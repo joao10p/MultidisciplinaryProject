@@ -20,6 +20,7 @@ class _SignupPageState extends State<SignupPage>{
   GlobalKey<FormState> globalKey= GlobalKey<FormState>();
   bool hidePAssword = true;
   bool isApiCallProcess= false;
+  API api= API();
 
 
   @override
@@ -126,12 +127,10 @@ Widget _formUI(){
                 setState(() {
                   isApiCallProcess= true;
                 });
-                  WooCommerceAPI a= WooCommerceAPI();
-                 
-                  a.postAsync(Config.customerUrl,model.toJson()).then(
-                  //WooCommerceAPI api= WooCommerceAPI();
-
-                 // api.createCustomer(model).then(
+                  
+                 //Here there is the call to the API and then we fetch the result
+                  api.postAsync(Config.customerUrl,model.toJson()).then(
+                  
                   (ret) {
                     setState(() {
                       

@@ -7,45 +7,7 @@ import 'package:device_info_plus/device_info_plus.dart';
 import 'package:dio/dio.dart';
 import 'package:woosignal/helpers/shared_pref.dart';
 import 'dart:io' show Platform;
-  /*
-  Future<bool> createCustomer( CustomerModel model) async{
-   
-     var authToken = base64.encode(   //create token to access
-      utf8.encode(Config.key + ":" + Config.secret),
-      );
-
-      bool ret= false;
-
-      try{
-        var response=await Dio().post(
-          Config.url + Config.customerUrl,
-          data: model.toJson (),
-          options: new Options(
-            headers: {
-              HttpHeaders.authorizationHeader: 'Basic $authToken',
-              HttpHeaders.contentTypeHeader: "application/json"
-
-            }));
-            
-          if (response.statusCode==201){
-            ret= true;
-          }
-
-      }on DioError catch(e){
-        if(e.response.statusCode==404){
-          ret= false;
-          }
-          else{
-            ret=false;
-          }
-          return ret;
-      }
-      print(ret);
-    return ret;
-  } 
-}
-
-*/
+  
 
 import 'dart:async';
 import "dart:collection";
@@ -65,13 +27,13 @@ import 'package:woocommerce_api/woocommerce_error.dart';
 /// [consumerSecret] is the consumer secret provided by WooCommerce, e.g. `cs_1a2b3c4d5e6f7g8h9i`
 ///
 /// [isHttps] check if [url] is https based
-class WooCommerceAPI {
+class API {
   String url;
   String consumerKey;
   String consumerSecret;
   bool isHttps;
 
-  WooCommerceAPI({
+  API({
      this.url,
      this.consumerKey,
      this.consumerSecret,
@@ -97,6 +59,12 @@ class WooCommerceAPI {
 
     String token = "";
     String url = this.url + "/wp-json/wc/v2/" + endpoint;
+
+    //If the request is a login, change the url to acces with token
+    if(endpoint=="login"){
+        url=this.url+ "/wp-json/jwt-auth/v1/token";
+    }
+
     bool containsQueryParams = url.contains("?");
 
     if (this.isHttps == true) {
@@ -200,12 +168,15 @@ class WooCommerceAPI {
     switch (response.statusCode) {
       case 200:
           return true;
+      case 201:
+          return true;
       case 400:
       case 401:
       case 404:
       case 500:
-        throw Exception(
-            WooCommerceError.fromJson(json.decode(response.body)).toString());
+        
+            //WooCommerceError.fromJson(json.decode(response.body)).toString());
+            return false;
       default:
         throw Exception(
             "An error occurred, status code: ${response.statusCode}");
@@ -235,28 +206,33 @@ class WooCommerceAPI {
   Future<dynamic> postAsync(String endPoint, Map data) async {
     
       
-    String url = this._getOAuthURL("POST", endPoint);
+    String url = _getOAuthURL("POST", endPoint);
   
     http.Client client = http.Client();
     http.Request request = http.Request('POST', Uri.parse(url));
-    request.headers[HttpHeaders.contentTypeHeader] =
+    //Switch to choose the right header depending on the request
+    switch (endPoint){
+      case "login":
+          request.headers[HttpHeaders.contentTypeHeader] =
+          "application/x-www-form-urlencoded";
+          break;
+      case "customers":
+          request.headers[HttpHeaders.contentTypeHeader] =
         'application/json; charset=utf-8';
-    request.headers[HttpHeaders.cacheControlHeader] = "no-cache";
-    var res;
+        request.headers[HttpHeaders.cacheControlHeader] = "no-cache";
+    }
+
     request.body = json.encode(data);
     var response =
-        await client.send(request).then((res) => res.stream.bytesToString());
-    var dataResponse = await json.decode(response);
-    if(dataResponse["id"]!=null)
-     return true;
-    else 
-      return false;
-   // return dataResponse;
+        await client.send(request);//.then((res) => res.stream.bytesToString());
+    //var dataResponse = await json.decode(response);
+    final result = await http.Response.fromStream(response);
     
-
+    return _handleError(result);
+    
+    
+   
     
   }
-
-
  
 }
