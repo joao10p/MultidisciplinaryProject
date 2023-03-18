@@ -3,6 +3,7 @@ class Config{
   static String secret="cs_48ef07d29108ea78cd97d77b888bc2d7c3e97985";
   static String url="https://olivevo.it";
   static String customerUrl="customers";
+  static String categoriesURL= "products/categories";
 }
 
 

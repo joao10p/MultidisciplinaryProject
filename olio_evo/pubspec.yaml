@@ -31,7 +31,7 @@ environment:
 # versions available, run `flutter pub outdated`.
 dependencies:
   woocommerce_api: ^0.1.0
-  woosignal: ^3.3.0
+  carousel_pro:
   flutter:
     sdk: flutter
 
@@ -78,7 +78,10 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  # fonts:
+  fonts:
+    - family: CartIcons
+      fonts:
+       - asset: lib/fonts/CartIcons.ttf
   #   - family: Schyler
   #     fonts:
   #       - asset: fonts/Schyler-Regular.ttf

@@ -1,11 +1,8 @@
-import 'package:olio_evo/api_service.dart';
+
 import 'package:olio_evo/models/customer.dart';
 import 'package:olio_evo/config.dart';
 
 import 'dart:convert';
-import 'package:device_info_plus/device_info_plus.dart';
-import 'package:dio/dio.dart';
-import 'package:woosignal/helpers/shared_pref.dart';
 import 'dart:io' show Platform;
   
 
@@ -19,6 +16,8 @@ import 'package:crypto/crypto.dart' as crypto;
 import 'package:woocommerce_api/query_string.dart';
 import 'package:http/http.dart' as http;
 import 'package:woocommerce_api/woocommerce_error.dart';
+
+import 'models/category.dart';
 
 /// [url] is you're site's base URL, e.g. `https://www.yourdomain.com`
 ///
@@ -217,6 +216,7 @@ class API {
           "application/x-www-form-urlencoded";
           break;
       case "customers":
+      case"categories":
           request.headers[HttpHeaders.contentTypeHeader] =
         'application/json; charset=utf-8';
         request.headers[HttpHeaders.cacheControlHeader] = "no-cache";
@@ -228,11 +228,20 @@ class API {
     //var dataResponse = await json.decode(response);
     final result = await http.Response.fromStream(response);
     
-    return _handleError(result);
-    
-    
-   
-    
+    return _handleError(result);   
+  }
+
+
+
+  Future<List<Category>> getCategories() async{
+   // var info= await getAsync(Config.categoriesURL);
+    List<dynamic> result= await getAsync(Config.categoriesURL);
+    List<Category> data = new List<Category>();
+        data= (result as List).map((i)=>Category.fromJson(i),)
+        .toList();
+        
+        return data;
+
   }
  
 }
