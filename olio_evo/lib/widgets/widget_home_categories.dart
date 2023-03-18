@@ -31,7 +31,7 @@ class _WidgetCategoriesState extends State<WidgetCategories> {
                     style:
                         TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
               ),
-              Padding(
+             /* Padding(
                 padding: EdgeInsets.only(left: 16, top: 10),
                 child: Text('I tuoi preferiti',
                     style:
@@ -43,6 +43,7 @@ class _WidgetCategoriesState extends State<WidgetCategories> {
                     style:
                         TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
               )
+              */
             ],
           ),
           _categoriesList()
@@ -81,8 +82,8 @@ class _WidgetCategoriesState extends State<WidgetCategories> {
                   alignment: Alignment.center,
                   width: 80,
                   height: 80,
-                  child: Image.network(
-                    "https://www.lucianopignataro.it/wp-content/uploads/2022/02/Olio-Campania-igt.jpg",
+                  child: Image.network(data.image.url,
+                    
                     height: 80,
                   ),
                   decoration: BoxDecoration(

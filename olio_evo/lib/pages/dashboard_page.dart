@@ -1,7 +1,8 @@
 import 'package:carousel_pro/carousel_pro.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:olio_evo/config.dart';
 import 'package:olio_evo/widgets/widget_home_categories.dart';
+import 'package:olio_evo/widgets/widget_home_products.dart';
 
 class DashboardPage extends StatefulWidget {
   @override
@@ -14,9 +15,13 @@ class _DashboardPageState extends State<DashboardPage> {
     return Scaffold(
         body: Container(
       color: Colors.white,
-      child: ListView(children: [
+      child: ListView(
+        children: [
         imageCarousel(context),
         WidgetCategories(),
+        WidgetHomeProducts(labelName: "Offerte di oggi", tagId:Config.offerteDiOggiTagId),
+        WidgetHomeProducts(labelName: "TopSeller", tagId:Config.topSellingTagId)
+
       ]),
     ));
   }

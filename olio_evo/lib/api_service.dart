@@ -18,6 +18,7 @@ import 'package:http/http.dart' as http;
 import 'package:woocommerce_api/woocommerce_error.dart';
 
 import 'models/category.dart';
+import 'models/product.dart';
 
 /// [url] is you're site's base URL, e.g. `https://www.yourdomain.com`
 ///
@@ -52,7 +53,7 @@ class API {
   ///
   /// if [isHttps] is true we just return the URL with
   /// [consumerKey] and [consumerSecret] as query parameters
-  String _getOAuthURL(String requestMethod, String endpoint) {
+  String _getOAuthURL(String requestMethod, String endpoint, String tag) {
     String consumerKey = this.consumerKey;
     String consumerSecret = this.consumerSecret;
 
@@ -67,6 +68,21 @@ class API {
     bool containsQueryParams = url.contains("?");
 
     if (this.isHttps == true) {
+      if(endpoint=="products"){
+        return url +
+          (tag == null
+              ? "&consumer_key=" +
+                  this.consumerKey +
+                  "&consumer_secret=" +
+                  this.consumerSecret
+              : "?consumer_key=" +
+                  this.consumerKey +
+                  "&consumer_secret=" +
+                  this.consumerSecret +
+                  "&tag="+ 
+                  tag);
+    }
+    
       return url +
           (containsQueryParams == true
               ? "&consumer_key=" +
@@ -182,8 +198,8 @@ class API {
     }
   }
 
-  Future<dynamic> getAsync(String endPoint) async {
-    String url = this._getOAuthURL("GET", endPoint);
+  Future<dynamic> getAsync(String endPoint, String tag) async {
+    String url = this._getOAuthURL("GET", endPoint, tag);
 
     try {
       final http.Response response = await http.get(Uri.parse(url));
@@ -205,7 +221,7 @@ class API {
   Future<dynamic> postAsync(String endPoint, Map data) async {
     
       
-    String url = _getOAuthURL("POST", endPoint);
+    String url = _getOAuthURL("POST", endPoint, null);
   
     http.Client client = http.Client();
     http.Request request = http.Request('POST', Uri.parse(url));
@@ -235,7 +251,7 @@ class API {
 
   Future<List<Category>> getCategories() async{
    // var info= await getAsync(Config.categoriesURL);
-    List<dynamic> result= await getAsync(Config.categoriesURL);
+    List<dynamic> result= await getAsync(Config.categoriesURL, null);
     List<Category> data = new List<Category>();
         data= (result as List).map((i)=>Category.fromJson(i),)
         .toList();
@@ -243,5 +259,15 @@ class API {
         return data;
 
   }
+
+  Future<List<Product>> getProductsByTag (String tagName) async {
+    List<Product> data= new List<Product>();
+    List<dynamic> result= await getAsync(Config.productURL,tagName);
+    data= (result as List).map((i)=>Product.fromJson(i),)
+        .toList();
+    return data;
+    
+  }
+
  
 }

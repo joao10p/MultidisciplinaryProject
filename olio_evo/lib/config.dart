@@ -4,6 +4,10 @@ class Config{
   static String url="https://olivevo.it";
   static String customerUrl="customers";
   static String categoriesURL= "products/categories";
+
+  static String productURL="products";
+  static String topSellingTagId="31";
+  static String offerteDiOggiTagId="30";
 }
 
 
