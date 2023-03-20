@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:olio_evo/api_service.dart';
-
+import 'package:intl/intl.dart';
 import '../models/product.dart';
 
 class WidgetHomeProducts extends StatefulWidget{
@@ -59,14 +59,14 @@ class _WidgetHomeProductState extends State<WidgetHomeProducts>{
                 )
             ],
           ),
-        _productsList(),
+        _productsList(this.widget.tagId),
       ]),
     );
   }
 
-  Widget _productsList(){
+  Widget _productsList(String tagId){
     return new FutureBuilder(
-      future: apiService.getProductsByTag(this.widget.tagId),
+      future: apiService.getProducts(tagName: tagId),
       builder:(context,snapshot){
         if(snapshot.hasData){
           return _buildList(snapshot.data);
@@ -80,7 +80,7 @@ class _WidgetHomeProductState extends State<WidgetHomeProducts>{
 
   Widget _buildList(List<Product> items){
     return Container(
-      height: 200,
+      height: 220,
       alignment: Alignment.centerLeft,
       child: ListView.builder(
         shrinkWrap: true,
@@ -144,7 +144,7 @@ class _WidgetHomeProductState extends State<WidgetHomeProducts>{
                       '${data.salePrice}',
                       style: TextStyle(
                         fontSize: 14,
-                        color:Colors.black,
+                        color:Colors.redAccent,
                         fontWeight: FontWeight.bold,
                       ),
                     ),

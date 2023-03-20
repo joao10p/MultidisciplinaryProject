@@ -53,7 +53,7 @@ class API {
   ///
   /// if [isHttps] is true we just return the URL with
   /// [consumerKey] and [consumerSecret] as query parameters
-  String _getOAuthURL(String requestMethod, String endpoint, String tag) {
+  String _getOAuthURL(String requestMethod, String endpoint) {
     String consumerKey = this.consumerKey;
     String consumerSecret = this.consumerSecret;
 
@@ -67,22 +67,7 @@ class API {
 
     bool containsQueryParams = url.contains("?");
 
-    if (this.isHttps == true) {
-      if(endpoint=="products"){
-        return url +
-          (tag == null
-              ? "&consumer_key=" +
-                  this.consumerKey +
-                  "&consumer_secret=" +
-                  this.consumerSecret
-              : "?consumer_key=" +
-                  this.consumerKey +
-                  "&consumer_secret=" +
-                  this.consumerSecret +
-                  "&tag="+ 
-                  tag);
-    }
-    
+    if (this.isHttps == true) {    
       return url +
           (containsQueryParams == true
               ? "&consumer_key=" +
@@ -198,8 +183,10 @@ class API {
     }
   }
 
-  Future<dynamic> getAsync(String endPoint, String tag) async {
-    String url = this._getOAuthURL("GET", endPoint, tag);
+  Future<dynamic> getAsync(String endPoint, String url) async {
+    if(url==null){
+      url = this._getOAuthURL("GET", endPoint);
+    }
 
     try {
       final http.Response response = await http.get(Uri.parse(url));
@@ -221,7 +208,7 @@ class API {
   Future<dynamic> postAsync(String endPoint, Map data) async {
     
       
-    String url = _getOAuthURL("POST", endPoint, null);
+    String url = _getOAuthURL("POST", endPoint);
   
     http.Client client = http.Client();
     http.Request request = http.Request('POST', Uri.parse(url));
@@ -248,24 +235,83 @@ class API {
   }
 
 
-
+//sometise throw an exception beacuse it receives 
   Future<List<Category>> getCategories() async{
    // var info= await getAsync(Config.categoriesURL);
-    List<dynamic> result= await getAsync(Config.categoriesURL, null);
-    List<Category> data = new List<Category>();
-        data= (result as List).map((i)=>Category.fromJson(i),)
-        .toList();
-        
-        return data;
+   try{
+    List<dynamic> result= await getAsync(Config.categoriesURL,null);
+    if(result!=null){
+      List<Category> data = new List<Category>();
+          data= (result as List).map((i)=>Category.fromJson(i),)
+          .toList();
+          
+          return data;
+      }
+   }catch(e){
+    TODO: //miss implementation of exception
+    print(e);
+   }
 
   }
 
-  Future<List<Product>> getProductsByTag (String tagName) async {
-    List<Product> data= new List<Product>();
-    List<dynamic> result= await getAsync(Config.productURL,tagName);
-    data= (result as List).map((i)=>Product.fromJson(i),)
-        .toList();
-    return data;
+  Future<List<Product>> getProducts ({
+    int pageNumber,
+    int pageSize,
+    String strSearch,
+    String tagName,
+    String categoryId,
+    String sortBy,
+    String sortOrder="asc",
+    }) async {
+   
+
+    try{
+
+      String parameter="";
+
+      if(strSearch != null){
+        parameter += "&search=$strSearch";
+      }
+
+      if(pageSize != null){
+        parameter += "&per_page=$pageSize";
+      }
+
+      if(pageNumber!= null){
+        parameter +="&page=$pageNumber";
+
+      }
+
+      if(tagName!= null){
+        parameter += "&tag=$tagName";
+      }
+
+      if(categoryId != null){
+        parameter += "&orderby=$categoryId";
+      }
+
+      if(sortBy != null){
+        parameter += "&category=$sortBy";
+      }
+
+      if(sortOrder != null){
+        parameter += "&order=$sortOrder";
+      }
+
+
+
+      String url= _getOAuthURL("GET",Config.productURL);
+      url+= parameter;
+      List<Product> data= new List<Product>();
+      List<dynamic> result= await getAsync(Config.productURL,url);
+      if(result!=null){
+        data= (result as List).map((i)=>Product.fromJson(i),)
+            .toList();
+        return data;
+     }
+    }catch(e){
+
+    }
     
   }
 

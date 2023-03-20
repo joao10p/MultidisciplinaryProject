@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:olio_evo/api_service.dart';
+import 'package:olio_evo/pages/product_page.dart';
 
 import '../models/category.dart' hide Image;
 
@@ -76,7 +77,14 @@ class _WidgetCategoriesState extends State<WidgetCategories> {
           itemCount: categories.length,
           itemBuilder: (context, index) {
             var data = categories[index];
-            return Column(
+            return 
+            GestureDetector(
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(
+                  builder: (context)=> ProductPage(categoryId: data.categoryId)));
+                },
+            
+            child: Column(
               children: [
                 Container(
                   alignment: Alignment.center,
@@ -107,6 +115,7 @@ class _WidgetCategoriesState extends State<WidgetCategories> {
                   ],
                 )
               ],
+            ),
             );
           },
         ));
