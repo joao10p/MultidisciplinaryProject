@@ -40,7 +40,7 @@ class BasePageState<T extends BasePage> extends State<T>{
       brightness: Brightness.dark,
       elevation: 0,
       backgroundColor: Colors.green,
-      automaticallyImplyLeading: false,
+      automaticallyImplyLeading: true,
       title: const Text(
         "OlivEvo",
         style: TextStyle(color: Colors.white),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../models/product.dart';
+import '../pages/product_details.dart';
 
 class ProductCard extends StatelessWidget{
 
@@ -10,7 +11,18 @@ class ProductCard extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => ProductDetails(
+          product: data,
+        ),
+        ),
+        );
+      },
+    
+    child: Container(
       decoration: BoxDecoration(
         color: Colors.green,
         borderRadius: BorderRadius.all(Radius.circular(20)),
@@ -28,6 +40,25 @@ class ProductCard extends StatelessWidget{
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
+                Visibility(
+                  visible: data.calculateDiscount() > 0,
+                  child: Align(
+                    alignment: Alignment.topLeft,
+                    child: Container(
+                      padding:EdgeInsets.all(5),
+                      decoration: BoxDecoration(
+                        color: Colors.green,
+                        borderRadius: BorderRadius.circular(50),
+                      ),
+                      child: Text(
+                        '${data.calculateDiscount()}% OFF',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                    ), ),
+                ),
                 Flexible(
                   child: Stack(
                     alignment:Alignment.center,
@@ -85,7 +116,8 @@ class ProductCard extends StatelessWidget{
               ],
             ),
            ),
-      );
+      ),
+    );
   }
 
 }
