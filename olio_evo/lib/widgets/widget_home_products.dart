@@ -59,12 +59,12 @@ class _WidgetHomeProductState extends State<WidgetHomeProducts>{
                 )
             ],
           ),
-        _productsList(this.widget.tagId),
+        _productsListHome(this.widget.tagId),
       ]),
     );
   }
 
-  Widget _productsList(String tagId){
+  Widget _productsListHome(String tagId){
     return new FutureBuilder(
       future: apiService.getProducts(tagName: tagId),
       builder:(context,snapshot){

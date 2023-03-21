@@ -287,11 +287,11 @@ class API {
       }
 
       if(categoryId != null){
-        parameter += "&orderby=$categoryId";
+        parameter += "&categories=$categoryId";
       }
 
       if(sortBy != null){
-        parameter += "&category=$sortBy";
+        parameter += "&orderby=$sortBy";
       }
 
       if(sortOrder != null){

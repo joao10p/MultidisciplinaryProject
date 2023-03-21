@@ -32,6 +32,7 @@ environment:
 dependencies:
 
   flutter_barcode_scanner: ^2.0.0
+  woocommerce_api: ^0.1.0
   provider:
   carousel_pro:
   flutter:

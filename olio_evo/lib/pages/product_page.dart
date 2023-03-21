@@ -2,18 +2,13 @@
 import 'package:flutter/material.dart';
 import 'package:olio_evo/pages/base_page.dart';
 import 'package:olio_evo/widgets/widget_product_card.dart';
+import 'package:provider/provider.dart';
 
 import '../api_service.dart';
 import '../models/product.dart';
+import '../provider/products_provider.dart';
 
 
-class SortBy{
-  String value;
-  String text;
-  String sortOrder;
-
-  SortBy(this.value, this.text,this.sortOrder);
-}
 
 class ProductPage extends BasePage{
   int categoryId;
@@ -25,9 +20,7 @@ class ProductPage extends BasePage{
 }
 
 class _ProductPageState extends BasePageState<ProductPage>{
-
-  API apiService= new API();
-
+  int pageNumber = 1;
   final _sortByOptions=[
     SortBy("popularity","Popularity", "asc"),
     SortBy("modified", "Latest", "asc"),
@@ -37,19 +30,30 @@ class _ProductPageState extends BasePageState<ProductPage>{
   ];
 
   @override
-  Widget pageUI(){
+  void initState(){
+    var _productList = Provider.of<ProductProvider>(context,listen:false);
+    _productList.resetStreams();
+     _productList.setLoadingState(LoadMoreStatus.INITIAL,false);
+    _productList.fetchProducts(pageNumber);
+    super.initState();
+  }
 
+  @override
+  Widget pageUI(){
     return _productsList();
   }
 
-    Widget _productsList(){
-    return new FutureBuilder(
-      future: apiService.getProducts(),
-      builder:(context,snapshot){
-        if(snapshot.hasData){
-          return _buildList(snapshot.data);
+  Widget _productsList(){
+    return new Consumer<ProductProvider>(
+      builder:(context,productsModel, child){
+        if(productsModel.allProducts != null &&
+        productsModel.allProducts.length >0 &&
+          productsModel.getLoadMoreStatus() != LoadMoreStatus.INITIAL
+          )
+      {
+          return _buildList(productsModel.allProducts);
         }
-/*  */
+
         return Center(
           child: CircularProgressIndicator());
       }

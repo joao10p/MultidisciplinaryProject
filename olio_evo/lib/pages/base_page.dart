@@ -16,13 +16,15 @@ class BasePageState<T extends BasePage> extends State<T>{
 
   @override
   Widget build(BuildContext context) {
-   return Scaffold(
+   return 
+   Scaffold(
     appBar: _buildAppBar(),
     body: ProgressHUD(child: pageUI(),
      inAsyncCall: isApiCallProcess,
      opacity: 0.3, 
     )
    );
+   
   }
 
   Widget pageUI(){

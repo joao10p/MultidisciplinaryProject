@@ -1,4 +1,5 @@
-import 'package:woocommerce_api/woocommerce_api.dart';
+
+import '../api_service.dart';
 
 class LoginResponseModel{
   bool success;
@@ -79,7 +80,7 @@ class Data{
 
 Future<LoginResponseModel> loginCustomer(String username, String password) async{
   LoginResponseModel model;
-  WooCommerceAPI api;
+  API api;
 
   try{
 
