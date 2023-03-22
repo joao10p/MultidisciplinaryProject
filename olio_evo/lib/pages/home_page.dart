@@ -1,8 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:olio_evo/pages/barcode_page.dart';
 
-import '../utils/cart_icons.dart';
+import 'chatbot_page.dart';
 import 'dashboard_page.dart';
 
 class HomePage extends StatefulWidget {
@@ -15,7 +14,7 @@ class _HomePageState extends State<HomePage> {
     DashboardPage(),
     DashboardPage(),
     const Center(child: BarcodePage()),
-    DashboardPage(),
+    const ChatbotPage(),
     DashboardPage(),
   ];
 
@@ -27,7 +26,7 @@ class _HomePageState extends State<HomePage> {
         debugShowCheckedModeBanner: false,
         home: Scaffold(
             appBar: _buildAppBar(),
-            body: _widgetList[_index],
+            body: IndexedStack(index: _index, children: _widgetList),
             bottomNavigationBar: SizedBox(
               height: 100,
               child: BottomNavigationBar(

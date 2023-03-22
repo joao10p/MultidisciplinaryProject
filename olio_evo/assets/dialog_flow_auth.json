@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "olivevochatbot-irla",
+  "private_key_id": "a0e3343ee1d706bbf0b18f3fab7310a77287865d",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCiA0uUCdWme90D\n5Sj4NLwd6eor0jM7+AD9E1fcDfD0EQKd9GLVCbKDKz0tkyFU6CkcwaeIifCh2X9S\nGpVVL7SpNS3oyeHpjZuDFHYMy4uUa2SYoDKiNFDbdLksVHqlQY7II7TaJnF2xsuV\ntf5ECYP1wr20rVRJUvyarz6z65DiGEnrujQsYiJ04hf6aJDhNgJG4q/sOiUA3vUe\n/fejLl4G3BqwI33qSuWizShTrqMZaTr54Mugw0yTn6bPZNv2Dg+yjIKoOshBxy5o\nvBVNGewrrm1xKxMX6Y4GM9SpRDtkhKV2RdnAju88dWlWsek7wi2iqNB6RzwiZ6ID\na6o53auTAgMBAAECggEAJvKZ2bXfic1fHY+aoMi0rJBOPkijDniZbD2ZMoqbcWEh\neu2EUOiq5IOhinJDYhEJySL47ocStSX/SLKhUcBNMxxYtAzMZYQobYOeuYa5QG3s\n2hAw+/ONuKQ/29tXPKEc/RowYP06663wxUXiIWMUOSGez2+XwqTTmzAj58bqpp+D\nodx+THCabk9yNgHhHxQST3MtYt2NZFrykjiOfVoM6E/HBk1o9U1NqZf5+CuVEeEI\nVECXTNFAkbzKUDt5RHbWGgl7QdGpVAaAiBbwnAMDbNmsR+fePcFJjvppRfWDkRFY\njcUhn5Btpm24gJUZFVHaDhNtcu/mlazZgS8zpqTzeQKBgQDkEopjBxMQFF2Te390\nuohzpU5nwWorOPaMGDxtDKCjm6SkN1ZQmRxOFVK9T4npKqM3jKXtFwZJcH9eEW1r\nVvQtXeCJ7YLlJmjsIHTZBiek2bb1P6m7NCB5LfQAosCzl780B4ofJECPAUyHE4GM\nngXiD/+PIeyIcQBA8F64B2sCHwKBgQC12fb1tOa1MQY9VbfoDt7NDPWuEBWIXZ5u\nPVFETBfB888sJgXhkeFpJdEQVEYMeBtVHv5EvIXsKVwch1duBc7i+5YYjk/HU5eC\nu1QTsDqDgguZgqIVEIavBn5ycgDM3TdrHCElyuxTvPL81zCHmo1D2xtUYgAbOJY8\n40SA4V9wDQKBgQC2yjlJZskbcQcShb9AIaPs88bkFzrtC0lmPKJpT96LYdnRl1xB\nWoU5+5MFkPLaAkcv5TSy0WpDf7tE/Diy98zZc0zbnpTy7RbYcKbVrT4mvCsLYgu5\nsux30qGlxMsm5O7kV0qW7Ook8wiPlc2VkqzqYqIS6EB3lgF7CmsPmTplRwKBgQCr\n3LfSFMpo+VENTGKHNO6J2bKic172RowBYX/ZTRSy32mvLqwmN4lRp0TC6vJcvHIQ\naz8g1Q64V4pPB/Wv7FtPFzgOMwjgt3acPdBC3y0dthyiUtw9jiXLaha8sFNjSboj\nRy1omzPoG82E+RZLQdw6Aev9PrUdBMiv+JV4PAbHTQKBgBCmkwFuQa18B0wJC3Nz\nBL08jAPSAHqq+5FUHIfvPHJQMsXvOTzpxOFlgJ3K6ktpo/hi7rQy2Px+6Gzqikpg\nqoPIzkbqCGuR44fnlazf3XAuI8qYjbPIEek0bJO0MkMnR9fcu2t0oI7p3Cc28kmB\nFsRDbDH306+VLJvpa52dDHoK\n-----END PRIVATE KEY-----\n",
+  "client_email": "olivevochatbot@olivevochatbot-irla.iam.gserviceaccount.com",
+  "client_id": "102199723405648937485",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/olivevochatbot%40olivevochatbot-irla.iam.gserviceaccount.com"
+}
