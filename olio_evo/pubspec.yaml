@@ -31,7 +31,9 @@ environment:
 dependencies:
   flutter_barcode_scanner: ^2.0.0
   woocommerce_api: ^0.1.0
+  dio: ^5.1.0
   provider:
+  carousel_slider:
   carousel_pro:
   flutter:
     sdk: flutter
@@ -42,6 +44,7 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   intl: ^0.18.0
+  uuid: ^3.0.7
 
 dev_dependencies:
   flutter_test:

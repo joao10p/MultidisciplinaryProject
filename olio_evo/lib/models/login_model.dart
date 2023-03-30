@@ -1,4 +1,6 @@
 
+import 'package:dio/dio.dart';
+
 import '../api_service.dart';
 
 class LoginResponseModel{
@@ -13,12 +15,12 @@ LoginResponseModel({this.success,this.statusCode,this.code,this.
 message, this.data});
 
 
-LoginResponseModel.fromJson(Map<String, dynamic> json){
-  success= json['sucess'];
-  statusCode= json['statusCode'];
-  code= json['code'];
-  message= json['message'];
-  data= json['data']!= null ? new Data.fromJson(json['data']) : null;
+LoginResponseModel.fromJson(Response response){
+  success= response.statusCode == 200 ? true : false ;
+  statusCode= response.statusCode;
+  code= null;
+  message="Autenticated";
+  data= response.data!= null ? new Data.fromJson(response.data) : null;
 }
 
 Map <String, dynamic> toJson(){
@@ -27,37 +29,30 @@ Map <String, dynamic> toJson(){
   data['statusCode']= this.statusCode;
   data['code']= this.code;
   data['message']= this.message;
-
   if(this.data!=null){
     data['data']= this.data.toJson();
-
   }
   return data;
-
 }
 
 
 }
 class Data{
   String token;
-  int id;
+  
   String email;
   String nicename;
-  String firstName;
-  String lastname;
   String displayName;
 
 
-  Data(this.token, this.id, this.email, this.firstName,this.lastname, 
+  Data(this.token, this.email,
   this.displayName);
 
   Data.fromJson(Map<String,dynamic> json){
     token=json['token'];
-    id= json['id'];
-    email=  json['email'];
-    nicename=json['nicename'];
-    firstName=json['firstName'];
-    displayName=json['dispalyName'];
+    email=  json['user_email'];
+    nicename=json['user_nicename'];
+    displayName=json['user_display_name'];
 
   }
 
@@ -65,11 +60,8 @@ class Data{
     final Map<String,dynamic> data= new Map<String,dynamic>();
 
     data['token']=this.token;
-    data['id']=this.id;
     data['email']=this.email;
     data['nicename']=this.nicename;
-    data['firstname']=this.firstName;
-    data['lastname']=this.lastname;
     data['dispalyName']=this.displayName;
     
     return data;
@@ -77,19 +69,6 @@ class Data{
 
 
 
-
-Future<LoginResponseModel> loginCustomer(String username, String password) async{
-  LoginResponseModel model;
-  API api;
-
-  try{
-
-      Credentials credential= Credentials(username,password);
-      api.postAsync("login", credential.toJson());
-
-  
-}catch(e){}
-}
 }
 
 class Credentials{

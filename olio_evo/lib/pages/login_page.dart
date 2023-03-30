@@ -92,7 +92,8 @@ Widget uiSetup(BuildContext context){
                         style:
                           TextStyle(color: Theme.of(context).accentColor),
                         keyboardType: TextInputType.text, 
-                        onSaved: (input)=> input.length<3
+                        onSaved:(input)=>password=input,
+                        validator: (input)=>input.length<3
                           ? "Password should be more than 3 chracters"
                           : null,
                         obscureText: hidePassword,
@@ -134,10 +135,10 @@ Widget uiSetup(BuildContext context){
                                   isApiCallProcess=true;
                               });
 
-                              api.postAsync("login",Credentials(username, password).toJson())
+                              api.loginCustomer(Credentials(username, password))
                               .then(
                                 (ret){
-                                  if(ret==true){
+                                  if(ret!=null){
                                     FormHelper.showMessage(context, "OlioEvo", "Login succesful", "Ok",(){},
                                     );
                                   }else{

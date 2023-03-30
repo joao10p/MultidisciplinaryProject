@@ -1,10 +1,11 @@
+import 'dart:async';
 
-import 'package:olio_evo/models/customer.dart';
+import 'package:dio/dio.dart';
+import 'package:olio_evo/models/customer.dart' as customer;
 import 'package:olio_evo/config.dart';
 
 import 'dart:convert';
 import 'dart:io' show Platform;
-  
 
 import 'dart:async';
 import "dart:collection";
@@ -13,11 +14,14 @@ import 'dart:io';
 import "dart:math";
 import "dart:core";
 import 'package:crypto/crypto.dart' as crypto;
+import 'package:olio_evo/models/login_model.dart';
+import 'package:uuid/uuid.dart';
 import 'package:woocommerce_api/query_string.dart';
 import 'package:http/http.dart' as http;
 import 'package:woocommerce_api/woocommerce_error.dart';
 
 import 'models/category.dart';
+import 'models/customer.dart';
 import 'models/product.dart';
 
 /// [url] is you're site's base URL, e.g. `https://www.yourdomain.com`
@@ -34,9 +38,9 @@ class API {
   bool isHttps;
 
   API({
-     this.url,
-     this.consumerKey,
-     this.consumerSecret,
+    this.url,
+    this.consumerKey,
+    this.consumerSecret,
   }) {
     this.url = Config.url;
     this.consumerKey = Config.key;
@@ -61,13 +65,13 @@ class API {
     String url = this.url + "/wp-json/wc/v2/" + endpoint;
 
     //If the request is a login, change the url to acces with token
-    if(endpoint=="login"){
-        url=this.url+ "/wp-json/jwt-auth/v1/token";
+    if (endpoint == "login") {
+      url = this.url + "/wp-json/jwt-auth/v1/token";
     }
 
     bool containsQueryParams = url.contains("?");
 
-    if (this.isHttps == true) {    
+    if (this.isHttps == true) {
       return url +
           (containsQueryParams == true
               ? "&consumer_key=" +
@@ -164,19 +168,19 @@ class API {
   /// Handle network errors if [response.statusCode] is not 200 (OK).
   ///
   /// WooCommerce supports and give informations about errors 400, 401, 404 and 500
-   bool _handleError(http.Response response) {
+  bool _handleError(http.Response response) {
     switch (response.statusCode) {
       case 200:
-          return true;
+        return true;
       case 201:
-          return true;
+        return true;
       case 400:
       case 401:
       case 404:
       case 500:
-        
-            //WooCommerceError.fromJson(json.decode(response.body)).toString());
-            return false;
+
+        //WooCommerceError.fromJson(json.decode(response.body)).toString());
+        return false;
       default:
         throw Exception(
             "An error occurred, status code: ${response.statusCode}");
@@ -184,7 +188,7 @@ class API {
   }
 
   Future<dynamic> getAsync(String endPoint, String url) async {
-    if(url==null){
+    if (url == null) {
       url = this._getOAuthURL("GET", endPoint);
     }
 
@@ -199,121 +203,144 @@ class API {
     }
   }
 
-
-     var authToken = base64.encode(   //create token to access
-      utf8.encode(Config.key + ":" + Config.secret),
-      );
-
+  var authToken = base64.encode(
+    //create token to access
+    utf8.encode(Config.key + ":" + Config.secret),
+  );
 
   Future<dynamic> postAsync(String endPoint, Map data) async {
-    
-      
     String url = _getOAuthURL("POST", endPoint);
-  
+
     http.Client client = http.Client();
     http.Request request = http.Request('POST', Uri.parse(url));
     //Switch to choose the right header depending on the request
-    switch (endPoint){
-      case "login":
-          request.headers[HttpHeaders.contentTypeHeader] =
-          "application/x-www-form-urlencoded";
-          break;
-      case "customers":
-      case"categories":
-          request.headers[HttpHeaders.contentTypeHeader] =
+    request.headers[HttpHeaders.contentTypeHeader] =
         'application/json; charset=utf-8';
-        request.headers[HttpHeaders.cacheControlHeader] = "no-cache";
-    }
-
+    request.headers[HttpHeaders.cacheControlHeader] = "no-cache";
     request.body = json.encode(data);
-    var response =
-        await client.send(request);//.then((res) => res.stream.bytesToString());
-    //var dataResponse = await json.decode(response);
+    var response = await client.send(request);
     final result = await http.Response.fromStream(response);
-    
-    return _handleError(result);   
+    bool isGood = _handleError(result);
   }
 
-
-//sometise throw an exception beacuse it receives 
-  Future<List<Category>> getCategories() async{
-   // var info= await getAsync(Config.categoriesURL);
-   try{
-    List<dynamic> result= await getAsync(Config.categoriesURL,null);
-    if(result!=null){
-      List<Category> data = new List<Category>();
-          data= (result as List).map((i)=>Category.fromJson(i),)
-          .toList();
-          
-          return data;
+//sometise throw an exception beacuse it receives
+  Future<List<Category>> getCategories() async {
+    // var info= await getAsync(Config.categoriesURL);
+    try {
+      List<dynamic> result = await getAsync(Config.categoriesURL, null);
+      if (result != null) {
+        List<Category> data = new List<Category>();
+        data = (result as List)
+            .map(
+              (i) => Category.fromJson(i),
+            )
+            .toList();
+        return data;
       }
-   }catch(e){
-    TODO: //miss implementation of exception
-    print(e);
-   }
-
+    } catch (e) {
+      TODO: //miss implementation of exception
+      print(e);
+    }
   }
 
-  Future<List<Product>> getProducts ({
+  Future<List<Product>> getProducts({
     int pageNumber,
     int pageSize,
     String strSearch,
     String tagName,
     String categoryId,
     String sortBy,
-    String sortOrder="asc",
-    }) async {
-   
+    String sortOrder = "asc",
+  }) async {
+    try {
+      String parameter = "";
 
-    try{
-
-      String parameter="";
-
-      if(strSearch != null){
+      if (strSearch != null) {
         parameter += "&search=$strSearch";
       }
 
-      if(pageSize != null){
+      if (pageSize != null) {
         parameter += "&per_page=$pageSize";
       }
 
-      if(pageNumber!= null){
-        parameter +="&page=$pageNumber";
-
+      if (pageNumber != null) {
+        parameter += "&page=$pageNumber";
       }
 
-      if(tagName!= null){
+      if (tagName != null) {
         parameter += "&tag=$tagName";
       }
 
-      if(categoryId != null){
+      if (categoryId != null) {
         parameter += "&category=$categoryId";
       }
 
-      if(sortBy != null){
+      if (sortBy != null) {
         parameter += "&order_by	=$sortBy";
       }
 
-      if(sortOrder != null){
+      if (sortOrder != null) {
         parameter += "&order=$sortOrder";
       }
 
-
-
-      String url= _getOAuthURL("GET",Config.productURL);
-      url+= parameter;
-      List<Product> data= new List<Product>();
-      List<dynamic> result= await getAsync(Config.productURL,url);
-      if(result!=null){
-        data= (result as List).map((i)=>Product.fromJson(i),)
+      String url = _getOAuthURL("GET", Config.productURL);
+      url += parameter;
+      List<Product> data = new List<Product>();
+      List<dynamic> result = await getAsync(Config.productURL, url);
+      if (result != null) {
+        data = (result as List)
+            .map(
+              (i) => Product.fromJson(i),
+            )
             .toList();
         return data;
-     }
-    }catch(e){
-
-    }
-    
+      }
+    } catch (e) {}
   }
 
- 
+  Future<LoginResponseModel> loginCustomer(Credentials credentials) async {
+    LoginResponseModel model;
+    String url = _getOAuthURL("POST", "login");
+    try {
+      var response = await Dio().post(url,
+          data: {
+            "username": credentials.username,
+            "password": credentials.password
+          },
+          options: new Options(headers: {
+            HttpHeaders.contentTypeHeader: "application/x-www-form-urlencoded"
+          }));
+      if (response.statusCode == 200) {
+        model = LoginResponseModel.fromJson(response);
+      }
+
+      return model;
+    } on DioError catch (e) {
+      print(e.message);
+    }
+  }
+
+  Future<bool> createCustomer(CustomerModel model) async {
+    bool ret = false;
+    String url = _getOAuthURL("POST", "customers");
+    try {
+      var response = await Dio().post(url,
+          data: model.toJson(),
+          options: new Options(headers: {
+            HttpHeaders.contentTypeHeader: 'application/json; charset=utf-8',
+          }));
+      if (response.statusCode == 201) {
+        ret = true;
+      }
+    } on DioError catch (e) {
+      if (e.response.statusCode == 404) {
+        ret = false;
+      } else {
+        ret = false;
+      }
+    }
+
+    return ret;
+  }
+
 }
