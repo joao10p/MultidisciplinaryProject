@@ -65,11 +65,15 @@ class _AccountPageState extends State<AccountPage> {
           AsyncSnapshot<bool> loginModel,
         ) {
           if (loginModel.hasData) {
-            if (loginModel.data) {
+            if (loginModel.data != null && loginModel.data) {
               return _listView(context);
             } else {
-              return const Text("Not logged in");
+              return const Center(
+                child: Text("Not logged in"),
+              );
             }
+          } else {
+            return const Text("No data");
           }
         });
   }
@@ -120,7 +124,7 @@ class _AccountPageState extends State<AccountPage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Welcome, ${loginModel.data.data.nicename}",
+                      "Welcome, ${loginModel.data.data.displayName}",
                       style: const TextStyle(
                         fontSize: 22,
                         fontWeight: FontWeight.bold,
@@ -149,7 +153,7 @@ class _AccountPageState extends State<AccountPage> {
         }
 
         return const Center(
-          child: Text("ciao"),
+          child: Text("Login model has no data"),
         );
       },
     );

@@ -20,6 +20,16 @@ class LoginResponseModel {
     data = json['data'].length > 0 ? Data.fromJson(json['data']) : null;
   }
 
+  LoginResponseModel.fromJsonSharedService(Map<String, dynamic> json) {
+    success = json['success'];
+    statusCode = json['statusCode'];
+    code = null;
+    message = "Autenticated";
+    data = json['data'].length > 0
+        ? Data.fromJsonSharedService(json['data'])
+        : null;
+  }
+
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['success'] = success;
@@ -49,13 +59,20 @@ class Data {
     displayName = json['user_display_name'];
   }
 
+  Data.fromJsonSharedService(Map<String, dynamic> json) {
+    token = json['token'];
+    email = json['email'];
+    nicename = json['nicename'];
+    displayName = json['dispalyName'];
+  }
+
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
 
     data['token'] = this.token;
-    data['email'] = this.email;
-    data['nicename'] = this.nicename;
-    data['dispalyName'] = this.displayName;
+    data['user_email'] = this.email;
+    data['user_nicename'] = this.nicename;
+    data['user_display_name'] = this.displayName;
 
     return data;
   }

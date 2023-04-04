@@ -288,7 +288,7 @@ class API {
       List<Product> data = new List<Product>();
       List<dynamic> result = await getAsync(Config.productURL, url);
       if (result != null) {
-        data = (result as List)
+        data = (result)
             .map(
               (i) => Product.fromJson(i),
             )
@@ -307,7 +307,7 @@ class API {
             "username": credentials.username,
             "password": credentials.password
           },
-          options: new Options(headers: {
+          options: Options(headers: {
             HttpHeaders.contentTypeHeader: "application/x-www-form-urlencoded"
           }));
       if (response.statusCode == 200) {
@@ -332,7 +332,7 @@ class API {
     try {
       var response = await Dio().post(url,
           data: model.toJson(),
-          options: new Options(headers: {
+          options: Options(headers: {
             HttpHeaders.contentTypeHeader: 'application/json; charset=utf-8',
           }));
       if (response.statusCode == 201) {

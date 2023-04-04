@@ -15,7 +15,7 @@ class SharedService {
     final prefs = await SharedPreferences.getInstance();
 
     return prefs.getString("login_details") != null
-        ? LoginResponseModel.fromJson(
+        ? LoginResponseModel.fromJsonSharedService(
             jsonDecode(prefs.getString("login_details")))
         : null;
   }
