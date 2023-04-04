@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
       ],
       
     child: MaterialApp(
-        title: 'OlivEvo', debugShowCheckedModeBanner: false, home: SignupPage())
+        title: 'OlivEvo', debugShowCheckedModeBanner: false, home: LoginPage())
     );
   }
 

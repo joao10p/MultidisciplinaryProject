@@ -15,12 +15,12 @@ LoginResponseModel({this.success,this.statusCode,this.code,this.
 message, this.data});
 
 
-LoginResponseModel.fromJson(Response response){
-  success= response.statusCode == 200 ? true : false ;
-  statusCode= response.statusCode;
+LoginResponseModel.fromJson(Map<String, dynamic> json){
+  success= json['success'];
+  statusCode= json['statusCode'];
   code= null;
   message="Autenticated";
-  data= response.data!= null ? new Data.fromJson(response.data) : null;
+  data= json['data']!= null ? new Data.fromJson(json['data']) : null;
 }
 
 Map <String, dynamic> toJson(){
