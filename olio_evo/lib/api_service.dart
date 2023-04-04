@@ -311,7 +311,13 @@ class API {
             HttpHeaders.contentTypeHeader: "application/x-www-form-urlencoded"
           }));
       if (response.statusCode == 200) {
-        model = LoginResponseModel.fromJson(response);
+        Map<String, dynamic> json = <String, dynamic>{};
+        json['success'] = true;
+        json['statusCode'] = 200;
+        json['code'] = '';
+        json['message'] = '';
+        json['data'] = response.data;
+        model = LoginResponseModel.fromJson(json);
       }
 
       return model;
@@ -342,5 +348,4 @@ class API {
 
     return ret;
   }
-
 }

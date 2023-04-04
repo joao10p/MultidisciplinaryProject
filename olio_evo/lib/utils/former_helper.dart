@@ -42,7 +42,7 @@ class FormHelper {
     Widget suffixIcon,
   }) {
     return InputDecoration(
-      contentPadding: EdgeInsets.all(6),
+      contentPadding: const EdgeInsets.all(6),
       hintText: hintText,
       helperText: helperText,
       prefixIcon: prefixIcon,
@@ -64,7 +64,7 @@ class FormHelper {
 
   static Widget fieldLabel(String labelName) {
     return new Padding(
-      padding: EdgeInsets.fromLTRB(0, 5, 0, 10),
+      padding: const EdgeInsets.fromLTRB(0, 5, 0, 10),
       child: Text(
         labelName,
         style: new TextStyle(
@@ -100,7 +100,7 @@ class FormHelper {
               Center(
                 child: Text(
                   buttonText,
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: Colors.white,
                     fontSize: 16,
                     fontWeight: FontWeight.w600,
@@ -126,16 +126,17 @@ class FormHelper {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: new Text(title),
-          content: new Text(message),
-        //actions: [
-           // new FlatButton(
-          //    onPressed: () {
-            //    return onPressed();
-             // },
-              //child: new Text(buttonText),
-           // )
-          //],
+          title: Text(title),
+          content: Text(message),
+          actions: [
+            ElevatedButton(
+              // ignore: void_checks
+              onPressed: () {
+                return onPressed();
+              },
+              child: Text(buttonText),
+            )
+          ],
         );
       },
     );

@@ -35,6 +35,7 @@ dependencies:
   provider:
   carousel_slider:
   carousel_pro:
+  shared_preferences:
   flutter:
     sdk: flutter
 

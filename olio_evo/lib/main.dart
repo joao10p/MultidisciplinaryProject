@@ -16,16 +16,15 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-      providers: [ChangeNotifierProvider(
-        create: (context) => ProductProvider(),
-        child: ProductPage(),
-
-        ) 
-      ],
-      
-    child: MaterialApp(
-        title: 'OlivEvo', debugShowCheckedModeBanner: false, home: SignupPage())
-    );
+        providers: [
+          ChangeNotifierProvider(
+            create: (context) => ProductProvider(),
+            child: ProductPage(),
+          )
+        ],
+        child: MaterialApp(
+            title: 'OlivEvo',
+            debugShowCheckedModeBanner: false,
+            home: LoginPage()));
   }
-
 }
