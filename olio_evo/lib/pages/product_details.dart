@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:olio_evo/pages/base_page.dart';
-import 'package:olio_evo/widgets/widget_product_details.dart';
 
 import '../models/product.dart';
 
@@ -19,8 +18,9 @@ class _ProductDetailsState extends BasePageState<ProductDetails>{
 
   @override
   Widget pageUI(){
-    return ProductDetailsWidget(data: this.widget.product);
+    return Container(
+      child: new Text(this.widget.product.name),
 
-    
+    );
   }
 }
