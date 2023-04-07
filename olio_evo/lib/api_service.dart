@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 import 'package:olio_evo/models/customer.dart' as customer;
 import 'package:olio_evo/config.dart';
 
@@ -316,13 +317,21 @@ class API {
         json['statusCode'] = 200;
         json['code'] = '';
         json['message'] = '';
-        json['data'] = response.data;
+        json['data'] = new Map<String, dynamic>();
         model = LoginResponseModel.fromJson(json);
       }
 
       return model;
     } on DioError catch (e) {
-      print(e.message);
+      Map<String, dynamic> json = <String, dynamic>{};
+      json['success'] = false;
+      json['statusCode'] = e.response.statusCode;
+      json['code'] = '';
+      json['message'] = '';
+      json['data'] = '';
+      model = LoginResponseModel.fromJson(json);
+      return model;
+
     }
   }
 

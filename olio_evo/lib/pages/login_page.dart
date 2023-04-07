@@ -166,7 +166,10 @@ class _LoginPageState extends State<LoginPage> {
                                     "OlioEvo",
                                     "Invalid Login",
                                     "Ok",
-                                    () {},
+                                    () {Navigator.of(context).push(
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  LoginPage()));},
                                   );
                                 }
                               });

@@ -4,23 +4,93 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 import '../models/product.dart';
+import '../utils/custom_stepper.dart';
 
 class ProductDetailsWidget extends StatelessWidget {
   ProductDetailsWidget({Key key, this.data}) : super(key: key);
 
   Product data;
-
+  int qty=0;
+  final CarouselController _controller = CarouselController();
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      child: Container(
-        color: Colors.white,
-        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 0),
-        child: Stack(
-          children: [productImages(data.images, context)],
+        child: Container(
+      color: Colors.white,
+      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 0),
+      child: Stack(children: [
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            productImages(data.images, context),
+            SizedBox(height: 10),
+            Visibility(
+                visible: data.calculateDiscount() > 0,
+                child: Align(
+                  alignment: Alignment.topLeft,
+                  child: Container(
+                    padding: EdgeInsets.all(5),
+                    decoration: BoxDecoration(color: Colors.green),
+                    child: Text('${data.calculateDiscount()}% OFF',
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.normal)),
+                  ),
+                )),
+            SizedBox(
+              height: 5,
+            ),
+            Text(
+              data.name,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                  fontSize: 25,
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text(
+                  data.attributes != null && data.attributes.length > 0
+                      ? (data.attributes[0].options.join("-").toString() +
+                          "" +
+                          data.attributes[0].name)
+                      : "",
+                ),
+                Text(
+                  '£${data.salePrice}',
+                  style: TextStyle(
+                      fontSize: 25,
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold),
+                )
+              ],
+            ),
+            SizedBox(height: 10,),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                CustomStepper(
+                  lowerLimit: 0 ,
+                  upperLimit: 20,
+                  stepValue: 1,
+                  iconSize: 22.0,
+                  value:this.qty,
+                  onChanged: (value){
+                    print(value);
+                  },
+                  ),
+                //  FlatButton
+
+              ],
+            )
+          ],
         ),
-      ),
-    );
+      ]),
+    ));
   }
 
   Widget productImages(List<Images> images, BuildContext context) {
@@ -45,7 +115,26 @@ class ProductDetailsWidget extends StatelessWidget {
                   autoPlay: false,
                   enlargeCenterPage: true,
                   viewportFraction: 1),
-              // Container
+              carouselController: _controller,
+            ),
+          ),
+          Positioned(
+            top: 100,
+            child: IconButton(
+              icon: Icon(Icons.arrow_back_ios),
+              onPressed: () {
+                _controller.previousPage();
+              },
+            ),
+          ),
+          Positioned(
+            top: 100,
+            left: MediaQuery.of(context).size.width - 80,
+            child: IconButton(
+              icon: Icon(Icons.arrow_forward_ios),
+              onPressed: () {
+                _controller.nextPage();
+              },
             ),
           )
         ],

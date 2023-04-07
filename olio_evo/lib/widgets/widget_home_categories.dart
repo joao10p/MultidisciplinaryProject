@@ -32,7 +32,7 @@ class _WidgetCategoriesState extends State<WidgetCategories> {
                     style:
                         TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
               ),
-             /* Padding(
+              /* Padding(
                 padding: EdgeInsets.only(left: 16, top: 10),
                 child: Text('I tuoi preferiti',
                     style:
@@ -60,8 +60,9 @@ class _WidgetCategoriesState extends State<WidgetCategories> {
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           return _buildCategoryList(snapshot.data);
+        } else {
+          return Center(child: CircularProgressIndicator());
         }
-        return Center(child: CircularProgressIndicator());
       },
     );
   }
@@ -77,45 +78,46 @@ class _WidgetCategoriesState extends State<WidgetCategories> {
           itemCount: categories.length,
           itemBuilder: (context, index) {
             var data = categories[index];
-            return 
-            GestureDetector(
+            return GestureDetector(
               onTap: () {
-                Navigator.push(context, MaterialPageRoute(
-                  builder: (context)=> ProductPage(categoryId: data.categoryId)));
-                },
-            
-            child: Column(
-              children: [
-                Container(
-                  alignment: Alignment.center,
-                  width: 80,
-                  height: 80,
-                  child: Image.network(data.image.url,
-                    
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            ProductPage(categoryId: data.categoryId)));
+              },
+              child: Column(
+                children: [
+                  Container(
+                    alignment: Alignment.center,
+                    width: 80,
                     height: 80,
+                    child: Image.network(
+                      data.image.url,
+                      height: 80,
+                    ),
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Colors.white,
+                      boxShadow: [
+                        BoxShadow(
+                            color: Colors.black,
+                            offset: Offset(0, 5),
+                            blurRadius: 15),
+                      ],
+                    ),
                   ),
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: Colors.white,
-                    boxShadow: [
-                      BoxShadow(
-                          color: Colors.black,
-                          offset: Offset(0, 5),
-                          blurRadius: 15),
+                  Row(
+                    children: [
+                      Text(data.categoryName.toString()),
+                      Icon(
+                        Icons.keyboard_arrow_right,
+                        size: 14,
+                      )
                     ],
-                  ),
-                ),
-                Row(
-                  children: [
-                    Text(data.categoryName.toString()),
-                    Icon(
-                      Icons.keyboard_arrow_right,
-                      size: 14,
-                    )
-                  ],
-                )
-              ],
-            ),
+                  )
+                ],
+              ),
             );
           },
         ));
