@@ -2,6 +2,8 @@ import 'package:carousel_slider/carousel_options.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:olio_evo/utils/expand_text.dart';
+import 'package:olio_evo/widgets/widget_related_products.dart';
 
 import '../models/product.dart';
 import '../utils/custom_stepper.dart';
@@ -10,7 +12,7 @@ class ProductDetailsWidget extends StatelessWidget {
   ProductDetailsWidget({Key key, this.data}) : super(key: key);
 
   Product data;
-  int qty=0;
+  int qty = 0;
   final CarouselController _controller = CarouselController();
   @override
   Widget build(BuildContext context) {
@@ -69,24 +71,47 @@ class ProductDetailsWidget extends StatelessWidget {
                 )
               ],
             ),
-            SizedBox(height: 10,),
+            SizedBox(
+              height: 10,
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 CustomStepper(
-                  lowerLimit: 0 ,
+                  lowerLimit: 0,
                   upperLimit: 20,
                   stepValue: 1,
                   iconSize: 22.0,
-                  value:this.qty,
-                  onChanged: (value){
+                  value: this.qty,
+                  onChanged: (value) {
                     print(value);
                   },
-                  ),
-                //  FlatButton
-
+                ),
+                TextButton(
+                    onPressed: () {},
+                    child: Text(
+                      'Add to Cart',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    style: TextButton.styleFrom(
+                      backgroundColor: Colors.green,
+                      padding: EdgeInsets.all(15),
+                      shape: StadiumBorder(),
+                    )),
               ],
-            )
+            ),
+            SizedBox(
+              height: 5,
+            ),
+            ExpandText(
+                labelHeader: "Product Details",
+                desc: data.description,
+                shortDesc: data.shortDescription
+                ),
+                Divider(),
+                SizedBox(height: 10,),
+                WidgetRelatedProducts(labelName: "Related Products", products: this.data.relatedIds,)
+
           ],
         ),
       ]),

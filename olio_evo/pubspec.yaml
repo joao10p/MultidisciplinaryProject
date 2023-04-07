@@ -30,10 +30,12 @@ environment:
 # versions available, run `flutter pub outdated`.
 dependencies:
   flutter_barcode_scanner: ^2.0.0
+  google_fonts: ^3.0.1
   woocommerce_api: ^0.1.0
   dio: ^5.1.0
   provider:
   carousel_slider:
+  flutter_html:
   carousel_pro:
   shared_preferences:
   flutter:

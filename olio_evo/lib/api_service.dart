@@ -251,7 +251,9 @@ class API {
     String tagName,
     String categoryId,
     String sortBy,
+    List<int> productsIDs,
     String sortOrder = "asc",
+
   }) async {
     try {
       String parameter = "";
@@ -272,12 +274,16 @@ class API {
         parameter += "&tag=$tagName";
       }
 
-      if (categoryId != null) {
+      /*if (categoryId != null) {
         parameter += "&category=$categoryId";
       }
-
+*/
       if (sortBy != null) {
         parameter += "&order_by	=$sortBy";
+      }
+
+      if(productsIDs != null){
+        parameter += "&include=${productsIDs.join(",").toString()}";
       }
 
       if (sortOrder != null) {
