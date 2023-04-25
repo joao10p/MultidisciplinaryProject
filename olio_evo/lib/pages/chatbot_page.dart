@@ -26,41 +26,60 @@ class _ChatbotPageState extends State<ChatbotPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Container(
-      child: Column(
-        children: [
-          Expanded(child: MessagesScreen(messages: messages)),
-          Container(
-              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
-              color: Colors.grey,
-              child: Row(
-                children: [
-                  Expanded(
-                      child: TextField(
-                          controller: _controller,
-                          style: const TextStyle(color: Colors.white),
-                          cursorColor: Colors.white,
-                          decoration: const InputDecoration(
-                              enabledBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(color: Colors.white),
-                              ),
-                              focusedBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(color: Colors.white),
-                              )))),
-                  IconButton(
-                      onPressed: () {
-                        sendMessage(_controller.text);
+      backgroundColor: Color.fromARGB(255, 152, 191, 145),
+      body: Container(
+        alignment: Alignment.center,
+        margin: EdgeInsets.all(0),
+        padding: EdgeInsets.all(0),
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height,
+        decoration: BoxDecoration(
+          color: Color(0x1f000000),
+          shape: BoxShape.rectangle,
+          borderRadius: BorderRadius.zero,
+          border: Border.all(color: Color(0x4d9e9e9e), width: 1),
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisSize: MainAxisSize.max,
+          children: [
+            Expanded(child: MessagesScreen(messages: messages)),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                Expanded(
+                    flex: 1,
+                    child: TextField(
+                        controller: _controller,
+                        style: const TextStyle(color: Color.fromARGB(255, 252, 252, 252)),
+                        cursorColor: Colors.white,
+                        decoration: const InputDecoration(
+                          fillColor: Color.fromARGB(255, 38, 112, 6), filled: true,
+                        
+                            enabledBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: Colors.white),
+                            ),
+                            focusedBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: Colors.white),
+                            )))),
+                IconButton(
+                  icon: Icon(Icons.send),
+                  onPressed: () {
+                    sendMessage(_controller.text);
                         _controller.clear();
-                      },
-                      icon: const Icon(
-                        Icons.send,
-                        color: Colors.white,
-                      ))
-                ],
-              ))
-        ],
+                  },
+                  color: Color(0xff212435),
+                  iconSize: 30,
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
-    ));
+    );
   }
 
   sendMessage(String text) async {

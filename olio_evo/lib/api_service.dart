@@ -16,10 +16,9 @@ import "dart:math";
 import "dart:core";
 import 'package:crypto/crypto.dart' as crypto;
 import 'package:olio_evo/models/login_model.dart';
+import 'package:olio_evo/utils/query_string.dart';
 import 'package:uuid/uuid.dart';
-import 'package:woocommerce_api/query_string.dart';
 import 'package:http/http.dart' as http;
-import 'package:woocommerce_api/woocommerce_error.dart';
 
 import 'models/category.dart';
 import 'models/customer.dart';

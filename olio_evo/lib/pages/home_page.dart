@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:olio_evo/pages/account_page.dart';
 import 'package:olio_evo/pages/barcode_page.dart';
+import 'package:olio_evo/pages/payment_screen.dart';
 
 import 'chatbot_page.dart';
 import 'dashboard_page.dart';
@@ -14,6 +15,7 @@ class _HomePageState extends State<HomePage> {
   final List<Widget> _widgetList = [
     DashboardPage(),
     DashboardPage(),
+    PaymentScreen(),
     const Center(child: BarcodePage()),
     const ChatbotPage(),
     const AccountPage(),
