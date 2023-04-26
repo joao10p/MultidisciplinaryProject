@@ -7,6 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../config.dart';
+import '../models/cart_response_model.dart';
+import '../provider/cart_provider.dart';
 
 class PaypalServices {
   String clientId = Config.paypalClientID;
@@ -56,7 +58,7 @@ Map<String, dynamic> getOrderParams (BuildContext context) {
     items.add({
     "name": item.productName,
     "quantity": item.qty,
-    "price": item.productSale Price,
+    "price": item.productSalePrice,
     "currency": defaultCurrency ["currency"]
   });
 });
