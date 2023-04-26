@@ -141,6 +141,8 @@ class _CartPageState extends State<CartPage> {
             )
           ],
         );
+      } else {
+        return Container();
       }
     });
   }

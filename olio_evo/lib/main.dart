@@ -24,7 +24,8 @@ class MyApp extends StatelessWidget {
         providers: [
           ChangeNotifierProvider(
             create: (context) => ProductProvider(),
-            child: ProductPage()),
+            child: ProductPage(),
+          ),
           ChangeNotifierProvider(
             create: (context) => LoaderProvider(),
             child: BasePage(),
