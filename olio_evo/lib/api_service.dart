@@ -20,6 +20,8 @@ import 'package:olio_evo/utils/query_string.dart';
 import 'package:uuid/uuid.dart';
 import 'package:http/http.dart' as http;
 
+import 'models/cart_request_model.dart';
+import 'models/cart_response_model.dart';
 import 'models/category.dart';
 import 'models/customer.dart';
 import 'models/product.dart';
@@ -252,7 +254,6 @@ class API {
     String sortBy,
     List<int> productsIDs,
     String sortOrder = "asc",
-
   }) async {
     try {
       String parameter = "";
@@ -281,7 +282,7 @@ class API {
         parameter += "&order_by	=$sortBy";
       }
 
-      if(productsIDs != null){
+      if (productsIDs != null) {
         parameter += "&include=${productsIDs.join(",").toString()}";
       }
 
@@ -336,8 +337,65 @@ class API {
       json['data'] = '';
       model = LoginResponseModel.fromJson(json);
       return model;
-
     }
+  }
+
+  Future<CartResponseModel> addToCart(CartRequestModel model) async {
+    //TODO: use user id of logged user
+    model.userId = int.parse(Config.userID);
+
+    CartResponseModel responseModel;
+
+    try {
+      var response = await Dio().post(
+        Config.url + Config.addToCartURL,
+        data: model.toJson(),
+        options: Options(
+          headers: {
+            HttpHeaders.contentTypeHeader: "application/json",
+          },
+        ),
+      );
+
+      if (response.statusCode == 200) {
+        responseModel = CartResponseModel.fromJson(response.data);
+      }
+    } on DioError catch (e) {
+      if (e.response.statusCode == 404) {
+        print(e.response.statusCode);
+      } else {
+        print(e.message);
+        print(e.requestOptions);
+      }
+    }
+
+    return responseModel;
+  }
+
+  Future<CartResponseModel> getCartItems() async {
+    CartResponseModel responseModel;
+
+    try {
+      String url =
+          "${Config.url}${Config.cartURL}?user_id=${Config.userID}&consumer_key=${Config.key}&consumer_secret=${Config.secret}";
+
+      print(url);
+
+      var response = await Dio().get(
+        url,
+        options: Options(
+          headers: {HttpHeaders.contentTypeHeader: "application/json"},
+        ),
+      );
+
+      if (response.statusCode == 200) {
+        responseModel = CartResponseModel.fromJson(response.data);
+      }
+    } on DioError catch (e) {
+      print(e.response);
+    }
+
+    return responseModel;
   }
 
   Future<bool> createCustomer(CustomerModel model) async {
