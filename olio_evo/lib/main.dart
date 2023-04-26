@@ -3,21 +3,14 @@ import 'package:olio_evo/models/product.dart';
 import 'package:olio_evo/pages/base_page.dart';
 import 'package:olio_evo/pages/cart_page.dart';
 import 'package:olio_evo/pages/home_page.dart';
-<<<<<<< Updated upstream
 import 'package:olio_evo/pages/paypal_payment.dart';
-=======
-import 'package:olio_evo/pages/login_page.dart';
 import 'package:olio_evo/pages/product_details.dart';
->>>>>>> Stashed changes
 import 'package:olio_evo/pages/product_page.dart';
 import 'package:olio_evo/pages/sign_up_new.dart';
 import 'package:olio_evo/provider/cart_provider.dart';
 import 'package:olio_evo/provider/loader_provider.dart';
 import 'package:olio_evo/provider/products_provider.dart';
 import 'package:provider/provider.dart';
-
-import 'pages/login_page.dart';
-import 'pages/pagina_prova.dart';
 
 void main() {
   runApp(MyApp());
@@ -31,7 +24,7 @@ class MyApp extends StatelessWidget {
         providers: [
           ChangeNotifierProvider(
             create: (context) => ProductProvider(),
-            child: ProductPage(),
+            child: ProductPage()),
           ChangeNotifierProvider(
             create: (context) => LoaderProvider(),
             child: BasePage(),
@@ -48,7 +41,7 @@ class MyApp extends StatelessWidget {
         child: MaterialApp(
             title: 'OlivEvo',
             debugShowCheckedModeBanner: false,
-            home: SignupPage(),
+            home: HomePage(),
             initialRoute: "/",
             routes: <String, WidgetBuilder>{
               "/PayPal": (context) => new PaypalPaymentScreen()

@@ -365,7 +365,6 @@ class API {
         print(e.response.statusCode);
       } else {
         print(e.message);
-        print(e.requestOptions);
       }
     }
 
