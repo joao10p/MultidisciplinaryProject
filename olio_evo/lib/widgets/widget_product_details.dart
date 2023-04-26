@@ -1,11 +1,13 @@
-import 'package:carousel_slider/carousel_options.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:olio_evo/utils/expand_text.dart';
 import 'package:olio_evo/widgets/widget_related_products.dart';
+import 'package:provider/provider.dart';
 
+import '../models/cart_request_model.dart';
 import '../models/product.dart';
+import '../provider/cart_provider.dart';
+import '../provider/loader_provider.dart';
 import '../utils/custom_stepper.dart';
 
 class ProductDetailsWidget extends StatelessWidget {
@@ -13,40 +15,43 @@ class ProductDetailsWidget extends StatelessWidget {
 
   Product data;
   int qty = 0;
+
+  CartProducts cartProducts = CartProducts();
+
   final CarouselController _controller = CarouselController();
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
         child: Container(
       color: Colors.white,
-      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 0),
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 0),
       child: Stack(children: [
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             productImages(data.images, context),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Visibility(
                 visible: data.calculateDiscount() > 0,
                 child: Align(
                   alignment: Alignment.topLeft,
                   child: Container(
-                    padding: EdgeInsets.all(5),
-                    decoration: BoxDecoration(color: Colors.green),
+                    padding: const EdgeInsets.all(5),
+                    decoration: const BoxDecoration(color: Colors.green),
                     child: Text('${data.calculateDiscount()}% OFF',
-                        style: TextStyle(
+                        style: const TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.normal)),
                   ),
                 )),
-            SizedBox(
+            const SizedBox(
               height: 5,
             ),
             Text(
               data.name,
               textAlign: TextAlign.center,
-              style: TextStyle(
+              style: const TextStyle(
                   fontSize: 25,
                   color: Colors.black,
                   fontWeight: FontWeight.bold),
@@ -56,22 +61,20 @@ class ProductDetailsWidget extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Text(
-                  data.attributes != null && data.attributes.length > 0
-                      ? (data.attributes[0].options.join("-").toString() +
-                          "" +
-                          data.attributes[0].name)
+                  data.attributes != null && data.attributes.isNotEmpty
+                      ? ("${data.attributes[0].options.join("-")}${data.attributes[0].name}")
                       : "",
                 ),
                 Text(
                   '£${data.salePrice}',
-                  style: TextStyle(
+                  style: const TextStyle(
                       fontSize: 25,
                       color: Colors.black,
                       fontWeight: FontWeight.bold),
                 )
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             Row(
@@ -82,36 +85,51 @@ class ProductDetailsWidget extends StatelessWidget {
                   upperLimit: 20,
                   stepValue: 1,
                   iconSize: 22.0,
-                  value: this.qty,
+                  value: qty,
                   onChanged: (value) {
                     print(value);
                   },
                 ),
                 TextButton(
-                    onPressed: () {},
-                    child: Text(
-                      'Add to Cart',
-                      style: TextStyle(color: Colors.white),
-                    ),
-                    style: TextButton.styleFrom(
-                      backgroundColor: Colors.green,
-                      padding: EdgeInsets.all(15),
-                      shape: StadiumBorder(),
-                    )),
+                  onPressed: () {
+                    Provider.of<LoaderProvider>(context, listen: false)
+                        .setLoadingStatus(true);
+                    var cartProvider =
+                        Provider.of<CartProvider>(context, listen: false);
+
+                    cartProducts.productId = data.id;
+                    cartProvider.addToCart(cartProducts, (val) {
+                      Provider.of<LoaderProvider>(context, listen: false)
+                          .setLoadingStatus(false);
+                    });
+                  },
+                  style: TextButton.styleFrom(
+                    padding: const EdgeInsets.all(15),
+                    backgroundColor: Colors.redAccent,
+                    shape: const StadiumBorder(),
+                  ),
+                  child: const Text(
+                    "Add to Cart",
+                    style: TextStyle(color: Colors.white),
+                  ),
+                )
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 5,
             ),
             ExpandText(
                 labelHeader: "Product Details",
                 desc: data.description,
-                shortDesc: data.shortDescription
-                ),
-                Divider(),
-                SizedBox(height: 10,),
-                WidgetRelatedProducts(labelName: "Related Products", products: this.data.relatedIds,)
-
+                shortDesc: data.shortDescription),
+            const Divider(),
+            const SizedBox(
+              height: 10,
+            ),
+            WidgetRelatedProducts(
+              labelName: "Related Products",
+              products: this.data.relatedIds,
+            )
           ],
         ),
       ]),
@@ -146,7 +164,7 @@ class ProductDetailsWidget extends StatelessWidget {
           Positioned(
             top: 100,
             child: IconButton(
-              icon: Icon(Icons.arrow_back_ios),
+              icon: const Icon(Icons.arrow_back_ios),
               onPressed: () {
                 _controller.previousPage();
               },
@@ -156,7 +174,7 @@ class ProductDetailsWidget extends StatelessWidget {
             top: 100,
             left: MediaQuery.of(context).size.width - 80,
             child: IconButton(
-              icon: Icon(Icons.arrow_forward_ios),
+              icon: const Icon(Icons.arrow_forward_ios),
               onPressed: () {
                 _controller.nextPage();
               },
