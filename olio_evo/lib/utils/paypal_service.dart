@@ -41,26 +41,26 @@ class PaypalServices {
   }
 
 // you can change default currency according to your need
-Map<dynamic, dynamic> defaultCurrency= {
-  "symbol": "INR",
-  "decimalDigits": 2,
-  "symbolBefore TheNumber": true,
-  "currency": "INR"
-};
- 
-Map<String, dynamic> getOrderParams (BuildContext context) {
-  var cartModel = Provider.of<CartProvider>(context, listen: false);
-  cartModel.fetchCartItems();
-  List items = [];
-  
-  cartModel.cartItems.forEach((CartItem item) {
-    items.add({
-    "name": item.productName,
-    "quantity": item.qty,
-    "price": item.productSalePrice,
-    "currency": defaultCurrency ["currency"]
-  });
-});
+  Map<dynamic, dynamic> defaultCurrency = {
+    "symbol": "EUR",
+    "decimalDigits": 2,
+    "symbolBefore TheNumber": true,
+    "currency": "EUR"
+  };
+
+  Map<String, dynamic> getOrderParams(BuildContext context) {
+    var cartModel = Provider.of<CartProvider>(context, listen: false);
+    cartModel.fetchCartItems();
+    List items = [];
+
+    cartModel.cartItems.forEach((CartItem item) {
+      items.add({
+        "name": item.productName,
+        "quantity": item.qty,
+        "price": item.productSalePrice,
+        "currency": defaultCurrency["currency"]
+      });
+    });
 
 // checkout invoice details
     String totalAmount = cartModel.totalAmount.toString();
@@ -69,7 +69,7 @@ Map<String, dynamic> getOrderParams (BuildContext context) {
     int shippingDiscountCost = 0;
     Map<String, dynamic> temp = {
       "intent": "sale",
-      "payer": {"payment method": "paypal"},
+      "payer": {"payment_method": "paypal"},
       "transactions": [
         {
           "amount": {
@@ -83,7 +83,7 @@ Map<String, dynamic> getOrderParams (BuildContext context) {
           },
           "description": "The payment transaction description.",
           "payment_options": {
-            "allowed_payment method": "INSTANT_FUNDING_SOURCE"
+            "allowed_payment_method": "INSTANT_FUNDING_SOURCE"
           },
           "item_list": {
             "items": items,

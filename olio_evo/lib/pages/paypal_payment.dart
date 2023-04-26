@@ -23,7 +23,9 @@ class PaypalPaymentScreenState extends State<PaypalPaymentScreen> {
   @override
   void initState() {
     super.initState();
+    paypalServices= new PaypalServices();
     this.scaffoldKey = new GlobalKey<ScaffoldState>();
+  
 
     Future.delayed(Duration.zero, () async {
       try {

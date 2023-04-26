@@ -87,7 +87,7 @@ class ProductDetailsWidget extends StatelessWidget {
                   iconSize: 22.0,
                   value: qty,
                   onChanged: (value) {
-                    print(value);
+                    qty=value;
                   },
                 ),
                 TextButton(
@@ -98,6 +98,7 @@ class ProductDetailsWidget extends StatelessWidget {
                         Provider.of<CartProvider>(context, listen: false);
 
                     cartProducts.productId = data.id;
+                    cartProducts.quantity =this.qty;
                     cartProvider.addToCart(cartProducts, (val) {
                       Provider.of<LoaderProvider>(context, listen: false)
                           .setLoadingStatus(false);

@@ -15,7 +15,7 @@ class _PaymentScreenState extends BasePageState<PaymentScreen> {
   @override
   Widget build(BuildContext context) {
     list = new PaymentMethodList();
-    return SingleChildScrollView(
+     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.start,

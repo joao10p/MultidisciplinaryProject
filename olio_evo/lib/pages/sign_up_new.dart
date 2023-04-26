@@ -1,6 +1,7 @@
 ///File download from FlutterViz- Drag and drop a tools. For more details visit https://flutterviz.io/
 
 import 'package:flutter/material.dart';
+import 'package:olio_evo/utils/validator_service.dart';
 
 import '../api_service.dart';
 import '../models/customer.dart';
@@ -30,7 +31,8 @@ class _SignupPageState extends State<SignupPage> {
       appBar: AppBar(
           backgroundColor: Colors.greenAccent,
           automaticallyImplyLeading: true,
-          title: Text("Sign Up"),
+          title: Text("Registrati"),
+          centerTitle: true,
         ),
         body: ProgressHUD(
             child: Form(
@@ -52,6 +54,7 @@ class _SignupPageState extends State<SignupPage> {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisSize: MainAxisSize.max,
               children: [
+                SizedBox(height: 5,),
                 Padding(
                   padding: EdgeInsets.fromLTRB(0, 0, 0, 10),
                   child:
@@ -66,7 +69,7 @@ class _SignupPageState extends State<SignupPage> {
                 Padding(
                   padding: EdgeInsets.fromLTRB(0, 16, 0, 0),
                   child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            FormHelper.fieldLabel("Firts Name"), //parsing the first name
+            FormHelper.fieldLabel("Nome"), //parsing the first name
             FormHelper.textInput(
               context, //passing the context
               model.firstName,
@@ -75,233 +78,153 @@ class _SignupPageState extends State<SignupPage> {
               },
               onValidate: (value) {
                 if (value.toString().isEmpty) {
-                  return 'Please Enter First Name.';
+                  return 'Per favore inserisci il tuo nome.';
                 }
                 return null;
               },
             ),
               ]),
                 ),
-                Padding(
-                  padding: EdgeInsets.fromLTRB(0, 16, 0, 0),
-                  child: TextField(
-                    controller: TextEditingController(text: "John"),
-                    obscureText: false,
-                    textAlign: TextAlign.start,
-                    maxLines: 1,
-                    style: TextStyle(
-                      fontWeight: FontWeight.w400,
-                      fontStyle: FontStyle.normal,
-                      fontSize: 16,
-                      color: Color(0xff000000),
-                    ),
-                    decoration: InputDecoration(
-                      disabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(4.0),
-                        borderSide:
-                            BorderSide(color: Color(0xff9e9e9e), width: 1),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(4.0),
-                        borderSide:
-                            BorderSide(color: Color(0xff9e9e9e), width: 1),
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(4.0),
-                        borderSide:
-                            BorderSide(color: Color(0xff9e9e9e), width: 1),
-                      ),
-                      labelText: "Last Name",
-                      labelStyle: TextStyle(
-                        fontWeight: FontWeight.w400,
-                        fontStyle: FontStyle.normal,
-                        fontSize: 16,
-                        color: Color(0xff9e9e9e),
-                      ),
-                      filled: true,
-                      fillColor: Color(0x00ffffff),
-                      isDense: false,
-                      contentPadding:
-                          EdgeInsets.symmetric(vertical: 8, horizontal: 12),
-                    ),
-                  ),
+           
+            FormHelper.fieldLabel("Cognome"), //parsing the first name
+            FormHelper.textInput(
+              context, //passing the context
+              model.firstName,
+              (value) => {
+                this.model.lastName = value,
+              },
+              onValidate: (value) {
+                if (value.toString().isEmpty) {
+                  return 'Per favore inserisci il tuo cognome.';
+                }
+                return null;
+              },
+            ),
+              FormHelper.fieldLabel("Email"), //parsing the first name
+            FormHelper.textInput(
+              context, //passing the context
+              model.firstName,
+              (value) => {
+                this.model.email = value,
+              },
+              onValidate: (value) {
+                if (value.toString().isEmpty) {
+                  return 'Per favore inserisci una mail';
+                }
+                if (value.isNotEmpty && !value.toString().isValidEmail()) {
+                  return 'Per favore inserisci una mail corretta';
+                }
+                return null;
+              },
+            ),
+                FormHelper.fieldLabel("Password"), //parsing the first name
+            FormHelper.textInput(
+              context, //passing the context
+              model.firstName,
+              (value) => {
+                this.model.password = value,
+              },
+              onValidate: (value) {
+                if (value.toString().isEmpty) {
+                  return 'Per favore metti la password.';
+                }
+                return null;
+              },
+              obscureText: hidePAssword,
+              suffixIcon: IconButton(
+                onPressed: () {
+                  setState(() {
+                    hidePAssword = !hidePAssword;
+                  });
+                },
+                color: Theme.of(context).accentColor.withOpacity(0.4),
+                icon: Icon(
+                  hidePAssword ? Icons.visibility_off : Icons.visibility,
                 ),
-                Padding(
-                  padding: EdgeInsets.fromLTRB(0, 16, 0, 0),
-                  child: TextField(
-                    controller: TextEditingController(text: "john@test.com"),
-                    obscureText: false,
-                    textAlign: TextAlign.start,
-                    maxLines: 1,
-                    style: TextStyle(
-                      fontWeight: FontWeight.w400,
-                      fontStyle: FontStyle.normal,
-                      fontSize: 16,
-                      color: Color(0xff000000),
-                    ),
-                    decoration: InputDecoration(
-                      disabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(4.0),
-                        borderSide:
-                            BorderSide(color: Color(0xff9e9e9e), width: 1),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(4.0),
-                        borderSide:
-                            BorderSide(color: Color(0xff9e9e9e), width: 1),
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(4.0),
-                        borderSide:
-                            BorderSide(color: Color(0xff9e9e9e), width: 1),
-                      ),
-                      labelText: "Email",
-                      labelStyle: TextStyle(
-                        fontWeight: FontWeight.w400,
-                        fontStyle: FontStyle.normal,
-                        fontSize: 16,
-                        color: Color(0xff9e9e9e),
-                      ),
-                      filled: true,
-                      fillColor: Color(0x00ffffff),
-                      isDense: false,
-                      contentPadding:
-                          EdgeInsets.symmetric(vertical: 8, horizontal: 12),
-                    ),
-                  ),
+              ),
+            ),
+                FormHelper.fieldLabel("Conferma password"), //parsing the first name
+            FormHelper.textInput(
+              context, //passing the context
+              model.firstName,
+              (value) => {
+               
+              },
+              onValidate: (value) {
+                if (value.toString()!=this.model.password) {
+                  return 'Per favore metti la stessa password';
+                }
+                return null;
+              },
+              obscureText: hidePAssword,
+              suffixIcon: IconButton(
+                onPressed: () {
+                  setState(() {
+                    hidePAssword = !hidePAssword;
+                  });
+                },
+                color: Theme.of(context).accentColor.withOpacity(0.4),
+                icon: Icon(
+                  hidePAssword ? Icons.visibility_off : Icons.visibility,
                 ),
-                Padding(
-                  padding: EdgeInsets.fromLTRB(0, 16, 0, 0),
-                  child: TextField(
-                    controller: TextEditingController(text: "12345678"),
-                    obscureText: true,
-                    textAlign: TextAlign.start,
-                    maxLines: 1,
-                    style: TextStyle(
-                      fontWeight: FontWeight.w400,
-                      fontStyle: FontStyle.normal,
-                      fontSize: 14,
-                      color: Color(0xff000000),
-                    ),
-                    decoration: InputDecoration(
-                      disabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(4.0),
-                        borderSide:
-                            BorderSide(color: Color(0xff494949), width: 1),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(4.0),
-                        borderSide:
-                            BorderSide(color: Color(0xff494949), width: 1),
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(4.0),
-                        borderSide:
-                            BorderSide(color: Color(0xff494949), width: 1),
-                      ),
-                      labelText: "Password",
-                      labelStyle: TextStyle(
-                        fontWeight: FontWeight.w400,
-                        fontStyle: FontStyle.normal,
-                        fontSize: 16,
-                        color: Color(0xff000000),
-                      ),
-                      filled: true,
-                      fillColor: Color(0x00f2f2f3),
-                      isDense: false,
-                      contentPadding:
-                          EdgeInsets.symmetric(vertical: 8, horizontal: 12),
-                      suffixIcon: Icon(Icons.visibility,
-                          color: Color(0xff212435), size: 24),
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.fromLTRB(0, 16, 0, 30),
-                  child: TextField(
-                    controller: TextEditingController(text: "12345678"),
-                    obscureText: true,
-                    textAlign: TextAlign.start,
-                    maxLines: 1,
-                    style: TextStyle(
-                      fontWeight: FontWeight.w400,
-                      fontStyle: FontStyle.normal,
-                      fontSize: 16,
-                      color: Color(0xff000000),
-                    ),
-                    decoration: InputDecoration(
-                      disabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(4.0),
-                        borderSide:
-                            BorderSide(color: Color(0xff9e9e9e), width: 1),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(4.0),
-                        borderSide:
-                            BorderSide(color: Color(0xff9e9e9e), width: 1),
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(4.0),
-                        borderSide:
-                            BorderSide(color: Color(0xff9e9e9e), width: 1),
-                      ),
-                      labelText: "Confirm Password",
-                      labelStyle: TextStyle(
-                        fontWeight: FontWeight.w400,
-                        fontStyle: FontStyle.normal,
-                        fontSize: 16,
-                        color: Color(0xff9e9e9e),
-                      ),
-                      filled: true,
-                      fillColor: Color(0x00ffffff),
-                      isDense: false,
-                      contentPadding:
-                          EdgeInsets.symmetric(vertical: 8, horizontal: 12),
-                      suffixIcon: Icon(Icons.visibility,
-                          color: Color(0xff212435), size: 24),
-                    ),
-                  ),
-                ),
+              ),
+            ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisSize: MainAxisSize.max,
                   children: [
-                    Expanded(
-                      flex: 1,
-                      child: Padding(
-                        padding: EdgeInsets.fromLTRB(20, 0, 0, 20),
-                        child: MaterialButton(
-                          onPressed: () {},
-                          color: Color(0xff27c63d),
-                          elevation: 0,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12.0),
-                          ),
-                          padding: EdgeInsets.all(16),
-                          child: Text(
-                            "Sign Up",
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w400,
-                              fontStyle: FontStyle.normal,
-                            ),
-                          ),
-                          textColor: Color(0xffffffff),
-                          height: 40,
-                          minWidth: 140,
-                        ),
-                      ),
-                    ),
+                     new Center(
+              child: FormHelper.saveButton(
+                "Registrati",
+                () {
+                  if (validateAndSave()) {
+                    setState(() {
+                      isApiCallProcess = true;
+                    });
+                    //Here there is the call to the API and then we fetch the result
+                    api.createCustomer(model).then(
+                      (ret) {
+                        setState(() {
+                          isApiCallProcess = false;
+                        });
+                        if (ret) {
+                          FormHelper.showMessage(
+                            context,
+                            "OlioEvo",
+                            "Registrazione avvenuta con successo",
+                            "Ok",
+                            () {
+                              Navigator.of(context).pop();
+                            },
+                          );
+                        } else {
+                          FormHelper.showMessage(
+                            context,
+                            "OlioEvo",
+                            "Esiste già un account con questa mail",
+                            "Ok",
+                            () {
+                              Navigator.of(context).pop();
+                            },
+                          );
+                        }
+                      },
+                    );
+                  }
+                },
+              ),
+            ),
                     SizedBox(
                       width: 16,
                     ),
                   ],
                 ),
+                SizedBox(height: 30,),
                 Align(
                   alignment: Alignment.center,
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisSize: MainAxisSize.max,
                     children: [
@@ -314,16 +237,17 @@ class _SignupPageState extends State<SignupPage> {
                           style: TextStyle(
                             fontWeight: FontWeight.w400,
                             fontStyle: FontStyle.normal,
-                            fontSize: 10,
-                            color: Color(0xff000000),
+                            fontSize: 16,
+                            color: Color.fromARGB(255, 13, 14, 13),
                           ),
                         ),
                       ),
+                      SizedBox(width: 30,),
                       Padding(
-                        padding: EdgeInsets.fromLTRB(2, 0, 30, 0),
+                        padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
                         child: MaterialButton(
                           onPressed: () {},
-                          color: Color(0xff000000),
+                          color: Color.fromARGB(255, 56, 156, 6),
                           elevation: 0,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(5.0),
@@ -334,7 +258,7 @@ class _SignupPageState extends State<SignupPage> {
                           child: Text(
                             "Login",
                             style: TextStyle(
-                              fontSize: 10,
+                              fontSize: 16,
                               fontWeight: FontWeight.w400,
                               fontStyle: FontStyle.normal,
                             ),
@@ -352,6 +276,15 @@ class _SignupPageState extends State<SignupPage> {
           ),
         ),
       );
-    
   }
+
+   bool validateAndSave() {
+    final form = globalKey.currentState;
+    if (form.validate()) {
+      form.save();
+      return true;
+    }
+    return false;
+  }
+
 }

@@ -9,11 +9,11 @@ class Config {
   static String topSellingTagId = "31";
   static String offerteDiOggiTagId = "30";
 
-  static String addToCartURL = "/addtocart";
-  static String cartURL = "/cart";
+  static String addToCartURL = "/wp-json/wc/v3/addtocart";
+  static String cartURL = "/wp-json/wc/v3/cart";
   static String userID = "23";
-    static String paypalClientID ="";
-  static String paypalSecretKey = "";
+    static String paypalClientID ="AYYhbgihgcEMz7vsDR4xdzlIYOTqurHq5aB0U6nHqe6G8hfuaUM4lN94ImY_h3Jg2or7BZM44u8LX8WJ";
+  static String paypalSecretKey = "EFX24oLMAQH6suXP9oTY2opoLhXO7PiZyxx3TR7mrXfg-jmN2pbfNZFL98GispoBWczh6U-pudMAXjSM";
   static String paypalURL = "https://api.sandbox.paypal.com"; //for sandbox mode
     //static String paypalURL = "https://api.paypal.com"; //for Production mode
 

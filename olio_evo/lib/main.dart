@@ -42,7 +42,7 @@ class MyApp extends StatelessWidget {
         child: MaterialApp(
             title: 'OlivEvo',
             debugShowCheckedModeBanner: false,
-            home: HomePage(),
+            home: SignupPage(),
             initialRoute: "/",
             routes: <String, WidgetBuilder>{
               "/PayPal": (context) => new PaypalPaymentScreen()

@@ -341,6 +341,8 @@ class API {
   }
 
   Future<CartResponseModel> addToCart(CartRequestModel model) async {
+    
+
     //TODO: use user id of logged user
     model.userId = int.parse(Config.userID);
 
@@ -375,6 +377,7 @@ class API {
     CartResponseModel responseModel;
 
     try {
+        
       String url =
           "${Config.url}${Config.cartURL}?user_id=${Config.userID}&consumer_key=${Config.key}&consumer_secret=${Config.secret}";
 

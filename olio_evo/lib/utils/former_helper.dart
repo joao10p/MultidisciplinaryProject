@@ -49,13 +49,13 @@ class FormHelper {
       suffixIcon: suffixIcon,
       enabledBorder: OutlineInputBorder(
         borderSide: BorderSide(
-          color: Theme.of(context).primaryColor,
+          color: Color.fromARGB(255, 1, 115, 60),
           width: 1,
         ),
       ),
       border: OutlineInputBorder(
         borderSide: BorderSide(
-          color: Theme.of(context).primaryColor,
+          color: Color.fromARGB(255, 4, 87, 47),
           width: 1,
         ),
       ),
@@ -63,13 +63,15 @@ class FormHelper {
   }
 
   static Widget fieldLabel(String labelName) {
-    return new Padding(
-      padding: const EdgeInsets.fromLTRB(0, 5, 0, 10),
+    return new Align(
+            alignment: Alignment.centerLeft,
+      
       child: Text(
         labelName,
         style: new TextStyle(
           fontWeight: FontWeight.bold,
           fontSize: 15.0,
+
         ),
       ),
     );
@@ -87,11 +89,11 @@ class FormHelper {
         child: Container(
           decoration: BoxDecoration(
             border: Border.all(
-              color: Colors.redAccent,
+              color: Color.fromARGB(255, 34, 182, 69),
               style: BorderStyle.solid,
               width: 1.0,
             ),
-            color: Colors.redAccent,
+            color: Color.fromARGB(255, 32, 145, 24),
             borderRadius: BorderRadius.circular(30.0),
           ),
           child: Row(

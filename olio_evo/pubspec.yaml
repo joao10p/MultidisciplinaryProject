@@ -30,6 +30,7 @@ environment:
 # versions available, run `flutter pub outdated`.
 dependencies:
   uuid: ^2.0.0
+  
   flutter_barcode_scanner: ^2.0.0
   dio: 3.0.10
   provider:
@@ -40,7 +41,6 @@ dependencies:
   shared_preferences:
   flutter:
     sdk: flutter
-
   dialog_flowtter:
 
   # The following adds the Cupertino Icons font to your application.

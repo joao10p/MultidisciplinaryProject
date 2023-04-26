@@ -4,6 +4,8 @@ import 'package:olio_evo/api_service.dart';
 import '../models/product.dart';
 
 class WidgetRelatedProducts extends StatefulWidget{
+
+  bool hasFired=false;
   
   WidgetRelatedProducts({
     this.labelName,
@@ -64,6 +66,7 @@ class WidgetRelatedProductsState extends State<WidgetRelatedProducts>{
   }
 
   Widget _productsList() {
+    if(!this.widget.hasFired){
     return new FutureBuilder(
         future: apiService.getProducts(productsIDs: this.widget.products),
         builder: (context, snapshot) {
@@ -73,9 +76,11 @@ class WidgetRelatedProductsState extends State<WidgetRelatedProducts>{
             return Center(child: CircularProgressIndicator());
           }
         });
+    }
   }
 
   Widget _buildList(List<Product> items) {
+    this.widget.hasFired=true;
     return Container(
       height: 220,
       alignment: Alignment.centerLeft,

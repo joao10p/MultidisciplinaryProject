@@ -6,7 +6,7 @@ class CartResponseModel {
 
   CartResponseModel.fromJson(Map<String, dynamic> json) {
     status = json['status'];
-    if (json['data'] != null) {
+    if (json['data'].length > 0) {
       data = <CartItem>[];
       json['data'].forEach((v) {
         data.add(CartItem.fromJson(v));
