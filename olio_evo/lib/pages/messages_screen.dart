@@ -31,8 +31,8 @@ class _MessagesScreenState extends State<MessagesScreen> {
                         vertical: 14, horizontal: 14),
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.only(
-                          bottomLeft: const Radius.circular(
-                            20,
+                          bottomLeft: const Radius.elliptical(
+                            20,20
                           ),
                           topRight: const Radius.circular(20),
                           bottomRight: Radius.circular(widget.messages[

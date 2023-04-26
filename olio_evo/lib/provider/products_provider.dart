@@ -64,7 +64,7 @@ class ProductProvider with ChangeNotifier{
       sortOrder: this._sortBy.sortOrder,
     );
 
-    if(itemModel.length > 0){
+    if(itemModel!=null && itemModel.length > 0){
       _productList.addAll(itemModel);
     }
 
