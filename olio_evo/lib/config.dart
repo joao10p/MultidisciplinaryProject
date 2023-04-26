@@ -8,6 +8,11 @@ class Config{
   static String productURL="products";
   static String topSellingTagId="31";
   static String offerteDiOggiTagId="30";
+    static String paypalClientID ="";
+  static String paypalSecretKey = "";
+  static String paypalURL = "https://api.sandbox.paypal.com"; //for sandbox mode
+    //static String paypalURL = "https://api.paypal.com"; //for Production mode
+
 }
 
 
