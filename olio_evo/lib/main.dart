@@ -40,16 +40,13 @@ class MyApp extends StatelessWidget {
           ),
         ],
         child: MaterialApp(
-            title: 'OlivEvo',
-            debugShowCheckedModeBanner: false,
-            home: SignupPage(),
-            initialRoute: "/",
-            routes: <String, WidgetBuilder>{
-              "/PayPal": (context) => new PaypalPaymentScreen()
-            } 
-            ,
-            )
-
-            );
+          title: 'OlivEvo',
+          debugShowCheckedModeBanner: false,
+          home: HomePage(),
+          initialRoute: "/",
+          routes: <String, WidgetBuilder>{
+            "/PayPal": (context) => new PaypalPaymentScreen()
+          },
+        ));
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:olio_evo/pages/cart_page.dart';
 import 'package:olio_evo/utils/ProgressHUD.dart';
 import 'package:provider/provider.dart';
 
@@ -18,7 +19,6 @@ class BasePageState<T extends BasePage> extends State<T> {
   @override
   Widget build(BuildContext context) {
     return Consumer<LoaderProvider>(
-      // ignore: missing_return
       builder: (context, loaderModel, child) {
         return Scaffold(
             appBar: _buildAppBar(),
@@ -49,9 +49,6 @@ class BasePageState<T extends BasePage> extends State<T> {
         const IconButton(
           onPressed: null,
           icon: Icon(Icons.notifications_none, color: Colors.white),
-        ),
-        const SizedBox(
-          width: 20,
         ),
         const IconButton(
           onPressed: null,
@@ -87,9 +84,6 @@ class BasePageState<T extends BasePage> extends State<T> {
                   ],
                 ),
               ),
-        const SizedBox(
-          width: 20,
-        ),
       ],
     );
   }

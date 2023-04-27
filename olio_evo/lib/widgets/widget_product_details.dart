@@ -16,7 +16,7 @@ class ProductDetailsWidget extends StatelessWidget {
   Product data;
   int qty = 0;
 
-  CartProducts cartProducts = CartProducts();
+  CartProducts cartProducts = new CartProducts();
 
   final CarouselController _controller = CarouselController();
   @override
@@ -87,7 +87,7 @@ class ProductDetailsWidget extends StatelessWidget {
                   iconSize: 22.0,
                   value: qty,
                   onChanged: (value) {
-                    qty=value;
+                    cartProducts.quantity = value;
                   },
                 ),
                 TextButton(
@@ -95,13 +95,14 @@ class ProductDetailsWidget extends StatelessWidget {
                     Provider.of<LoaderProvider>(context, listen: false)
                         .setLoadingStatus(true);
                     var cartProvider =
-                        Provider.of<CartProvider>(context, listen: false);
+                        Provider.of<CartProvider>(context, listen: true);
 
                     cartProducts.productId = data.id;
-                    cartProducts.quantity =this.qty;
+                    cartProducts.quantity = qty;
                     cartProvider.addToCart(cartProducts, (val) {
                       Provider.of<LoaderProvider>(context, listen: false)
                           .setLoadingStatus(false);
+                      print(val);
                     });
                   },
                   style: TextButton.styleFrom(

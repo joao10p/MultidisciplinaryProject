@@ -92,11 +92,7 @@ class _WidgetCategoriesState extends State<WidgetCategories> {
                     alignment: Alignment.center,
                     width: 80,
                     height: 80,
-                    child: Image.network(
-                      data.image.url,
-                      height: 80,
-                    ),
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       shape: BoxShape.circle,
                       color: Colors.white,
                       boxShadow: [
@@ -105,6 +101,10 @@ class _WidgetCategoriesState extends State<WidgetCategories> {
                             offset: Offset(0, 5),
                             blurRadius: 15),
                       ],
+                    ),
+                    child: Image.network(
+                      data.image.url,
+                      height: 80,
                     ),
                   ),
                   Row(

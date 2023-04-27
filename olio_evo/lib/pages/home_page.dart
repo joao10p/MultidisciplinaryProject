@@ -80,7 +80,6 @@ class _HomePageState extends State<HomePage> {
   Widget _buildAppBar() {
     return AppBar(
       centerTitle: true,
-      brightness: Brightness.dark,
       elevation: 0,
       backgroundColor: Colors.green,
       automaticallyImplyLeading: false,
@@ -88,12 +87,27 @@ class _HomePageState extends State<HomePage> {
         "OlivEvo",
         style: TextStyle(color: Colors.white),
       ),
-      actions: const [
-        Icon(Icons.notifications_none, color: Colors.white),
+      actions: [
+        IconButton(
+          icon: Icon(
+            Icons.notifications_none,
+            color: Colors.white,
+          ),
+          onPressed: () {},
+        ),
         SizedBox(
           width: 20,
         ),
-        Icon(Icons.shopping_cart, color: Colors.white),
+        IconButton(
+          onPressed: () {
+            Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => const CartPage()));
+          },
+          icon: Icon(
+            Icons.shopping_cart,
+            color: Colors.white,
+          ),
+        ),
         SizedBox(
           width: 20,
         ),

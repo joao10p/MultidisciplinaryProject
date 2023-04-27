@@ -55,89 +55,94 @@ class _CartPageState extends State<CartPage> {
                     return CartProduct(data: cartModel.cartItems[index]);
                   },
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(10),
-                  child: Align(
-                    alignment: Alignment.centerRight,
-                    child: TextButton(
-                      onPressed: () {
-                        Provider.of<LoaderProvider>(context, listen: false)
-                            .setLoadingStatus(true);
-                        var cartProvider =
-                            Provider.of<CartProvider>(context, listen: false);
+              ],
+            ),
+            Padding(
+              padding: const EdgeInsets.all(10),
+              child: Align(
+                alignment: Alignment.topRight,
+                child: TextButton(
+                  onPressed: () {
+                    Provider.of<LoaderProvider>(context, listen: false)
+                        .setLoadingStatus(true);
+                    var cartProvider =
+                        Provider.of<CartProvider>(context, listen: false);
 
-                        cartProvider.updateCart((val) {
-                          Provider.of<LoaderProvider>(context, listen: false)
-                              .setLoadingStatus(false);
-                        });
-                      },
-                      style: TextButton.styleFrom(
-                        padding: const EdgeInsets.all(15),
-                        backgroundColor: Colors.green,
-                        shape: const StadiumBorder(),
+                    cartProvider.updateCart((val) {
+                      Provider.of<LoaderProvider>(context, listen: false)
+                          .setLoadingStatus(false);
+                    });
+                  },
+                  style: TextButton.styleFrom(
+                    padding: const EdgeInsets.all(15),
+                    backgroundColor: Colors.green,
+                    shape: const StadiumBorder(),
+                  ),
+                  child: Wrap(
+                    alignment: WrapAlignment.center,
+                    crossAxisAlignment: WrapCrossAlignment.center,
+                    children: const [
+                      Icon(
+                        Icons.sync,
+                        color: Colors.white,
                       ),
-                      child: Wrap(
-                        alignment: WrapAlignment.center,
-                        crossAxisAlignment: WrapCrossAlignment.center,
-                        children: const [
-                          Icon(
-                            Icons.sync,
-                            color: Colors.white,
-                          ),
-                          Text(
-                            "Update Cart",
-                            style: TextStyle(color: Colors.white),
-                          ),
-                        ],
+                      Text(
+                        "Update Cart",
+                        style: TextStyle(color: Colors.white),
                       ),
-                    ),
+                    ],
                   ),
                 ),
-                Container(
-                  color: Colors.white,
-                  width: MediaQuery.of(context).size.width,
-                  height: 100,
-                  child: Padding(
-                    padding: const EdgeInsets.all(10),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.center,
+              ),
+            ),
+            Container(
+              color: Colors.white,
+              width: MediaQuery.of(context).size.width,
+              height: 100,
+              child: Padding(
+                padding: const EdgeInsets.all(10),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const Text(
-                              "Total",
-                              style: TextStyle(
-                                  fontSize: 15, fontWeight: FontWeight.w400),
-                            ),
-                            Text(
-                              "€${cartModel.totalAmount}",
-                              style: const TextStyle(
-                                fontSize: 25,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            )
-                          ],
+                        const Text(
+                          "Total",
+                          style: TextStyle(
+                              fontSize: 15, fontWeight: FontWeight.w400),
                         ),
-                        TextButton(
-                          onPressed: () {},
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: const [
-                              Text(
-                                "Checkout",
-                                style: TextStyle(color: Colors.white),
-                              )
-                            ],
+                        Text(
+                          "€ ${cartModel.totalAmount}",
+                          style: const TextStyle(
+                            fontSize: 25,
+                            fontWeight: FontWeight.bold,
                           ),
                         )
                       ],
                     ),
-                  ),
-                )
-              ],
+                    TextButton(
+                      onPressed: () {},
+                      style: TextButton.styleFrom(
+                        padding: const EdgeInsets.all(15),
+                        backgroundColor: Colors.redAccent,
+                        shape: const StadiumBorder(),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: const [
+                          Text(
+                            "Checkout",
+                            style: TextStyle(color: Colors.white),
+                          )
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+              ),
             )
           ],
         );

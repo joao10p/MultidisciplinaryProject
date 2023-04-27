@@ -16,14 +16,7 @@ class CartProduct extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 2.0,
-      margin: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 6.0),
-      child: Container(
-        decoration: const BoxDecoration(color: Colors.white),
-        child: const Text("Cart item"),
-      ),
-    );
+    return makeListTitle(context);
   }
 
   ListTile makeListTitle(BuildContext context) => ListTile(
@@ -65,7 +58,7 @@ class CartProduct extends StatelessWidget {
                         Provider.of<LoaderProvider>(context, listen: false)
                             .setLoadingStatus(true);
 
-                        Provider.of<CartProvider>(context, listen: true)
+                        Provider.of<CartProvider>(context, listen: false)
                             .removeItem(data.productId);
 
                         Provider.of<LoaderProvider>(context, listen: false)
@@ -94,7 +87,7 @@ class CartProduct extends StatelessWidget {
             ],
           ),
         ),
-        trailing: SizedBox(
+        trailing: Container(
             width: 120,
             child: CustomStepper(
               lowerLimit: 0,
