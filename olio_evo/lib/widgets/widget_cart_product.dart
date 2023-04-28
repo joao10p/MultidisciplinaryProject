@@ -7,6 +7,7 @@ import 'package:olio_evo/provider/cart_provider.dart';
 import 'package:olio_evo/utils/utils.dart';
 import 'package:provider/provider.dart';
 
+import '../pages/cart_page.dart';
 import '../provider/loader_provider.dart';
 import '../utils/custom_stepper.dart';
 
@@ -49,27 +50,40 @@ class CartProduct extends StatelessWidget {
               ),
               TextButton(
                 onPressed: () {
-                  Utils.showMessage(
-                      context,
-                      "OlivEvo",
-                      "Do you want to delete this item?",
-                      "Yes",
-                      () {
-                        Provider.of<LoaderProvider>(context, listen: false)
-                            .setLoadingStatus(true);
+                  showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: Text("OlivEvo"),
+                          content: Text("Do you want to delete this item?"),
+                          actions: [
+                            TextButton(
+                                onPressed: () {
+                                  Provider.of<LoaderProvider>(context,
+                                          listen: false)
+                                      .setLoadingStatus(true);
 
-                        Provider.of<CartProvider>(context, listen: false)
-                            .removeItem(data.productId);
+                                  Provider.of<CartProvider>(context,
+                                          listen: false)
+                                      .removeItem(data.productId);
 
-                        Provider.of<LoaderProvider>(context, listen: false)
-                            .setLoadingStatus(false);
+                                  Provider.of<LoaderProvider>(context,
+                                          listen: false)
+                                      .setLoadingStatus(false);
 
-                        Navigator.of(context).pop();
-                      },
-                      buttonText2: "No",
-                      isConfirmationDialog: true,
-                      onPressed2: () {
-                        Navigator.of(context).pop();
+                                  Navigator.of(context).pop();
+                                },
+                                child: const Text("Yes")),
+                            Visibility(
+                                visible: true,
+                                child: TextButton(
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                  },
+                                  child: const Text("No"),
+                                ))
+                          ],
+                        );
                       });
                 },
                 style: TextButton.styleFrom(

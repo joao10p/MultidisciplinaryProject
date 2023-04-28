@@ -14,7 +14,7 @@ class ProductDetailsWidget extends StatelessWidget {
   ProductDetailsWidget({Key key, this.data}) : super(key: key);
 
   Product data;
-  int qty = 0;
+  int qty = 1;
 
   CartProducts cartProducts = new CartProducts();
 
@@ -81,13 +81,14 @@ class ProductDetailsWidget extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 CustomStepper(
-                  lowerLimit: 0,
+                  lowerLimit: 1,
                   upperLimit: 20,
                   stepValue: 1,
                   iconSize: 22.0,
                   value: qty,
                   onChanged: (value) {
                     cartProducts.quantity = value;
+                    qty = value;
                   },
                 ),
                 TextButton(
@@ -95,7 +96,7 @@ class ProductDetailsWidget extends StatelessWidget {
                     Provider.of<LoaderProvider>(context, listen: false)
                         .setLoadingStatus(true);
                     var cartProvider =
-                        Provider.of<CartProvider>(context, listen: true);
+                        Provider.of<CartProvider>(context, listen: false);
 
                     cartProducts.productId = data.id;
                     cartProducts.quantity = qty;
