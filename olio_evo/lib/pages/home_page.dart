@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:olio_evo/pages/account_page.dart';
 import 'package:olio_evo/pages/barcode_page.dart';
 import 'package:olio_evo/pages/payment_screen.dart';
+import 'package:provider/provider.dart';
 
+import '../provider/cart_provider.dart';
 import 'cart_page.dart';
 import 'chatbot_page.dart';
 import 'dashboard_page.dart';
@@ -81,34 +83,66 @@ class _HomePageState extends State<HomePage> {
       centerTitle: true,
       elevation: 0,
       backgroundColor: Colors.green,
-      automaticallyImplyLeading: false,
+      automaticallyImplyLeading: true,
       title: const Text(
         "OlivEvo",
         style: TextStyle(color: Colors.white),
       ),
       actions: [
         IconButton(
-          icon: Icon(
+          icon: const Icon(
             Icons.notifications_none,
             color: Colors.white,
           ),
           onPressed: () {},
         ),
-        SizedBox(
-          width: 20,
+        const SizedBox(
+          width: 10,
         ),
         IconButton(
+          visualDensity: const VisualDensity(horizontal: -4.0, vertical: -4.0),
+          padding: EdgeInsets.zero,
           onPressed: () {
             Navigator.of(context).push(
                 MaterialPageRoute(builder: (context) => const CartPage()));
           },
-          icon: Icon(
+          icon: const Icon(
             Icons.shopping_cart,
             color: Colors.white,
           ),
         ),
-        SizedBox(
-          width: 20,
+        Provider.of<CartProvider>(context, listen: false).cartItems.isEmpty
+            ? Container()
+            : Positioned(
+                child: Stack(
+                  children: <Widget>[
+                    Icon(
+                      Icons.brightness_1,
+                      size: 20.0,
+                      color: Colors.green[900],
+                    ),
+                    Positioned(
+                      top: 4.0,
+                      right: 6.0,
+                      child: Center(
+                        child: Text(
+                          Provider.of<CartProvider>(context, listen: false)
+                              .cartItems
+                              .length
+                              .toString(),
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 12.0,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              ),
+        const SizedBox(
+          width: 10,
         ),
       ],
     );

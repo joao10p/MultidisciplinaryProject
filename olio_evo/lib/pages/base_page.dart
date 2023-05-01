@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:olio_evo/pages/cart_page.dart';
 import 'package:olio_evo/utils/ProgressHUD.dart';
 import 'package:provider/provider.dart';
@@ -46,13 +45,27 @@ class BasePageState<T extends BasePage> extends State<T> {
         style: TextStyle(color: Colors.white),
       ),
       actions: [
-        const IconButton(
-          onPressed: null,
-          icon: Icon(Icons.notifications_none, color: Colors.white),
+        IconButton(
+          icon: const Icon(
+            Icons.notifications_none,
+            color: Colors.white,
+          ),
+          onPressed: () {},
         ),
-        const IconButton(
-          onPressed: null,
-          icon: Icon(Icons.shopping_cart, color: Colors.white),
+        const SizedBox(
+          width: 10,
+        ),
+        IconButton(
+          visualDensity: const VisualDensity(horizontal: -4.0, vertical: -4.0),
+          padding: EdgeInsets.zero,
+          onPressed: () {
+            Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => const CartPage()));
+          },
+          icon: const Icon(
+            Icons.shopping_cart,
+            color: Colors.white,
+          ),
         ),
         Provider.of<CartProvider>(context, listen: false).cartItems.isEmpty
             ? Container()
@@ -62,11 +75,11 @@ class BasePageState<T extends BasePage> extends State<T> {
                     Icon(
                       Icons.brightness_1,
                       size: 20.0,
-                      color: Colors.green[800],
+                      color: Colors.green[900],
                     ),
                     Positioned(
                       top: 4.0,
-                      right: 4.0,
+                      right: 6.0,
                       child: Center(
                         child: Text(
                           Provider.of<CartProvider>(context, listen: false)
@@ -75,7 +88,7 @@ class BasePageState<T extends BasePage> extends State<T> {
                               .toString(),
                           style: const TextStyle(
                             color: Colors.white,
-                            fontSize: 11.0,
+                            fontSize: 12.0,
                             fontWeight: FontWeight.w500,
                           ),
                         ),
@@ -84,6 +97,9 @@ class BasePageState<T extends BasePage> extends State<T> {
                   ],
                 ),
               ),
+        const SizedBox(
+          width: 10,
+        ),
       ],
     );
   }

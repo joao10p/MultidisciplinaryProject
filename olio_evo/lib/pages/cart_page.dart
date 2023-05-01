@@ -25,6 +25,17 @@ class _CartPageState extends State<CartPage> {
   Widget build(BuildContext context) {
     return Consumer<LoaderProvider>(builder: (context, loaderModel, child) {
       return Scaffold(
+        appBar: AppBar(
+          leading: IconButton(
+            icon: const Icon(Icons.arrow_back_ios, color: Colors.white),
+            onPressed: () => Navigator.of(context).pop(),
+          ),
+          title: const Text("Cart"),
+          centerTitle: true,
+          elevation: 0,
+          backgroundColor: Colors.green,
+          automaticallyImplyLeading: false,
+        ),
         body: ProgressHUD(
           inAsyncCall: loaderModel.isApiCallProcess,
           opacity: 0.3,
@@ -39,7 +50,8 @@ class _CartPageState extends State<CartPage> {
         // ignore: missing_return
         builder: (context, cartModel, child) {
       if (cartModel.cartItems != null && cartModel.cartItems.isNotEmpty) {
-        return Column(
+        return SingleChildScrollView(
+            child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
@@ -145,9 +157,60 @@ class _CartPageState extends State<CartPage> {
               ),
             )
           ],
-        );
-      } else {
-        return Container();
+        ));
+      } else if (cartModel.cartItems.isEmpty) {
+        return Column(children: [
+          const Text("The cart is empty"),
+          Container(
+            color: Colors.white,
+            width: MediaQuery.of(context).size.width,
+            height: 100,
+            child: Padding(
+              padding: const EdgeInsets.all(10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: const [
+                      Text(
+                        "Total",
+                        style: TextStyle(
+                            fontSize: 15, fontWeight: FontWeight.w400),
+                      ),
+                      Text(
+                        "€ 0.0",
+                        style: TextStyle(
+                          fontSize: 25,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      )
+                    ],
+                  ),
+                  TextButton(
+                    onPressed: () {},
+                    style: TextButton.styleFrom(
+                      padding: const EdgeInsets.all(15),
+                      backgroundColor: Colors.redAccent,
+                      shape: const StadiumBorder(),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: const [
+                        Text(
+                          "Checkout",
+                          style: TextStyle(color: Colors.white),
+                        )
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            ),
+          )
+        ]);
       }
     });
   }
