@@ -50,7 +50,7 @@ class _ProductPageState extends BasePageState<ProductPage> {
 
     super.initState();
   }
-
+//TODO: manca la parte in cui la ricerca ritorna nessun prodotto
   _onSearchChange() {
     var productsList = Provider.of<ProductProvider>(context, listen: false);
 
@@ -59,7 +59,7 @@ class _ProductPageState extends BasePageState<ProductPage> {
     _debounce = Timer(const Duration(milliseconds: 500), () {
       productsList.resetStreams();
       productsList.setLoadingState(LoadMoreStatus.INITIAL, true);
-      productsList.fetchProducts(pageNumber, strSearch: _searchQuery.text);
+      productsList.fetchProducts(pageNumber, strSearch: _searchQuery.text, categoryId: this.widget.categoryId.toString());
     });
   }
 
@@ -85,11 +85,19 @@ class _ProductPageState extends BasePageState<ProductPage> {
   Widget _buildList(List<Product> items, bool isLoadMore) {
     return Column(
       children: [
-         Padding(padding: EdgeInsets.fromLTRB(0, 10, 0, 10),child:  
-         _categoriesList()),
-        
-        Padding(padding: EdgeInsets.fromLTRB(0, 10, 0, 10),child:  
-       _productFilters()),
+        //Text in italic with writtent "Seleziona la categoria in cui cercare", colore verde
+        Text(
+          "Seleziona la categoria in cui cercare",
+          style: TextStyle(
+              fontStyle: FontStyle.italic,
+              fontSize: 22,
+              color: Color.fromARGB(255, 3, 3, 3),
+              fontWeight: FontWeight.bold),
+        ),
+        Padding(
+            padding: EdgeInsets.fromLTRB(0, 5, 0, 5), child: _categoriesList()),
+        Padding(
+            padding: EdgeInsets.fromLTRB(0, 5, 0, 5), child: _productFilters()),
         Flexible(
           child: GridView.count(
             shrinkWrap: true,
@@ -118,6 +126,7 @@ class _ProductPageState extends BasePageState<ProductPage> {
   Widget _productFilters() {
     return Container(
       height: 51,
+      color: Colors.greenAccent,
       margin: EdgeInsets.fromLTRB(10, 10, 10, 5),
       child: Row(
         children: [
@@ -135,7 +144,7 @@ class _ProductPageState extends BasePageState<ProductPage> {
                 border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(15.0),
                     borderSide: BorderSide.none),
-                fillColor: Color.fromARGB(251, 55, 172, 57),
+                fillColor: Color.fromARGB(250, 252, 255, 252),
                 filled: true,
               ),
             ),
@@ -143,7 +152,7 @@ class _ProductPageState extends BasePageState<ProductPage> {
           SizedBox(width: 15),
           Container(
             decoration: BoxDecoration(
-              color: Color.fromARGB(252, 68, 146, 52),
+              color: Color.fromARGB(249, 40, 177, 13),
               borderRadius: BorderRadius.circular(9.0),
             ),
             child: PopupMenuButton(
@@ -177,7 +186,7 @@ class _ProductPageState extends BasePageState<ProductPage> {
           .getCategories(), //getData(), // if you mean this method well return image url
       builder: (context, snapshot) {
         if (snapshot.hasData) {
-          return _buildCategoryList(snapshot.data);
+          return _buildCategoryList(setFirstSelected(snapshot.data));
         } else {
           return Center(child: CircularProgressIndicator());
         }
@@ -187,7 +196,7 @@ class _ProductPageState extends BasePageState<ProductPage> {
 
   Widget _buildCategoryList(List<Category> categories) {
     return Container(
-      height: 100,
+      height: 110,
       decoration: BoxDecoration(
         color: Color.fromARGB(255, 255, 255, 255),
         shape: BoxShape.rectangle,
@@ -201,112 +210,93 @@ class _ProductPageState extends BasePageState<ProductPage> {
         itemCount: categories.length,
         itemBuilder: (context, index) {
           var data = categories[index];
-          return GestureDetector(
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) =>
-                            ProductPage(categoryId: data.categoryId)));
-              },
-              child: Container(
-                  margin: EdgeInsets.fromLTRB(0, 0, 10, 0),
-                  padding: EdgeInsets.symmetric(vertical: 2, horizontal: 0),
-                  width: 250,
-                  height: 100,
-                  decoration: BoxDecoration(
-                    color: widget.categoryId==data.categoryId? Color.fromARGB(255, 13, 136, 46):Color.fromARGB(255, 135, 209, 128) , //inside color
-                    shape: BoxShape.rectangle,
-                    borderRadius: BorderRadius.circular(6.0),
-                    border: Border.all(
-                        color: Color.fromARGB(77, 16, 16, 16),
-                        width: 1), // border color
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.fromLTRB(20, 0, 0, 0),
-                        child: Container(
-                          width: 100,
-                          height: 70,
-                          decoration: BoxDecoration(
-                            shape: BoxShape.rectangle,
-                            color: Colors.white,
-                            boxShadow: [
-                              BoxShadow(
-                                  color: Colors.black,
-                                  offset: Offset(0, 5),
-                                  blurRadius: 15),
-                            ],
-                          ),
-                          child: Image.network(
-                            data.image.url,
-                            width: MediaQuery.of(context).size.width * 0.01,
-                            fit: BoxFit.cover,
-                          ),
-                        ),
+          return Padding(
+              padding: EdgeInsets.only(left: 5),
+              child: GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                ProductPage(categoryId: data.categoryId)));
+                    // pageUI();
+                  },
+                  child: Container(
+                      margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                      padding: EdgeInsets.symmetric(vertical: 2, horizontal: 0),
+                      width: 90,
+                      height: 110,
+                      decoration: BoxDecoration(
+                        color: data.categoryId == widget.categoryId
+                            ? Color.fromARGB(255, 15, 115, 6)
+                            : Color.fromARGB(255, 135, 209, 128), //inside color
+                        shape: BoxShape.rectangle,
+                        borderRadius: BorderRadius.circular(6.0),
+                        border: Border.all(
+                            color: Color.fromARGB(77, 16, 16, 16),
+                            width: 1), // border color
                       ),
-                      Padding(
-                        padding: EdgeInsets.fromLTRB(30, 0, 0, 0),
-                        child: Container(
-                          width: 80,
-                          child: 
-                            Text(
-                              data.categoryName.toString(),
-                             textAlign: TextAlign.justify,
-                              style: TextStyle(
-                                fontWeight: FontWeight.w700,
-                                fontStyle: FontStyle.normal,
-                                fontSize: 16,
-                                color: Color(0xff000000),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.fromLTRB(0, 5, 0, 0),
+                            child: Container(
+                              width: 60,
+                              height: 60,
+                              decoration: BoxDecoration(
+                                shape: BoxShape.rectangle,
+                                color: Colors.white,
+                                boxShadow: [
+                                  BoxShadow(
+                                      color: Colors.black,
+                                      offset: Offset(0, 5),
+                                      blurRadius: 15),
+                                ],
+                              ),
+                              child: Image.network(
+                                data.image.url,
+                                width: MediaQuery.of(context).size.width * 0.01,
+                                fit: BoxFit.cover,
                               ),
                             ),
-                          
-                        ),
-                      )
-                    ],
+                          ),
+                          Padding(
+                            padding: EdgeInsets.only(top: 5),
+                            child: Container(
+                              alignment: Alignment.center,
+                              child: Text(
+                                data.categoryName.toString(),
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w700,
+                                  fontStyle: FontStyle.italic,
+                                  fontSize: 14,
+                                  color: Color(0xff000000),
+                                ),
+                              ),
+                            ),
+                          )
+                        ],
+                      ))));
+        },
+      ),
+    );
+  }
 
-                    /*   Container(
-                  alignment: Alignment.center,
-                  width: 80,
-                  height: 80,
-                  decoration: const BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: Colors.white,
-                    boxShadow: [
-                      BoxShadow(
-                          color: Colors.black,
-                          offset: Offset(0, 5),
-                          blurRadius: 15),
-                    ],
-                  ),
-                  child: Image.network(
-                    data.image.url,
-                    height: 80,
-                  ),
-                ),
-                Row(
-                  children: [
-                    Text(data.categoryName.toString()),
-                    Icon(
-                      Icons.keyboard_arrow_right,
-                      size: 14,
-                    )
-                  ],
-                )
-              ],
-            ),
-          );
-        },
-      ),
-    );
-    */
-                  )));
-        },
-      ),
-    );
+//set the as first in the list the elemnt with categoryId == widget.categoryId
+  List<Category> setFirstSelected(List<Category> categories) {
+    if (widget.categoryId != null) {
+      var index = categories
+          .indexWhere((element) => element.categoryId == widget.categoryId);
+      if (index != -1) {
+        var category = categories[index];
+        categories.removeAt(index);
+        categories.insert(0, category);
+      }
+    }
+    return categories;
   }
 }

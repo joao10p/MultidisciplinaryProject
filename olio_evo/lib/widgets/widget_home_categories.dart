@@ -28,7 +28,7 @@ class _WidgetCategoriesState extends State<WidgetCategories> {
             mainAxisSize: MainAxisSize.max,
             children: [
               Padding(
-                padding: EdgeInsets.fromLTRB(5, 0, 0, 15),
+                padding: EdgeInsets.fromLTRB(18, 0, 0, 15),
                 child: Text(
                   "Categorie",
                   textAlign: TextAlign.start,
@@ -37,7 +37,7 @@ class _WidgetCategoriesState extends State<WidgetCategories> {
                     fontWeight: FontWeight.w700,
                     fontStyle: FontStyle.normal,
                     fontSize: 26,
-                    color: Color.fromARGB(255, 14, 144, 38),
+                    color: Color.fromARGB(255, 0, 0, 0),
                   ),
                 ),
               ),
@@ -59,7 +59,7 @@ class _WidgetCategoriesState extends State<WidgetCategories> {
             ],
           ),
           Padding(
-            padding: EdgeInsets.fromLTRB(0, 30, 0, 10),
+            padding: EdgeInsets.fromLTRB(0, 30, 0, 5),
             child: _categoriesList(),
           ),
         ],
@@ -97,7 +97,7 @@ class _WidgetCategoriesState extends State<WidgetCategories> {
 
   Widget _buildCategoryList(List<Category> categories) {
     return Container(
-      height: 130,
+      height: 150,
       decoration: BoxDecoration(
         color: Color.fromARGB(255, 255, 255, 255),
         shape: BoxShape.rectangle,
@@ -111,7 +111,7 @@ class _WidgetCategoriesState extends State<WidgetCategories> {
         itemCount: categories.length,
         itemBuilder: (context, index) {
           var data = categories[index];
-          return GestureDetector(
+          return Padding(padding:EdgeInsets.only(left: 5) ,child: GestureDetector(
               onTap: () {
                 Navigator.push(
                     context,
@@ -120,9 +120,9 @@ class _WidgetCategoriesState extends State<WidgetCategories> {
                             ProductPage(categoryId: data.categoryId)));
               },
               child: Container(
-                  margin: EdgeInsets.fromLTRB(0, 0, 10, 0),
+                  margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
                   padding: EdgeInsets.symmetric(vertical: 2, horizontal: 0),
-                  width: 250,
+                  width: 150,
                   height: 150,
                   decoration: BoxDecoration(
                     color: Color.fromARGB(255, 135, 209, 128), //inside color
@@ -132,16 +132,16 @@ class _WidgetCategoriesState extends State<WidgetCategories> {
                         color: Color.fromARGB(77, 16, 16, 16),
                         width: 1), // border color
                   ),
-                  child: Row(
+                  child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisSize: MainAxisSize.max,
                     children: [
                       Padding(
-                        padding: EdgeInsets.fromLTRB(20, 0, 0, 0),
+                        padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
                         child: Container(
-                          width: 100,
-                          height: 70,
+                          width: 90,
+                          height: 90,
                           decoration: BoxDecoration(
                             shape: BoxShape.rectangle,
                             color: Colors.white,
@@ -160,15 +160,15 @@ class _WidgetCategoriesState extends State<WidgetCategories> {
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsets.fromLTRB(30, 0, 0, 0),
+                        padding: EdgeInsets.only(top: 10),
                         child: Container(
-                          width: 80,
+                          alignment: Alignment.center,
                           child: Text(
                             data.categoryName.toString(),
-                            textAlign: TextAlign.justify,
+                            textAlign: TextAlign.center,
                             style: TextStyle(
                               fontWeight: FontWeight.w700,
-                              fontStyle: FontStyle.normal,
+                              fontStyle: FontStyle.italic,
                               fontSize: 16,
                               color: Color(0xff000000),
                             ),
@@ -176,45 +176,10 @@ class _WidgetCategoriesState extends State<WidgetCategories> {
                         ),
                       )
                     ],
-
-                    /*   Container(
-                  alignment: Alignment.center,
-                  width: 80,
-                  height: 80,
-                  decoration: const BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: Colors.white,
-                    boxShadow: [
-                      BoxShadow(
-                          color: Colors.black,
-                          offset: Offset(0, 5),
-                          blurRadius: 15),
-                    ],
-                  ),
-                  child: Image.network(
-                    data.image.url,
-                    height: 80,
-                  ),
-                ),
-                Row(
-                  children: [
-                    Text(data.categoryName.toString()),
-                    Icon(
-                      Icons.keyboard_arrow_right,
-                      size: 14,
-                    )
-                  ],
-                )
-              ],
-            ),
-          );
-        },
-      ),
-    );
-    */
-                  )));
+                  ))));
         },
       ),
     );
   }
+
 }

@@ -274,10 +274,10 @@ class API {
         parameter += "&tag=$tagName";
       }
 
-      /*if (categoryId != null) {
+      if (categoryId != null) {
         parameter += "&category=$categoryId";
       }
-*/
+
       if (sortBy != null) {
         parameter += "&order_by	=$sortBy";
       }
