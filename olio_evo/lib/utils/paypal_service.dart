@@ -57,7 +57,7 @@ class PaypalServices {
       items.add({
         "name": item.productName,
         "quantity": item.qty,
-        "price": item.productSalePrice,
+        "price": item.productSalePrice!=""?item.productSalePrice:item.productRegularPrice,
         "currency": defaultCurrency["currency"]
       });
     });
@@ -134,7 +134,7 @@ class PaypalServices {
         throw Exception(body["message"]);
       }
     } catch (e) {
-      rethrow;
+      print(e);
     }
   }
 

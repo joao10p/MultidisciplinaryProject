@@ -35,7 +35,7 @@ class _WidgetHomeProductState extends State<WidgetHomeProducts> {
               child: Text(
                 this.widget.labelName,
                 style: TextStyle(
-                  fontSize: 18,
+                  fontSize: 20,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -71,7 +71,7 @@ class _WidgetHomeProductState extends State<WidgetHomeProducts> {
 
   Widget _buildList(List<Product> items) {
     return Container(
-      height: 220,
+      height: 320,
       alignment: Alignment.centerLeft,
       child: ListView.builder(
         shrinkWrap: true,
@@ -86,12 +86,12 @@ class _WidgetHomeProductState extends State<WidgetHomeProducts> {
             children: <Widget>[
               Container(
                   margin: EdgeInsets.all(10),
-                  width: 130,
-                  height: 120,
+                  width: 170,
+                  height: 220,
                   alignment: Alignment.center,
                   child: Image.network(
                     data.images[0].src,
-                    height: 120,
+                    height: 200,
                   ),
                   decoration: BoxDecoration(
                     shape: BoxShape.rectangle,
@@ -105,37 +105,54 @@ class _WidgetHomeProductState extends State<WidgetHomeProducts> {
                       )
                     ],
                   )),
-              Container(
-                width: 130,
-                alignment: Alignment.centerLeft,
+              Container( //qui il nome del prodotto
+                width: 180,
+                alignment: Alignment.center,
                 child: Text(data.name,
                     style: TextStyle(
                       fontSize: 14,
                       color: Colors.black,
                     )),
               ),
-              Container(
+              Container( // qui il prezzo
                 margin: EdgeInsets.only(top: 4, left: 4),
-                width: 130,
+                width: 180,
                 alignment: Alignment.centerLeft,
                 child: Row(
                   children: [
-                    Text(
-                      '${data.regularPrice}',
+                                  //I want to make this two widget Visibility, visible only if the data.salePrice is not empty
+                                          
+                     Visibility(
+                        child: Text(
+                      'Prezzo: ${data.regularPrice}',
                       style: TextStyle(
                         fontSize: 14,
                         color: Colors.black,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    Text(
-                      '${data.salePrice}',
+                        maintainSize: true, 
+                        maintainAnimation: true,
+                        maintainState: true,
+                        visible: data.salePrice=="",
+                      ),
+                    
+                    Visibility(
+                        child: Text(
+                      'In Offerta: ${data.salePrice}',
                       style: TextStyle(
+                        
                         fontSize: 14,
                         color: Colors.redAccent,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
+                        maintainSize: true, 
+                        maintainAnimation: true,
+                        maintainState: true,
+                        visible: data.salePrice!="", 
+                      ),
+                    
                   ],
                 ),
               )

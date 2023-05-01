@@ -38,7 +38,7 @@ class _PaymentScreenState extends BasePageState<PaymentScreen> {
                       style: Theme.of(context).textTheme.headline4,
                     ), // Text
 
-                    subtitle: Text("Select your preffered Payment Moder"),
+                    subtitle: Text("Seleziona il tuo metodo di pagamento preferito"),
                   ),
                 )
               : SizedBox(height: 0),
@@ -67,13 +67,13 @@ class _PaymentScreenState extends BasePageState<PaymentScreen> {
                       color: Theme.of(context).hintColor,
                     ), // Icon
                     title: Text(
-                      "Cash on Delivery",
+                      "Conatante alla consegna",
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: Theme.of(context).textTheme.headline4,
                     ), // Text
 
-                    subtitle: Text("Select your preffered Payment Moder"),
+                    subtitle: Text("Seleziona il tuo metodo di pagamento preferito"),
                   ),
                 )
               : SizedBox(height: 0),

@@ -15,7 +15,6 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final List<Widget> _widgetList = [
     DashboardPage(),
-    DashboardPage(),
     PaymentScreen(),
     CartPage(),
     const Center(child: BarcodePage()),
