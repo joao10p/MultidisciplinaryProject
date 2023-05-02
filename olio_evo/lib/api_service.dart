@@ -438,27 +438,22 @@ class API {
   }
 
   Future<String> getIdCustomer(Credentials credentials) async {
-    
     String url = _getOAuthURL("GET", "customers");
     Map<String, String> data = {
-    'username': credentials.username,
-    'password': credentials.password,
-  };
+      'username': credentials.username,
+      'password': credentials.password,
+    };
     try {
       var response = await Dio().post(url,
-          data:data,
+          data: data,
           options: Options(headers: {
             HttpHeaders.contentTypeHeader: 'application/json; charset=utf-8',
           }));
       if (response.statusCode == 200) {
-       dynamic customerData = jsonDecode(response.data);
-  // Ottiene l'ID del primo cliente dalla risposta
+        dynamic customerData = jsonDecode(response.data);
+        // Ottiene l'ID del primo cliente dalla risposta
         return customerData[0]['id'].toString();
       }
-    } on DioError catch (e) {
-     
-    }
-
-   
+    } on DioError catch (e) {}
   }
 }
