@@ -198,23 +198,36 @@ class _LoginPageState extends State<LoginPage> {
                                                   if (ret.success) {
                                                     SharedService
                                                         .setLoginDetails(ret);
-                                                    FormHelper.showMessage(
-                                                      context,
-                                                      "OlioEvo",
-                                                      "Login effetuato con successo!",
-                                                      "Ok",
-                                                      () {
-                                                        Navigator.pushAndRemoveUntil(
-                                                            context,
-                                                            MaterialPageRoute(
-                                                                builder: (context) =>
-                                                                    HomePage(
-                                                                        selectedPage:
-                                                                            3)),
-                                                            ModalRoute.withName(
-                                                                "/Home"));
-                                                      },
-                                                    );
+                                                    showDialog(
+                                                        context: context,
+                                                        builder: (BuildContext
+                                                            context) {
+                                                          return AlertDialog(
+                                                            title: const Text(
+                                                                "OlioEvo"),
+                                                            content: const Text(
+                                                                "Login effetuato con successo!"),
+                                                            actions: [
+                                                              ElevatedButton(
+                                                                // ignore: void_checks
+                                                                onPressed: () {
+                                                                  Navigator.pushAndRemoveUntil(
+                                                                      context,
+                                                                      MaterialPageRoute(
+                                                                          builder: (context) => HomePage(
+                                                                              selectedPage:
+                                                                                  3)),
+                                                                      ModalRoute
+                                                                          .withName(
+                                                                              "/Home"));
+                                                                },
+                                                                child:
+                                                                    const Text(
+                                                                        "Ok"),
+                                                              )
+                                                            ],
+                                                          );
+                                                        });
                                                   } else {
                                                     showDialog(
                                                       context: context,

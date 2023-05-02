@@ -8,13 +8,13 @@ class SharedService {
   static Future<bool> isLoggedIn() async {
     final prefs = await SharedPreferences.getInstance();
 
-    return prefs.getString("login_details") != null ? true : false;
+    return prefs.getString("login_details") != "" ? true : false;
   }
 
   static Future<LoginResponseModel> loginDetails() async {
     final prefs = await SharedPreferences.getInstance();
 
-    return prefs.getString("login_details") != null
+    return prefs.getString("login_details") != ""
         ? LoginResponseModel.fromJsonSharedService(
             jsonDecode(prefs.getString("login_details")))
         : null;
@@ -24,7 +24,7 @@ class SharedService {
     final prefs = await SharedPreferences.getInstance();
 
     return prefs.setString("login_details",
-        loginResponse != null ? jsonEncode(loginResponse.toJson()) : null);
+        loginResponse != null ? jsonEncode(loginResponse.toJson()) : "");
   }
 
   static Future<void> logout() async {
