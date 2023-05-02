@@ -97,7 +97,7 @@ class _WidgetCategoriesState extends State<WidgetCategories> {
 
   Widget _buildCategoryList(List<Category> categories) {
     return Container(
-      height: 150,
+      height: 120,
       decoration: BoxDecoration(
         color: Color.fromARGB(255, 255, 255, 255),
         shape: BoxShape.rectangle,
@@ -122,8 +122,8 @@ class _WidgetCategoriesState extends State<WidgetCategories> {
               child: Container(
                   margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
                   padding: EdgeInsets.symmetric(vertical: 2, horizontal: 0),
-                  width: 150,
-                  height: 150,
+                  width: 120,
+                  height: 120,
                   decoration: BoxDecoration(
                     color: Color.fromARGB(255, 135, 209, 128), //inside color
                     shape: BoxShape.rectangle,
@@ -140,8 +140,8 @@ class _WidgetCategoriesState extends State<WidgetCategories> {
                       Padding(
                         padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
                         child: Container(
-                          width: 90,
-                          height: 90,
+                          width: 60,
+                          height: 60,
                           decoration: BoxDecoration(
                             shape: BoxShape.rectangle,
                             color: Colors.white,

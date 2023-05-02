@@ -17,7 +17,7 @@ class _DashboardPageState extends State<DashboardPage> {
       color: Colors.white,
       child: ListView(
         children: [
-        imageCarousel(context),
+       // imageCarousel(context),
         WidgetCategories(),
         WidgetHomeProducts(labelName: "Offerte di oggi", tagId:Config.offerteDiOggiTagId),
         WidgetHomeProducts(labelName: "TopSeller", tagId:Config.topSellingTagId)

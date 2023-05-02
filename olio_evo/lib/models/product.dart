@@ -14,6 +14,7 @@ class Product{
   List<Categories> categories;
   List<Attributes> attributes;
   List<int> relatedIds;
+  int rating;
 
 
   Product({
@@ -28,6 +29,7 @@ class Product{
     this.stockStatus,
     this.attributes,
     this.relatedIds,
+    this.rating
   });
 
   Product.fromJson(Map <String, dynamic> json){
@@ -41,6 +43,7 @@ class Product{
     salePrice = json['sale_price'];
     stockStatus= json['stock_status'];
     relatedIds = json['cross_sell_ids'].cast<int>();
+    rating= json['rating_count'];
 
     if(json['categories']!= null){
       categories= new List<Categories>();
