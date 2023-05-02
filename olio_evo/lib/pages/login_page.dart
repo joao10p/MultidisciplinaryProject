@@ -112,10 +112,11 @@ class _LoginPageState extends State<LoginPage> {
                                                 focusedBorder:
                                                     UnderlineInputBorder(
                                                         borderSide: BorderSide(
-                                                            color: Colors.greenAccent)),
+                                                            color: Colors
+                                                                .greenAccent)),
                                                 prefixIcon: Icon(
                                                   Icons.email,
-                                                  color:  Colors.greenAccent,
+                                                  color: Colors.greenAccent,
                                                 ))),
                                         const SizedBox(height: 20),
                                         TextFormField(
@@ -135,11 +136,11 @@ class _LoginPageState extends State<LoginPage> {
                                                     color: Colors.greenAccent)),
                                             focusedBorder: UnderlineInputBorder(
                                                 borderSide: BorderSide(
-                                                    color: Color.fromARGB(255, 69, 203, 132))),
+                                                    color: Color.fromARGB(
+                                                        255, 69, 203, 132))),
                                             prefixIcon: Icon(
                                               Icons.lock,
-                                              color:
-                                                   Colors.greenAccent,
+                                              color: Colors.greenAccent,
                                             ),
                                             suffixIcon: IconButton(
                                               onPressed: () {
@@ -147,7 +148,7 @@ class _LoginPageState extends State<LoginPage> {
                                                   hidePassword = !hidePassword;
                                                 });
                                               },
-                                              color:  Colors.greenAccent,
+                                              color: Colors.greenAccent,
                                               icon: Icon(hidePassword
                                                   ? Icons.visibility_off
                                                   : Icons.visibility),
@@ -230,7 +231,8 @@ class _LoginPageState extends State<LoginPage> {
                                               borderRadius:
                                                   BorderRadius.circular(8.0),
                                               side: BorderSide(
-                                                  color: Color.fromARGB(255, 5, 79, 22),
+                                                  color: Color.fromARGB(
+                                                      255, 5, 79, 22),
                                                   width: 1),
                                             ),
                                             padding: EdgeInsets.all(16),
@@ -242,7 +244,8 @@ class _LoginPageState extends State<LoginPage> {
                                                 fontStyle: FontStyle.normal,
                                               ),
                                             ),
-                                            textColor: Color.fromARGB(255, 36, 160, 65),
+                                            textColor: Color.fromARGB(
+                                                255, 36, 160, 65),
                                             height: 50,
                                             minWidth: 200,
                                           ),
