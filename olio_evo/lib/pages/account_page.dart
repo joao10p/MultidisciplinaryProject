@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:olio_evo/pages/dashboard_page.dart';
 import 'package:olio_evo/shared_service.dart';
+import 'package:olio_evo/widgets/unauth_widget.dart';
 
 import '../models/login_model.dart';
 
@@ -68,9 +69,7 @@ class _AccountPageState extends State<AccountPage> {
             if (loginModel.data != null && loginModel.data) {
               return _listView(context);
             } else {
-              return const Center(
-                child: Text("Not logged in"),
-              );
+              return const UnAuthWidget();
             }
           } else {
             return const Text("No data");
@@ -152,9 +151,20 @@ class _AccountPageState extends State<AccountPage> {
           );
         }
 
-        return const Center(
-          child: Text("Login model has no data"),
-        );
+        return Center(
+            child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            const Text("Login model has no data"),
+            TextButton(
+              child: const Text("Logout"),
+              onPressed: () {
+                SharedService.logout().then((value) => {setState(() {})});
+              },
+            )
+          ],
+        ));
       },
     );
   }

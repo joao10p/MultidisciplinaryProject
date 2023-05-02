@@ -16,6 +16,7 @@ import "dart:math";
 import "dart:core";
 import 'package:crypto/crypto.dart' as crypto;
 import 'package:olio_evo/models/login_model.dart';
+import 'package:olio_evo/shared_service.dart';
 import 'package:olio_evo/utils/query_string.dart';
 import 'package:uuid/uuid.dart';
 import 'package:http/http.dart' as http;
@@ -323,7 +324,7 @@ class API {
         json['statusCode'] = 200;
         json['code'] = '';
         json['message'] = '';
-        json['data'] = new Map<String, dynamic>();
+        json['data'] = response.data;
         model = LoginResponseModel.fromJson(json);
       }
 
@@ -341,8 +342,15 @@ class API {
   }
 
   Future<CartResponseModel> addToCart(CartRequestModel model) async {
-    //TODO: use user id of logged user
     model.userId = int.parse(Config.userID);
+
+    /*
+    LoginResponseModel loginResponseModel = await SharedService.loginDetails();
+
+    if (loginResponseModel.data != null) {
+      model.userId = loginResponseModel.data.id;
+    }
+    */
 
     CartResponseModel responseModel;
 
@@ -375,6 +383,15 @@ class API {
     CartResponseModel responseModel;
 
     try {
+      /*
+      LoginResponseModel loginResponseModel =
+          await SharedService.loginDetails();
+
+      if (loginResponseModel.data != null) {
+        int userId = loginResponseModel.data.id;
+      }
+      */
+
       String url =
           "${Config.url}${Config.cartURL}?user_id=${Config.userID}&consumer_key=${Config.key}&consumer_secret=${Config.secret}";
 

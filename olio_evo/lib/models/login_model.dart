@@ -67,12 +67,12 @@ class Data {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
 
-    data['token'] = this.token;
-    data['user_email'] = this.email;
-    data['user_nicename'] = this.nicename;
-    data['user_display_name'] = this.displayName;
+    data['token'] = token;
+    data['user_email'] = email;
+    data['user_nicename'] = nicename;
+    data['user_display_name'] = displayName;
 
     return data;
   }
@@ -88,10 +88,10 @@ class Credentials {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
 
-    data['username'] = this.username;
-    data['password'] = this.password;
+    data['username'] = username;
+    data['password'] = password;
 
     return data;
   }

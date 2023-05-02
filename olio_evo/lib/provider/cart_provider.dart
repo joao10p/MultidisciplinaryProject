@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:olio_evo/models/cart_request_model.dart';
+import 'package:olio_evo/shared_service.dart';
 
 import '../api_service.dart';
 import '../models/cart_response_model.dart';
@@ -59,15 +60,20 @@ class CartProvider with ChangeNotifier {
   }
 
   fetchCartItems() async {
+    bool isLoggedIn = await SharedService.isLoggedIn();
+
     if (_cartItems == null) resetStreams();
 
-    await _api.getCartItems().then((cartResponseModel) {
-      if (cartResponseModel.data != null) {
-        _cartItems.addAll(cartResponseModel.data);
-      }
+    if (isLoggedIn) {
+      await _api.getCartItems().then((cartResponseModel) {
+        if (cartResponseModel.data != null) {
+          _cartItems.clear();
+          _cartItems.addAll(cartResponseModel.data);
+        }
 
-      notifyListeners();
-    });
+        notifyListeners();
+      });
+    }
   }
 
   void updateQty(int productId, int qty) {

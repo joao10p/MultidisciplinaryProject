@@ -10,6 +10,8 @@ import 'chatbot_page.dart';
 import 'dashboard_page.dart';
 
 class HomePage extends StatefulWidget {
+  int selectedPage;
+  HomePage({Key key, this.selectedPage}) : super(key: key);
   @override
   State<StatefulWidget> createState() => _HomePageState();
 }
@@ -18,13 +20,22 @@ class _HomePageState extends State<HomePage> {
   final List<Widget> _widgetList = [
     DashboardPage(),
     PaymentScreen(),
-    CartPage(),
+    const CartPage(),
     const Center(child: BarcodePage()),
-    const ChatbotPage(),
     const AccountPage(),
+    const ChatbotPage(),
   ];
 
   int _index = 0;
+
+  @override
+  void initState() {
+    super.initState();
+
+    if (widget.selectedPage != null) {
+      _index = widget.selectedPage;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
