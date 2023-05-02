@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:olio_evo/shared_service.dart';
 
 import '../api_service.dart';
 import '../models/login_model.dart';
@@ -35,11 +36,11 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget uiSetup(BuildContext context) {
     return Scaffold(
-        backgroundColor: Color(0xffffffff),
+        backgroundColor: const Color(0xffffffff),
         body: Align(
           alignment: Alignment.center,
           child: Padding(
-            padding: EdgeInsets.symmetric(vertical: 0, horizontal: 16),
+            padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 16),
             child: SingleChildScrollView(
               child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -53,11 +54,11 @@ class _LoginPageState extends State<LoginPage> {
                         alignment: Alignment.topCenter,
                         children: [
                           Container(
-                            margin: EdgeInsets.all(0),
-                            padding: EdgeInsets.all(0),
+                            margin: const EdgeInsets.all(0),
+                            padding: const EdgeInsets.all(0),
                             width: MediaQuery.of(context).size.width,
                             height: MediaQuery.of(context).size.height,
-                            decoration: BoxDecoration(
+                            decoration: const BoxDecoration(
                               color: Color(0x1fffffff),
                               shape: BoxShape.rectangle,
                               borderRadius: BorderRadius.zero,
@@ -67,7 +68,7 @@ class _LoginPageState extends State<LoginPage> {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               mainAxisSize: MainAxisSize.max,
                               children: [
-                                Padding(
+                                const Padding(
                                   padding: EdgeInsets.symmetric(
                                       vertical: 25, horizontal: 0),
                                   child:
@@ -82,7 +83,8 @@ class _LoginPageState extends State<LoginPage> {
                                   ),
                                 ),
                                 Padding(
-                                  padding: EdgeInsets.fromLTRB(0, 0, 0, 15),
+                                  padding:
+                                      const EdgeInsets.fromLTRB(0, 0, 0, 15),
                                   child: Form(
                                     key: globalKey,
                                     child: Column(
@@ -98,10 +100,10 @@ class _LoginPageState extends State<LoginPage> {
                                                     .contains('@')
                                                 ? "Inserisci una mail valida"
                                                 : null,
-                                            decoration: InputDecoration(
+                                            decoration: const InputDecoration(
                                                 hintText: "Indirizzo email",
                                                 enabledBorder:
-                                                    const UnderlineInputBorder(
+                                                    UnderlineInputBorder(
                                                         borderSide: BorderSide(
                                                   color: Color.fromARGB(
                                                       255,
@@ -156,7 +158,7 @@ class _LoginPageState extends State<LoginPage> {
                                           ),
                                         ),
                                         const SizedBox(height: 30),
-                                        Padding(
+                                        const Padding(
                                           padding:
                                               EdgeInsets.fromLTRB(0, 0, 0, 10),
                                           child: Align(
@@ -177,8 +179,8 @@ class _LoginPageState extends State<LoginPage> {
                                         ),
                                         const SizedBox(height: 20),
                                         Padding(
-                                          padding:
-                                              EdgeInsets.fromLTRB(0, 0, 0, 15),
+                                          padding: const EdgeInsets.fromLTRB(
+                                              0, 0, 0, 15),
                                           child: MaterialButton(
                                             onPressed: () {
                                               if (validateAndSave()) {
@@ -194,38 +196,55 @@ class _LoginPageState extends State<LoginPage> {
                                                     isApiCallProcess = false;
                                                   });
                                                   if (ret.success) {
+                                                    SharedService
+                                                        .setLoginDetails(ret);
                                                     FormHelper.showMessage(
                                                       context,
                                                       "OlioEvo",
                                                       "Login effetuato con successo!",
                                                       "Ok",
                                                       () {
-                                                        Navigator.of(context).push(
+                                                        Navigator.pushAndRemoveUntil(
+                                                            context,
                                                             MaterialPageRoute(
-                                                                builder:
-                                                                    (context) =>
-                                                                        HomePage()));
+                                                                builder: (context) =>
+                                                                    HomePage(
+                                                                        selectedPage:
+                                                                            3)),
+                                                            ModalRoute.withName(
+                                                                "/Home"));
                                                       },
                                                     );
                                                   } else {
-                                                    FormHelper.showMessage(
-                                                      context,
-                                                      "OlioEvo",
-                                                      "Credenziali errate",
-                                                      "Ok",
-                                                      () {
-                                                        Navigator.of(context).push(
-                                                            MaterialPageRoute(
-                                                                builder:
-                                                                    (context) =>
-                                                                        LoginPage()));
+                                                    showDialog(
+                                                      context: context,
+                                                      builder: (BuildContext
+                                                          context) {
+                                                        return AlertDialog(
+                                                          title: const Text(
+                                                              "OlioEvo"),
+                                                          content: const Text(
+                                                              "Credenziali errate"),
+                                                          actions: [
+                                                            ElevatedButton(
+                                                              // ignore: void_checks
+                                                              onPressed: () {
+                                                                Navigator.of(
+                                                                        context)
+                                                                    .pop();
+                                                              },
+                                                              child: const Text(
+                                                                  "Ok"),
+                                                            )
+                                                          ],
+                                                        );
                                                       },
                                                     );
                                                   }
                                                 });
                                               }
                                             },
-                                            color: Color(0xffffffff),
+                                            color: const Color(0xffffffff),
                                             elevation: 0,
                                             shape: RoundedRectangleBorder(
                                               borderRadius:
@@ -235,8 +254,8 @@ class _LoginPageState extends State<LoginPage> {
                                                       255, 5, 79, 22),
                                                   width: 1),
                                             ),
-                                            padding: EdgeInsets.all(16),
-                                            child: Text(
+                                            padding: const EdgeInsets.all(16),
+                                            child: const Text(
                                               "Login",
                                               style: TextStyle(
                                                 fontSize: 14,
@@ -258,7 +277,7 @@ class _LoginPageState extends State<LoginPage> {
                                               CrossAxisAlignment.center,
                                           mainAxisSize: MainAxisSize.max,
                                           children: [
-                                            Expanded(
+                                            const Expanded(
                                               flex: 1,
                                               child: Divider(
                                                 color: Color(0xff808080),
@@ -268,7 +287,7 @@ class _LoginPageState extends State<LoginPage> {
                                                 endIndent: 3,
                                               ),
                                             ),
-                                            Text(
+                                            const Text(
                                               "Oppure accedi con",
                                               textAlign: TextAlign.start,
                                               overflow: TextOverflow.clip,
@@ -279,7 +298,7 @@ class _LoginPageState extends State<LoginPage> {
                                                 color: Color(0xff000000),
                                               ),
                                             ),
-                                            Expanded(
+                                            const Expanded(
                                               flex: 1,
                                               child: Divider(
                                                 color: Color(0xff808080),
@@ -292,8 +311,8 @@ class _LoginPageState extends State<LoginPage> {
                                           ],
                                         ),
                                         Padding(
-                                          padding:
-                                              EdgeInsets.fromLTRB(0, 5, 0, 10),
+                                          padding: const EdgeInsets.fromLTRB(
+                                              0, 5, 0, 10),
                                           child: Row(
                                             mainAxisAlignment:
                                                 MainAxisAlignment.spaceAround,
@@ -302,21 +321,21 @@ class _LoginPageState extends State<LoginPage> {
                                             mainAxisSize: MainAxisSize.max,
                                             children: [
                                               IconButton(
-                                                icon: Icon(Icons.add),
+                                                icon: const Icon(Icons.add),
                                                 onPressed: () {},
-                                                color: Color(0xff212435),
+                                                color: const Color(0xff212435),
                                                 iconSize: 30,
                                               ),
                                               IconButton(
-                                                icon: Icon(Icons.add),
+                                                icon: const Icon(Icons.add),
                                                 onPressed: () {},
-                                                color: Color(0xff212435),
+                                                color: const Color(0xff212435),
                                                 iconSize: 30,
                                               ),
                                               IconButton(
-                                                icon: Icon(Icons.add),
+                                                icon: const Icon(Icons.add),
                                                 onPressed: () {},
-                                                color: Color(0xff212435),
+                                                color: const Color(0xff212435),
                                                 iconSize: 30,
                                               ),
                                             ],
@@ -324,8 +343,8 @@ class _LoginPageState extends State<LoginPage> {
                                         ),
                                         const SizedBox(height: 20),
                                         Padding(
-                                          padding:
-                                              EdgeInsets.fromLTRB(5, 10, 5, 0),
+                                          padding: const EdgeInsets.fromLTRB(
+                                              5, 10, 5, 0),
                                           child: Row(
                                             mainAxisAlignment:
                                                 MainAxisAlignment.start,
@@ -333,7 +352,7 @@ class _LoginPageState extends State<LoginPage> {
                                                 CrossAxisAlignment.center,
                                             mainAxisSize: MainAxisSize.max,
                                             children: [
-                                              Padding(
+                                              const Padding(
                                                 padding: EdgeInsets.fromLTRB(
                                                     0, 0, 5, 0),
                                                 child: Text(
@@ -349,23 +368,26 @@ class _LoginPageState extends State<LoginPage> {
                                                 ),
                                               ),
                                               Padding(
-                                                padding: EdgeInsets.fromLTRB(
-                                                    5, 0, 0, 0),
+                                                padding:
+                                                    const EdgeInsets.fromLTRB(
+                                                        5, 0, 0, 0),
                                                 child: MaterialButton(
                                                   onPressed: () {},
-                                                  color: Color(0xffffffff),
+                                                  color:
+                                                      const Color(0xffffffff),
                                                   elevation: 0,
                                                   shape: RoundedRectangleBorder(
                                                     borderRadius:
                                                         BorderRadius.circular(
                                                             8.0),
-                                                    side: BorderSide(
+                                                    side: const BorderSide(
                                                         color:
                                                             Color(0xff808080),
                                                         width: 1),
                                                   ),
-                                                  padding: EdgeInsets.all(16),
-                                                  child: Text(
+                                                  padding:
+                                                      const EdgeInsets.all(16),
+                                                  child: const Text(
                                                     "Registrati",
                                                     style: TextStyle(
                                                       fontSize: 14,
@@ -375,7 +397,8 @@ class _LoginPageState extends State<LoginPage> {
                                                           FontStyle.normal,
                                                     ),
                                                   ),
-                                                  textColor: Color(0xff000000),
+                                                  textColor:
+                                                      const Color(0xff000000),
                                                   height: 35,
                                                   minWidth: 100,
                                                 ),

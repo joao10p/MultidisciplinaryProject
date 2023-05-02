@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:olio_evo/provider/cart_provider.dart';
 import 'package:olio_evo/provider/loader_provider.dart';
+import 'package:olio_evo/shared_service.dart';
 import 'package:olio_evo/utils/ProgressHUD.dart';
+import 'package:olio_evo/widgets/unauth_widget.dart';
 import 'package:olio_evo/widgets/widget_cart_product.dart';
 import 'package:provider/provider.dart';
+
+import '../shared_service.dart';
 
 class CartPage extends StatefulWidget {
   const CartPage({Key key}) : super(key: key);
@@ -23,26 +27,42 @@ class _CartPageState extends State<CartPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<LoaderProvider>(builder: (context, loaderModel, child) {
-      return Scaffold(
-        appBar: AppBar(
-          leading: IconButton(
-            icon: const Icon(Icons.arrow_back_ios, color: Colors.white),
-            onPressed: () => Navigator.of(context).pop(),
-          ),
-          title: const Text("Cart"),
-          centerTitle: true,
-          elevation: 0,
-          backgroundColor: Colors.green,
-          automaticallyImplyLeading: false,
-        ),
-        body: ProgressHUD(
-          inAsyncCall: loaderModel.isApiCallProcess,
-          opacity: 0.3,
-          child: _cartItemsList(),
-        ),
-      );
-    });
+    return FutureBuilder(
+      future: SharedService.isLoggedIn(),
+      builder: (BuildContext context, AsyncSnapshot<bool> loginModel) {
+        if (loginModel.hasData) {
+          if (loginModel.data) {
+            return Consumer<LoaderProvider>(
+                builder: (context, loaderModel, child) {
+              return Scaffold(
+                appBar: AppBar(
+                  leading: IconButton(
+                    icon: const Icon(Icons.arrow_back_ios, color: Colors.white),
+                    onPressed: () => Navigator.of(context).pop(),
+                  ),
+                  title: const Text("Cart"),
+                  centerTitle: true,
+                  elevation: 0,
+                  backgroundColor: Colors.green,
+                  automaticallyImplyLeading: false,
+                ),
+                body: ProgressHUD(
+                  inAsyncCall: loaderModel.isApiCallProcess,
+                  opacity: 0.3,
+                  child: _cartItemsList(),
+                ),
+              );
+            });
+          } else {
+            return const UnAuthWidget();
+          }
+        }
+
+        return const Center(
+          child: CircularProgressIndicator(),
+        );
+      },
+    );
   }
 
   Widget _cartItemsList() {

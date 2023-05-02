@@ -15,7 +15,7 @@ class _PaymentScreenState extends BasePageState<PaymentScreen> {
   @override
   Widget build(BuildContext context) {
     list = new PaymentMethodList();
-     return SingleChildScrollView(
+    return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.start,
@@ -38,7 +38,8 @@ class _PaymentScreenState extends BasePageState<PaymentScreen> {
                       style: Theme.of(context).textTheme.headline4,
                     ), // Text
 
-                    subtitle: Text("Seleziona il tuo metodo di pagamento preferito"),
+                    subtitle:
+                        Text("Seleziona il tuo metodo di pagamento preferito"),
                   ),
                 )
               : SizedBox(height: 0),
@@ -55,8 +56,8 @@ class _PaymentScreenState extends BasePageState<PaymentScreen> {
               return SizedBox(height: 10);
             },
             itemCount: list.paymentsList.length,
-          ), 
-            SizedBox(height: 15),
+          ),
+          SizedBox(height: 15),
           list.cashList.length > 0
               ? Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -67,17 +68,18 @@ class _PaymentScreenState extends BasePageState<PaymentScreen> {
                       color: Theme.of(context).hintColor,
                     ), // Icon
                     title: Text(
-                      "Conatante alla consegna",
+                      "Contante alla consegna",
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: Theme.of(context).textTheme.headline4,
                     ), // Text
 
-                    subtitle: Text("Seleziona il tuo metodo di pagamento preferito"),
+                    subtitle:
+                        Text("Seleziona il tuo metodo di pagamento preferito"),
                   ),
                 )
               : SizedBox(height: 0),
-              ListView.separated(
+          ListView.separated(
             scrollDirection: Axis.vertical,
             shrinkWrap: true,
             primary: false,
