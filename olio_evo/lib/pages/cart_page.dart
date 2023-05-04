@@ -35,17 +35,7 @@ class _CartPageState extends State<CartPage> {
             return Consumer<LoaderProvider>(
                 builder: (context, loaderModel, child) {
               return Scaffold(
-                appBar: AppBar(
-                  leading: IconButton(
-                    icon: const Icon(Icons.arrow_back_ios, color: Colors.white),
-                    onPressed: () => Navigator.of(context).pop(),
-                  ),
-                  title: const Text("Cart"),
-                  centerTitle: true,
-                  elevation: 0,
-                  backgroundColor: Colors.green,
-                  automaticallyImplyLeading: false,
-                ),
+                
                 body: ProgressHUD(
                   inAsyncCall: loaderModel.isApiCallProcess,
                   opacity: 0.3,

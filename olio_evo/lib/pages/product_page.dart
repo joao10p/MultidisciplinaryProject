@@ -114,8 +114,8 @@ class _ProductPageState extends BasePageState<ProductPage> {
         Visibility(
           child: Container(
               padding: EdgeInsets.all(5),
-              height: 35.0,
-              width: 35.0,
+              height: 60.0,
+              width: 60.0,
               child: CircularProgressIndicator()),
           visible: isLoadMore,
         )
@@ -299,4 +299,7 @@ class _ProductPageState extends BasePageState<ProductPage> {
     }
     return categories;
   }
+
+//create a widget that is a filter list view with all the filter used before    
+
 }

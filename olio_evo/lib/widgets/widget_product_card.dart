@@ -23,16 +23,17 @@ class ProductCard extends StatelessWidget{
       },
     
     child: Container(
+     // width: 300,
       decoration: BoxDecoration(
-        color: Colors.green,
+        color: Color.fromARGB(255, 242, 243, 242),
         borderRadius: BorderRadius.all(Radius.circular(20)),
         boxShadow: <BoxShadow>[
-          BoxShadow( color: Colors.greenAccent, blurRadius: 15, spreadRadius: 10),
+          BoxShadow( color: Color.fromARGB(255, 160, 161, 161), blurRadius: 5, spreadRadius: 2),
         ],
       ),
-      margin: EdgeInsets.symmetric(vertical:10, horizontal: 10),
+      margin: EdgeInsets.symmetric(vertical:2, horizontal: 5),
       child: Container(
-        padding: EdgeInsets.symmetric( horizontal: 10, vertical: 10),
+        padding: EdgeInsets.symmetric( horizontal: 0, vertical: 0),
         child: Stack(
           alignment:Alignment.center,
           children: <Widget>[
@@ -55,18 +56,16 @@ class ProductCard extends StatelessWidget{
                         style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.w700,
+                          fontSize: 12,
                         ),
                       ),
                     ), ),
                 ),
-                Flexible(
+                Container(
                   child: Stack(
                     alignment:Alignment.center,
                     children: <Widget>[
-                      CircleAvatar(
-                        radius: 30,
-                        backgroundColor: Color(0xffE).withAlpha(40),
-                      ),
+                     
                       Image.network(
                         data.images.length>0
                         ? data.images[0].src
@@ -77,40 +76,38 @@ class ProductCard extends StatelessWidget{
                     ],
                     ),
                 ),
-                SizedBox(height: 5),
+               
                 Text(
                   data.name,
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    fontSize: 14,
+                    fontSize: 13,
                     color: Colors.black,
                     fontWeight: FontWeight.bold,
                   ),
                   ),
-                  Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Visibility(
-                          visible: data.salePrice!=data.regularPrice,
-                          child:Text(
-                      '${data.regularPrice}',
-                      style: TextStyle(
-                        fontSize: 14,
-                        color:Colors.black,
-                        fontWeight: FontWeight.bold,
-                      ),
+                  Container(
+                  // qui il prezzo
+                  margin: EdgeInsets.only(top: 4, left: 4),
+                  width: 170,
+                  alignment: Alignment.center,
+                  child: Text(
+                    data.salePrice != null && data.salePrice.isNotEmpty
+                        ? 'In offerta: ${data.salePrice} € '
+                        : '${data.regularPrice} €',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: data.salePrice != null && data.salePrice.isNotEmpty
+                          ? Colors.red
+                          : Colors.black,
+                      fontWeight:
+                          data.salePrice != null && data.salePrice.isNotEmpty
+                              ? FontWeight.bold
+                              : FontWeight.bold,
                     ),
-                        ),
-                    Text(
-                      '${data.salePrice}',
-                      style: TextStyle(
-                        fontSize: 14,
-                        color:Colors.redAccent,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ],
                   ),
+                ),
                   ],
                   ),
               ],

@@ -26,7 +26,14 @@ class _WidgetHomeProductState extends State<WidgetHomeProducts> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.greenAccent,
+      
+      decoration: BoxDecoration(
+        color: Color.fromARGB(255, 249, 249, 249),
+        border: Border.all(
+                         width: 1,
+                          // assign the color to the border color
+                          color: Color.fromARGB(255, 12, 12, 12),
+      ),),
       child: Column(children: <Widget>[
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -38,6 +45,7 @@ class _WidgetHomeProductState extends State<WidgetHomeProducts> {
                 style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
+                  color: Color.fromARGB(255, 5, 116, 30)
                 ),
               ),
             ),
@@ -47,7 +55,7 @@ class _WidgetHomeProductState extends State<WidgetHomeProducts> {
                 onPressed: () {},
                 child: Text(
                   'View All',
-                  style: TextStyle(color: Colors.greenAccent),
+                  style: TextStyle(color: Color.fromARGB(255, 5, 116, 30)),
                 ),
               ),
             )
@@ -72,7 +80,7 @@ class _WidgetHomeProductState extends State<WidgetHomeProducts> {
 
   Widget _buildList(List<Product> items) {
     return Container(
-      height: 350,
+      height: 320,
       alignment: Alignment.centerLeft,
       child: ListView.builder(
         shrinkWrap: true,
@@ -85,8 +93,8 @@ class _WidgetHomeProductState extends State<WidgetHomeProducts> {
           return Container(
             padding: EdgeInsets.all(5),
             margin: EdgeInsets.all(10),
-            width: 200,
-            height: 220,
+            width: 180,
+            height: 200,
             alignment: Alignment.center,
             decoration: BoxDecoration(
               shape: BoxShape.rectangle,

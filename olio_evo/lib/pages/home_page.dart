@@ -40,53 +40,70 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        home: Scaffold(
-            appBar: _buildAppBar(),
-            body: IndexedStack(index: _index, children: _widgetList),
-            bottomNavigationBar: SizedBox(
-              height: 100,
-              child: BottomNavigationBar(
-                items: const [
-                  BottomNavigationBarItem(
-                      icon: Icon(
-                        Icons.storefront_outlined,
-                      ),
-                      label: 'Store'),
-                  BottomNavigationBarItem(
-                      icon: Icon(
-                        Icons.search,
-                      ),
-                      label: 'Search'),
-                  BottomNavigationBarItem(
-                      icon: Icon(
-                        Icons.camera_alt_outlined,
-                      ),
-                      label: 'Scan'),
-                  BottomNavigationBarItem(
-                      icon: Icon(
-                        Icons.chat_outlined,
-                      ),
-                      label: 'Chatbot'),
-                  BottomNavigationBarItem(
-                      icon: Icon(
-                        Icons.account_circle_outlined,
-                      ),
-                      label: 'Account'),
-                ],
-                selectedItemColor: Colors.white,
-                backgroundColor: Colors.lightGreen,
-                unselectedItemColor: const Color.fromRGBO(97, 113, 53, 1),
-                type: BottomNavigationBarType.fixed,
-                iconSize: 30,
-                currentIndex: _index,
-                onTap: (index) {
-                  setState(() {
-                    _index = index;
-                  });
-                },
+  debugShowCheckedModeBanner: false,
+  home: Scaffold(
+    appBar: _buildAppBar(),
+    body: IndexedStack(index: _index, children: _widgetList),
+    bottomNavigationBar: SizedBox(
+      height: 100,
+      child: BottomNavigationBar(
+        items: const [
+          BottomNavigationBarItem(
+              icon: Icon(
+                Icons.storefront_outlined,
+                color: Colors.green,
               ),
-            )));
+              label: 'Store'
+          ),
+          BottomNavigationBarItem(
+              icon: Icon(
+                Icons.search,
+                color: Colors.green,
+              ),
+              label: 'Search'
+          ),
+          BottomNavigationBarItem(
+              icon: Icon(
+                Icons.camera_alt_outlined,
+                color: Colors.green,
+              ),
+              label: 'Scan'
+          ),
+          BottomNavigationBarItem(
+              icon: Icon(
+                Icons.chat_outlined,
+                color: Colors.green,
+              ),
+              label: 'Chatbot'
+          ),
+          BottomNavigationBarItem(
+              icon: Icon(
+                Icons.account_circle_outlined,
+                color: Colors.green,
+              ),
+              label: 'Account'
+          ),
+        ],
+        selectedItemColor: Color.fromARGB(255, 17, 17, 17),
+        backgroundColor: Colors.white,
+        unselectedItemColor: const Color.fromRGBO(97, 113, 53, 1),
+        type: BottomNavigationBarType.fixed,
+        iconSize: 30,
+        currentIndex: _index,
+        onTap: (index) {
+          setState(() {
+            _index = index;
+          });
+        },
+        // Imposta lo stile delle label come invisibile
+       
+      ),
+    ),
+    backgroundColor: Colors.white,
+  ),
+);
+
+
   }
 
   Widget _buildAppBar() {
