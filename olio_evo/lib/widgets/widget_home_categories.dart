@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:olio_evo/api_service.dart';
-import 'package:olio_evo/pages/product_page.dart';
+import 'package:olio_evo/models/product.dart';
 
 import '../models/category.dart' hide Image;
+import '../pages/product_page.dart';
+import '../pages/product_page_new.dart';
 
 class WidgetCategories extends StatefulWidget {
   @override
@@ -11,7 +13,7 @@ class WidgetCategories extends StatefulWidget {
 
 class _WidgetCategoriesState extends State<WidgetCategories> {
   API apiSerivce;
-
+  List<Category> categorieSalvate;
   void initState() {
     apiSerivce = new API();
     super.initState();
@@ -87,6 +89,7 @@ class _WidgetCategoriesState extends State<WidgetCategories> {
           .getCategories(), //getData(), // if you mean this method well return image url
       builder: (context, snapshot) {
         if (snapshot.hasData) {
+          categorieSalvate=snapshot.data;
           return _buildCategoryList(snapshot.data);
         } else {
           return Center(child: CircularProgressIndicator());
@@ -117,7 +120,7 @@ class _WidgetCategoriesState extends State<WidgetCategories> {
                     context,
                     MaterialPageRoute(
                         builder: (context) =>
-                            ProductPage(categoryId: data.categoryId)));
+                            ProductPageNEW(categories: categorieSalvate)));
               },
               child: Container(
                   margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
