@@ -14,7 +14,7 @@ class SharedService {
   static Future<LoginResponseModel> loginDetails() async {
     final prefs = await SharedPreferences.getInstance();
 
-    return prefs.getString("login_details") != ""
+    return prefs.getString("login_details")!=null
         ? LoginResponseModel.fromJsonSharedService(
             jsonDecode(prefs.getString("login_details")))
         : null;

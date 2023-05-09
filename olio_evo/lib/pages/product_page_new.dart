@@ -8,6 +8,7 @@ import 'package:provider/provider.dart';
 import '../api_service.dart';
 import '../models/category.dart' hide Image;
 import '../models/product.dart';
+import '../provider/filters_provider.dart';
 import '../provider/products_provider.dart';
 
 class ProductPageNEW extends BasePage {
@@ -24,15 +25,18 @@ class _ProductPageState extends BasePageState<ProductPageNEW> {
   List<String> sortIndex = ["Ordina", "Categorie", "Regioni", "Consigliati"];
   List<String> myStrings = ['Elemento 1', 'Elemento 123242', 'Elemento 3'];
   int pageNumber = 1;
+  int categoryId;
   ScrollController _scrollController = new ScrollController();
   final _searchQuery = new TextEditingController();
   Timer _debounce;
   Future<List<Category>> categorieSaved;
+  List<String> sortFilterStrings = ["Popolarità", "Nuovi Arrivi", "Recensioni", "Nome"];
+
   final _sortByOptions = [
     SortBy("popularity", "Popularity", "asc"),
     SortBy("modified", "Latest", "asc"),
-    SortBy("price", "Price: High to Low", "desc"),
-    SortBy("price", "Price: Low to High", "asc"),
+    SortBy("rating", "Price: High to Low", "desc"),
+    SortBy("title", "Price: Low to High", "asc"),
   ];
 
   @override
@@ -51,8 +55,7 @@ class _ProductPageState extends BasePageState<ProductPageNEW> {
         _productList.fetchProducts(++pageNumber);
       }
     });
-    categorieSaved = apiSerivce.getCategories();
-    super.initState();
+  ;
   }
 
   //TODO: manca la parte in cui la ricerca ritorna nessun prodotto
@@ -194,8 +197,8 @@ class _ProductPageState extends BasePageState<ProductPageNEW> {
   //getData(), // if you mean this method well return image url
 
   Widget _buildCategoryList(List<Category> categories) {
-    int categoryId;
-
+    return Consumer<SelectionState>(
+  builder: (context, selectionState, _) {
     return Column(
       children: [
         Padding(
@@ -228,7 +231,8 @@ class _ProductPageState extends BasePageState<ProductPageNEW> {
                   child: GestureDetector(
                       onTap: () {
                         categoryId = data.categoryId;
-                        // pageUI();
+                                      selectionState.updateIndexCategories(index);
+
                       },
                       child: Container(
                           margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
@@ -237,7 +241,7 @@ class _ProductPageState extends BasePageState<ProductPageNEW> {
                           width: 90,
                           height: 110,
                           decoration: BoxDecoration(
-                            color: data.categoryId == categoryId
+                            color:  index == selectionState.getIndexCategories()
                                 ? Color.fromARGB(255, 15, 115, 6)
                                 : Color.fromARGB(
                                     255, 135, 209, 128), //inside color
@@ -321,6 +325,8 @@ class _ProductPageState extends BasePageState<ProductPageNEW> {
       ],
     );
   }
+    );
+  }
 
 //set the as first in the list the elemnt with categoryId == widget.categoryId
   List<Category> setFirstSelected(List<Category> categories) {
@@ -335,97 +341,124 @@ class _ProductPageState extends BasePageState<ProductPageNEW> {
     }
     return categories;
   }
+ 
 
-  Widget _buildFilterList() {
-    SortBy indexSorting;
+Widget _buildFilterList() {
+return Consumer<SelectionState>(
+  builder: (context, selectionState, _) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-            padding: EdgeInsets.fromLTRB(15, 10, 0, 10),
-            child: Text("Seleziona l'ordine che preferisci:",
-                style: TextStyle(
-                  fontSize: 24,
-                  color: Colors.green,
-                  fontWeight: FontWeight.bold,
-                ))),
-        // impostare un'altezza fissa
-           Container(
-            height: MediaQuery.of(context).size.height*0.1 ,
-            width: MediaQuery.of(context).size.width,
-            decoration: BoxDecoration(
-              color: Color.fromARGB(255, 255, 255, 255),
-              shape: BoxShape.rectangle,
-              borderRadius: BorderRadius.circular(6.0),
-              border:
-                  Border.all(color: Color.fromARGB(77, 23, 11, 11), width: 1),
+          padding: EdgeInsets.fromLTRB(15, 10, 0, 10),
+          child: Text(
+            "Seleziona l'ordine che preferisci:",
+            style: TextStyle(
+              fontSize: 24,
+              color: Colors.green,
+              fontWeight: FontWeight.bold,
             ),
-              child: GridView.count(
-        shrinkWrap: true,
-          crossAxisCount: 2,
-          physics: ClampingScrollPhysics(),
-          scrollDirection: Axis.vertical,// Padding esterno
-  children: List.generate(
-    sortIndex.length, // Numero di elementi
-    (index) {
-    var data = sortIndex[index];
-                  return Padding(
-                      padding: EdgeInsets.only(left: 5),
-                      child: GestureDetector(
-                        onTap: () {
-                          indexSorting=_sortByOptions[index];                          
-                        },
-                       
-                          child: Container(
-                          
-                          decoration: BoxDecoration(
-        color: Color.fromARGB(255, 242, 243, 242),
-        borderRadius: BorderRadius.all(Radius.circular(20)),
-        boxShadow: <BoxShadow>[
-          BoxShadow( color: Color.fromARGB(255, 160, 161, 161), blurRadius: 5, spreadRadius: 2),
-        ],
-      ),
-                          height: 2,
-                          child: Text(data,
-                          style: TextStyle(
-                  fontSize: 16,
-                  color: Colors.green,
-                  fontWeight: FontWeight.bold,
-                )),
-                        ),
-                      ));
-                },
-              ),
-            ),
-          
-        
+          ),
         ),
+        Padding(
+          padding: EdgeInsets.fromLTRB(15, 0, 15, 0),  
+          child:
+        Container(
+          height: MediaQuery.of(context).size.height * 0.15,
+          width: MediaQuery.of(context).size.width,
+          decoration: BoxDecoration(
+            color: Color.fromARGB(255, 255, 255, 255),
+            shape: BoxShape.rectangle,
+            borderRadius: BorderRadius.circular(6.0),
+            border: Border.all(color: Color.fromARGB(77, 23, 11, 11), width: 1),
+          ),
+          child: GridView.count(
+            childAspectRatio: 10,
+            crossAxisSpacing: MediaQuery.of(context).size.width * 0.01,
+            crossAxisCount: 1,
+            physics: ClampingScrollPhysics(),
+            scrollDirection: Axis.vertical,
+            children: List.generate(
+              sortIndex.length,
+              (index) {
+                var data = sortFilterStrings[index];
+                return GestureDetector(
+                  onTap: () {
+              selectionState.updateSelection(index);
+            },
+                  child: Padding(
+                    padding: EdgeInsets.all(1),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Color.fromARGB(255, 242, 243, 242),
+                        boxShadow: <BoxShadow>[
+                          BoxShadow(
+                            color: Color.fromARGB(255, 16, 17, 17),
+                            blurRadius: 5,
+                            spreadRadius: 2,
+                          ),
+                        ],
+                      ),
+                      height: 20,
+                      child: Center(child: Text(
+                        data,
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 24,
+                          fontStyle: FontStyle.italic,
+                          color:  selectionState.isSelected[index] == 0
+                              ? Color.fromARGB(255, 10, 10, 10)
+                              : Color.fromARGB(255, 48, 148, 41),
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),)
+                    ),
+                  ),
+                );
+              },
+            ),
+          ),
+        ),
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center, children: [
           Padding(
             padding: EdgeInsets.only(top: 10),
-            child: ElevatedButton(
-                child: Text('Applica'),
-                style: ElevatedButton.styleFrom(
-                  primary: Color.fromARGB(255, 17, 162, 46),
-                  side: BorderSide(
-                      color: Color.fromARGB(255, 33, 32, 32), width: 1),
-                  textStyle: TextStyle(
-                      color: Color.fromARGB(255, 236, 239, 236),
-                      fontSize: 20,
-                      fontStyle: FontStyle.italic),
+            child:
+          ElevatedButton(
+              child: Text('Applica'),
+              style: ElevatedButton.styleFrom(
+                primary: Color.fromARGB(255, 17, 162, 46),
+                side: BorderSide(
+                  color: Color.fromARGB(255, 33, 32, 32),
+                  width: 1,
                 ),
-                onPressed: () {
-                  var productsList =
-                      Provider.of<ProductProvider>(context, listen: false);
-                    var _productsList =
+                textStyle: TextStyle(
+                    color: Color.fromARGB(255, 236, 239, 236),
+                    fontSize: 20,
+                    fontStyle: FontStyle.italic),
+              ),
+              onPressed: () {
+              setState(() {
+                var _productsList =
                     Provider.of<ProductProvider>(context, listen: false);
                 _productsList.resetStreams();
-                _productsList.setSortOrder(indexSorting);
-                _productsList.fetchProducts(pageNumber);
-                  Navigator.pop(context);
-                }))
+                  _productsList.setLoadingState(LoadMoreStatus.INITIAL, true);
+                 
+                _productsList.fetchProducts(pageNumber,
+                sortOrder:_sortByOptions[selectionState.getIndex()].sortOrder,
+                sortBy:_sortByOptions[selectionState.getIndex()].value,
+                );
+                Navigator.pop(context);
+                });
+              })
+        )
+        ] 
+        )
       ],
-      
     );
+  }
+);
   }
 
   Widget filterMenu(int type) {

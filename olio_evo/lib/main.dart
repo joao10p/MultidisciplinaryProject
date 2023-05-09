@@ -9,6 +9,7 @@ import 'package:olio_evo/pages/product_details.dart';
 import 'package:olio_evo/pages/product_page.dart';
 import 'package:olio_evo/pages/sign_up_new.dart';
 import 'package:olio_evo/provider/cart_provider.dart';
+import 'package:olio_evo/provider/filters_provider.dart';
 import 'package:olio_evo/provider/loader_provider.dart';
 import 'package:olio_evo/provider/products_provider.dart';
 import 'package:provider/provider.dart';
@@ -22,7 +23,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-        providers: [
+        providers: [   
+           ChangeNotifierProvider(create: (context) => SelectionState()),
+
           ChangeNotifierProvider(
             create: (context) => ProductProvider(),
             child: ProductPage(),

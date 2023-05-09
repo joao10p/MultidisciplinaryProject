@@ -56,7 +56,7 @@ class ProductCard extends StatelessWidget{
                         style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.w700,
-                          fontSize: 12,
+                          fontSize: 14,
                         ),
                       ),
                     ), ),
@@ -97,7 +97,7 @@ class ProductCard extends StatelessWidget{
                         : '${data.regularPrice} €',
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                      fontSize: 14,
+                      fontSize: 16,
                       color: data.salePrice != null && data.salePrice.isNotEmpty
                           ? Colors.red
                           : Colors.black,

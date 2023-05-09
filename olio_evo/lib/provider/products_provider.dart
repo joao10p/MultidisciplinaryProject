@@ -58,10 +58,10 @@ class ProductProvider with ChangeNotifier{
       strSearch: strSearch,
       tagName: tagName,
       pageNumber: pageNumber,
-      pageSize: this.pageSize,
+      pageSize: pageSize,
       categoryId: categoryId,
-      sortBy: this._sortBy.value,
-      sortOrder: this._sortBy.sortOrder,
+      sortBy:sortBy,
+      sortOrder:  sortOrder
     );
 
     if(itemModel!=null && itemModel.length > 0){

@@ -280,7 +280,7 @@ class API {
       }
 
       if (sortBy != null) {
-        parameter += "&order_by	=$sortBy";
+        parameter += "&orderby=$sortBy";
       }
 
       if (productsIDs != null) {
