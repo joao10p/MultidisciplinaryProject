@@ -79,7 +79,7 @@ class _AccountPageState extends State<AccountPage> {
 
   Widget _buildRow(OptionList optionList, int index) {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(0, 5, 0, 5),
+      padding: const EdgeInsets.fromLTRB(0, 2, 0, 2),
       child: ListTile(
         leading: Container(
           padding: const EdgeInsets.all(10),
@@ -97,7 +97,7 @@ class _AccountPageState extends State<AccountPage> {
           ),
         ),
         subtitle: Padding(
-          padding: const EdgeInsets.only(top: 5),
+          padding: const EdgeInsets.only(top: 1),
           child: Text(
             optionList.optionSubTitle,
             style: const TextStyle(color: Colors.redAccent, fontSize: 14),
@@ -128,20 +128,20 @@ class _AccountPageState extends State<AccountPage> {
                     mainAxisSize: MainAxisSize.max,
                     children: [
                       Padding(
-                        padding: EdgeInsets.fromLTRB(4, 20, 4, 4),
+                        padding: EdgeInsets.fromLTRB(4, 5, 4, 0),
                         child: Container(
-                          height: 150,
-                          width: 150,
+                          height: MediaQuery.of(context).size.height*0.20,
+                          width: MediaQuery.of(context).size.width*0.3,
                           clipBehavior: Clip.antiAlias,
                           decoration: BoxDecoration(
-                            shape: BoxShape.circle,
+                            shape: BoxShape.rectangle,
                           ),
                           child: Image.asset("assets/images/olivevo_logo.jpg",
                               fit: BoxFit.cover),
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsets.fromLTRB(4, 4, 4, 8),
+                        padding: EdgeInsets.fromLTRB(2, 2, 2, 4),
                         child: Text(
                           "Ciao, Vittorio!",
                           textAlign: TextAlign.start,
@@ -161,22 +161,28 @@ class _AccountPageState extends State<AccountPage> {
                         physics: NeverScrollableScrollPhysics(),
                         children: [
                           Padding(
+                            
                             padding: EdgeInsets.fromLTRB(5, 20, 5, 5),
-                            child: ListTile(
+                            child:  Container( 
+                             height:  MediaQuery.of(context).size.height*0.06,
+                             child: Container( 
+                             height:  MediaQuery.of(context).size.height*0.06,
+                             child:ListTile(
+                            
                               tileColor: Color(0xffffffff),
                               title: Text(
                                 "Ordini",
                                 style: TextStyle(
                                   fontWeight: FontWeight.w400,
                                   fontStyle: FontStyle.normal,
-                                  fontSize: 16,
+                                  fontSize: 14,
                                   color: Color(0xff000000),
                                 ),
                                 textAlign: TextAlign.start,
                               ),
                               dense: false,
                               contentPadding:
-                                  EdgeInsets.symmetric(vertical: 2, horizontal: 4),
+                                  EdgeInsets.symmetric(vertical: 0, horizontal: 4),
                               selected: false,
                               selectedTileColor: Color(0x42000000),
                               shape: RoundedRectangleBorder(
@@ -189,23 +195,27 @@ class _AccountPageState extends State<AccountPage> {
                                   color: Color(0xff212435), size: 24),
                             ),
                           ),
+                          ),
+                          ),
                           Padding(
                             padding: EdgeInsets.fromLTRB(5, 0, 5, 5),
-                            child: ListTile(
+                            child: Container( 
+                             height:  MediaQuery.of(context).size.height*0.06,
+                             child: ListTile(
                               tileColor: Color(0x00000000),
                               title: Text(
                                 "Impostazioni",
                                 style: TextStyle(
                                   fontWeight: FontWeight.w400,
                                   fontStyle: FontStyle.normal,
-                                  fontSize: 16,
+                                  fontSize: 14,
                                   color: Color(0xff000000),
                                 ),
                                 textAlign: TextAlign.left,
                               ),
                               dense: false,
                               contentPadding:
-                                  EdgeInsets.symmetric(vertical: 2, horizontal: 4),
+                                  EdgeInsets.symmetric(vertical: 0, horizontal: 4),
                               selected: false,
                               selectedTileColor: Color(0x42000000),
                               shape: RoundedRectangleBorder(
@@ -218,23 +228,27 @@ class _AccountPageState extends State<AccountPage> {
                                   color: Color(0xff212435), size: 24),
                             ),
                           ),
+                          ),
                           Padding(
                             padding: EdgeInsets.fromLTRB(5, 0, 5, 5),
-                            child: ListTile(
+                            child:  Container( 
+                             height:  MediaQuery.of(context).size.height*0.06,
+
+                              child: ListTile(
                               tileColor: Color(0x00000000),
                               title: Text(
                                 "Metodo di pagamento",
                                 style: TextStyle(
                                   fontWeight: FontWeight.w400,
                                   fontStyle: FontStyle.normal,
-                                  fontSize: 16,
+                                  fontSize: 14,
                                   color: Color(0xff000000),
                                 ),
                                 textAlign: TextAlign.start,
                               ),
                               dense: false,
                               contentPadding:
-                                  EdgeInsets.symmetric(vertical: 2, horizontal: 4),
+                                  EdgeInsets.symmetric( horizontal: 4),
                               selected: false,
                               selectedTileColor: Color(0x42000000),
                               shape: RoundedRectangleBorder(
@@ -247,23 +261,26 @@ class _AccountPageState extends State<AccountPage> {
                                   color: Color(0xff212435), size: 24),
                             ),
                           ),
+                          ),
                           Padding(
                             padding: EdgeInsets.fromLTRB(5, 0, 5, 5),
-                            child: ListTile(
+                            child: Container( 
+                             height:  MediaQuery.of(context).size.height*0.06,
+                             child:ListTile(
                               tileColor: Color(0x00000000),
                               title: Text(
                                 "Indirizzo di spedizione",
                                 style: TextStyle(
                                   fontWeight: FontWeight.w400,
                                   fontStyle: FontStyle.normal,
-                                  fontSize: 16,
+                                  fontSize: 14,
                                   color: Color(0xff000000),
                                 ),
                                 textAlign: TextAlign.start,
                               ),
                               dense: false,
                               contentPadding:
-                                  EdgeInsets.symmetric(vertical: 2, horizontal: 4),
+                                  EdgeInsets.symmetric(vertical: 0, horizontal: 4),
                               selected: false,
                               selectedTileColor: Color(0x42000000),
                               shape: RoundedRectangleBorder(
@@ -276,23 +293,26 @@ class _AccountPageState extends State<AccountPage> {
                                   color: Color(0xff212435), size: 24),
                             ),
                           ),
+                          ),
                           Padding(
                             padding: EdgeInsets.fromLTRB(5, 0, 5, 5),
-                            child: ListTile(
+                            child: Container( 
+                             height:  MediaQuery.of(context).size.height*0.06,
+                             child: ListTile(
                               tileColor: Color(0x00000000),
                               title: Text(
                                 "Invita Amici e Ottieni Ricompense!",
                                 style: TextStyle(
                                   fontWeight: FontWeight.w400,
                                   fontStyle: FontStyle.normal,
-                                  fontSize: 16,
+                                  fontSize: 14,
                                   color: Color(0xff000000),
                                 ),
                                 textAlign: TextAlign.start,
                               ),
                               dense: false,
                               contentPadding:
-                                  EdgeInsets.symmetric(vertical: 2, horizontal: 4),
+                                  EdgeInsets.symmetric(vertical: 0, horizontal: 4),
                               selected: false,
                               selectedTileColor: Color(0x42000000),
                               shape: RoundedRectangleBorder(
@@ -305,23 +325,28 @@ class _AccountPageState extends State<AccountPage> {
                                   color: Color(0xff212435), size: 24),
                             ),
                           ),
+                          ),
                           Padding(
                             padding: EdgeInsets.fromLTRB(5, 0, 5, 5),
-                            child: ListTile(
+                            child:
+                            Container( 
+                             height:  MediaQuery.of(context).size.height*0.05,
+
+                              child: ListTile(
                               tileColor: Color(0x00000000),
                               title: Text(
                                 "Supporto",
                                 style: TextStyle(
                                   fontWeight: FontWeight.w400,
                                   fontStyle: FontStyle.normal,
-                                  fontSize: 16,
+                                  fontSize: 14,
                                   color: Color(0xff000000),
                                 ),
                                 textAlign: TextAlign.start,
                               ),
                               dense: false,
                               contentPadding:
-                                  EdgeInsets.symmetric(vertical: 2, horizontal: 4),
+                                  EdgeInsets.symmetric(vertical: 0, horizontal: 4),
                               selected: false,
                               selectedTileColor: Color(0x42000000),
                               shape: RoundedRectangleBorder(
@@ -334,12 +359,16 @@ class _AccountPageState extends State<AccountPage> {
                                   color: Color(0xff212435), size: 24),
                             ),
                           ),
+                          ),
                         ],
                       ),
                       Padding(
                         padding: EdgeInsets.fromLTRB(0, 20, 0, 5),
                         child: MaterialButton(
-                          onPressed: () {},
+                          onPressed: () {
+                              SharedService.logout().then((value) => {setState(() {})});
+
+                          },
                           color: Color(0xff000000),
                           elevation: 0,
                           shape: RoundedRectangleBorder(
@@ -350,13 +379,13 @@ class _AccountPageState extends State<AccountPage> {
                           child: Text(
                             "Logout",
                             style: TextStyle(
-                              fontSize: 16,
+                              fontSize: 14,
                               fontWeight: FontWeight.w700,
                               fontStyle: FontStyle.normal,
                             ),
                           ),
                           textColor: Color(0xffffffff),
-                          height: 40,
+                          height:  MediaQuery.of(context).size.height*0.05,
                           minWidth: 140,
                         ),
                       ),
