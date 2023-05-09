@@ -337,7 +337,7 @@ class _AccountPageState extends State<AccountPage> {
                         ],
                       ),
                       Padding(
-                        padding: EdgeInsets.fromLTRB(0, 30, 0, 0),
+                        padding: EdgeInsets.fromLTRB(0, 20, 0, 5),
                         child: MaterialButton(
                           onPressed: () {},
                           color: Color(0xff000000),
@@ -346,11 +346,11 @@ class _AccountPageState extends State<AccountPage> {
                             borderRadius: BorderRadius.circular(6.0),
                             side: BorderSide(color: Color(0xff808080), width: 1),
                           ),
-                          padding: EdgeInsets.all(16),
+                          padding: EdgeInsets.all(12),
                           child: Text(
                             "Logout",
                             style: TextStyle(
-                              fontSize: 14,
+                              fontSize: 16,
                               fontWeight: FontWeight.w700,
                               fontStyle: FontStyle.normal,
                             ),
