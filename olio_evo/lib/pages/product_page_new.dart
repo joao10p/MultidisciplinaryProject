@@ -26,11 +26,20 @@ class _ProductPageState extends BasePageState<ProductPageNEW> {
   List<String> myStrings = ['Elemento 1', 'Elemento 123242', 'Elemento 3'];
   int pageNumber = 1;
   int categoryId;
+  //Tiene ttraccia se è stato selezionato un filtro o meno
+  bool isFilter = false;
   ScrollController _scrollController = new ScrollController();
   final _searchQuery = new TextEditingController();
   Timer _debounce;
   Future<List<Category>> categorieSaved;
-  List<String> sortFilterStrings = ["Popolarità", "Nuovi Arrivi", "Recensioni", "Nome"];
+  List<String> sortFilterStrings = [
+    "Popolarità",
+    "Nuovi Arrivi",
+    "Recensioni",
+    "Nome"
+  ];
+
+  List<String> myFilters = ["", "", "", ""];
 
   final _sortByOptions = [
     SortBy("popularity", "Popularity", "asc"),
@@ -55,7 +64,7 @@ class _ProductPageState extends BasePageState<ProductPageNEW> {
         _productList.fetchProducts(++pageNumber);
       }
     });
-  ;
+    ;
   }
 
   //TODO: manca la parte in cui la ricerca ritorna nessun prodotto
@@ -96,46 +105,135 @@ class _ProductPageState extends BasePageState<ProductPageNEW> {
   Widget _buildList(List<Product> items, bool isLoadMore) {
     return Column(children: [
       searchWidget(),
+      Padding(
+        padding: EdgeInsets.only(top: 4.0),
+        child: Row(
+          children: [
+            Expanded(
+                child: Container(
+                    height: MediaQuery.of(context).size.height * 0.06,
+                    decoration: BoxDecoration(
+                      color: Color.fromARGB(255, 249, 249, 249),
+                      border: Border.all(
+                        width: 2,
+                        // assign the color to the border color
+                        color: Color.fromARGB(255, 72, 225, 38),
+                      ),
+                    ),
+                    child: ListView.builder(
+                        shrinkWrap: true,
+                        physics: ClampingScrollPhysics(),
+                        scrollDirection: Axis.horizontal,
+                        itemCount: sortIndex.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          return Container(
+                            decoration: BoxDecoration(
+                              color: Color.fromARGB(255, 249, 249, 249),
+                            ),
+                            // height: 150,
+                            padding: EdgeInsets.all(10),
+                            child: ElevatedButton(
+                                style: ButtonStyle(
+                                  backgroundColor:
+                                      MaterialStateProperty.all<Color>(
+                                          Color.fromARGB(255, 249, 249, 249)),
+                                  foregroundColor:
+                                      MaterialStateProperty.all<Color>(
+                                          Color.fromARGB(255, 12, 12, 12)),
+                                  shape: MaterialStateProperty.all<
+                                      RoundedRectangleBorder>(
+                                    RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(2),
+                                      side: BorderSide(
+                                        color: Color.fromARGB(255, 32, 172, 41),
+                                        width: 2,
+                                      ),
+                                    ),
+                                  ),
+                                  mouseCursor:
+                                      MaterialStateProperty.all<MouseCursor>(
+                                    SystemMouseCursors.click,
+                                  ),
+                                  elevation: MaterialStateProperty.all<double>(
+                                      10), // Valore dell'ombra
+                                  shadowColor: MaterialStateProperty.all<Color>(
+                                    Colors.black
+                                        .withOpacity(0.5), // Colore dell'ombra
+                                  ),
+                                ),
+                                onPressed: () {
+                                  filterMenu(index);
+                                },
+                                child: Row(children: [
+                                  Text(
+                                    sortIndex[index],
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  Icon(
+                                    Icons.arrow_drop_down,
+                                    size: 15,
+                                  ),
+                                ])),
+                          );
+                        }))),
+          ],
+        ),
+      ),
       Row(
         children: [
           Expanded(
-              flex: 3,
-              child: Container(
-                  height: 40,
-                  decoration: BoxDecoration(
-                    color: Color.fromARGB(255, 249, 249, 249),
-                    border: Border.all(
-                      width: 1,
-                      // assign the color to the border color
-                      color: Color.fromARGB(255, 12, 12, 12),
-                    ),
-                  ),
-                  child: ListView.builder(
+            flex: 1,
+            child: Container(
+              height: MediaQuery.of(context).size.height * 0.04,
+              width: MediaQuery.of(context).size.height,
+              decoration: BoxDecoration(
+                color: Color.fromARGB(255, 249, 249, 249),
+                border: Border.all(
+                  width: 1,
+                  // assign the color to the border color
+                  color: Color.fromARGB(255, 12, 12, 12),
+                ),
+              ),
+              child: Center(
+                child: Text("Filtri:",
+                    style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                    )),
+              ),
+            ),
+          ),
+          Expanded(
+            flex: 3,
+            child: Container(
+              height: MediaQuery.of(context).size.height * 0.04,
+              width: MediaQuery.of(context).size.height,
+              decoration: BoxDecoration(
+                color: Color.fromARGB(255, 249, 249, 249),
+                border: Border.all(
+                  width: 1,
+                  // assign the color to the border color
+                  color: Color.fromARGB(255, 12, 12, 12),
+                ),
+              ),
+              child: !isFilter
+                  ? Text("Nessun filtro")
+                  : ListView.builder(
                       shrinkWrap: true,
                       physics: ClampingScrollPhysics(),
                       scrollDirection: Axis.horizontal,
-                      itemCount: myStrings.length,
+                      itemCount: myFilters.length,
                       itemBuilder: (BuildContext context, int index) {
+                        var data = myFilters[index];
                         return Container(
-                          decoration: BoxDecoration(
-                            color: Color.fromARGB(255, 249, 249, 249),
-                            border: Border.all(
-                              width: 1,
-                              // assign the color to the border color
-                              color: Color.fromARGB(255, 12, 12, 12),
-                            ),
-                          ),
-                          height: 100,
-                          padding: EdgeInsets.all(10),
-                          child: ElevatedButton(
-                            style: ButtonStyle(),
-                            onPressed: () {
-                              filterMenu(index);
-                            },
-                            child: Text(sortIndex[index]),
-                          ),
+                          child: Text(data),
                         );
-                      }))),
+                      }),
+            ),
+          ),
         ],
       ),
       Flexible(
@@ -176,17 +274,17 @@ class _ProductPageState extends BasePageState<ProductPageNEW> {
         hintText: "Search",
         focusedBorder: OutlineInputBorder(
           borderSide: BorderSide(
-            color: Colors.black,
+            color: Color.fromARGB(255, 44, 158, 50),
             width: 2.0,
           ),
           borderRadius: BorderRadius.circular(15.0),
         ),
         enabledBorder: OutlineInputBorder(
           borderSide: BorderSide(
-            color: Colors.black,
-            width: 2.0,
+            color: Color.fromARGB(255, 82, 158, 55),
+            width: 3.0,
           ),
-          borderRadius: BorderRadius.circular(15.0),
+          borderRadius: BorderRadius.circular(5.0),
         ),
         fillColor: Color.fromARGB(250, 252, 255, 252),
         filled: true,
@@ -197,135 +295,140 @@ class _ProductPageState extends BasePageState<ProductPageNEW> {
   //getData(), // if you mean this method well return image url
 
   Widget _buildCategoryList(List<Category> categories) {
-    return Consumer<SelectionState>(
-  builder: (context, selectionState, _) {
-    return Column(
-      children: [
-        Padding(
-          padding: EdgeInsets.fromLTRB(15, 10, 0, 10),
-          child: Text("Seleziona la categoria che preferisci:",
-              style: TextStyle(
-                fontSize: 24,
-                color: Colors.green,
-                fontWeight: FontWeight.bold,
-              )),
-        ),
-        Container(
-          height: 110,
-          decoration: BoxDecoration(
-            color: Color.fromARGB(255, 255, 255, 255),
-            shape: BoxShape.rectangle,
-            borderRadius: BorderRadius.circular(6.0),
-            border: Border.all(color: Color.fromARGB(77, 23, 11, 11), width: 1),
+    return Consumer<SelectionState>(builder: (context, selectionState, _) {
+      return Column(
+        children: [
+          Padding(
+            padding: EdgeInsets.fromLTRB(15, 10, 0, 10),
+            child: Text("Seleziona la categoria che preferisci:",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 24,
+                  color: Colors.green,
+                  fontWeight: FontWeight.bold,
+                )),
           ),
-          child: ListView.builder(
-            shrinkWrap: true,
-            physics: ClampingScrollPhysics(),
-            scrollDirection: Axis.horizontal,
-            itemCount: categories.length,
-            itemBuilder: (context, index) {
-              var data = categories[index];
+          Container(
+            height: 110,
+            decoration: BoxDecoration(
+              color: Color.fromARGB(255, 255, 255, 255),
+              shape: BoxShape.rectangle,
+              borderRadius: BorderRadius.circular(6.0),
+              border:
+                  Border.all(color: Color.fromARGB(77, 23, 11, 11), width: 1),
+            ),
+            child: ListView.builder(
+              shrinkWrap: true,
+              physics: ClampingScrollPhysics(),
+              scrollDirection: Axis.horizontal,
+              itemCount: categories.length,
+              itemBuilder: (context, index) {
+                var data = categories[index];
 
-              return Padding(
-                  padding: EdgeInsets.only(left: 5),
-                  child: GestureDetector(
-                      onTap: () {
-                        categoryId = data.categoryId;
-                                      selectionState.updateIndexCategories(index);
-
-                      },
-                      child: Container(
-                          margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
-                          padding:
-                              EdgeInsets.symmetric(vertical: 2, horizontal: 0),
-                          width: 90,
-                          height: 110,
-                          decoration: BoxDecoration(
-                            color:  index == selectionState.getIndexCategories()
-                                ? Color.fromARGB(255, 15, 115, 6)
-                                : Color.fromARGB(
-                                    255, 135, 209, 128), //inside color
-                            shape: BoxShape.rectangle,
-                            borderRadius: BorderRadius.circular(6.0),
-                            border: Border.all(
-                                color: Color.fromARGB(77, 16, 16, 16),
-                                width: 1), // border color
-                          ),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisSize: MainAxisSize.max,
-                            children: [
-                              Padding(
-                                padding: EdgeInsets.fromLTRB(0, 5, 0, 0),
-                                child: Container(
-                                  width: 60,
-                                  height: 60,
-                                  decoration: BoxDecoration(
-                                    shape: BoxShape.rectangle,
-                                    color: Colors.white,
-                                    boxShadow: [
-                                      BoxShadow(
-                                          color: Colors.black,
-                                          offset: Offset(0, 5),
-                                          blurRadius: 15),
-                                    ],
-                                  ),
-                                  child: Image.network(
-                                    data.image.url,
-                                    width: MediaQuery.of(context).size.width *
-                                        0.01,
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
-                              ),
-                              Padding(
-                                padding: EdgeInsets.only(top: 5),
-                                child: Container(
-                                  alignment: Alignment.center,
-                                  child: Text(
-                                    data.categoryName.toString(),
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.w700,
-                                      fontStyle: FontStyle.italic,
-                                      fontSize: 14,
-                                      color: Color(0xff000000),
+                return Padding(
+                    padding: EdgeInsets.only(left: 5),
+                    child: GestureDetector(
+                        onTap: () {
+                          categoryId = data.categoryId;
+                          selectionState.updateIndexCategories(index);
+                        },
+                        child: Container(
+                            margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                            padding: EdgeInsets.symmetric(
+                                vertical: 2, horizontal: 0),
+                            width: 90,
+                            height: 110,
+                            decoration: BoxDecoration(
+                              color:
+                                  index == selectionState.getIndexCategories()
+                                      ? Color.fromARGB(255, 15, 115, 6)
+                                      : Color.fromARGB(
+                                          255, 135, 209, 128), //inside color
+                              shape: BoxShape.rectangle,
+                              borderRadius: BorderRadius.circular(6.0),
+                              border: Border.all(
+                                  color: Color.fromARGB(77, 16, 16, 16),
+                                  width: 1), // border color
+                            ),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisSize: MainAxisSize.max,
+                              children: [
+                                Padding(
+                                  padding: EdgeInsets.fromLTRB(0, 5, 0, 0),
+                                  child: Container(
+                                    width: 60,
+                                    height: 60,
+                                    decoration: BoxDecoration(
+                                      shape: BoxShape.rectangle,
+                                      color: Colors.white,
+                                      boxShadow: [
+                                        BoxShadow(
+                                            color: Colors.black,
+                                            offset: Offset(0, 5),
+                                            blurRadius: 15),
+                                      ],
+                                    ),
+                                    child: Image.network(
+                                      data.image.url,
+                                      width: MediaQuery.of(context).size.width *
+                                          0.01,
+                                      fit: BoxFit.cover,
                                     ),
                                   ),
                                 ),
-                              )
-                            ],
-                          ))));
-            },
+                                Padding(
+                                  padding: EdgeInsets.only(top: 5),
+                                  child: Container(
+                                    alignment: Alignment.center,
+                                    child: Text(
+                                      data.categoryName.toString(),
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.w700,
+                                        fontStyle: FontStyle.italic,
+                                        fontSize: 14,
+                                        color: Color(0xff000000),
+                                      ),
+                                    ),
+                                  ),
+                                )
+                              ],
+                            ))));
+              },
+            ),
           ),
-        ),
-        Padding(
-            padding: EdgeInsets.only(top: 10),
-            child: ElevatedButton(
-                child: Text('Applica'),
-                style: ElevatedButton.styleFrom(
-                  primary: Color.fromARGB(255, 17, 162, 46),
-                  side: BorderSide(
-                      color: Color.fromARGB(255, 33, 32, 32), width: 1),
-                  textStyle: TextStyle(
-                      color: Color.fromARGB(255, 236, 239, 236),
-                      fontSize: 20,
-                      fontStyle: FontStyle.italic),
-                ),
-                onPressed: () {
-                  var productsList =
-                      Provider.of<ProductProvider>(context, listen: false);
-                  productsList.resetStreams();
-                  productsList.setLoadingState(LoadMoreStatus.INITIAL, true);
-                  productsList.fetchProducts(pageNumber,
-                      categoryId: categoryId.toString());
-                  Navigator.pop(context);
-                }))
-      ],
-    );
-  }
-    );
+          Padding(
+              padding: EdgeInsets.only(top: 10),
+              child: ElevatedButton(
+                  child: Text('Applica'),
+                  style: ElevatedButton.styleFrom(
+                    primary: Color.fromARGB(255, 17, 162, 46),
+                    side: BorderSide(
+                        color: Color.fromARGB(255, 33, 32, 32), width: 1),
+                    textStyle: TextStyle(
+                        color: Color.fromARGB(255, 236, 239, 236),
+                        fontSize: 20,
+                        fontStyle: FontStyle.italic),
+                  ),
+                  onPressed: () {
+                    isFilter = true;
+                    myFilters[1] = "Categorie: " +
+                        categories[selectionState.getIndexCategories()]
+                            .categoryName
+                            .toString();
+                    var productsList =
+                        Provider.of<ProductProvider>(context, listen: false);
+                    productsList.resetStreams();
+                    productsList.setLoadingState(LoadMoreStatus.INITIAL, true);
+                    productsList.fetchProducts(pageNumber,
+                        categoryId: categoryId.toString());
+                    Navigator.pop(context);
+                  }))
+        ],
+      );
+    });
   }
 
 //set the as first in the list the elemnt with categoryId == widget.categoryId
@@ -341,124 +444,136 @@ class _ProductPageState extends BasePageState<ProductPageNEW> {
     }
     return categories;
   }
- 
 
-Widget _buildFilterList() {
-return Consumer<SelectionState>(
-  builder: (context, selectionState, _) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Padding(
-          padding: EdgeInsets.fromLTRB(15, 10, 0, 10),
-          child: Text(
-            "Seleziona l'ordine che preferisci:",
-            style: TextStyle(
-              fontSize: 24,
-              color: Colors.green,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
-        Padding(
-          padding: EdgeInsets.fromLTRB(15, 0, 15, 0),  
-          child:
-        Container(
-          height: MediaQuery.of(context).size.height * 0.15,
-          width: MediaQuery.of(context).size.width,
-          decoration: BoxDecoration(
-            color: Color.fromARGB(255, 255, 255, 255),
-            shape: BoxShape.rectangle,
-            borderRadius: BorderRadius.circular(6.0),
-            border: Border.all(color: Color.fromARGB(77, 23, 11, 11), width: 1),
-          ),
-          child: GridView.count(
-            childAspectRatio: 10,
-            crossAxisSpacing: MediaQuery.of(context).size.width * 0.01,
-            crossAxisCount: 1,
-            physics: ClampingScrollPhysics(),
-            scrollDirection: Axis.vertical,
-            children: List.generate(
-              sortIndex.length,
-              (index) {
-                var data = sortFilterStrings[index];
-                return GestureDetector(
-                  onTap: () {
-              selectionState.updateSelection(index);
-            },
-                  child: Padding(
-                    padding: EdgeInsets.all(1),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: Color.fromARGB(255, 242, 243, 242),
-                        boxShadow: <BoxShadow>[
-                          BoxShadow(
-                            color: Color.fromARGB(255, 16, 17, 17),
-                            blurRadius: 5,
-                            spreadRadius: 2,
-                          ),
-                        ],
-                      ),
-                      height: 20,
-                      child: Center(child: Text(
-                        data,
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: 24,
-                          fontStyle: FontStyle.italic,
-                          color:  selectionState.isSelected[index] == 0
-                              ? Color.fromARGB(255, 10, 10, 10)
-                              : Color.fromARGB(255, 48, 148, 41),
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),)
-                    ),
-                  ),
-                );
-              },
-            ),
-          ),
-        ),
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center, children: [
+  Widget _buildFilterList() {
+    return Consumer<SelectionState>(builder: (context, selectionState, _) {
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
           Padding(
-            padding: EdgeInsets.only(top: 10),
-            child:
-          ElevatedButton(
-              child: Text('Applica'),
-              style: ElevatedButton.styleFrom(
-                primary: Color.fromARGB(255, 17, 162, 46),
-                side: BorderSide(
-                  color: Color.fromARGB(255, 33, 32, 32),
-                  width: 1,
-                ),
-                textStyle: TextStyle(
-                    color: Color.fromARGB(255, 236, 239, 236),
-                    fontSize: 20,
-                    fontStyle: FontStyle.italic),
+            padding: EdgeInsets.fromLTRB(15, 10, 0, 10),
+            child: Text(
+              "Seleziona l'ordine che preferisci:",
+              style: TextStyle(
+                fontSize: 24,
+                color: Colors.green,
+                fontWeight: FontWeight.bold,
               ),
-              onPressed: () {
-              setState(() {
-                var _productsList =
-                    Provider.of<ProductProvider>(context, listen: false);
-                _productsList.resetStreams();
-                  _productsList.setLoadingState(LoadMoreStatus.INITIAL, true);
-                 
-                _productsList.fetchProducts(pageNumber,
-                sortOrder:_sortByOptions[selectionState.getIndex()].sortOrder,
-                sortBy:_sortByOptions[selectionState.getIndex()].value,
-                );
-                Navigator.pop(context);
-                });
-              })
-        )
-        ] 
-        )
-      ],
-    );
-  }
-);
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.fromLTRB(15, 0, 15, 0),
+            child: Container(
+              height: MediaQuery.of(context).size.height * 0.15,
+              width: MediaQuery.of(context).size.width,
+              decoration: BoxDecoration(
+                color: Color.fromARGB(255, 255, 255, 255),
+                shape: BoxShape.rectangle,
+                borderRadius: BorderRadius.circular(6.0),
+                border:
+                    Border.all(color: Color.fromARGB(77, 23, 11, 11), width: 1),
+              ),
+              child: GridView.count(
+                childAspectRatio: 10,
+                crossAxisSpacing: MediaQuery.of(context).size.width * 0.01,
+                crossAxisCount: 1,
+                physics: ClampingScrollPhysics(),
+                scrollDirection: Axis.vertical,
+                children: List.generate(
+                  sortFilterStrings.length,
+                  (index) {
+                    var data = sortFilterStrings[index];
+                    return GestureDetector(
+                      onTap: () {
+                        selectionState.updateSelection(index);
+                      },
+                      child: Padding(
+                        padding: EdgeInsets.all(1),
+                        child: Container(
+                            decoration: BoxDecoration(
+                              color: Color.fromARGB(255, 242, 243, 242),
+                              boxShadow: <BoxShadow>[
+                                BoxShadow(
+                                  color: Color.fromARGB(255, 16, 17, 17),
+                                  blurRadius: 5,
+                                  spreadRadius: 2,
+                                ),
+                              ],
+                            ),
+                            height: 20,
+                            child: Center(
+                              child: Text(
+                                data,
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  fontSize: 24,
+                                  fontStyle: FontStyle.italic,
+                                  color: selectionState.isSelected[index] == 0
+                                      ? Color.fromARGB(255, 10, 10, 10)
+                                      : Color.fromARGB(255, 48, 148, 41),
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            )),
+                      ),
+                    );
+                  },
+                ),
+              ),
+            ),
+          ),
+          Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+            Padding(
+                padding: EdgeInsets.only(top: 10),
+                child: ElevatedButton(
+                    child: Text('Applica'),
+                    style: ElevatedButton.styleFrom(
+                      primary: Color.fromARGB(255, 17, 162, 46),
+                      side: BorderSide(
+                        color: Color.fromARGB(255, 33, 32, 32),
+                        width: 1,
+                      ),
+                      textStyle: TextStyle(
+                          color: Color.fromARGB(255, 236, 239, 236),
+                          fontSize: 20,
+                          fontStyle: FontStyle.italic),
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        isFilter = true;
+                        myFilters[0] = "Ordine: " +
+                            sortFilterStrings[selectionState.getIndex()]
+                                .toString();
+                        var _productsList = Provider.of<ProductProvider>(
+                            context,
+                            listen: false);
+                        _productsList.resetStreams();
+                        _productsList.setLoadingState(
+                            LoadMoreStatus.INITIAL, true);
+                        if (categoryId != "null") {
+                          _productsList.fetchProducts(pageNumber,
+                              sortOrder:
+                                  _sortByOptions[selectionState.getIndex()]
+                                      .sortOrder,
+                              sortBy: _sortByOptions[selectionState.getIndex()]
+                                  .value,
+                              categoryId: categoryId.toString());
+                        } else {
+                          _productsList.fetchProducts(
+                            pageNumber,
+                            sortOrder: _sortByOptions[selectionState.getIndex()]
+                                .sortOrder,
+                            sortBy:
+                                _sortByOptions[selectionState.getIndex()].value,
+                          );
+                        }
+                        Navigator.pop(context);
+                      });
+                    }))
+          ])
+        ],
+      );
+    });
   }
 
   Widget filterMenu(int type) {
