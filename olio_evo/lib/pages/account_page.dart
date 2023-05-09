@@ -128,10 +128,10 @@ class _AccountPageState extends State<AccountPage> {
                     mainAxisSize: MainAxisSize.max,
                     children: [
                       Padding(
-                        padding: EdgeInsets.fromLTRB(4, 8, 4, 4),
+                        padding: EdgeInsets.fromLTRB(4, 20, 4, 4),
                         child: Container(
-                          height: 100,
-                          width: 100,
+                          height: 150,
+                          width: 150,
                           clipBehavior: Clip.antiAlias,
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
@@ -143,13 +143,13 @@ class _AccountPageState extends State<AccountPage> {
                       Padding(
                         padding: EdgeInsets.fromLTRB(4, 4, 4, 8),
                         child: Text(
-                          "Ciao, vittorio!",
+                          "Ciao, Vittorio!",
                           textAlign: TextAlign.start,
                           overflow: TextOverflow.clip,
                           style: TextStyle(
                             fontWeight: FontWeight.w600,
                             fontStyle: FontStyle.normal,
-                            fontSize: 14,
+                            fontSize: 18,
                             color: Color(0xff000000),
                           ),
                         ),
@@ -161,7 +161,7 @@ class _AccountPageState extends State<AccountPage> {
                         physics: NeverScrollableScrollPhysics(),
                         children: [
                           Padding(
-                            padding: EdgeInsets.fromLTRB(0, 20, 0, 5),
+                            padding: EdgeInsets.fromLTRB(5, 20, 5, 5),
                             child: ListTile(
                               tileColor: Color(0xffffffff),
                               title: Text(
@@ -169,14 +169,14 @@ class _AccountPageState extends State<AccountPage> {
                                 style: TextStyle(
                                   fontWeight: FontWeight.w400,
                                   fontStyle: FontStyle.normal,
-                                  fontSize: 14,
+                                  fontSize: 16,
                                   color: Color(0xff000000),
                                 ),
                                 textAlign: TextAlign.start,
                               ),
                               dense: false,
                               contentPadding:
-                                  EdgeInsets.symmetric(vertical: 0, horizontal: 4),
+                                  EdgeInsets.symmetric(vertical: 2, horizontal: 4),
                               selected: false,
                               selectedTileColor: Color(0x42000000),
                               shape: RoundedRectangleBorder(
@@ -184,13 +184,13 @@ class _AccountPageState extends State<AccountPage> {
                                 side: BorderSide(color: Color(0x4d9e9e9e), width: 1),
                               ),
                               leading: Icon(Icons.work_outline,
-                                  color: Color(0xff212435), size: 20),
+                                  color: Color(0xff212435), size: 24),
                               trailing: Icon(Icons.arrow_forward_ios,
-                                  color: Color(0xff212435), size: 20),
+                                  color: Color(0xff212435), size: 24),
                             ),
                           ),
                           Padding(
-                            padding: EdgeInsets.fromLTRB(0, 0, 0, 5),
+                            padding: EdgeInsets.fromLTRB(5, 0, 5, 5),
                             child: ListTile(
                               tileColor: Color(0x00000000),
                               title: Text(
@@ -198,14 +198,14 @@ class _AccountPageState extends State<AccountPage> {
                                 style: TextStyle(
                                   fontWeight: FontWeight.w400,
                                   fontStyle: FontStyle.normal,
-                                  fontSize: 14,
+                                  fontSize: 16,
                                   color: Color(0xff000000),
                                 ),
                                 textAlign: TextAlign.left,
                               ),
                               dense: false,
                               contentPadding:
-                                  EdgeInsets.symmetric(vertical: 0, horizontal: 4),
+                                  EdgeInsets.symmetric(vertical: 2, horizontal: 4),
                               selected: false,
                               selectedTileColor: Color(0x42000000),
                               shape: RoundedRectangleBorder(
@@ -213,13 +213,13 @@ class _AccountPageState extends State<AccountPage> {
                                 side: BorderSide(color: Color(0x4d9e9e9e), width: 1),
                               ),
                               leading: Icon(Icons.settings,
-                                  color: Color(0xff212435), size: 20),
+                                  color: Color(0xff212435), size: 24),
                               trailing: Icon(Icons.arrow_forward_ios,
-                                  color: Color(0xff212435), size: 20),
+                                  color: Color(0xff212435), size: 24),
                             ),
                           ),
                           Padding(
-                            padding: EdgeInsets.fromLTRB(0, 0, 0, 5),
+                            padding: EdgeInsets.fromLTRB(5, 0, 5, 5),
                             child: ListTile(
                               tileColor: Color(0x00000000),
                               title: Text(
@@ -227,14 +227,14 @@ class _AccountPageState extends State<AccountPage> {
                                 style: TextStyle(
                                   fontWeight: FontWeight.w400,
                                   fontStyle: FontStyle.normal,
-                                  fontSize: 14,
+                                  fontSize: 16,
                                   color: Color(0xff000000),
                                 ),
                                 textAlign: TextAlign.start,
                               ),
                               dense: false,
                               contentPadding:
-                                  EdgeInsets.symmetric(vertical: 0, horizontal: 4),
+                                  EdgeInsets.symmetric(vertical: 2, horizontal: 4),
                               selected: false,
                               selectedTileColor: Color(0x42000000),
                               shape: RoundedRectangleBorder(
@@ -242,13 +242,13 @@ class _AccountPageState extends State<AccountPage> {
                                 side: BorderSide(color: Color(0x4d9e9e9e), width: 1),
                               ),
                               leading: Icon(Icons.lock,
-                                  color: Color(0xff212435), size: 20),
+                                  color: Color(0xff212435), size: 24),
                               trailing: Icon(Icons.arrow_forward_ios,
-                                  color: Color(0xff212435), size: 20),
+                                  color: Color(0xff212435), size: 24),
                             ),
                           ),
                           Padding(
-                            padding: EdgeInsets.fromLTRB(0, 0, 0, 5),
+                            padding: EdgeInsets.fromLTRB(5, 0, 5, 5),
                             child: ListTile(
                               tileColor: Color(0x00000000),
                               title: Text(
@@ -256,14 +256,14 @@ class _AccountPageState extends State<AccountPage> {
                                 style: TextStyle(
                                   fontWeight: FontWeight.w400,
                                   fontStyle: FontStyle.normal,
-                                  fontSize: 12,
+                                  fontSize: 16,
                                   color: Color(0xff000000),
                                 ),
                                 textAlign: TextAlign.start,
                               ),
                               dense: false,
                               contentPadding:
-                                  EdgeInsets.symmetric(vertical: 0, horizontal: 4),
+                                  EdgeInsets.symmetric(vertical: 2, horizontal: 4),
                               selected: false,
                               selectedTileColor: Color(0x42000000),
                               shape: RoundedRectangleBorder(
@@ -271,13 +271,13 @@ class _AccountPageState extends State<AccountPage> {
                                 side: BorderSide(color: Color(0x4d9e9e9e), width: 1),
                               ),
                               leading: Icon(Icons.favorite_border,
-                                  color: Color(0xff000000), size: 20),
+                                  color: Color(0xff000000), size: 24),
                               trailing: Icon(Icons.arrow_forward_ios,
-                                  color: Color(0xff212435), size: 20),
+                                  color: Color(0xff212435), size: 24),
                             ),
                           ),
                           Padding(
-                            padding: EdgeInsets.fromLTRB(0, 0, 0, 5),
+                            padding: EdgeInsets.fromLTRB(5, 0, 5, 5),
                             child: ListTile(
                               tileColor: Color(0x00000000),
                               title: Text(
@@ -285,14 +285,14 @@ class _AccountPageState extends State<AccountPage> {
                                 style: TextStyle(
                                   fontWeight: FontWeight.w400,
                                   fontStyle: FontStyle.normal,
-                                  fontSize: 14,
+                                  fontSize: 16,
                                   color: Color(0xff000000),
                                 ),
                                 textAlign: TextAlign.start,
                               ),
                               dense: false,
                               contentPadding:
-                                  EdgeInsets.symmetric(vertical: 0, horizontal: 4),
+                                  EdgeInsets.symmetric(vertical: 2, horizontal: 4),
                               selected: false,
                               selectedTileColor: Color(0x42000000),
                               shape: RoundedRectangleBorder(
@@ -300,9 +300,9 @@ class _AccountPageState extends State<AccountPage> {
                                 side: BorderSide(color: Color(0x4d9e9e9e), width: 1),
                               ),
                               leading: Icon(Icons.info_outline,
-                                  color: Color(0xff212435), size: 20),
+                                  color: Color(0xff212435), size: 24),
                               trailing: Icon(Icons.arrow_forward_ios,
-                                  color: Color(0xff212435), size: 20),
+                                  color: Color(0xff212435), size: 24),
                             ),
                           ),
                         ],
