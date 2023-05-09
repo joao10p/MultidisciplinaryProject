@@ -114,42 +114,231 @@ class _AccountPageState extends State<AccountPage> {
       builder:
           (BuildContext context, AsyncSnapshot<LoginResponseModel> loginModel) {
         if (loginModel.hasData) {
-          return ListView(
-            children: [
-              Container(
-                margin: const EdgeInsets.fromLTRB(15, 15, 0, 0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "Welcome, ${loginModel.data.data.displayName}",
-                      style: const TextStyle(
-                        fontSize: 22,
-                        fontWeight: FontWeight.bold,
+          return Scaffold(
+            body: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                Expanded(
+                  flex: 1,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.fromLTRB(4, 8, 4, 4),
+                        child: Container(
+                          height: 100,
+                          width: 100,
+                          clipBehavior: Clip.antiAlias,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                          ),
+                          child: Image.asset("assets/images/olivevo_logo.jpg",
+                              fit: BoxFit.cover),
+                        ),
                       ),
-                    )
-                  ],
+                      Padding(
+                        padding: EdgeInsets.fromLTRB(4, 4, 4, 8),
+                        child: Text(
+                          "Ciao, vittorio!",
+                          textAlign: TextAlign.start,
+                          overflow: TextOverflow.clip,
+                          style: TextStyle(
+                            fontWeight: FontWeight.w600,
+                            fontStyle: FontStyle.normal,
+                            fontSize: 14,
+                            color: Color(0xff000000),
+                          ),
+                        ),
+                      ),
+                      ListView(
+                        scrollDirection: Axis.vertical,
+                        padding: EdgeInsets.all(3),
+                        shrinkWrap: true,
+                        physics: NeverScrollableScrollPhysics(),
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.fromLTRB(0, 20, 0, 5),
+                            child: ListTile(
+                              tileColor: Color(0xffffffff),
+                              title: Text(
+                                "Ordini",
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w400,
+                                  fontStyle: FontStyle.normal,
+                                  fontSize: 14,
+                                  color: Color(0xff000000),
+                                ),
+                                textAlign: TextAlign.start,
+                              ),
+                              dense: false,
+                              contentPadding:
+                                  EdgeInsets.symmetric(vertical: 0, horizontal: 4),
+                              selected: false,
+                              selectedTileColor: Color(0x42000000),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(6.0),
+                                side: BorderSide(color: Color(0x4d9e9e9e), width: 1),
+                              ),
+                              leading: Icon(Icons.work_outline,
+                                  color: Color(0xff212435), size: 20),
+                              trailing: Icon(Icons.arrow_forward_ios,
+                                  color: Color(0xff212435), size: 20),
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.fromLTRB(0, 0, 0, 5),
+                            child: ListTile(
+                              tileColor: Color(0x00000000),
+                              title: Text(
+                                "Modifica Profilo",
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w400,
+                                  fontStyle: FontStyle.normal,
+                                  fontSize: 14,
+                                  color: Color(0xff000000),
+                                ),
+                                textAlign: TextAlign.left,
+                              ),
+                              dense: false,
+                              contentPadding:
+                                  EdgeInsets.symmetric(vertical: 0, horizontal: 4),
+                              selected: false,
+                              selectedTileColor: Color(0x42000000),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(6.0),
+                                side: BorderSide(color: Color(0x4d9e9e9e), width: 1),
+                              ),
+                              leading: Icon(Icons.settings,
+                                  color: Color(0xff212435), size: 20),
+                              trailing: Icon(Icons.arrow_forward_ios,
+                                  color: Color(0xff212435), size: 20),
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.fromLTRB(0, 0, 0, 5),
+                            child: ListTile(
+                              tileColor: Color(0x00000000),
+                              title: Text(
+                                "Cambia Password",
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w400,
+                                  fontStyle: FontStyle.normal,
+                                  fontSize: 14,
+                                  color: Color(0xff000000),
+                                ),
+                                textAlign: TextAlign.start,
+                              ),
+                              dense: false,
+                              contentPadding:
+                                  EdgeInsets.symmetric(vertical: 0, horizontal: 4),
+                              selected: false,
+                              selectedTileColor: Color(0x42000000),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(6.0),
+                                side: BorderSide(color: Color(0x4d9e9e9e), width: 1),
+                              ),
+                              leading: Icon(Icons.lock,
+                                  color: Color(0xff212435), size: 20),
+                              trailing: Icon(Icons.arrow_forward_ios,
+                                  color: Color(0xff212435), size: 20),
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.fromLTRB(0, 0, 0, 5),
+                            child: ListTile(
+                              tileColor: Color(0x00000000),
+                              title: Text(
+                                "Invita Amici e Ottieni Ricompense!",
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w400,
+                                  fontStyle: FontStyle.normal,
+                                  fontSize: 12,
+                                  color: Color(0xff000000),
+                                ),
+                                textAlign: TextAlign.start,
+                              ),
+                              dense: false,
+                              contentPadding:
+                                  EdgeInsets.symmetric(vertical: 0, horizontal: 4),
+                              selected: false,
+                              selectedTileColor: Color(0x42000000),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(6.0),
+                                side: BorderSide(color: Color(0x4d9e9e9e), width: 1),
+                              ),
+                              leading: Icon(Icons.favorite_border,
+                                  color: Color(0xff000000), size: 20),
+                              trailing: Icon(Icons.arrow_forward_ios,
+                                  color: Color(0xff212435), size: 20),
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.fromLTRB(0, 0, 0, 5),
+                            child: ListTile(
+                              tileColor: Color(0x00000000),
+                              title: Text(
+                                "Supporto",
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w400,
+                                  fontStyle: FontStyle.normal,
+                                  fontSize: 14,
+                                  color: Color(0xff000000),
+                                ),
+                                textAlign: TextAlign.start,
+                              ),
+                              dense: false,
+                              contentPadding:
+                                  EdgeInsets.symmetric(vertical: 0, horizontal: 4),
+                              selected: false,
+                              selectedTileColor: Color(0x42000000),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(6.0),
+                                side: BorderSide(color: Color(0x4d9e9e9e), width: 1),
+                              ),
+                              leading: Icon(Icons.info_outline,
+                                  color: Color(0xff212435), size: 20),
+                              trailing: Icon(Icons.arrow_forward_ios,
+                                  color: Color(0xff212435), size: 20),
+                            ),
+                          ),
+                        ],
+                      ),
+                      Padding(
+                        padding: EdgeInsets.fromLTRB(0, 30, 0, 0),
+                        child: MaterialButton(
+                          onPressed: () {},
+                          color: Color(0xff000000),
+                          elevation: 0,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(6.0),
+                            side: BorderSide(color: Color(0xff808080), width: 1),
+                          ),
+                          padding: EdgeInsets.all(16),
+                          child: Text(
+                            "Logout",
+                            style: TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w700,
+                              fontStyle: FontStyle.normal,
+                            ),
+                          ),
+                          textColor: Color(0xffffffff),
+                          height: 40,
+                          minWidth: 140,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-              ListView.builder(
-                itemCount: options.length,
-                physics: const ScrollPhysics(),
-                padding: const EdgeInsets.all(8.0),
-                shrinkWrap: true,
-                itemBuilder: (context, index) {
-                  return Card(
-                    elevation: 0,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(16.0),
-                    ),
-                    child: _buildRow(options[index], index),
-                  );
-                },
-              )
-            ],
-          );
-        }
+              ],
+            ),
+            );
+          }
+          
 
         return Center(
             child: Column(
