@@ -194,7 +194,7 @@ class _AccountPageState extends State<AccountPage> {
                             child: ListTile(
                               tileColor: Color(0x00000000),
                               title: Text(
-                                "Modifica Profilo",
+                                "Impostazioni",
                                 style: TextStyle(
                                   fontWeight: FontWeight.w400,
                                   fontStyle: FontStyle.normal,
@@ -223,7 +223,7 @@ class _AccountPageState extends State<AccountPage> {
                             child: ListTile(
                               tileColor: Color(0x00000000),
                               title: Text(
-                                "Cambia Password",
+                                "Metodo di pagamento",
                                 style: TextStyle(
                                   fontWeight: FontWeight.w400,
                                   fontStyle: FontStyle.normal,
@@ -241,7 +241,36 @@ class _AccountPageState extends State<AccountPage> {
                                 borderRadius: BorderRadius.circular(6.0),
                                 side: BorderSide(color: Color(0x4d9e9e9e), width: 1),
                               ),
-                              leading: Icon(Icons.lock,
+                              leading: Icon(Icons.credit_card,
+                                  color: Color(0xff212435), size: 24),
+                              trailing: Icon(Icons.arrow_forward_ios,
+                                  color: Color(0xff212435), size: 24),
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.fromLTRB(5, 0, 5, 5),
+                            child: ListTile(
+                              tileColor: Color(0x00000000),
+                              title: Text(
+                                "Indirizzo di spedizione",
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w400,
+                                  fontStyle: FontStyle.normal,
+                                  fontSize: 16,
+                                  color: Color(0xff000000),
+                                ),
+                                textAlign: TextAlign.start,
+                              ),
+                              dense: false,
+                              contentPadding:
+                                  EdgeInsets.symmetric(vertical: 2, horizontal: 4),
+                              selected: false,
+                              selectedTileColor: Color(0x42000000),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(6.0),
+                                side: BorderSide(color: Color(0x4d9e9e9e), width: 1),
+                              ),
+                              leading: Icon(Icons.location_on,
                                   color: Color(0xff212435), size: 24),
                               trailing: Icon(Icons.arrow_forward_ios,
                                   color: Color(0xff212435), size: 24),
