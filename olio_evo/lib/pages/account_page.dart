@@ -134,7 +134,7 @@ class _AccountPageState extends State<AccountPage> {
                           width: MediaQuery.of(context).size.width*0.3,
                           clipBehavior: Clip.antiAlias,
                           decoration: BoxDecoration(
-                            shape: BoxShape.rectangle,
+                            shape: BoxShape.circle,
                           ),
                           child: Image.asset("assets/images/olivevo_logo.jpg",
                               fit: BoxFit.cover),
@@ -161,21 +161,19 @@ class _AccountPageState extends State<AccountPage> {
                         physics: NeverScrollableScrollPhysics(),
                         children: [
                           Padding(
-                            
                             padding: EdgeInsets.fromLTRB(5, 20, 5, 5),
                             child:  Container( 
-                             height:  MediaQuery.of(context).size.height*0.06,
+                             //height:  MediaQuery.of(context).size.height*0.06,
                              child: Container( 
-                             height:  MediaQuery.of(context).size.height*0.06,
+                             //height:  MediaQuery.of(context).size.height*0.06,
                              child:ListTile(
-                            
                               tileColor: Color(0xffffffff),
                               title: Text(
                                 "Ordini",
                                 style: TextStyle(
                                   fontWeight: FontWeight.w400,
                                   fontStyle: FontStyle.normal,
-                                  fontSize: 14,
+                                  fontSize: 16,
                                   color: Color(0xff000000),
                                 ),
                                 textAlign: TextAlign.start,
@@ -200,7 +198,7 @@ class _AccountPageState extends State<AccountPage> {
                           Padding(
                             padding: EdgeInsets.fromLTRB(5, 0, 5, 5),
                             child: Container( 
-                             height:  MediaQuery.of(context).size.height*0.06,
+                             //height:  MediaQuery.of(context).size.height*0.06,
                              child: ListTile(
                               tileColor: Color(0x00000000),
                               title: Text(
@@ -208,7 +206,7 @@ class _AccountPageState extends State<AccountPage> {
                                 style: TextStyle(
                                   fontWeight: FontWeight.w400,
                                   fontStyle: FontStyle.normal,
-                                  fontSize: 14,
+                                  fontSize: 16,
                                   color: Color(0xff000000),
                                 ),
                                 textAlign: TextAlign.left,
@@ -232,8 +230,7 @@ class _AccountPageState extends State<AccountPage> {
                           Padding(
                             padding: EdgeInsets.fromLTRB(5, 0, 5, 5),
                             child:  Container( 
-                             height:  MediaQuery.of(context).size.height*0.06,
-
+                             //height:  MediaQuery.of(context).size.height*0.06,
                               child: ListTile(
                               tileColor: Color(0x00000000),
                               title: Text(
@@ -241,7 +238,7 @@ class _AccountPageState extends State<AccountPage> {
                                 style: TextStyle(
                                   fontWeight: FontWeight.w400,
                                   fontStyle: FontStyle.normal,
-                                  fontSize: 14,
+                                  fontSize: 16,
                                   color: Color(0xff000000),
                                 ),
                                 textAlign: TextAlign.start,
@@ -265,7 +262,7 @@ class _AccountPageState extends State<AccountPage> {
                           Padding(
                             padding: EdgeInsets.fromLTRB(5, 0, 5, 5),
                             child: Container( 
-                             height:  MediaQuery.of(context).size.height*0.06,
+                             //height:  MediaQuery.of(context).size.height*0.06,
                              child:ListTile(
                               tileColor: Color(0x00000000),
                               title: Text(
@@ -273,7 +270,7 @@ class _AccountPageState extends State<AccountPage> {
                                 style: TextStyle(
                                   fontWeight: FontWeight.w400,
                                   fontStyle: FontStyle.normal,
-                                  fontSize: 14,
+                                  fontSize: 16,
                                   color: Color(0xff000000),
                                 ),
                                 textAlign: TextAlign.start,
@@ -297,7 +294,7 @@ class _AccountPageState extends State<AccountPage> {
                           Padding(
                             padding: EdgeInsets.fromLTRB(5, 0, 5, 5),
                             child: Container( 
-                             height:  MediaQuery.of(context).size.height*0.06,
+                             //height:  MediaQuery.of(context).size.height*0.06,
                              child: ListTile(
                               tileColor: Color(0x00000000),
                               title: Text(
@@ -305,7 +302,7 @@ class _AccountPageState extends State<AccountPage> {
                                 style: TextStyle(
                                   fontWeight: FontWeight.w400,
                                   fontStyle: FontStyle.normal,
-                                  fontSize: 14,
+                                  fontSize: 16,
                                   color: Color(0xff000000),
                                 ),
                                 textAlign: TextAlign.start,
@@ -330,8 +327,7 @@ class _AccountPageState extends State<AccountPage> {
                             padding: EdgeInsets.fromLTRB(5, 0, 5, 5),
                             child:
                             Container( 
-                             height:  MediaQuery.of(context).size.height*0.05,
-
+                              //height:  MediaQuery.of(context).size.height*0.05,
                               child: ListTile(
                               tileColor: Color(0x00000000),
                               title: Text(
@@ -339,7 +335,7 @@ class _AccountPageState extends State<AccountPage> {
                                 style: TextStyle(
                                   fontWeight: FontWeight.w400,
                                   fontStyle: FontStyle.normal,
-                                  fontSize: 14,
+                                  fontSize: 16,
                                   color: Color(0xff000000),
                                 ),
                                 textAlign: TextAlign.start,
@@ -375,17 +371,17 @@ class _AccountPageState extends State<AccountPage> {
                             borderRadius: BorderRadius.circular(6.0),
                             side: BorderSide(color: Color(0xff808080), width: 1),
                           ),
-                          padding: EdgeInsets.all(12),
+                          padding: EdgeInsets.all(10),
                           child: Text(
                             "Logout",
                             style: TextStyle(
-                              fontSize: 14,
+                              fontSize: 16,
                               fontWeight: FontWeight.w700,
                               fontStyle: FontStyle.normal,
                             ),
                           ),
                           textColor: Color(0xffffffff),
-                          height:  MediaQuery.of(context).size.height*0.05,
+                          height: 40,
                           minWidth: 140,
                         ),
                       ),

@@ -334,13 +334,13 @@ class _LoginPageState extends State<LoginPage> {
                                             mainAxisSize: MainAxisSize.max,
                                             children: [
                                               IconButton(
-                                                icon: const Icon(Icons.add),
+                                                icon: const Icon(Icons.facebook),
                                                 onPressed: () {},
                                                 color: const Color(0xff212435),
                                                 iconSize: 30,
                                               ),
                                               IconButton(
-                                                icon: const Icon(Icons.add),
+                                                icon: const Icon(Icons.apple),
                                                 onPressed: () {},
                                                 color: const Color(0xff212435),
                                                 iconSize: 30,
