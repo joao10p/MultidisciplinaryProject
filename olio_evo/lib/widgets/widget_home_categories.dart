@@ -4,7 +4,7 @@ import 'package:olio_evo/models/product.dart';
 
 import '../models/category.dart' hide Image;
 import '../pages/product_page.dart';
-import '../pages/product_page_new.dart';
+import '../pages/product_page.dart';
 
 class WidgetCategories extends StatefulWidget {
   @override
@@ -45,18 +45,29 @@ class _WidgetCategoriesState extends State<WidgetCategories> {
               ),
               Padding(
                 padding: EdgeInsets.fromLTRB(0, 0, 10, 15),
-                child: Text(
-                  "Vedi tutto",
-                  textAlign: TextAlign.start,
-                  overflow: TextOverflow.clip,
-                  style: TextStyle(
-                    decoration: TextDecoration.underline,
-                    fontWeight: FontWeight.w700,
-                    fontStyle: FontStyle.normal,
-                    fontSize: 16,
-                    color: Color.fromARGB(255, 26, 97, 8),
-                  ),
-                ),
+                child: TextButton(
+  onPressed: () {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => ProductPage(categories: categorieSalvate,)),
+    );  },
+  child: Text(
+    "Vedi tutto", // Testo del bottone
+    style: TextStyle(
+      decoration: TextDecoration.underline, // Sottolineato
+      fontWeight: FontWeight.w700, // Grassetto
+      fontStyle: FontStyle.normal, // Stile normale
+      fontSize: 16, // Dimensione del font
+      color: Color.fromARGB(255, 26, 97, 8), // Colore del testo
+    ),
+  ),
+  style: TextButton.styleFrom(
+    minimumSize: Size.zero, // Larghezza e altezza minima del bottone
+    padding: EdgeInsets.zero, // Spazio interno al bottone
+    tapTargetSize: MaterialTapTargetSize.shrinkWrap, // Dimensione dell'area di tap
+  ),
+),
+
               )
             ],
           ),
@@ -120,7 +131,7 @@ class _WidgetCategoriesState extends State<WidgetCategories> {
                     context,
                     MaterialPageRoute(
                         builder: (context) =>
-                            ProductPageNEW(categories: categorieSalvate)));
+                            ProductPage(categories: categorieSalvate, category: data )));
               },
               child: Container(
                   margin: EdgeInsets.fromLTRB(0, 0, 0, 0),

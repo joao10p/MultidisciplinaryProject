@@ -454,6 +454,24 @@ class API {
         // Ottiene l'ID del primo cliente dalla risposta
         return customerData[0]['id'].toString();
       }
-    } on DioError catch (e) {}
+    } on DioError catch (e) {
+
+    }
+
+
   }
+
+Future<Product> getProductBySlug(String slug) async {
+    // var info= await getAsync(Config.categoriesURL);
+    try {
+      List<dynamic> result = await getAsync(Config.productURL +"?&sku="+ slug, null);
+      if (result != null) {
+      return Product.fromJson(result[0]);
+      }
+    } catch (e) {
+      
+      return null;
+    }
+  }
+  
 }

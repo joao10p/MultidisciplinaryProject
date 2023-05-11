@@ -19,11 +19,11 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final List<Widget> _widgetList = [
     DashboardPage(),
-    PaymentScreen(),
     const CartPage(),
     const Center(child: BarcodePage()),
-    const AccountPage(),
     const ChatbotPage(),
+    const AccountPage(),
+    
   ];
 
   int _index = 0;
@@ -47,6 +47,9 @@ class _HomePageState extends State<HomePage> {
     bottomNavigationBar: SizedBox(
       height: 100,
       child: BottomNavigationBar(
+          selectedLabelStyle: TextStyle(fontSize: 16),
+  unselectedLabelStyle: TextStyle(fontSize: 15),
+
         items: const [
           BottomNavigationBarItem(
               icon: Icon(
@@ -81,7 +84,8 @@ class _HomePageState extends State<HomePage> {
                 Icons.account_circle_outlined,
                 color: Colors.green,
               ),
-              label: 'Account'
+              label: 'Account',
+
           ),
         ],
         selectedItemColor: Color.fromARGB(255, 17, 17, 17),
@@ -89,6 +93,7 @@ class _HomePageState extends State<HomePage> {
         unselectedItemColor: const Color.fromRGBO(97, 113, 53, 1),
         type: BottomNavigationBarType.fixed,
         iconSize: 30,
+        
         currentIndex: _index,
         onTap: (index) {
           setState(() {

@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 class SelectionState extends ChangeNotifier {
 
   List<int> isSelectedSort = [0,0,0,0];
-  int mainIndexSort = 0;
-  int mainIndexCategories = 0;
+  int mainIndexSort = -1;
+  int mainIndexCategories = -1;
   List<int> get isSelected => isSelectedSort;
  
   void updateSelection(int index) {
