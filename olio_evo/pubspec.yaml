@@ -94,6 +94,9 @@ flutter:
     - family: CartIcons
       fonts:
         - asset: lib/fonts/CartIcons.ttf
+    - family: SFPro
+      fonts:
+        - asset: lib/fonts/SF-Pro.ttf
   #   - family: Schyler
   #     fonts:
   #       - asset: fonts/Schyler-Regular.ttf
