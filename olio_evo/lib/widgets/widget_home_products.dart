@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:olio_evo/api_service.dart';
 import 'package:intl/intl.dart';
+import 'package:olio_evo/pages/product_page.dart';
 import '../models/product.dart';
 
 
@@ -27,11 +28,9 @@ class _WidgetHomeProductState extends State<WidgetHomeProducts> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      
       decoration: BoxDecoration(
         color: Color.fromARGB(255, 249, 249, 249),
-        
-        ),
+      ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -41,7 +40,7 @@ class _WidgetHomeProductState extends State<WidgetHomeProducts> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             Padding(
-              padding: EdgeInsets.all(10),
+              padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
               child: Text(
                 this.widget.labelName,
                 style: TextStyle(
@@ -52,15 +51,23 @@ class _WidgetHomeProductState extends State<WidgetHomeProducts> {
               ),
             ),
             Padding(
-              padding: EdgeInsets.all(10),
+              padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
               child: TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ProductPage(
+                      ),
+                    ),
+                  );
+                },
                 child: Text(
-                  'View All',
+                  'Vedi tutti',
                   style: TextStyle(color: Color.fromARGB(255, 5, 116, 30)),
                 ),
               ),
-            )
+            ),
           ],
         ),
         _productsListHome(this.widget.tagId),

@@ -19,65 +19,137 @@ class _WidgetCategoriesState extends State<WidgetCategories> {
     super.initState();
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Stack(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              Padding(
-                padding: EdgeInsets.fromLTRB(18, 0, 0, 15),
-                child: Text(
-                  "Categorie",
-                  textAlign: TextAlign.start,
-                  overflow: TextOverflow.clip,
-                  style: TextStyle(
-                    fontWeight: FontWeight.w700,
-                    fontStyle: FontStyle.normal,
-                    fontSize: 26,
-                    color: Color.fromARGB(255, 0, 0, 0),
-                  ),
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.fromLTRB(0, 0, 10, 15),
-                child: TextButton(
+  //navigare alla product page
+  /*
   onPressed: () {
     Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => ProductPage(categories: categorieSalvate,)),
     );  },
-  child: Text(
-    "Vedi tutto", // Testo del bottone
-    style: TextStyle(
-      decoration: TextDecoration.underline, // Sottolineato
-      fontWeight: FontWeight.w700, // Grassetto
-      fontStyle: FontStyle.normal, // Stile normale
-      fontSize: 16, // Dimensione del font
-      color: Color.fromARGB(255, 26, 97, 8), // Colore del testo
-    ),
-  ),
-  style: TextButton.styleFrom(
-    minimumSize: Size.zero, // Larghezza e altezza minima del bottone
-    padding: EdgeInsets.zero, // Spazio interno al bottone
-    tapTargetSize: MaterialTapTargetSize.shrinkWrap, // Dimensione dell'area di tap
-  ),
-),
+  */
 
-              )
-            ],
-          ),
-          Padding(
-            padding: EdgeInsets.fromLTRB(0, 30, 0, 5),
-            child: _categoriesList(),
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      child: Stack(
+        children: [
+          Container(
+            margin: EdgeInsets.all(0),
+            padding: EdgeInsets.fromLTRB(10, 15, 0, 10),
+            width: MediaQuery.of(context).size.width,
+            height: 110,
+            decoration: BoxDecoration(
+              color: Color.fromARGB(255, 249, 249, 249),
+              shape: BoxShape.rectangle,
+              borderRadius: BorderRadius.zero,
+              border:
+                  Border.all(color: Colors.white, width: 0),
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                Container(
+                  margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                  padding: EdgeInsets.all(5),
+                  width: MediaQuery.of(context).size.width * 0.45,
+                  height: 90,
+                  decoration: BoxDecoration(
+                    color: Color(0xffffffff),
+                    shape: BoxShape.rectangle,
+                    borderRadius: BorderRadius.circular(6.0),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black12,
+                        offset: Offset(0, 0),
+                        blurRadius: 3,
+                      )
+                    ],
+                  ),
+                  child: Row(
+                    mainAxisAlignment:MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.fromLTRB(10, 0, 20, 0),
+                        child: Image(
+                          image: AssetImage("assets/images/sapori_image.png"),
+                          height: 60,
+                          width: MediaQuery.of(context).size.width *
+                              0.15,
+                          fit: BoxFit.contain,
+                        ),
+                      ),
+                      Text(
+                        "Sapore",
+                        textAlign: TextAlign.start,
+                        overflow: TextOverflow.clip,
+                        style: TextStyle(
+                          fontFamily: "SFPro",
+                          fontWeight: FontWeight.w600,
+                          fontStyle: FontStyle.normal,
+                          fontSize: 18,
+                          color: Color(0xff000000),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Container(
+                  margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                  padding: EdgeInsets.all(5),
+                  width: MediaQuery.of(context).size.width * 0.45,
+                  height: 90,
+                  decoration: BoxDecoration(
+                    color: Color(0xffffffff),
+                    shape: BoxShape.rectangle,
+                    borderRadius: BorderRadius.circular(6.0),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black12,
+                        offset: Offset(0, 0),
+                        blurRadius: 3,
+                      )
+                    ],
+                  ),
+                  child: Row(
+                    mainAxisAlignment:
+                        MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.fromLTRB(10, 0, 20, 0),
+                        child: Image(
+                          image: AssetImage(
+                              "assets/images/regions_image.png"),
+                          height: 60,
+                          width: MediaQuery.of(context).size.width *
+                              0.15,
+                          fit: BoxFit.fitHeight,
+                        ),
+                      ),
+                      Text( "Regioni",
+                        textAlign: TextAlign.start,
+                        overflow: TextOverflow.clip,
+                        style: TextStyle(
+                          fontFamily: "SFPro",
+                          fontWeight: FontWeight.w600,
+                          fontStyle: FontStyle.normal,
+                          fontSize: 18,
+                          color: Color(0xff000000),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                ],
+            ),
           ),
         ],
-      ),
-    );
+      )
 
     /* Padding(
                 padding: EdgeInsets.only(left: 16, top: 10),
@@ -90,8 +162,9 @@ class _WidgetCategoriesState extends State<WidgetCategories> {
                 child: Text('All categories',
                     style:
                         TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-              )
+             )
               */
+    );
   }
 
   Widget _categoriesList() {
@@ -181,8 +254,9 @@ class _WidgetCategoriesState extends State<WidgetCategories> {
                             data.categoryName.toString(),
                             textAlign: TextAlign.center,
                             style: TextStyle(
-                              fontWeight: FontWeight.w700,
-                              fontStyle: FontStyle.italic,
+                              fontFamily:'SFPro',
+                              fontWeight: FontWeight.w800,
+                              fontStyle: FontStyle.normal,
                               fontSize: 16,
                               color: Color(0xff000000),
                             ),
