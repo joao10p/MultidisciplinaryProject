@@ -97,8 +97,8 @@ class _WidgetHomeProductState extends State<WidgetHomeProducts> {
             alignment: Alignment.center,
             margin: EdgeInsets.all(10),
             padding: EdgeInsets.all(0),
-            width: MediaQuery.of(context).size.width / 2.2,
-            height: MediaQuery.of(context).size.height / 0.5,
+            //width: MediaQuery.of(context).size.width / 2.2,
+            //height: MediaQuery.of(context).size.height / 0.5,
             decoration: BoxDecoration(
               color: Color(0xffffffff),
               shape: BoxShape.rectangle,
