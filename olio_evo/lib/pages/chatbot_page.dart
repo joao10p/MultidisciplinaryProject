@@ -26,7 +26,7 @@ class _ChatbotPageState extends State<ChatbotPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 152, 191, 145),
+      backgroundColor: Color.fromARGB(69, 52, 165, 52),
       body: Container(
         alignment: Alignment.center,
         margin: EdgeInsets.all(0),
@@ -57,7 +57,7 @@ class _ChatbotPageState extends State<ChatbotPage> {
                         style: const TextStyle(color: Color.fromARGB(255, 252, 252, 252)),
                         cursorColor: Colors.white,
                         decoration: const InputDecoration(
-                          fillColor: Color.fromARGB(255, 38, 112, 6), filled: true,
+                          fillColor: Color.fromARGB(255, 232, 235, 231), filled: true,
                         
                             enabledBorder: UnderlineInputBorder(
                               borderSide: BorderSide(color: Colors.white),

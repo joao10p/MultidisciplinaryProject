@@ -45,7 +45,7 @@ class _HomePageState extends State<HomePage> {
     appBar: _buildAppBar(),
     body: IndexedStack(index: _index, children: _widgetList),
     bottomNavigationBar: SizedBox(
-      height: 100,
+      height: MediaQuery.of(context).size.height * 0.1,
       child: BottomNavigationBar(
           selectedLabelStyle: TextStyle(fontSize: 16),
   unselectedLabelStyle: TextStyle(fontSize: 15),

@@ -198,7 +198,6 @@ class _ProductPageState extends BasePageState<ProductPage> {
             flex: 1,
             child: Container(
               height: MediaQuery.of(context).size.height * 0.05,
-              width: MediaQuery.of(context).size.height,
               decoration: BoxDecoration(
                 color: Color.fromARGB(255, 249, 249, 249),
                 border: Border.all(
@@ -238,12 +237,12 @@ class _ProductPageState extends BasePageState<ProductPage> {
                       itemCount: myFilters.length,
                       itemBuilder: (BuildContext context, int index) {
                         var data = myFilters[index];
-                       
                         return  data==""
                         ?  SizedBox.shrink()
                         :Padding(
                           padding: EdgeInsets.all(5.0),
                           child: Container(
+                            height: MediaQuery.of(context).size.height * 0.05,
                             decoration: BoxDecoration(
                               color: Color.fromARGB(255, 249, 249, 249),
                               border: Border.all(
@@ -260,7 +259,6 @@ class _ProductPageState extends BasePageState<ProductPage> {
                             ),
                             padding: EdgeInsets.only(left: 1.0, right: 1),
                             // il resto del contenuto del container
-
                             child: Center(
                               child: Text(
                                 data,
@@ -488,7 +486,10 @@ class _ProductPageState extends BasePageState<ProductPage> {
 
   Widget _buildFilterList() {
     return Consumer<SelectionState>(builder: (context, selectionState, _) {
-      return Column(
+       return Container(
+              height: MediaQuery.of(context).size.height * 0.32,
+              child: 
+       Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
@@ -505,7 +506,7 @@ class _ProductPageState extends BasePageState<ProductPage> {
           Padding(
             padding: EdgeInsets.fromLTRB(15, 0, 15, 0),
             child: Container(
-              height: MediaQuery.of(context).size.height * 0.15,
+              height: MediaQuery.of(context).size.height * 0.20,
               width: MediaQuery.of(context).size.width,
               decoration: BoxDecoration(
                 color: Color.fromARGB(255, 255, 255, 255),
@@ -516,7 +517,7 @@ class _ProductPageState extends BasePageState<ProductPage> {
               ),
               child: GridView.count(
                 childAspectRatio: 10,
-                crossAxisSpacing: MediaQuery.of(context).size.width * 0.01,
+                crossAxisSpacing: MediaQuery.of(context).size.width * 0.013,
                 crossAxisCount: 1,
                 physics: ClampingScrollPhysics(),
                 scrollDirection: Axis.vertical,
@@ -526,6 +527,7 @@ class _ProductPageState extends BasePageState<ProductPage> {
                     var data = sortFilterStrings[index];
                     return GestureDetector(
                       onTap: () {
+
                         selectionState.updateSelection(index);
                       },
                       child: Padding(
@@ -541,7 +543,7 @@ class _ProductPageState extends BasePageState<ProductPage> {
                                 ),
                               ],
                             ),
-                            height: 20,
+                            height: 40,
                             child: Center(
                               child: Text(
                                 data,
@@ -613,7 +615,7 @@ class _ProductPageState extends BasePageState<ProductPage> {
                     }))
           ])
         ],
-      );
+      ),);
     });
   }
 
@@ -628,7 +630,7 @@ class _ProductPageState extends BasePageState<ProductPage> {
         isScrollControlled: true, // abilita lo scrolling
         builder: (context) {
           return Container(
-              height: MediaQuery.of(context).size.height * 0.3,
+        
               child: type == 1
                   ? _buildCategoryList(this.widget.categories)
                   : _buildFilterList());
