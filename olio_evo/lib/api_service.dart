@@ -230,7 +230,10 @@ class API {
   Future<List<Category>> getCategories() async {
     // var info= await getAsync(Config.categoriesURL);
     try {
-      List<dynamic> result = await getAsync(Config.categoriesURL, null);
+      String url;
+      url = _getOAuthURL("GET", Config.categoriesURL);
+      url = url + "&per_page=100";
+      List<dynamic> result = await getAsync(null, url);
       if (result != null) {
         List<Category> data = new List<Category>();
         data = (result as List)
