@@ -233,10 +233,17 @@ class API {
     url=_getOAuthURL("GET", Config.categoriesURL);
     url+="&per_page=20";
     try {
+<<<<<<< HEAD
      http.Response result = await this.getAsync(null, url);
 
       
       
+=======
+      String url;
+      url = _getOAuthURL("GET", Config.categoriesURL);
+      url = url + "&per_page=100";
+      List<dynamic> result = await getAsync(null, url);
+>>>>>>> a1d09143a59c95f902b39aa2ff198ad8edf9556b
       if (result != null) {
         List<Category> data = new List<Category>();
         data = (result as List)
