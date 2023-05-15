@@ -193,6 +193,7 @@ class API {
   Future<dynamic> getAsync(String endPoint, String url) async {
     if (url == null) {
       url = this._getOAuthURL("GET", endPoint);
+     
     }
 
     try {
@@ -229,8 +230,13 @@ class API {
 //sometise throw an exception beacuse it receives
   Future<List<Category>> getCategories() async {
     // var info= await getAsync(Config.categoriesURL);
+    url=_getOAuthURL("GET", Config.categoriesURL);
+    url+="&per_page=20";
     try {
-      List<dynamic> result = await getAsync(Config.categoriesURL, null);
+     http.Response result = await this.getAsync(null, url);
+
+      
+      
       if (result != null) {
         List<Category> data = new List<Category>();
         data = (result as List)
