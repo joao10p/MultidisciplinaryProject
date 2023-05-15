@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:olio_evo/api_service.dart';
 import 'package:olio_evo/models/product.dart';
+import 'package:olio_evo/pages/home_page.dart';
 
 import '../models/category.dart' hide Image;
 import '../pages/product_page.dart';
@@ -265,7 +266,9 @@ Container(
               ),
             ),
           ),
-          IconButton(onPressed: (){},
+          IconButton(onPressed: (){
+            //chiudi il popup
+          },
           iconSize: 40,
           icon: Icon(Icons.close_rounded),
           color: Colors.black,
