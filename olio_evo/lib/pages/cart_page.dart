@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:olio_evo/pages/verify_address.dart';
 import 'package:olio_evo/provider/cart_provider.dart';
 import 'package:olio_evo/provider/loader_provider.dart';
 import 'package:olio_evo/shared_service.dart';
@@ -35,7 +36,7 @@ class _CartPageState extends State<CartPage> {
             return Consumer<LoaderProvider>(
                 builder: (context, loaderModel, child) {
               return Scaffold(
-                
+                appBar: _buildAppBar(),
                 body: ProgressHUD(
                   inAsyncCall: loaderModel.isApiCallProcess,
                   opacity: 0.3,
@@ -146,7 +147,12 @@ class _CartPageState extends State<CartPage> {
                       ],
                     ),
                     TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => VerifyAddress()));
+                      },
                       style: TextButton.styleFrom(
                         padding: const EdgeInsets.all(15),
                         backgroundColor: Colors.redAccent,
@@ -200,7 +206,12 @@ class _CartPageState extends State<CartPage> {
                     ],
                   ),
                   TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => VerifyAddress()));
+                    },
                     style: TextButton.styleFrom(
                       padding: const EdgeInsets.all(15),
                       backgroundColor: Colors.redAccent,
@@ -223,5 +234,19 @@ class _CartPageState extends State<CartPage> {
         ]);
       }
     });
+  }
+
+  Widget _buildAppBar() {
+    return AppBar(
+      centerTitle: true,
+      elevation: 0,
+      backgroundColor: Colors.green,
+      automaticallyImplyLeading: true,
+      title: const Text(
+        "Carrello",
+        style: TextStyle(color: Colors.white),
+      ),
+      actions: const <Widget>[],
+    );
   }
 }
