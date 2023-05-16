@@ -142,7 +142,7 @@ class _ProductPageState extends BasePageState<ProductPage> {
                               color: Color.fromARGB(255, 249, 249, 249),
                             ),
                             // height: 150,
-                            padding: EdgeInsets.all(8), /// questo modifica la grandezza del
+                            padding: EdgeInsets.all(8), /// questo modifica la grandezza del container
                             child: ElevatedButton(
                                 style: ButtonStyle(
                                   backgroundColor:
@@ -468,6 +468,7 @@ class _ProductPageState extends BasePageState<ProductPage> {
                     productsList.setLoadingState(LoadMoreStatus.INITIAL, true);
                     productsList.fetchProducts(pageNumber,
                         categoryId: categoryId.toString());
+                        categories=setFirstSelected(categories);
                     Navigator.pop(context);
                   }))
         ],

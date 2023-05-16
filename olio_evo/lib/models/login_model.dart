@@ -25,7 +25,7 @@ class LoginResponseModel {
     statusCode = json['statusCode'];
     code = null;
     message = "Autenticated";
-    data = json['data'].length > 0
+    data = json['data']!= null && json['data'].length > 0
         ? Data.fromJsonSharedService(json['data'])
         : null;
   }
