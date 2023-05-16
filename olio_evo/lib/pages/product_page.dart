@@ -114,7 +114,8 @@ class _ProductPageState extends BasePageState<ProductPage> {
 
   Widget _buildList(List<Product> items, bool isLoadMore) {
     return Column(children: [
-      searchWidget(),
+      Padding( padding : EdgeInsets.only(top: 2),
+       child: searchWidget(),),
       Padding(
         padding: EdgeInsets.only(top: 4.0),
         child: Row(
@@ -141,7 +142,7 @@ class _ProductPageState extends BasePageState<ProductPage> {
                               color: Color.fromARGB(255, 249, 249, 249),
                             ),
                             // height: 150,
-                            padding: EdgeInsets.all(10),
+                            padding: EdgeInsets.all(8), /// questo modifica la grandezza del
                             child: ElevatedButton(
                                 style: ButtonStyle(
                                   backgroundColor:
@@ -197,7 +198,7 @@ class _ProductPageState extends BasePageState<ProductPage> {
           Expanded(
             flex: 1,
             child: Container(
-              height: MediaQuery.of(context).size.height * 0.05,
+              height: MediaQuery.of(context).size.height * 0.06,
               decoration: BoxDecoration(
                 color: Color.fromARGB(255, 249, 249, 249),
                 border: Border.all(
@@ -218,8 +219,7 @@ class _ProductPageState extends BasePageState<ProductPage> {
           Expanded(
             flex: 3,
             child: Container(
-              height: MediaQuery.of(context).size.height * 0.05,
-              width: MediaQuery.of(context).size.height,
+              height: MediaQuery.of(context).size.height * 0.06,
               decoration: BoxDecoration(
                 color: Color.fromARGB(255, 249, 249, 249),
                 border: Border.all(
@@ -277,11 +277,15 @@ class _ProductPageState extends BasePageState<ProductPage> {
         ],
       ),
       Flexible(
-        child: GridView.count(
-          shrinkWrap: true,
+        child: Padding(
+          padding: EdgeInsets.only(top: 4),
+          child: 
+        GridView.count(
           crossAxisCount: 2,
           physics: ClampingScrollPhysics(),
           scrollDirection: Axis.vertical,
+              childAspectRatio: 0.75,
+
           children: items.map((Product item) {
             return ProductCard(
               data: item,
@@ -289,9 +293,10 @@ class _ProductPageState extends BasePageState<ProductPage> {
           }).toList(),
         ),
       ),
+      ),
       Visibility(
         child: Container(
-          padding: EdgeInsets.all(5),
+          padding: EdgeInsets.all(2),
           height: 60.0,
           width: 60.0,
           child: CircularProgressIndicator(),
@@ -630,6 +635,7 @@ class _ProductPageState extends BasePageState<ProductPage> {
         isScrollControlled: true, // abilita lo scrolling
         builder: (context) {
           return Container(
+            height:  MediaQuery.of(context).size.height*0.40,
         
               child: type == 1
                   ? _buildCategoryList(this.widget.categories)
