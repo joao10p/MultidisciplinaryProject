@@ -139,7 +139,7 @@ class _HomePageState extends State<HomePage> {
                 MaterialPageRoute(builder: (context) => const CartPage()));
           },
           icon: const Icon(
-            Icons.shopping_cart,
+            Icons.shopping_cart_rounded,
             color: Colors.white,
           ),
         ),
