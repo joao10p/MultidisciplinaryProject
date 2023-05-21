@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:olio_evo/pages/checkout_base.dart';
+import 'package:olio_evo/pages/home_page.dart';
 import 'package:provider/provider.dart';
 
 import '../provider/cart_provider.dart';
@@ -72,7 +73,12 @@ class _OrderSuccessWidgetState
                     height: 20,
                   ),
                   TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pushAndRemoveUntil(
+                          context,
+                          MaterialPageRoute(builder: (context) => HomePage()),
+                          ModalRoute.withName("/Home"));
+                    },
                     style: TextButton.styleFrom(
                         padding: const EdgeInsets.all(15),
                         backgroundColor: Colors.green),

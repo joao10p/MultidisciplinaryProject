@@ -32,14 +32,17 @@ class CheckoutBasePageState<T extends CheckoutBasePage> extends State<T> {
           child: SingleChildScrollView(
               child: Column(
             children: [
-              CheckPoints(
-                checkedTill: currentPage,
-                checkPoints: const [
-                  "Shipping",
-                  "Payment",
-                  "Order",
-                ],
-                checkPointFilledColor: Colors.green,
+              Padding(
+                padding: const EdgeInsets.all(5),
+                child: CheckPoints(
+                  checkedTill: currentPage,
+                  checkPoints: const [
+                    "Shipping",
+                    "Payment",
+                    "Order",
+                  ],
+                  checkPointFilledColor: Colors.green,
+                ),
               ),
               const Divider(color: Colors.grey),
               pageUI(),
@@ -54,7 +57,7 @@ class CheckoutBasePageState<T extends CheckoutBasePage> extends State<T> {
     return AppBar(
       centerTitle: true,
       elevation: 0,
-      backgroundColor: Colors.redAccent,
+      backgroundColor: Colors.green,
       automaticallyImplyLeading: showBackButton,
       title: const Text(
         "Checkout",

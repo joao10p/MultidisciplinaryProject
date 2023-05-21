@@ -2,7 +2,7 @@ class Config {
   static String key = "ck_3148de4b1e8752810b7e792692a82e5f694ca984";
   static String secret = "cs_48ef07d29108ea78cd97d77b888bc2d7c3e97985";
   static String url = "https://olivevo.it";
-  static String customerUrl = "/customers";
+  static String customerUrl = "customers";
   static String categoriesURL = "products/categories";
 
   static String productURL = "products";
@@ -18,5 +18,7 @@ class Config {
       "EFX24oLMAQH6suXP9oTY2opoLhXO7PiZyxx3TR7mrXfg-jmN2pbfNZFL98GispoBWczh6U-pudMAXjSM";
   static String paypalURL = "https://api.sandbox.paypal.com"; //for sandbox mode
   //static String paypalURL = "https://api.paypal.com"; //for Production mode
-  static String orderURL = "orders";
+  static String orderURL = "/wp-json/wc/v2/orders";
+
+  static var currency = "€";
 }

@@ -25,6 +25,7 @@ class CartProvider with ChangeNotifier {
   CustomerDetailsModel get customerDetailsModel => _customerDetailsModel;
   OrderModel get orderModel => _orderModel;
   bool get isOrderCreated => _isOrderCreated;
+
   CartProvider() {
     _api = API();
     _cartItems = <CartItem>[];
@@ -128,7 +129,9 @@ class CartProvider with ChangeNotifier {
   }
 
   fetchShippingDetails() async {
-    _customerDetailsModel ??= CustomerDetailsModel();
+    if (_customerDetailsModel == null) {
+      _customerDetailsModel = CustomerDetailsModel();
+    }
 
     _customerDetailsModel = await _api.customerDetails();
     notifyListeners();

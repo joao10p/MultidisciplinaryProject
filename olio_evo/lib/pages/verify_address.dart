@@ -18,13 +18,13 @@ class _VerifyAddressState extends CheckoutBasePageState<VerifyAddress> {
   void initState() {
     super.initState();
     currentPage = 0;
-    var cartProvider = Provider.of<CartProvider>(context, listen: false);
-    //cartProvider.fetchShippingDetails();
   }
 
   @override
   Widget pageUI() {
-    return /* Consumer<CartProvider>(builder: (context, customerModel, child) {
+    var cartProvider = Provider.of<CartProvider>(context, listen: false);
+    cartProvider.fetchShippingDetails();
+    return Consumer<CartProvider>(builder: (context, customerModel, child) {
       if (customerModel.customerDetailsModel.id != null) {
         return _formUI(customerModel.customerDetailsModel);
       }
@@ -32,11 +32,10 @@ class _VerifyAddressState extends CheckoutBasePageState<VerifyAddress> {
       return const Center(
         child: CircularProgressIndicator(),
       );
-    }); */
-        _formUI();
+    });
   }
 
-  Widget _formUI(/* CustomerDetailsModel model */) {
+  Widget _formUI(CustomerDetailsModel model) {
     return SingleChildScrollView(
       child: Padding(
           padding: const EdgeInsets.all(10),
@@ -59,23 +58,21 @@ class _VerifyAddressState extends CheckoutBasePageState<VerifyAddress> {
                   Flexible(
                       fit: FlexFit.tight,
                       flex: 1,
-                      child: FormHelper.fieldLabelValue(
-                          context, "firstname" /* model.firstName */)),
+                      child:
+                          FormHelper.fieldLabelValue(context, model.firstName)),
                   Flexible(
                       fit: FlexFit.tight,
                       flex: 1,
                       child: Padding(
                           padding: const EdgeInsets.all(5),
                           child: FormHelper.fieldLabelValue(
-                              context, "lastname" /* model.lastName */)))
+                              context, model.lastName)))
                 ],
               ),
               FormHelper.fieldLabel("Address"),
-              FormHelper.fieldLabelValue(
-                  context, "address1" /* model.shipping.address1 */),
+              FormHelper.fieldLabelValue(context, model.shipping.address1),
               FormHelper.fieldLabel("Apartment, etc."),
-              FormHelper.fieldLabelValue(
-                  context, "address2" /* model.shipping.address2 */),
+              FormHelper.fieldLabelValue(context, model.shipping.address2),
               Row(children: [
                 Flexible(
                     fit: FlexFit.tight,
@@ -92,14 +89,14 @@ class _VerifyAddressState extends CheckoutBasePageState<VerifyAddress> {
                       fit: FlexFit.tight,
                       flex: 1,
                       child: FormHelper.fieldLabelValue(
-                          context, "country" /* model.shipping.country */)),
+                          context, model.shipping.country)),
                   Flexible(
                       fit: FlexFit.tight,
                       flex: 1,
                       child: Padding(
                           padding: const EdgeInsets.all(5),
                           child: FormHelper.fieldLabelValue(
-                              context, "state" /* model.shipping.state */)))
+                              context, model.shipping.state)))
                 ],
               ),
               Row(children: [
@@ -118,14 +115,14 @@ class _VerifyAddressState extends CheckoutBasePageState<VerifyAddress> {
                       fit: FlexFit.tight,
                       flex: 1,
                       child: FormHelper.fieldLabelValue(
-                          context, "city" /* model.shipping.city */)),
+                          context, model.shipping.city)),
                   Flexible(
                       fit: FlexFit.tight,
                       flex: 1,
                       child: Padding(
                           padding: const EdgeInsets.all(5),
-                          child: FormHelper.fieldLabelValue(context,
-                              "Postcode" /* model.shipping.postcode */)))
+                          child: FormHelper.fieldLabelValue(
+                              context, model.shipping.postcode)))
                 ],
               ),
               const SizedBox(
