@@ -142,9 +142,9 @@ class _WidgetHomeProductState extends State<WidgetHomeProducts> {
                     Padding(
                       padding: EdgeInsets.fromLTRB(10, 20, 3, 0),
                       child: Text(
-                        data.rating.toString() == '0'
-                            ? '3.0'
-                            : 'data.rating.toString()',
+                          data.rating.toString()== '0'
+                        ? '3.0'
+                        : 'data.rating.toString()',
                         textAlign: TextAlign.left,
                         overflow: TextOverflow.clip,
                         style: TextStyle(
@@ -159,9 +159,10 @@ class _WidgetHomeProductState extends State<WidgetHomeProducts> {
                     Padding(
                       padding: EdgeInsets.fromLTRB(0, 21, 0, 0),
                       child: RatingBar.builder(
-                        initialRating: data.rating.toDouble() == 0
-                            ? 3
-                            : data.rating.toDouble(),
+                        initialRating:   
+                        data.rating.toDouble()==0
+                        ? 3
+                        : data.rating.toDouble(),
                         unratedColor: Color(0xff9e9e9e),
                         itemBuilder: (context, index) =>
                             Icon(Icons.star, color: Color(0xffffc107)),
@@ -245,10 +246,46 @@ class _WidgetHomeProductState extends State<WidgetHomeProducts> {
                       ),
                       width: MediaQuery.of(context).size.width * 0.25,
                       alignment: Alignment.center,
-                      child: Text(
-                        data.salePrice != null && data.salePrice.isNotEmpty
-                            ? 'In offerta: € ${data.salePrice}'
-                            : '€ ${data.regularPrice}',
+                      child:   data.salePrice != null && data.salePrice.isNotEmpty
+
+                            ? Row(
+                                                mainAxisAlignment: MainAxisAlignment.center,
+
+                              children: [
+                              Text( '€ ${data.regularPrice}',
+                             textAlign: TextAlign.center,
+                        style: TextStyle(
+                          decoration: TextDecoration.lineThrough,
+                          fontFamily: 'SFPro',
+                          fontSize: 20,
+                          color:
+                              Color.fromARGB(255, 150, 149, 149),
+                          fontWeight:
+                              data.salePrice != null && data.salePrice.isNotEmpty
+                                  ? FontWeight.w800
+                                  : FontWeight.w800,
+                        ),
+                             ),
+                                SizedBox(width:MediaQuery.of(context).size.width * 0.02,),
+
+                             Text( '€ ${data.salePrice}',
+                             textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontFamily: 'SFPro',
+                          fontSize: 20,
+                          color: data.salePrice != null && data.salePrice.isNotEmpty
+                              ? Colors.red
+                              : Colors.black,
+                          fontWeight:
+                              data.salePrice != null && data.salePrice.isNotEmpty
+                                  ? FontWeight.w800
+                                  : FontWeight.w800,
+                        ),
+                             ) ],
+                            
+                      )
+                        : Text(
+                          '€ ${data.regularPrice}',
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontFamily: 'SFPro',

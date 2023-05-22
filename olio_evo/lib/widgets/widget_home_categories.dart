@@ -40,7 +40,7 @@ class _WidgetCategoriesState extends State<WidgetCategories> {
             margin: EdgeInsets.all(0),
             padding: EdgeInsets.fromLTRB(10, 15, 0, 10),
             width: MediaQuery.of(context).size.width,
-            height: 110,
+            height: MediaQuery.of(context).size.height * 0.12,
             decoration: BoxDecoration(
               color: Color.fromARGB(255, 249, 249, 249),
               shape: BoxShape.rectangle,
@@ -57,7 +57,6 @@ class _WidgetCategoriesState extends State<WidgetCategories> {
     margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
     padding: EdgeInsets.all(5),
     width: MediaQuery.of(context).size.width * 0.45,
-    height: 90,
     decoration: BoxDecoration(
       color: Color(0xffffffff),
       shape: BoxShape.rectangle,
