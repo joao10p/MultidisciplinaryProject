@@ -4,6 +4,7 @@ import 'package:olio_evo/api_service.dart';
 import 'package:intl/intl.dart';
 import 'package:olio_evo/pages/product_page.dart';
 import '../models/product.dart';
+import '../pages/product_details.dart';
 
 class WidgetHomeProducts extends StatefulWidget {
   String labelName;
@@ -88,7 +89,7 @@ class _WidgetHomeProductState extends State<WidgetHomeProducts> {
   }
 
   Widget _buildList(List<Product> items) {
-    return Container(
+    return   Container(
       height: MediaQuery.of(context).size.height / 1.7, //altezza box
       alignment: Alignment.center,
       child: GridView.builder(
@@ -100,7 +101,18 @@ class _WidgetHomeProductState extends State<WidgetHomeProducts> {
         itemCount: items.length,
         itemBuilder: (context, index) {
           var data = items[index];
-          return Container(
+          return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => ProductDetails(
+              product: data,
+            ),
+          ),
+        );
+        },
+        child: Container(
             alignment: Alignment.center,
             margin: EdgeInsets.all(10),
             padding: EdgeInsets.all(0),
@@ -321,7 +333,7 @@ class _WidgetHomeProductState extends State<WidgetHomeProducts> {
               ],
             ),
           ],
-          ),);
+          ),));
         },
       ),
     );
