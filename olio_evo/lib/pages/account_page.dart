@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:olio_evo/pages/dashboard_page.dart';
+import 'package:olio_evo/pages/orders_page.dart';
 import 'package:olio_evo/shared_service.dart';
-import 'package:olio_evo/widgets/unauth_widget.dart';
 
 import '../models/login_model.dart';
+import '../widgets/unauth_widget.dart';
 
 class AccountPage extends StatefulWidget {
   const AccountPage({Key key}) : super(key: key);
@@ -28,32 +28,6 @@ class _AccountPageState extends State<AccountPage> {
   @override
   void initState() {
     super.initState();
-    options.add(
-      OptionList(
-          optionIcon: Icons.shopping_cart,
-          optionTitle: "Orders",
-          optionSubTitle: "Check my orders",
-          onTap: () {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => DashboardPage()));
-          }),
-    );
-    options.add(
-      OptionList(
-          optionIcon: Icons.edit,
-          optionTitle: "Edit Profile",
-          optionSubTitle: "Update your profile",
-          onTap: () {}),
-    );
-    options.add(
-      OptionList(
-          optionIcon: Icons.logout_sharp,
-          optionTitle: "Sign out",
-          optionSubTitle: "",
-          onTap: () {
-            SharedService.logout().then((value) => {setState(() {})});
-          }),
-    );
   }
 
   @override
@@ -128,19 +102,19 @@ class _AccountPageState extends State<AccountPage> {
                     mainAxisSize: MainAxisSize.max,
                     children: [
                       Padding(
-                        padding: EdgeInsets.fromLTRB(4, 5, 4, 0),
+                        padding: const EdgeInsets.fromLTRB(4, 5, 4, 0),
                         child: Container(
-                          height: MediaQuery.of(context).size.height*0.20,
-                          width: MediaQuery.of(context).size.width*0.3,
+                          height: MediaQuery.of(context).size.height * 0.15,
+                          width: MediaQuery.of(context).size.width * 0.25,
                           clipBehavior: Clip.antiAlias,
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                             shape: BoxShape.circle,
                           ),
                           child: Image.asset("assets/images/olivevo_logo.jpg",
                               fit: BoxFit.cover),
                         ),
                       ),
-                      Padding(
+                      const Padding(
                         padding: EdgeInsets.fromLTRB(2, 2, 2, 4),
                         child: Text(
                           "Ciao, Vittorio!",
@@ -156,223 +130,236 @@ class _AccountPageState extends State<AccountPage> {
                       ),
                       ListView(
                         scrollDirection: Axis.vertical,
-                        padding: EdgeInsets.all(3),
+                        padding: const EdgeInsets.all(3),
                         shrinkWrap: true,
-                        physics: NeverScrollableScrollPhysics(),
+                        physics: const NeverScrollableScrollPhysics(),
                         children: [
                           Padding(
-                            padding: EdgeInsets.fromLTRB(5, 20, 5, 5),
-                            child:  Container( 
-                             //height:  MediaQuery.of(context).size.height*0.06,
-                             child: Container( 
-                             //height:  MediaQuery.of(context).size.height*0.06,
-                             child:ListTile(
-                              tileColor: Color(0xffffffff),
-                              title: Text(
-                                "Ordini",
-                                style: TextStyle(
-                                  fontWeight: FontWeight.w400,
-                                  fontStyle: FontStyle.normal,
-                                  fontSize: 16,
-                                  color: Color(0xff000000),
+                            padding: const EdgeInsets.fromLTRB(5, 20, 5, 5),
+                            child: Container(
+                              //height:  MediaQuery.of(context).size.height*0.06,
+                              child: Container(
+                                //height:  MediaQuery.of(context).size.height*0.06,
+                                child: ListTile(
+                                  tileColor: const Color(0xffffffff),
+                                  title: const Text(
+                                    "Ordini",
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.w400,
+                                      fontStyle: FontStyle.normal,
+                                      fontSize: 16,
+                                      color: Color(0xff000000),
+                                    ),
+                                    textAlign: TextAlign.start,
+                                  ),
+                                  dense: false,
+                                  contentPadding: const EdgeInsets.symmetric(
+                                      vertical: 0, horizontal: 4),
+                                  selected: false,
+                                  selectedTileColor: const Color(0x42000000),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(6.0),
+                                    side: const BorderSide(
+                                        color: Color(0x4d9e9e9e), width: 1),
+                                  ),
+                                  leading: const Icon(Icons.work_outline,
+                                      color: Color(0xff212435), size: 24),
+                                  trailing: const Icon(Icons.arrow_forward_ios,
+                                      color: Color(0xff212435), size: 24),
+                                  onTap: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                OrdersPage()));
+                                  },
                                 ),
-                                textAlign: TextAlign.start,
                               ),
-                              dense: false,
-                              contentPadding:
-                                  EdgeInsets.symmetric(vertical: 0, horizontal: 4),
-                              selected: false,
-                              selectedTileColor: Color(0x42000000),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(6.0),
-                                side: BorderSide(color: Color(0x4d9e9e9e), width: 1),
-                              ),
-                              leading: Icon(Icons.work_outline,
-                                  color: Color(0xff212435), size: 24),
-                              trailing: Icon(Icons.arrow_forward_ios,
-                                  color: Color(0xff212435), size: 24),
                             ),
                           ),
-                          ),
-                          ),
                           Padding(
-                            padding: EdgeInsets.fromLTRB(5, 0, 5, 5),
-                            child: Container( 
-                             //height:  MediaQuery.of(context).size.height*0.06,
-                             child: ListTile(
-                              tileColor: Color(0x00000000),
-                              title: Text(
-                                "Impostazioni",
-                                style: TextStyle(
-                                  fontWeight: FontWeight.w400,
-                                  fontStyle: FontStyle.normal,
-                                  fontSize: 16,
-                                  color: Color(0xff000000),
-                                ),
-                                textAlign: TextAlign.left,
-                              ),
-                              dense: false,
-                              contentPadding:
-                                  EdgeInsets.symmetric(vertical: 0, horizontal: 4),
-                              selected: false,
-                              selectedTileColor: Color(0x42000000),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(6.0),
-                                side: BorderSide(color: Color(0x4d9e9e9e), width: 1),
-                              ),
-                              leading: Icon(Icons.settings,
-                                  color: Color(0xff212435), size: 24),
-                              trailing: Icon(Icons.arrow_forward_ios,
-                                  color: Color(0xff212435), size: 24),
-                            ),
-                          ),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.fromLTRB(5, 0, 5, 5),
-                            child:  Container( 
-                             //height:  MediaQuery.of(context).size.height*0.06,
+                            padding: const EdgeInsets.fromLTRB(5, 0, 5, 5),
+                            child: Container(
+                              //height:  MediaQuery.of(context).size.height*0.06,
                               child: ListTile(
-                              tileColor: Color(0x00000000),
-                              title: Text(
-                                "Metodo di pagamento",
-                                style: TextStyle(
-                                  fontWeight: FontWeight.w400,
-                                  fontStyle: FontStyle.normal,
-                                  fontSize: 16,
-                                  color: Color(0xff000000),
+                                tileColor: const Color(0x00000000),
+                                title: const Text(
+                                  "Impostazioni",
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.w400,
+                                    fontStyle: FontStyle.normal,
+                                    fontSize: 16,
+                                    color: Color(0xff000000),
+                                  ),
+                                  textAlign: TextAlign.left,
                                 ),
-                                textAlign: TextAlign.start,
+                                dense: false,
+                                contentPadding: const EdgeInsets.symmetric(
+                                    vertical: 0, horizontal: 4),
+                                selected: false,
+                                selectedTileColor: const Color(0x42000000),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(6.0),
+                                  side: const BorderSide(
+                                      color: Color(0x4d9e9e9e), width: 1),
+                                ),
+                                leading: const Icon(Icons.settings,
+                                    color: Color(0xff212435), size: 24),
+                                trailing: const Icon(Icons.arrow_forward_ios,
+                                    color: Color(0xff212435), size: 24),
                               ),
-                              dense: false,
-                              contentPadding:
-                                  EdgeInsets.symmetric( horizontal: 4),
-                              selected: false,
-                              selectedTileColor: Color(0x42000000),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(6.0),
-                                side: BorderSide(color: Color(0x4d9e9e9e), width: 1),
-                              ),
-                              leading: Icon(Icons.credit_card,
-                                  color: Color(0xff212435), size: 24),
-                              trailing: Icon(Icons.arrow_forward_ios,
-                                  color: Color(0xff212435), size: 24),
                             ),
                           ),
-                          ),
                           Padding(
-                            padding: EdgeInsets.fromLTRB(5, 0, 5, 5),
-                            child: Container( 
-                             //height:  MediaQuery.of(context).size.height*0.06,
-                             child:ListTile(
-                              tileColor: Color(0x00000000),
-                              title: Text(
-                                "Indirizzo di spedizione",
-                                style: TextStyle(
-                                  fontWeight: FontWeight.w400,
-                                  fontStyle: FontStyle.normal,
-                                  fontSize: 16,
-                                  color: Color(0xff000000),
+                            padding: const EdgeInsets.fromLTRB(5, 0, 5, 5),
+                            child: Container(
+                              //height:  MediaQuery.of(context).size.height*0.06,
+                              child: ListTile(
+                                tileColor: const Color(0x00000000),
+                                title: const Text(
+                                  "Metodo di pagamento",
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.w400,
+                                    fontStyle: FontStyle.normal,
+                                    fontSize: 16,
+                                    color: Color(0xff000000),
+                                  ),
+                                  textAlign: TextAlign.start,
                                 ),
-                                textAlign: TextAlign.start,
+                                dense: false,
+                                contentPadding:
+                                    const EdgeInsets.symmetric(horizontal: 4),
+                                selected: false,
+                                selectedTileColor: const Color(0x42000000),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(6.0),
+                                  side: const BorderSide(
+                                      color: Color(0x4d9e9e9e), width: 1),
+                                ),
+                                leading: const Icon(Icons.credit_card,
+                                    color: Color(0xff212435), size: 24),
+                                trailing: const Icon(Icons.arrow_forward_ios,
+                                    color: Color(0xff212435), size: 24),
                               ),
-                              dense: false,
-                              contentPadding:
-                                  EdgeInsets.symmetric(vertical: 0, horizontal: 4),
-                              selected: false,
-                              selectedTileColor: Color(0x42000000),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(6.0),
-                                side: BorderSide(color: Color(0x4d9e9e9e), width: 1),
-                              ),
-                              leading: Icon(Icons.location_on,
-                                  color: Color(0xff212435), size: 24),
-                              trailing: Icon(Icons.arrow_forward_ios,
-                                  color: Color(0xff212435), size: 24),
                             ),
                           ),
-                          ),
                           Padding(
-                            padding: EdgeInsets.fromLTRB(5, 0, 5, 5),
-                            child: Container( 
-                             //height:  MediaQuery.of(context).size.height*0.06,
-                             child: ListTile(
-                              tileColor: Color(0x00000000),
-                              title: Text(
-                                "Invita Amici e Ottieni Ricompense!",
-                                style: TextStyle(
-                                  fontWeight: FontWeight.w400,
-                                  fontStyle: FontStyle.normal,
-                                  fontSize: 16,
-                                  color: Color(0xff000000),
+                            padding: const EdgeInsets.fromLTRB(5, 0, 5, 5),
+                            child: Container(
+                              //height:  MediaQuery.of(context).size.height*0.06,
+                              child: ListTile(
+                                tileColor: const Color(0x00000000),
+                                title: const Text(
+                                  "Indirizzo di spedizione",
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.w400,
+                                    fontStyle: FontStyle.normal,
+                                    fontSize: 16,
+                                    color: Color(0xff000000),
+                                  ),
+                                  textAlign: TextAlign.start,
                                 ),
-                                textAlign: TextAlign.start,
+                                dense: false,
+                                contentPadding: const EdgeInsets.symmetric(
+                                    vertical: 0, horizontal: 4),
+                                selected: false,
+                                selectedTileColor: const Color(0x42000000),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(6.0),
+                                  side: const BorderSide(
+                                      color: Color(0x4d9e9e9e), width: 1),
+                                ),
+                                leading: const Icon(Icons.location_on,
+                                    color: Color(0xff212435), size: 24),
+                                trailing: const Icon(Icons.arrow_forward_ios,
+                                    color: Color(0xff212435), size: 24),
                               ),
-                              dense: false,
-                              contentPadding:
-                                  EdgeInsets.symmetric(vertical: 0, horizontal: 4),
-                              selected: false,
-                              selectedTileColor: Color(0x42000000),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(6.0),
-                                side: BorderSide(color: Color(0x4d9e9e9e), width: 1),
-                              ),
-                              leading: Icon(Icons.favorite_border,
-                                  color: Color(0xff000000), size: 24),
-                              trailing: Icon(Icons.arrow_forward_ios,
-                                  color: Color(0xff212435), size: 24),
                             ),
                           ),
+                          Padding(
+                            padding: const EdgeInsets.fromLTRB(5, 0, 5, 5),
+                            child: Container(
+                              //height:  MediaQuery.of(context).size.height*0.06,
+                              child: ListTile(
+                                tileColor: const Color(0x00000000),
+                                title: const Text(
+                                  "Invita Amici e Ottieni Ricompense!",
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.w400,
+                                    fontStyle: FontStyle.normal,
+                                    fontSize: 16,
+                                    color: Color(0xff000000),
+                                  ),
+                                  textAlign: TextAlign.start,
+                                ),
+                                dense: false,
+                                contentPadding: const EdgeInsets.symmetric(
+                                    vertical: 0, horizontal: 4),
+                                selected: false,
+                                selectedTileColor: const Color(0x42000000),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(6.0),
+                                  side: const BorderSide(
+                                      color: Color(0x4d9e9e9e), width: 1),
+                                ),
+                                leading: const Icon(Icons.favorite_border,
+                                    color: Color(0xff000000), size: 24),
+                                trailing: const Icon(Icons.arrow_forward_ios,
+                                    color: Color(0xff212435), size: 24),
+                              ),
+                            ),
                           ),
                           Padding(
-                            padding: EdgeInsets.fromLTRB(5, 0, 5, 5),
-                            child:
-                            Container( 
+                            padding: const EdgeInsets.fromLTRB(5, 0, 5, 5),
+                            child: Container(
                               //height:  MediaQuery.of(context).size.height*0.05,
                               child: ListTile(
-                              tileColor: Color(0x00000000),
-                              title: Text(
-                                "Supporto",
-                                style: TextStyle(
-                                  fontWeight: FontWeight.w400,
-                                  fontStyle: FontStyle.normal,
-                                  fontSize: 16,
-                                  color: Color(0xff000000),
+                                tileColor: const Color(0x00000000),
+                                title: const Text(
+                                  "Supporto",
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.w400,
+                                    fontStyle: FontStyle.normal,
+                                    fontSize: 16,
+                                    color: Color(0xff000000),
+                                  ),
+                                  textAlign: TextAlign.start,
                                 ),
-                                textAlign: TextAlign.start,
+                                dense: false,
+                                contentPadding: const EdgeInsets.symmetric(
+                                    vertical: 0, horizontal: 4),
+                                selected: false,
+                                selectedTileColor: const Color(0x42000000),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(6.0),
+                                  side: const BorderSide(
+                                      color: Color(0x4d9e9e9e), width: 1),
+                                ),
+                                leading: const Icon(Icons.info_outline,
+                                    color: Color(0xff212435), size: 24),
+                                trailing: const Icon(Icons.arrow_forward_ios,
+                                    color: Color(0xff212435), size: 24),
                               ),
-                              dense: false,
-                              contentPadding:
-                                  EdgeInsets.symmetric(vertical: 0, horizontal: 4),
-                              selected: false,
-                              selectedTileColor: Color(0x42000000),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(6.0),
-                                side: BorderSide(color: Color(0x4d9e9e9e), width: 1),
-                              ),
-                              leading: Icon(Icons.info_outline,
-                                  color: Color(0xff212435), size: 24),
-                              trailing: Icon(Icons.arrow_forward_ios,
-                                  color: Color(0xff212435), size: 24),
                             ),
-                          ),
                           ),
                         ],
                       ),
                       Padding(
-                        padding: EdgeInsets.fromLTRB(0, 20, 0, 5),
+                        padding: const EdgeInsets.fromLTRB(0, 20, 0, 5),
                         child: MaterialButton(
                           onPressed: () {
-                              SharedService.logout().then((value) => {setState(() {})});
-
+                            SharedService.logout()
+                                .then((value) => {setState(() {})});
                           },
-                          color: Color(0xff000000),
+                          color: const Color(0xff000000),
                           elevation: 0,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(6.0),
-                            side: BorderSide(color: Color(0xff808080), width: 1),
+                            side: const BorderSide(
+                                color: Color(0xff808080), width: 1),
                           ),
-                          padding: EdgeInsets.all(10),
-                          child: Text(
+                          padding: const EdgeInsets.all(10),
+                          child: const Text(
                             "Logout",
                             style: TextStyle(
                               fontSize: 16,
@@ -380,7 +367,7 @@ class _AccountPageState extends State<AccountPage> {
                               fontStyle: FontStyle.normal,
                             ),
                           ),
-                          textColor: Color(0xffffffff),
+                          textColor: const Color(0xffffffff),
                           height: 40,
                           minWidth: 140,
                         ),
@@ -390,9 +377,8 @@ class _AccountPageState extends State<AccountPage> {
                 ),
               ],
             ),
-            );
-          }
-          
+          );
+        }
 
         return Center(
             child: Column(

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:olio_evo/pages/account_page.dart';
 import 'package:olio_evo/pages/barcode_page.dart';
+import 'package:olio_evo/pages/order_detail.dart';
+import 'package:olio_evo/pages/orders_page.dart';
 import 'package:olio_evo/pages/payment_screen.dart';
 import 'package:provider/provider.dart';
 
@@ -20,10 +22,9 @@ class _HomePageState extends State<HomePage> {
   final List<Widget> _widgetList = [
     DashboardPage(),
     const CartPage(),
-    const Center(child: BarcodePage()),
+    const BarcodePage(),
     const ChatbotPage(),
     const AccountPage(),
-    
   ];
 
   int _index = 0;
@@ -40,75 +41,66 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-  debugShowCheckedModeBanner: false,
-  home: Scaffold(
-    appBar: _buildAppBar(),
-    body: IndexedStack(index: _index, children: _widgetList),
-    bottomNavigationBar: SizedBox(
-      height: MediaQuery.of(context).size.height * 0.1,
-      child: BottomNavigationBar(
-          selectedLabelStyle: TextStyle(fontSize: 16),
-  unselectedLabelStyle: TextStyle(fontSize: 15),
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(
+        appBar: _buildAppBar(),
+        body: IndexedStack(index: _index, children: _widgetList),
+        bottomNavigationBar: SizedBox(
+          height: MediaQuery.of(context).size.height * 0.107,
+          child: BottomNavigationBar(
+            selectedLabelStyle: TextStyle(fontSize: 16),
+            unselectedLabelStyle: TextStyle(fontSize: 15),
+            items: const [
+              BottomNavigationBarItem(
+                  icon: Icon(
+                    Icons.storefront_outlined,
+                    color: Colors.green,
+                  ),
+                  label: 'Store'),
+              BottomNavigationBarItem(
+                  icon: Icon(
+                    Icons.search,
+                    color: Colors.green,
+                  ),
+                  label: 'Search'),
+              BottomNavigationBarItem(
+                  icon: Icon(
+                    Icons.camera_alt_outlined,
+                    color: Colors.green,
+                  ),
+                  label: 'Scan'),
+              BottomNavigationBarItem(
+                  icon: Icon(
+                    Icons.chat_outlined,
+                    color: Colors.green,
+                  ),
+                  label: 'Chatbot'),
+              BottomNavigationBarItem(
+                icon: Icon(
+                  Icons.account_circle_outlined,
+                  color: Colors.green,
+                ),
+                label: 'Account',
+              ),
+            ],
+            selectedItemColor: Color.fromARGB(255, 17, 17, 17),
+            backgroundColor: Colors.white,
+            unselectedItemColor: const Color.fromRGBO(97, 113, 53, 1),
+            type: BottomNavigationBarType.fixed,
+            iconSize: 30,
 
-        items: const [
-          BottomNavigationBarItem(
-              icon: Icon(
-                Icons.storefront_outlined,
-                color: Colors.green,
-              ),
-              label: 'Store'
+            currentIndex: _index,
+            onTap: (index) {
+              setState(() {
+                _index = index;
+              });
+            },
+            // Imposta lo stile delle label come invisibile
           ),
-          BottomNavigationBarItem(
-              icon: Icon(
-                Icons.search,
-                color: Colors.green,
-              ),
-              label: 'Search'
-          ),
-          BottomNavigationBarItem(
-              icon: Icon(
-                Icons.camera_alt_outlined,
-                color: Colors.green,
-              ),
-              label: 'Scan'
-          ),
-          BottomNavigationBarItem(
-              icon: Icon(
-                Icons.chat_outlined,
-                color: Colors.green,
-              ),
-              label: 'Chatbot'
-          ),
-          BottomNavigationBarItem(
-              icon: Icon(
-                Icons.account_circle_outlined,
-                color: Colors.green,
-              ),
-              label: 'Account',
-
-          ),
-        ],
-        selectedItemColor: Color.fromARGB(255, 17, 17, 17),
+        ),
         backgroundColor: Colors.white,
-        unselectedItemColor: const Color.fromRGBO(97, 113, 53, 1),
-        type: BottomNavigationBarType.fixed,
-        iconSize: 30,
-        
-        currentIndex: _index,
-        onTap: (index) {
-          setState(() {
-            _index = index;
-          });
-        },
-        // Imposta lo stile delle label come invisibile
-       
       ),
-    ),
-    backgroundColor: Colors.white,
-  ),
-);
-
-
+    );
   }
 
   Widget _buildAppBar() {
@@ -140,7 +132,7 @@ class _HomePageState extends State<HomePage> {
                 MaterialPageRoute(builder: (context) => const CartPage()));
           },
           icon: const Icon(
-            Icons.shopping_cart,
+            Icons.shopping_cart_rounded,
             color: Colors.white,
           ),
         ),

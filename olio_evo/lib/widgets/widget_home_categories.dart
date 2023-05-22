@@ -150,7 +150,7 @@ Container(
         BoxShadow(
           color: Colors.black12,
           offset: Offset(0, 0),
-          blurRadius: 3,
+          blurRadius: 30,
         )
       ],
     ),

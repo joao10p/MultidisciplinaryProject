@@ -16,6 +16,7 @@ import "dart:math";
 import "dart:core";
 import 'package:crypto/crypto.dart' as crypto;
 import 'package:olio_evo/models/login_model.dart';
+import 'package:olio_evo/models/order_details.dart';
 import 'package:olio_evo/shared_service.dart';
 import 'package:olio_evo/utils/query_string.dart';
 import 'package:uuid/uuid.dart';
@@ -195,7 +196,6 @@ class API {
   Future<dynamic> getAsync(String endPoint, String url) async {
     if (url == null) {
       url = this._getOAuthURL("GET", endPoint);
-     
     }
 
     try {
@@ -231,15 +231,12 @@ class API {
 
 //sometise throw an exception beacuse it receives
   Future<List<Category>> getCategories() async {
-   String url;
-    url=_getOAuthURL("GET", Config.categoriesURL);
-    url+=/*"&parent=italia&*/"&per_page=100";
-    
+    String url;
+    url = _getOAuthURL("GET", Config.categoriesURL);
+    url += "&per_page=20";
     try {
       List<dynamic> result = await getAsync(null, url);
 
-      
-      
       if (result != null) {
         List<Category> data = new List<Category>();
         data = (result as List)
@@ -392,15 +389,6 @@ class API {
     CartResponseModel responseModel;
 
     try {
-      /*
-      LoginResponseModel loginResponseModel =
-          await SharedService.loginDetails();
-
-      if (loginResponseModel.data != null) {
-        int userId = loginResponseModel.data.id;
-      }
-      */
-
       String url =
           "${Config.url}${Config.cartURL}?user_id=${Config.userID}&consumer_key=${Config.key}&consumer_secret=${Config.secret}";
 
@@ -484,7 +472,7 @@ class API {
 
     try {
       String url =
-          "${Config.url}${Config.customerUrl}/${Config.userID}?consumer_key=${Config.key}&consumer_secret=${Config.secret}";
+          "${Config.url}/wp-json/wc/v2/${Config.customerUrl}/${Config.userID}?consumer_key=${Config.key}&consumer_secret=${Config.secret}";
 
       var response = await Dio().get(
         url,
@@ -506,6 +494,8 @@ class API {
         print(e.request);
       }
     }
+
+    return responseModel;
   }
 
   Future<bool> createOrder(OrderModel model) async {
@@ -537,5 +527,63 @@ class API {
     }
 
     return isOrderCreated;
+  }
+
+  Future<List<OrderModel>> getOrders() async {
+    List<OrderModel> data = <OrderModel>[];
+
+    try {
+      String url =
+          "${Config.url}${Config.orderURL}?consumer_key=${Config.key}&consumer_secret=${Config.secret}";
+
+      print(url);
+
+      var response = await Dio().get(
+        url,
+        options: Options(
+          headers: {
+            HttpHeaders.contentTypeHeader: "application/json",
+          },
+        ),
+      );
+
+      if (response.statusCode == 200) {
+        data = (response.data as List)
+            .map(
+              (i) => OrderModel.fromJson(i),
+            )
+            .toList();
+      }
+    } on DioError catch (e) {
+      print(e.response);
+    }
+
+    return data;
+  }
+
+  Future<OrderDetailModel> getOrderDetails(int orderId) async {
+    OrderDetailModel responseModel = OrderDetailModel();
+
+    try {
+      String url =
+          "${Config.url}${Config.orderURL}/$orderId?consumer_key=${Config.key}&consumer_secret=${Config.secret}";
+
+      print(url);
+
+      var response = await Dio().get(url,
+          options: Options(
+            headers: {
+              HttpHeaders.contentTypeHeader: "application/json",
+            },
+          ));
+
+      if (response.statusCode == 200) {
+        responseModel = OrderDetailModel.fromJson(response.data);
+      }
+    } on DioError catch (e) {
+      print(e.response);
+    }
+
+    return responseModel;
   }
 }

@@ -4,7 +4,7 @@ import 'package:olio_evo/provider/cart_provider.dart';
 import 'package:olio_evo/provider/loader_provider.dart';
 import 'package:olio_evo/shared_service.dart';
 import 'package:olio_evo/utils/ProgressHUD.dart';
-import 'package:olio_evo/widgets/unauth_widget.dart';
+import 'package:olio_evo/widgets/unauth_cart_widget.dart';
 import 'package:olio_evo/widgets/widget_cart_product.dart';
 import 'package:provider/provider.dart';
 
@@ -45,7 +45,7 @@ class _CartPageState extends State<CartPage> {
               );
             });
           } else {
-            return const UnAuthWidget();
+            return UnAuthCartWidget();
           }
         }
 

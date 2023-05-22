@@ -69,4 +69,10 @@ class LineItems {
     }
     return data;
   }
+
+  /* LineItems.fromJson(Map<String, dynamic> json) {
+    productId = json['product_id'];
+    quantity = json['quantity'];
+    variationId = json['variation_id'];
+  } */
 }
