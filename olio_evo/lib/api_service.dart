@@ -233,7 +233,8 @@ class API {
   Future<List<Category>> getCategories() async {
    String url;
     url=_getOAuthURL("GET", Config.categoriesURL);
-    url+="&per_page=20";
+    url+=/*"&parent=italia&*/"&per_page=100";
+    
     try {
       List<dynamic> result = await getAsync(null, url);
 

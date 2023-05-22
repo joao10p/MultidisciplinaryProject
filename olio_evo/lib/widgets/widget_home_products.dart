@@ -5,7 +5,6 @@ import 'package:intl/intl.dart';
 import 'package:olio_evo/pages/product_page.dart';
 import '../models/product.dart';
 
-
 class WidgetHomeProducts extends StatefulWidget {
   String labelName;
   String tagId;
@@ -32,46 +31,47 @@ class _WidgetHomeProductState extends State<WidgetHomeProducts> {
         color: Color.fromARGB(255, 249, 249, 249),
       ),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisSize: MainAxisSize.max,
-        children: <Widget> [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.max,
           children: <Widget>[
-            Padding(
-              padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
-              child: Text(
-                this.widget.labelName,
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                  color: Color.fromARGB(255, 5, 116, 30)
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Padding(
+                  padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                  child: Text(
+                    this.widget.labelName,
+                    style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: Color.fromARGB(255, 5, 116, 30)),
+                  ),
                 ),
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
-              child: TextButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => ProductPage(
+                Padding(
+                  padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                  child: TextButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ProductPage(),
+                        ),
+                      );
+                    },
+                    child: Text(
+                      'Vedi tutti',
+                      style: TextStyle(
+                        color: Color.fromARGB(255, 5, 116, 30),
+                        decoration: TextDecoration.underline,
                       ),
                     ),
-                  );
-                },
-                child: Text(
-                  'Vedi tutti',
-                  style: TextStyle(color: Color.fromARGB(255, 5, 116, 30)),
-                ),
-              ),
+                  ),
+                ), 
+              ],
             ),
-          ],
-        ),
-        _productsListHome(this.widget.tagId),
-      ]),
+            _productsListHome(this.widget.tagId),
+          ]),
     );
   }
 
@@ -117,7 +117,7 @@ class _WidgetHomeProductState extends State<WidgetHomeProducts> {
                   blurRadius: 3,
                 )
               ],
-              ),
+            ),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -142,9 +142,9 @@ class _WidgetHomeProductState extends State<WidgetHomeProducts> {
                     Padding(
                       padding: EdgeInsets.fromLTRB(10, 20, 3, 0),
                       child: Text(
-                          data.rating.toString()== '0'
-                        ? '3.0'
-                        : 'data.rating.toString()',
+                        data.rating.toString() == '0'
+                            ? '3.0'
+                            : 'data.rating.toString()',
                         textAlign: TextAlign.left,
                         overflow: TextOverflow.clip,
                         style: TextStyle(
@@ -159,10 +159,9 @@ class _WidgetHomeProductState extends State<WidgetHomeProducts> {
                     Padding(
                       padding: EdgeInsets.fromLTRB(0, 21, 0, 0),
                       child: RatingBar.builder(
-                        initialRating:   
-                        data.rating.toDouble()==0
-                        ? 3
-                        : data.rating.toDouble(),
+                        initialRating: data.rating.toDouble() == 0
+                            ? 3
+                            : data.rating.toDouble(),
                         unratedColor: Color(0xff9e9e9e),
                         itemBuilder: (context, index) =>
                             Icon(Icons.star, color: Color(0xffffc107)),
