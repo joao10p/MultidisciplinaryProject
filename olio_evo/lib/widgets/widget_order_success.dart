@@ -83,7 +83,7 @@ class _OrderSuccessWidgetState
                         padding: const EdgeInsets.all(15),
                         backgroundColor: Colors.green),
                     child: const Text(
-                      "Done",
+                      "Fatto!",
                       style: TextStyle(color: Colors.white),
                     ),
                   )

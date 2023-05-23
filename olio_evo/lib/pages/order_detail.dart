@@ -62,7 +62,7 @@ class _OrderDetailsPageState extends BasePageState<OrderDetailsPage> {
               height: 20,
             ),
             Text(
-              "Delivered to:",
+              "Indirizzo di spedizione:",
               style: Theme.of(context).textTheme.labelHeading,
             ),
             Text(
@@ -77,7 +77,7 @@ class _OrderDetailsPageState extends BasePageState<OrderDetailsPage> {
               height: 20,
             ),
             Text(
-              "Payment method:",
+              "Metodo di pagamento: ",
               style: Theme.of(context).textTheme.labelHeading,
             ),
             Text(model.paymentMethod,
@@ -88,7 +88,7 @@ class _OrderDetailsPageState extends BasePageState<OrderDetailsPage> {
             ),
             const CheckPoints(
               checkedTill: 0,
-              checkPoints: ["Processing", "Shipping", "Delivered"],
+              checkPoints: ["Processing", "Spedito", "Consegnato"],
               checkPointFilledColor: Colors.redAccent,
             ),
             const Divider(
@@ -98,11 +98,11 @@ class _OrderDetailsPageState extends BasePageState<OrderDetailsPage> {
             const Divider(
               color: Colors.grey,
             ),
-            _itemTotal("Item total", "${model.itemTotalAmount}",
+            _itemTotal("Totale prodotto", "${model.itemTotalAmount}",
                 textStyle: Theme.of(context).textTheme.itemTotalText),
-            _itemTotal("Shipping charges", "${model.shippingTotal}",
+            _itemTotal("Costo di spedizione", "${model.shippingTotal}",
                 textStyle: Theme.of(context).textTheme.itemTotalText),
-            _itemTotal("Total paid", "${model.totalAmount}",
+            _itemTotal("Totale", "${model.totalAmount}",
                 textStyle: Theme.of(context).textTheme.itemTotalPaidText),
           ]),
     );
@@ -128,7 +128,7 @@ class _OrderDetailsPageState extends BasePageState<OrderDetailsPage> {
           style: Theme.of(context).textTheme.productItemText),
       subtitle: Padding(
         padding: const EdgeInsets.all(1),
-        child: Text("Qty: ${product.quantity}"),
+        child: Text("Quantità: ${product.quantity}"),
       ),
       trailing: Text("${Config.currency} ${product.totalAmount}"),
     );

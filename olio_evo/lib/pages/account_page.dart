@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:olio_evo/pages/about_us_page.dart';
 import 'package:olio_evo/pages/orders_page.dart';
 import 'package:olio_evo/shared_service.dart';
 
@@ -335,17 +336,57 @@ class _AccountPageState extends State<AccountPage> {
                                   side: const BorderSide(
                                       color: Color(0x4d9e9e9e), width: 1),
                                 ),
-                                leading: const Icon(Icons.info_outline,
+                                leading: const Icon(Icons.help_outline,
                                     color: Color(0xff212435), size: 24),
                                 trailing: const Icon(Icons.arrow_forward_ios,
                                     color: Color(0xff212435), size: 24),
                               ),
                             ),
                           ),
+                          Padding(
+                            padding: const EdgeInsets.fromLTRB(5, 0, 5, 5),
+                            child: Container(
+                              //height:  MediaQuery.of(context).size.height*0.05,
+                              child: ListTile(
+                                tileColor: const Color(0x00000000),
+                                title: const Text(
+                                  "About Us",
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.w400,
+                                    fontStyle: FontStyle.normal,
+                                    fontSize: 16,
+                                    color: Color(0xff000000),
+                                  ),
+                                  textAlign: TextAlign.start,
+                                ),
+                                dense: false,
+                                contentPadding: const EdgeInsets.symmetric(
+                                    vertical: 0, horizontal: 4),
+                                selected: false,
+                                selectedTileColor: const Color(0x42000000),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(6.0),
+                                  side: const BorderSide(
+                                      color: Color(0x4d9e9e9e), width: 1),
+                                ),
+                                leading: const Icon(Icons.info_outline,
+                                    color: Color(0xff212435), size: 24),
+                                trailing: const Icon(Icons.arrow_forward_ios,
+                                    color: Color(0xff212435), size: 24),
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                            builder: (context) =>
+                                                AboutPage()));
+                                },
+                              ),
+                            ),
+                          ),
                         ],
                       ),
                       Padding(
-                        padding: const EdgeInsets.fromLTRB(0, 20, 0, 5),
+                        padding: const EdgeInsets.fromLTRB(0, 15, 0, 5),
                         child: MaterialButton(
                           onPressed: () {
                             SharedService.logout()
