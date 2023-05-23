@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:olio_evo/api_service.dart';
 
 import '../models/product.dart';
+import '../pages/product_details.dart';
 
 class WidgetRelatedProducts extends StatefulWidget{
 
@@ -33,7 +34,7 @@ class WidgetRelatedProductsState extends State<WidgetRelatedProducts>{
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.greenAccent,
+       
       child: Column(children: <Widget>[
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -43,18 +44,18 @@ class WidgetRelatedProductsState extends State<WidgetRelatedProducts>{
               child: Text(
                 this.widget.labelName,
                 style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
+                  fontSize: 20,
+                  fontWeight: FontWeight.w700,
                 ),
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(left: 16, top: 4),
+              padding: EdgeInsets.only(left: 16, top: 8),
               child: TextButton(
                 onPressed: () {},
                 child: Text(
                   'View All',
-                  style: TextStyle(color: Colors.greenAccent),
+                  style: TextStyle(color: Color.fromARGB(255, 54, 196, 19)),
                 ),
               ),
             )
@@ -81,8 +82,17 @@ class WidgetRelatedProductsState extends State<WidgetRelatedProducts>{
 
   Widget _buildList(List<Product> items) {
     this.widget.hasFired=true;
-    return Container(
-      height: 220,
+    return Column(children: [
+     
+        Container(
+           decoration: BoxDecoration(border: Border.all(
+      color: Color.fromARGB(255, 27, 157, 23),
+      width: 2.0,
+    ),
+        borderRadius: BorderRadius.circular(20.0),
+
+        ),
+      height: MediaQuery.of(context).size.height * 0.5,
       alignment: Alignment.centerLeft,
       child: ListView.builder(
         shrinkWrap: true,
@@ -91,22 +101,43 @@ class WidgetRelatedProductsState extends State<WidgetRelatedProducts>{
         itemCount: items.length,
         itemBuilder: (context, index) {
           var data = items[index];
-          return Column(
+          return Padding(
+            padding: EdgeInsets.all(8),
+              child:GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ProductDetails(
+                      product: data,
+                    ),
+                  ),
+                );
+              },
+              child: Container(
+              decoration: BoxDecoration(border: Border.all(
+      color: Color.fromARGB(255, 42, 128, 6),
+      width: 1.0,
+    ),
+        borderRadius: BorderRadius.circular(10),
+
+        ),
+              child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               Container(
                   margin: EdgeInsets.all(10),
-                  width: 130,
-                  height: 120,
+                  width: MediaQuery.of(context).size.width * 0.2,
+                  height: MediaQuery.of(context).size.height * 0.2,
                   alignment: Alignment.center,
                   child: Image.network(
                     data.images[0].src,
-                    height: 120,
+                   
                   ),
                   decoration: BoxDecoration(
                     shape: BoxShape.rectangle,
-                    borderRadius: BorderRadius.circular(4),
+                    borderRadius: BorderRadius.circular(30),
                     color: Colors.white,
                     boxShadow: [
                       BoxShadow(
@@ -117,43 +148,84 @@ class WidgetRelatedProductsState extends State<WidgetRelatedProducts>{
                     ],
                   )),
               Container(
-                width: 130,
+                width: MediaQuery.of(context).size.width*0.25,
                 alignment: Alignment.centerLeft,
                 child: Text(data.name,
+                textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 14,
                       color: Colors.black,
+                      fontWeight: FontWeight.w500
                     )),
               ),
               Container(
                 margin: EdgeInsets.only(top: 4, left: 4),
-                width: 130,
+                width:  MediaQuery.of(context).size.width*0.25,
                 alignment: Alignment.centerLeft,
-                child: Row(
-                  children: [
-                    Text(
-                      '${data.regularPrice}',
-                      style: TextStyle(
-                        fontSize: 14,
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    Text(
-                      '${data.salePrice}',
-                      style: TextStyle(
-                        fontSize: 14,
-                        color: Colors.redAccent,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ],
-                ),
+                child:data.salePrice != null &&
+                                    data.salePrice.isNotEmpty
+                                ? Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        '€ ${data.regularPrice}',
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                          decoration:
+                                              TextDecoration.lineThrough,
+                                          fontFamily: 'SFPro',
+                                          fontSize: 18,
+                                          color: Color.fromARGB(
+                                              255, 150, 149, 149),
+                                          fontWeight: data.salePrice != null &&
+                                                  data.salePrice.isNotEmpty
+                                              ? FontWeight.w800
+                                              : FontWeight.w800,
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                0.02,
+                                      ),
+                                      Text(
+                                        '€ ${data.salePrice}',
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                          fontFamily: 'SFPro',
+                                          fontSize: 18,
+                                          color: data.salePrice != null &&
+                                                  data.salePrice.isNotEmpty
+                                              ? Colors.red
+                                              : Colors.black,
+                                          fontWeight: data.salePrice != null &&
+                                                  data.salePrice.isNotEmpty
+                                              ? FontWeight.w800
+                                              : FontWeight.w800,
+                                        ),
+                                      )
+                                    ],
+                                  )
+                                : Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                    '€ ${data.regularPrice}',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      fontFamily: 'SFPro',
+                                      fontSize: 18,
+                                      color: Colors.black,
+                                      fontWeight:  FontWeight.w800,
+                                    ),
+                                  ),
+                                    ],),
               )
             ],
-          );
+          ))));
         },
       ),
-    );
+    ),
+      SizedBox(height: MediaQuery.of(context).size.height * 0.05, ),]);
   }
 }
