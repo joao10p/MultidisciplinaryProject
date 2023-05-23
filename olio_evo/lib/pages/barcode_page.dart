@@ -6,6 +6,8 @@ import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:olio_evo/api_service.dart';
 import 'package:olio_evo/models/product.dart';
 import 'package:olio_evo/pages/product_details.dart';
+import 'package:olio_evo/provider/filters_provider.dart';
+import 'package:provider/provider.dart';
 
 class BarcodePage extends StatefulWidget {
   const BarcodePage({Key key}) : super(key: key);
@@ -15,6 +17,7 @@ class BarcodePage extends StatefulWidget {
 }
 
 class _BarcodePageState extends State<BarcodePage> {
+  bool isNotFound = false;
   API apiService = new API();
   String _scanBarcode = 'Unknown';
 
@@ -54,21 +57,21 @@ class _BarcodePageState extends State<BarcodePage> {
             mainAxisSize: MainAxisSize.max,
             children: [
               Padding(
-                padding: EdgeInsets.fromLTRB(150, 0, 0, 0),
-                child: Container(
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      color: Colors.black,
-                      width: 1,
-                    ),
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.fromLTRB(0, 0, 5, 0),
+                padding: EdgeInsets.fromLTRB(0, 0, 10, 10),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.fromLTRB(0, 0, 5, 0),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            color: Color.fromRGBO(47, 165, 51, 1),
+                            width: 2,
+                          ),
+                        ),
                         child: IconButton(
                           icon: Icon(Icons.qr_code),
                           onPressed: () {},
@@ -76,22 +79,26 @@ class _BarcodePageState extends State<BarcodePage> {
                           iconSize: 24,
                         ),
                       ),
-                      Align(
-                        alignment: Alignment.center,
-                        child: IconButton(
-                          icon: Icon(Icons.photo_camera),
-                          onPressed: () {},
-                          color: Color(0xff212435),
-                          iconSize: 24,
+                    ),
+                    Container(
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: Color.fromRGBO(47, 165, 51, 1),
+                          width: 2,
                         ),
                       ),
-                    ],
-                  ),
+                      child: IconButton(
+                        icon: Icon(Icons.photo_camera),
+                        onPressed: () {},
+                        color: Color(0xff212435),
+                        iconSize: 24,
+                      ),
+                    ),
+                  ],
                 ),
               ),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  padding: EdgeInsets.zero,
                   primary: Color(0x1f000000),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12.0),
@@ -99,28 +106,37 @@ class _BarcodePageState extends State<BarcodePage> {
                   ),
                 ),
                 onPressed: () {
-                  // scanBarcodeNormal();ù
-                  // Inserire qui le azioni da eseguire quando il bottone viene cliccato
-                  String slug = "800";
-                  apiService.getProductBySlug(slug).then((value) => {
-                        if (value != null)
-                          {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) =>
-                                    ProductDetails(product: value),
-                              ),
+                  scanBarcodeNormal().then((value) => {
+                        apiService.getProductBySlug(_scanBarcode).then(
+                              (value) => {
+                                if (value != null)
+                                  {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            ProductDetails(product: value),
+                                      ),
+                                    )
+                                  }
+                                else
+                                  {
+                                    setState(() {
+                                      isNotFound = true;
+                                    })
+                                  }
+                              },
                             )
-                          }
-                          
                       });
+                  // Inserire qui le azioni da eseguire quando il bottone viene cliccato
+                 
+                
                 },
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Positioned(
-                      top: MediaQuery.of(context).size.height * 0.06,
+                      top: MediaQuery.of(context).size.height * 0.1,
                       left: 0,
                       right: 0,
                       child: Text(
@@ -156,6 +172,19 @@ class _BarcodePageState extends State<BarcodePage> {
                     ),
                   ],
                 ),
+              ),
+              Visibility(
+                child: Center(
+                    child: Padding(
+                        padding: EdgeInsets.only(top: 20),
+                        child: Text(
+                          "Barcode non trovato",
+                          style: TextStyle(
+                              fontSize: 24,
+                              fontWeight: FontWeight.w500,
+                              color: Colors.red),
+                        ))),
+                visible: isNotFound,
               )
             ],
           )),

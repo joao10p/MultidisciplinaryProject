@@ -22,7 +22,7 @@ class _HomePageState extends State<HomePage> {
   final List<Widget> _widgetList = [
     DashboardPage(),
     const CartPage(),
-    const BarcodePage(),
+     BarcodePage(),
     const ChatbotPage(),
     const AccountPage(),
   ];
