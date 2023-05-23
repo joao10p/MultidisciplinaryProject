@@ -55,7 +55,7 @@ class _WidgetCategoriesState extends State<WidgetCategories> {
               children: [
               Container(
     margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
-    padding: EdgeInsets.all(5),
+    padding: EdgeInsets.all(0),
     width: MediaQuery.of(context).size.width * 0.45,
     decoration: BoxDecoration(
       color: Color(0xffffffff),
@@ -63,9 +63,9 @@ class _WidgetCategoriesState extends State<WidgetCategories> {
       borderRadius: BorderRadius.circular(6.0),
       boxShadow: [
         BoxShadow(
-          color: Colors.black12,
+          color: Colors.black,
           offset: Offset(0, 0),
-          blurRadius: 3,
+          blurRadius: 0,
         )
       ],
     ),
@@ -111,12 +111,12 @@ class _WidgetCategoriesState extends State<WidgetCategories> {
       mainAxisSize: MainAxisSize.max,
       children: [
         Padding(
-          padding: EdgeInsets.fromLTRB(5, 0, 20, 0),
+          padding: EdgeInsets.all(5),
           child: Image(
             image: AssetImage("assets/images/sapori_image.png"),
-            height: 60,
+            height: MediaQuery.of(context).size.height * 0.15,
             width: MediaQuery.of(context).size.width * 0.15,
-            fit: BoxFit.contain,
+            fit: BoxFit.fitHeight,
           ),
         ),
         Text(
@@ -138,7 +138,7 @@ class _WidgetCategoriesState extends State<WidgetCategories> {
 
 Container(
     margin: EdgeInsets.fromLTRB(5, 0, 10, 0),
-    padding: EdgeInsets.all(5),
+    padding: EdgeInsets.all(0),
     width: MediaQuery.of(context).size.width * 0.45,
     height: 90,
     decoration: BoxDecoration(
@@ -153,7 +153,7 @@ Container(
         )
       ],
     ),
-   child: ElevatedButton(
+    child: ElevatedButton(
       style: ButtonStyle(
         backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
         shape: MaterialStateProperty.all<RoundedRectangleBorder>(
@@ -196,11 +196,11 @@ Container(
   ),
 ),
 
-                ],
-            ),
-          ),
-        ],
-      )
+            ],
+        ),
+      ),
+    ],
+  )
 
     /* Padding(
                 padding: EdgeInsets.only(left: 16, top: 10),
