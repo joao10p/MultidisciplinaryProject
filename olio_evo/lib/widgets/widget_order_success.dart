@@ -64,7 +64,7 @@ class _OrderSuccessWidgetState
                   Opacity(
                     opacity: 0.6,
                     child: Text(
-                      "Your order has been successfully submitted!",
+                      "Il tuo ordine è stato creato con successo!",
                       textAlign: TextAlign.center,
                       style: Theme.of(context).textTheme.headlineLarge,
                     ),

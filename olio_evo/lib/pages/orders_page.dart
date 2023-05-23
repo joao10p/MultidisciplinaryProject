@@ -29,8 +29,12 @@ class _OrdersPageState extends BasePageState<OrdersPage> {
     return Consumer<OrderProvider>(builder: (context, ordersModel, child) {
       if (ordersModel.allOrders != null && ordersModel.allOrders.isNotEmpty) {
         return _listView(context, ordersModel.allOrders);
+      } else if (ordersModel.allOrders != null &&
+          ordersModel.allOrders.isEmpty) {
+        return const Center(
+          child: Text('No orders found'),
+        );
       }
-
       return const Center(
         child: CircularProgressIndicator(),
       );
@@ -39,17 +43,27 @@ class _OrdersPageState extends BasePageState<OrdersPage> {
 
   Widget _listView(BuildContext context, List<OrderModel> orders) {
     return ListView(
+      padding: EdgeInsets.all(10),
       children: [
+        Padding(
+          padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
+          child: Text('Orders',
+              style: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+              color: Colors.black87)
+              ),
+        ),
         ListView.builder(
           itemCount: orders.length,
           physics: const ScrollPhysics(),
-          padding: const EdgeInsets.all(10),
+          padding: const EdgeInsets.all(0),
           shrinkWrap: true,
           itemBuilder: (context, index) {
             return Card(
               elevation: 0,
               shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(16.0)),
+                  borderRadius: BorderRadius.circular(6.0)),
               child: WidgetOrderItem(orderModel: orders[index]),
             );
           },

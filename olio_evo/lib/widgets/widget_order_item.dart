@@ -29,11 +29,11 @@ class WidgetOrderItem extends StatelessWidget {
           children: [
             iconText(
                 const Icon(
-                  Icons.edit,
+                  Icons.receipt,
                   color: Colors.redAccent,
                 ),
                 const Text(
-                  "OrderID",
+                  "ID",
                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                 )),
             Text(
@@ -54,7 +54,7 @@ class WidgetOrderItem extends StatelessWidget {
                   color: Colors.redAccent,
                 ),
                 const Text(
-                  "Order Date",
+                  "Data",
                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                 )),
             Text(
@@ -73,7 +73,7 @@ class WidgetOrderItem extends StatelessWidget {
                 Row(
                   children: const [
                     Text(
-                      " Order details ",
+                      "Dettagli",
                       style: TextStyle(color: Colors.white),
                     ),
                     Icon(
@@ -101,7 +101,7 @@ class WidgetOrderItem extends StatelessWidget {
       children: [
         iconWidget,
         const SizedBox(
-          width: 5,
+          width: 10,
         ),
         textWidget
       ],
@@ -112,9 +112,11 @@ class WidgetOrderItem extends StatelessWidget {
     return TextButton(
       onPressed: onPressed,
       style: TextButton.styleFrom(
-        padding: const EdgeInsets.all(5),
+        padding: const EdgeInsets.all(10),
         backgroundColor: color,
-        shape: const StadiumBorder(),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(6),
+        ),
       ),
       child: iconText,
     );
@@ -145,7 +147,7 @@ class WidgetOrderItem extends StatelessWidget {
     return iconText(
         icon,
         Text(
-          "Order $status",
+          "Ordine $status",
           style: TextStyle(
             fontSize: 15,
             color: color,

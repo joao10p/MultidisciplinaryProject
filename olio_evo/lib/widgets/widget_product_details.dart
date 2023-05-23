@@ -39,7 +39,7 @@ class ProductDetailsWidget extends StatelessWidget {
                   child: Container(
                     padding: const EdgeInsets.all(5),
                     decoration: const BoxDecoration(color: Colors.green),
-                    child: Text('${data.calculateDiscount()}% OFF',
+                    child: Text('Sconto: ${data.calculateDiscount()}%',
                         style: const TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.normal)),
@@ -66,7 +66,7 @@ class ProductDetailsWidget extends StatelessWidget {
                       : "",
                 ),
                 Text(
-                  '£${data.salePrice}',
+                  '€ ${data.salePrice}',
                   style: const TextStyle(
                       fontSize: 25,
                       color: Colors.black,
@@ -109,11 +109,15 @@ class ProductDetailsWidget extends StatelessWidget {
                   style: TextButton.styleFrom(
                     padding: const EdgeInsets.all(15),
                     backgroundColor: Colors.redAccent,
-                    shape: const StadiumBorder(),
+                    //bordi del bottone
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(6),
+                    ),
                   ),
                   child: const Text(
-                    "Add to Cart",
-                    style: TextStyle(color: Colors.white),
+                    "Aggiungi al carrello",
+                    style: TextStyle(
+                        color: Colors.white, fontWeight: FontWeight.bold),
                   ),
                 )
               ],
@@ -122,7 +126,7 @@ class ProductDetailsWidget extends StatelessWidget {
               height: 5,
             ),
             ExpandText(
-                labelHeader: "Product Details",
+                labelHeader: "Descrizione",
                 desc: data.description,
                 shortDesc: data.shortDescription),
             const Divider(),
@@ -130,7 +134,7 @@ class ProductDetailsWidget extends StatelessWidget {
               height: 10,
             ),
             WidgetRelatedProducts(
-              labelName: "Related Products",
+              labelName: "Prodotti correlati",
               products: this.data.relatedIds,
             )
           ],

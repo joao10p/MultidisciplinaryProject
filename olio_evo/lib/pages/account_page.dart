@@ -137,9 +137,9 @@ class _AccountPageState extends State<AccountPage> {
                           Padding(
                             padding: const EdgeInsets.fromLTRB(5, 20, 5, 5),
                             child: Container(
-                              //height:  MediaQuery.of(context).size.height*0.06,
+                              height:  MediaQuery.of(context).size.height*0.06,
                               child: Container(
-                                //height:  MediaQuery.of(context).size.height*0.06,
+                                height:  MediaQuery.of(context).size.height*0.06,
                                 child: ListTile(
                                   tileColor: const Color(0xffffffff),
                                   title: const Text(
