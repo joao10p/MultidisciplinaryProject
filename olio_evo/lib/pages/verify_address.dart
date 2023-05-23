@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:olio_evo/models/customer_detail_model.dart';
 import 'package:olio_evo/pages/payment_screen.dart';
@@ -47,11 +46,11 @@ class _VerifyAddressState extends CheckoutBasePageState<VerifyAddress> {
                 Flexible(
                     fit: FlexFit.tight,
                     flex: 1,
-                    child: FormHelper.fieldLabel("First Name")),
+                    child: FormHelper.fieldLabel("Nome")),
                 Flexible(
                     fit: FlexFit.tight,
                     flex: 1,
-                    child: FormHelper.fieldLabel("Last Name"))
+                    child: FormHelper.fieldLabel("Cognome"))
               ]),
               Row(
                 children: [
@@ -59,77 +58,93 @@ class _VerifyAddressState extends CheckoutBasePageState<VerifyAddress> {
                       fit: FlexFit.tight,
                       flex: 1,
                       child:
-                          FormHelper.fieldLabelValue(context, model.firstName)),
+                          FormHelper.textInput(context, model.firstName, (val) {
+                        model.firstName = val;
+                      })),
                   Flexible(
                       fit: FlexFit.tight,
                       flex: 1,
                       child: Padding(
                           padding: const EdgeInsets.all(5),
-                          child: FormHelper.fieldLabelValue(
-                              context, model.lastName)))
+                          child: FormHelper.textInput(context, model.lastName,
+                              (val) {
+                            model.lastName = val;
+                          })))
                 ],
               ),
-              FormHelper.fieldLabel("Address"),
-              FormHelper.fieldLabelValue(context, model.shipping.address1),
-              FormHelper.fieldLabel("Apartment, etc."),
-              FormHelper.fieldLabelValue(context, model.shipping.address2),
+              FormHelper.fieldLabel("Indirizzo"),
+              FormHelper.textInput(context, model.shipping.address1, (val) {
+                model.shipping.address1 = val;
+              }),
+              FormHelper.fieldLabel("Piano"),
+              FormHelper.textInput(context, model.shipping.address2, (val) {
+                model.shipping.address2 = val;
+              }),
               Row(children: [
                 Flexible(
                     fit: FlexFit.tight,
                     flex: 1,
-                    child: FormHelper.fieldLabel("Country")),
+                    child: FormHelper.fieldLabel("Stato")),
                 Flexible(
                     fit: FlexFit.tight,
                     flex: 1,
-                    child: FormHelper.fieldLabel("State"))
+                    child: FormHelper.fieldLabel("Città"))
               ]),
               Row(
                 children: [
                   Flexible(
                       fit: FlexFit.tight,
                       flex: 1,
-                      child: FormHelper.fieldLabelValue(
-                          context, model.shipping.country)),
+                      child: FormHelper.textInput(
+                          context, model.shipping.country, (val) {
+                        model.shipping.country = val;
+                      })),
                   Flexible(
                       fit: FlexFit.tight,
                       flex: 1,
                       child: Padding(
                           padding: const EdgeInsets.all(5),
-                          child: FormHelper.fieldLabelValue(
-                              context, model.shipping.state)))
+                          child: FormHelper.textInput(
+                              context, model.shipping.state, (val) {
+                            model.shipping.state = val;
+                          })))
                 ],
               ),
               Row(children: [
                 Flexible(
                     fit: FlexFit.tight,
                     flex: 1,
-                    child: FormHelper.fieldLabel("City")),
+                    child: FormHelper.fieldLabel("Comune")),
                 Flexible(
                     fit: FlexFit.tight,
                     flex: 1,
-                    child: FormHelper.fieldLabel("Postcode"))
+                    child: FormHelper.fieldLabel("CAP"))
               ]),
               Row(
                 children: [
                   Flexible(
                       fit: FlexFit.tight,
                       flex: 1,
-                      child: FormHelper.fieldLabelValue(
-                          context, model.shipping.city)),
+                      child: FormHelper.textInput(context, model.shipping.city,
+                          (val) {
+                        model.shipping.city = val;
+                      })),
                   Flexible(
                       fit: FlexFit.tight,
                       flex: 1,
                       child: Padding(
                           padding: const EdgeInsets.all(5),
-                          child: FormHelper.fieldLabelValue(
-                              context, model.shipping.postcode)))
+                          child: FormHelper.textInput(
+                              context, model.shipping.postcode, (val) {
+                            model.shipping.postcode = val;
+                          })))
                 ],
               ),
               const SizedBox(
                 height: 20,
               ),
               Center(
-                  child: FormHelper.saveButton("Next", () {
+                  child: FormHelper.saveButton("Avanti", () {
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context) => PaymentScreen()));
               })),

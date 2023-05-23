@@ -371,6 +371,8 @@ class API {
         ),
       );
 
+      print(Config.url + Config.addToCartURL);
+
       if (response.statusCode == 200) {
         responseModel = CartResponseModel.fromJson(response.data);
       }

@@ -32,7 +32,7 @@ class _OrdersPageState extends BasePageState<OrdersPage> {
       } else if (ordersModel.allOrders != null &&
           ordersModel.allOrders.isEmpty) {
         return const Center(
-          child: Text('No orders found'),
+          child: Text('Non ci sono ordini presenti'),
         );
       }
       return const Center(
@@ -43,16 +43,15 @@ class _OrdersPageState extends BasePageState<OrdersPage> {
 
   Widget _listView(BuildContext context, List<OrderModel> orders) {
     return ListView(
-      padding: EdgeInsets.all(10),
+      padding: const EdgeInsets.all(10),
       children: [
-        Padding(
+        const Padding(
           padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
-          child: Text('Orders',
+          child: Text('I miei ordini',
               style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-              color: Colors.black87)
-              ),
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black87)),
         ),
         ListView.builder(
           itemCount: orders.length,

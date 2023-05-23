@@ -16,11 +16,13 @@ class CartProvider with ChangeNotifier {
 
   List<CartItem> get cartItems => _cartItems;
   double get totalRecords => _cartItems.length.toDouble();
-  double get totalAmount => _cartItems != null
+  double get totalItemCost => _cartItems != null && _cartItems.isNotEmpty
       ? _cartItems
           .map<double>((e) => e.lineSubtotal)
           .reduce((value, element) => value + element)
       : 0;
+  double get speditionCost => 0;
+  double get totalAmount => totalItemCost + speditionCost;
 
   CustomerDetailsModel get customerDetailsModel => _customerDetailsModel;
   OrderModel get orderModel => _orderModel;
