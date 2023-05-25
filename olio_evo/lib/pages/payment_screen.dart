@@ -295,7 +295,7 @@ class _PaymentScreenState extends CheckoutBasePageState<PaymentScreen> {
                   child: Text(
                     "Paga alla consegna", //da togliere
                     style: TextStyle(
-                      fontSize: 18,
+                      fontSize: 20,
                       fontWeight: FontWeight.w500,
                       fontStyle: FontStyle.normal,
                     ),
