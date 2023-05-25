@@ -234,6 +234,30 @@ class API {
     String url;
     url = _getOAuthURL("GET", Config.categoriesURL);
     url += "&per_page=20";
+    url += "&parent=39"; //39 è l'id della categoria parent che tiene tutti i sapori
+    try {
+      List<dynamic> result = await getAsync(null, url);
+
+      if (result != null) {
+        List<Category> data = new List<Category>();
+        data = (result as List)
+            .map(
+              (i) => Category.fromJson(i),
+            )
+            .toList();
+        return data;
+      }
+    } catch (e) {
+      TODO: //miss implementation of exception
+      print(e);
+    }
+  }
+
+   Future<List<Category>> getSapori() async {
+    String url;
+    url = _getOAuthURL("GET", Config.categoriesURL);
+    url += "&per_page=20";
+    url += "&parent=39"; //39 è l'id della categoria parent che tiene tutti i sapori
     try {
       List<dynamic> result = await getAsync(null, url);
 
