@@ -29,25 +29,26 @@ class CheckoutBasePageState<T extends CheckoutBasePage> extends State<T> {
         body: ProgressHUD(
           inAsyncCall: loaderModel.isApiCallProcess,
           opacity: 0.3,
-          child: SingleChildScrollView(
-              child: Column(
+          child: Column(
             children: [
               Padding(
                 padding: const EdgeInsets.all(5),
                 child: CheckPoints(
                   checkedTill: currentPage,
                   checkPoints: const [
-                    "Shipping",
-                    "Payment",
-                    "Order",
+                    "Spedizione",
+                    "Pagamento",
+                    "Ordina",
                   ],
                   checkPointFilledColor: Colors.green,
                 ),
               ),
               const Divider(color: Colors.grey),
-              pageUI(),
+              Expanded(
+                child: pageUI(),
+              )
             ],
-          )),
+          ),
         ),
       );
     });

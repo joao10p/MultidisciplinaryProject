@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:olio_evo/api_service.dart';
 import 'package:olio_evo/pages/base_page.dart';
 import 'package:olio_evo/utils/widget_checkpoints.dart';
 
 import '../config.dart';
-import '../models/customer_detail_model.dart';
 import '../models/order_details.dart';
 
 class OrderDetailsPage extends BasePage {
@@ -86,9 +82,9 @@ class _OrderDetailsPageState extends BasePageState<OrderDetailsPage> {
             const SizedBox(
               height: 5,
             ),
-            const CheckPoints(
+            CheckPoints(
               checkedTill: 0,
-              checkPoints: ["Processing", "Spedito", "Consegnato"],
+              checkPoints: ["Elaborazione", "Spedito", "Consegnato"],
               checkPointFilledColor: Colors.redAccent,
             ),
             const Divider(
@@ -98,11 +94,13 @@ class _OrderDetailsPageState extends BasePageState<OrderDetailsPage> {
             const Divider(
               color: Colors.grey,
             ),
-            _itemTotal("Totale prodotto", "${model.itemTotalAmount}",
+            _itemTotal(
+                "Totale prodotto", model.itemTotalAmount.toStringAsFixed(2),
                 textStyle: Theme.of(context).textTheme.itemTotalText),
-            _itemTotal("Costo di spedizione", "${model.shippingTotal}",
+            _itemTotal(
+                "Costo di spedizione", model.shippingTotal.toStringAsFixed(2),
                 textStyle: Theme.of(context).textTheme.itemTotalText),
-            _itemTotal("Totale", "${model.totalAmount}",
+            _itemTotal("Totale", model.totalAmount.toStringAsFixed(2),
                 textStyle: Theme.of(context).textTheme.itemTotalPaidText),
           ]),
     );
@@ -130,7 +128,8 @@ class _OrderDetailsPageState extends BasePageState<OrderDetailsPage> {
         padding: const EdgeInsets.all(1),
         child: Text("Quantità: ${product.quantity}"),
       ),
-      trailing: Text("${Config.currency} ${product.totalAmount}"),
+      trailing:
+          Text("${Config.currency} ${product.totalAmount.toStringAsFixed(2)}"),
     );
   }
 
@@ -143,7 +142,7 @@ class _OrderDetailsPageState extends BasePageState<OrderDetailsPage> {
         label,
         style: textStyle,
       ),
-      trailing: Text("${Config.currency}$value"),
+      trailing: Text("${Config.currency} $value"),
     );
   }
 }

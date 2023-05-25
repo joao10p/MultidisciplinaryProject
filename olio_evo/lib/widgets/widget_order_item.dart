@@ -147,12 +147,32 @@ class WidgetOrderItem extends StatelessWidget {
     return iconText(
         icon,
         Text(
-          "Ordine $status",
+          "Ordine ${getItalianStatusName(status)}",
           style: TextStyle(
             fontSize: 15,
             color: color,
             fontWeight: FontWeight.bold,
           ),
         ));
+  }
+
+  String getItalianStatusName(String status) {
+    switch (status) {
+      case 'completed':
+        return 'completato';
+      case 'pending':
+        return 'in attesa';
+      case 'processing':
+        return 'in fase di processo';
+      case 'on-hold':
+        return 'in attesa';
+      case 'cancelled':
+        return 'cancellato';
+      case 'refunded':
+        return 'rimborsato';
+      case 'failed':
+        return 'fallito';
+    }
+    return "";
   }
 }
