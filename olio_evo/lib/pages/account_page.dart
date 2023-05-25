@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:olio_evo/pages/about_us_page.dart';
+import 'package:olio_evo/pages/invite_friends_page.dart';
 import 'package:olio_evo/pages/orders_page.dart';
 import 'package:olio_evo/shared_service.dart';
 
@@ -308,6 +309,12 @@ class _AccountPageState extends State<AccountPage> {
                                     color: Color(0xff000000), size: 24),
                                 trailing: const Icon(Icons.arrow_forward_ios,
                                     color: Color(0xff212435), size: 24),
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => OffersPage()));
+                                },
                               ),
                             ),
                           ),

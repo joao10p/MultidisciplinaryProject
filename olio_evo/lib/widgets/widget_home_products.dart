@@ -44,7 +44,7 @@ class _WidgetHomeProductState extends State<WidgetHomeProducts> {
                   child: Text(
                     this.widget.labelName,
                     style: TextStyle(
-                        fontSize: 20,
+                        fontSize: 24,
                         fontWeight: FontWeight.bold,
                         color: Color.fromARGB(255, 5, 116, 30)),
                   ),
@@ -65,6 +65,7 @@ class _WidgetHomeProductState extends State<WidgetHomeProducts> {
                       style: TextStyle(
                         color: Color.fromARGB(255, 5, 116, 30),
                         decoration: TextDecoration.underline,
+                        fontSize: 15,
                       ),
                     ),
                   ),
