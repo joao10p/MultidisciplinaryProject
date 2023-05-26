@@ -399,7 +399,9 @@ class API {
 
       if (response.statusCode == 200) {
         responseModel = CartResponseModel.fromJson(response.data);
+        
       }
+      return responseModel;
     } on DioError catch (e) {
       if (e.response.statusCode == 404) {
         print(e.response.statusCode);

@@ -94,7 +94,7 @@ class _WidgetCategoriesState extends State<WidgetCategories> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                _categoriesList()              
+                _saporiList()              
               ],
             ),
           ),
@@ -222,6 +222,21 @@ Container(
     return FutureBuilder<List<Category>>(
       future: apiSerivce
           .getCategories(), //getData(), // if you mean this method well return image url
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          categorieSalvate=snapshot.data;
+          return _buildCategoryList(snapshot.data);
+        } else {
+          return Center(child: CircularProgressIndicator());
+        }
+      },
+    );
+  }
+
+  Widget _saporiList() {
+    return FutureBuilder<List<Category>>(
+      future: apiSerivce
+          .getSapori(), //getData(), // if you mean this method well return image url
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           categorieSalvate=snapshot.data;
