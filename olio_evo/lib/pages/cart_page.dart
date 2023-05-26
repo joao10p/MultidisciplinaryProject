@@ -36,6 +36,7 @@ class _CartPageState extends State<CartPage> {
             return Consumer<LoaderProvider>(
                 builder: (context, loaderModel, child) {
               return Scaffold(
+                backgroundColor: Colors.white,
                 appBar: _buildAppBar(),
                 body: ProgressHUD(
                   inAsyncCall: loaderModel.isApiCallProcess,
@@ -133,7 +134,7 @@ class _CartPageState extends State<CartPage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         const Text(
-                          "Total",
+                          "Totale",
                           style: TextStyle(
                               fontSize: 15, fontWeight: FontWeight.w400),
                         ),
@@ -154,16 +155,23 @@ class _CartPageState extends State<CartPage> {
                                 builder: (context) => VerifyAddress()));
                       },
                       style: TextButton.styleFrom(
-                        padding: const EdgeInsets.all(15),
+                        padding: const EdgeInsets.all(16),
                         backgroundColor: Colors.redAccent,
-                        shape: const StadiumBorder(),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(6),
+                          side: const BorderSide(
+                              color: Colors.redAccent, width: 2),
+                        ),
                       ),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: const [
                           Text(
                             "Checkout",
-                            style: TextStyle(color: Colors.white),
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 16,
+                            ),
                           )
                         ],
                       ),
@@ -176,7 +184,45 @@ class _CartPageState extends State<CartPage> {
         ));
       } else if (cartModel.cartItems.isEmpty) {
         return Column(children: [
-          const Text("The cart is empty"),
+          Padding(
+            padding: EdgeInsets.fromLTRB(0, 70, 0, 30),
+            child: Image.asset(
+              "assets/images/empty_cart.png",
+              height: MediaQuery.of(context).size.height * 0.3,
+              width: MediaQuery.of(context).size.width,
+              fit: BoxFit.fitWidth,
+            ),
+          ),
+          //bottone di testo verde
+          Padding(
+            padding: const EdgeInsets.all(10),
+            child: TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              style: TextButton.styleFrom(
+                padding: const EdgeInsets.all(16),
+                backgroundColor: Colors.green,
+                shape: const StadiumBorder(),
+              ),
+              child: Wrap(
+                alignment: WrapAlignment.center,
+                crossAxisAlignment: WrapCrossAlignment.center,
+                children: const [
+                  Icon(
+                    Icons.home_rounded,
+                    color: Colors.white,
+                  ),
+                  Text(
+                    "Torna allo shopping",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 16,),
+                  ),
+                ],
+              ),
+            ),
+          ),
           Container(
             color: Colors.white,
             width: MediaQuery.of(context).size.width,
@@ -213,10 +259,14 @@ class _CartPageState extends State<CartPage> {
                               builder: (context) => VerifyAddress()));
                     },
                     style: TextButton.styleFrom(
-                      padding: const EdgeInsets.all(15),
-                      backgroundColor: Colors.redAccent,
-                      shape: const StadiumBorder(),
-                    ),
+                      padding: const EdgeInsets.all(16),
+                        backgroundColor: Colors.redAccent,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(6),
+                          side: const BorderSide(
+                              color: Colors.redAccent, width: 2),
+                        ),
+                      ),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: const [
