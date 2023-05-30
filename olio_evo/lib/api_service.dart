@@ -230,11 +230,12 @@ class API {
   }
 
 //sometise throw an exception beacuse it receives
-  Future<List<Category>> getCategories() async {
+  Future<List<Category>> getCategories(String parent) async {
     String url;
     url = _getOAuthURL("GET", Config.categoriesURL);
     url += "&per_page=20";
-    url += "&parent=39"; //39 è l'id della categoria parent che tiene tutti i sapori
+    url += "&parent=" + parent;
+    //39 è l'id della categoria parent che tiene tutti i sapori
     try {
       List<dynamic> result = await getAsync(null, url);
 
