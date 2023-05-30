@@ -370,7 +370,7 @@ class _PaymentScreenState extends CheckoutBasePageState<PaymentScreen> {
                   ),
                 ),
                 const Padding(
-                  padding: EdgeInsets.fromLTRB(0, 100, 0, 0),
+                  padding: EdgeInsets.fromLTRB(0, 80, 0, 0),
                   child: Text(
                     "Consegna prevista entro:",
                     textAlign: TextAlign.start,
