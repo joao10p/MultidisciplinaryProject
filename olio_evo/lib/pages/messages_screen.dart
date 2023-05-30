@@ -18,7 +18,7 @@ class _MessagesScreenState extends State<MessagesScreen> {
         shrinkWrap: true,
         itemBuilder: (context, index) {
           return Container(
-            margin: const EdgeInsets.all(10),
+            margin: const EdgeInsets.fromLTRB(0, 0, 0, 10),
             child: Row(
               mainAxisAlignment:
                   widget.messages[widget.messages.length - 1 - index]
@@ -27,48 +27,53 @@ class _MessagesScreenState extends State<MessagesScreen> {
                       : MainAxisAlignment.start,
               children: [
                 Container(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 14, horizontal: 14),
+                    padding: const EdgeInsets.all(14),
                     decoration: BoxDecoration(
-    border: Border.all(
-      color: Colors.black,
-      width: 1,
-    ),
-borderRadius: BorderRadius.only(
-      topLeft: widget.messages[widget.messages.length - 1 - index]
-                                    ['isUserMessage']
-                                ? Radius.circular(10)
-                                : Radius.circular(0),
-      topRight: widget.messages[widget.messages.length - 1 - index]
-                                    ['isUserMessage']
-                                ? Radius.circular(0)
-                                : Radius.circular(10),
-      bottomRight: widget.messages[widget.messages.length - 1 - index]
-                                    ['isUserMessage']
-                                ? Radius.circular(0)
-                                : Radius.circular(10),
-      bottomLeft: widget.messages[widget.messages.length - 1 - index]
-                                    ['isUserMessage']
-                                ? Radius.circular(10)
-                                : Radius.circular(0),
-    ),
-  
+                        border: Border.all(
+                          color: Colors.black,
+                          width: 1,
+                        ),
+                        borderRadius: BorderRadius.only(
+                          topLeft: widget.messages[widget.messages.length -
+                                  1 -
+                                  index]['isUserMessage']
+                              ? Radius.circular(10)
+                              : Radius.circular(10),
+                          topRight: widget.messages[widget.messages.length -
+                                  1 -
+                                  index]['isUserMessage']
+                              ? Radius.circular(10)
+                              : Radius.circular(10),
+                          bottomRight: widget.messages[widget.messages.length -
+                                  1 -
+                                  index]['isUserMessage']
+                              ? Radius.circular(0)
+                              : Radius.circular(10),
+                          bottomLeft: widget.messages[widget.messages.length -
+                                  1 -
+                                  index]['isUserMessage']
+                              ? Radius.circular(10)
+                              : Radius.circular(0),
+                        ),
                         color:
                             widget.messages[widget.messages.length - 1 - index]
                                     ['isUserMessage']
-                                ? Color.fromARGB(255, 255, 255, 255)
-                                : Color.fromARGB(255, 255, 255, 255).withOpacity(0.8)),
+                                ? Color.fromARGB(255, 79, 187, 82)
+                                : Color.fromARGB(255, 109, 108, 108)),
                     constraints: BoxConstraints(maxWidth: w * 2 / 3),
-                    child: Text(widget
-                        .messages[widget.messages.length - 1 - index]['message']
-                        .text
-                        .text[0],
-                      
+                    child: Text(
+                        widget
+                            .messages[widget.messages.length - 1 - index]
+                                ['message']
+                            .text
+                            .text[0],
                         style: TextStyle(
-                          fontSize: 18,
-                          color: Colors.black,
-                          fontStyle: FontStyle.italic,
-                          
+                          fontSize: 20,
+                          color: widget.messages[widget.messages.length - 1 - index]
+                                    ['isUserMessage']
+                          ?Colors.white
+                          :Colors.white,
+                          fontStyle: FontStyle.normal,
                         ))),
               ],
             ),
