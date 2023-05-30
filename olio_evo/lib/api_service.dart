@@ -487,9 +487,10 @@ class API {
     try {
       List<dynamic> result =
           await getAsync(Config.productURL + "?&sku=" + slug, null);
-      if (result != null) {
+      if (result.length >0) {
         return Product.fromJson(result[0]);
       }
+      return null;
     } catch (e) {
       return null;
     }

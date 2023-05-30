@@ -20,6 +20,7 @@ class _BarcodePageState extends State<BarcodePage> {
   bool isNotFound = false;
   API apiService = new API();
   String _scanBarcode = 'Unknown';
+  bool isApiCallProcess = false;
 
   Future<void> scanBarcodeNormal() async {
     String barcodeScanRes;
@@ -107,10 +108,18 @@ class _BarcodePageState extends State<BarcodePage> {
                 ),
                 onPressed: () {
                   scanBarcodeNormal().then((value) => {
+                        setState(() {
+                          isApiCallProcess = true;
+                        }),
                         apiService.getProductBySlug(_scanBarcode).then(
                               (value) => {
                                 if (value != null)
                                   {
+                                    setState(() {
+                                      isApiCallProcess = false;
+                                    isNotFound = false;
+
+                                    }),
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
@@ -122,6 +131,8 @@ class _BarcodePageState extends State<BarcodePage> {
                                 else
                                   {
                                     setState(() {
+                                      isApiCallProcess = false;
+
                                       isNotFound = true;
                                     })
                                   }
@@ -129,8 +140,6 @@ class _BarcodePageState extends State<BarcodePage> {
                             )
                       });
                   // Inserire qui le azioni da eseguire quando il bottone viene cliccato
-                 
-                
                 },
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -175,16 +184,19 @@ class _BarcodePageState extends State<BarcodePage> {
               ),
               Visibility(
                 child: Center(
-                    child: Padding(
-                        padding: EdgeInsets.only(top: 20),
-                        child: Text(
-                          "Barcode non trovato",
-                          style: TextStyle(
-                              fontSize: 24,
-                              fontWeight: FontWeight.w500,
-                              color: Colors.red),
-                        ))),
-                visible: isNotFound,
+                    child: isApiCallProcess
+                        ?  Padding(
+                            padding: EdgeInsets.only(top: 20),child: CircularProgressIndicator(),)
+                        : Padding(
+                            padding: EdgeInsets.only(top: 20),
+                            child: Text(
+                              "Barcode non trovato",
+                              style: TextStyle(
+                                  fontSize: 24,
+                                  fontWeight: FontWeight.w500,
+                                  color: Colors.red),
+                            ))),
+                visible: isApiCallProcess || isNotFound,
               )
             ],
           )),
