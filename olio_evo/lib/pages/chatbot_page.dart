@@ -26,11 +26,11 @@ class _ChatbotPageState extends State<ChatbotPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(69, 52, 165, 52),
+      backgroundColor: Color.fromARGB(69, 255, 255, 255),
       body: Container(
         alignment: Alignment.center,
         margin: EdgeInsets.all(0),
-        padding: EdgeInsets.all(0),
+        padding: EdgeInsets.all(5),
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
         decoration: BoxDecoration(
@@ -51,14 +51,15 @@ class _ChatbotPageState extends State<ChatbotPage> {
               mainAxisSize: MainAxisSize.max,
               children: [
                 Expanded(
-                    flex: 1,
                     child: TextField(
                         controller: _controller,
-                        style: const TextStyle(color: Color.fromARGB(255, 252, 252, 252)),
-                        cursorColor: Colors.white,
+                        style: const TextStyle(
+                            color: Colors.black,
+                            fontSize: 20,),
+                        cursorColor: Colors.black,
                         decoration: const InputDecoration(
-                          fillColor: Color.fromARGB(255, 232, 235, 231), filled: true,
-                        
+                            fillColor: Colors.white,
+                            filled: true,
                             enabledBorder: UnderlineInputBorder(
                               borderSide: BorderSide(color: Colors.white),
                             ),
@@ -66,10 +67,10 @@ class _ChatbotPageState extends State<ChatbotPage> {
                               borderSide: BorderSide(color: Colors.white),
                             )))),
                 IconButton(
-                  icon: Icon(Icons.send),
+                  icon: Icon(Icons.send_rounded),
                   onPressed: () {
                     sendMessage(_controller.text);
-                        _controller.clear();
+                    _controller.clear();
                   },
                   color: Color(0xff212435),
                   iconSize: 30,

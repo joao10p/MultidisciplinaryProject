@@ -253,60 +253,124 @@ class _PaymentScreenState extends CheckoutBasePageState<PaymentScreen> {
                 ),
                 Padding(
                   padding: const EdgeInsets.fromLTRB(0, 20, 0, 0),
-                  child: MaterialButton(
+                  child: TextButton(
                     onPressed: () {
                       Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => PaypalPaymentScreen()));
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => PaypalPaymentScreen(),
+                        ),
+                      );
                     },
-                    color: const Color(0xff1b66de),
-                    elevation: 0,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(6.0),
-                      side:
-                          const BorderSide(color: Color(0xff808080), width: 1),
-                    ),
-                    padding: const EdgeInsets.all(16),
-                    textColor: const Color(0xffffffff),
-                    height: 50,
-                    minWidth: MediaQuery.of(context).size.width * 0.8,
-                    child: const Text(
-                      "Paga con PayPal", //aggiungere funzione pagamento
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w600,
-                        fontStyle: FontStyle.normal,
+                    style: TextButton.styleFrom(
+                      padding: const EdgeInsets.all(16),
+                      backgroundColor: Colors.blue,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(6.0),
+                        side: const BorderSide(
+                            color: Color(0xff808080), width: 1),
                       ),
                     ),
-                  ),
-                ),
-                /* Padding(
-                padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
-                child: MaterialButton(
-                  onPressed: () {},
-                  color: Color(0xff82ca06),
-                  elevation: 0,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(6.0),
-                    side: BorderSide(color: Color(0xff808080), width: 1),
-                  ),
-                  padding: EdgeInsets.all(16),
-                  child: Text(
-                    "Paga alla consegna", //da togliere
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w500,
-                      fontStyle: FontStyle.normal,
+                    child: Wrap(
+                      alignment: WrapAlignment.center,
+                      crossAxisAlignment: WrapCrossAlignment.center,
+                      children: const [
+                        Padding(
+                          padding: EdgeInsets.fromLTRB(0, 0, 10, 0),
+                          child: Image(
+                            image: AssetImage("assets/images/paypal.png"), 
+                            width: 30),
+                        ),
+                        Text(
+                          "Paga con PayPal",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w600,
+                            fontSize: 18,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                  textColor: Color(0xffffffff),
-                  height: 40,
-                  minWidth: MediaQuery.of(context).size.width * 0.8,
                 ),
-              ), */
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(0, 20, 0, 0),
+                  child: TextButton(
+                    onPressed: () {},
+                    style: TextButton.styleFrom(
+                      padding: const EdgeInsets.all(16),
+                      backgroundColor: Colors.orange,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(6.0),
+                        side: const BorderSide(
+                            color: Color(0xff808080), width: 1),
+                      ),
+                    ),
+                    child: Wrap(
+                      alignment: WrapAlignment.center,
+                      crossAxisAlignment: WrapCrossAlignment.center,
+                      children: const [
+                        Padding(
+                          padding: EdgeInsets.fromLTRB(0, 0, 10, 0),
+                          child: Icon(
+                            Icons.credit_card_rounded,
+                            color: Colors.white,
+                            size: 30,
+                          ),
+                        ),
+                        Text(
+                          "Paga con carta di credito",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w600,
+                            fontSize: 18,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(0, 20, 0, 0),
+                  child: TextButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    style: TextButton.styleFrom(
+                      padding: const EdgeInsets.all(16),
+                      backgroundColor: Colors.green,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(6.0),
+                        side: const BorderSide(
+                            color: Color(0xff808080), width: 1),
+                      ),
+                    ),
+                    child: Wrap(
+                      alignment: WrapAlignment.center,
+                      crossAxisAlignment: WrapCrossAlignment.center,
+                      children: const [
+                        Padding(
+                          padding: EdgeInsets.fromLTRB(0, 0, 10, 0),
+                          child: Icon(
+                            Icons.monetization_on_rounded,
+                            color: Colors.white,
+                            size: 30,
+                          ),
+                        ),
+                        Text(
+                          "Paga alla consegna",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w600,
+                            fontSize: 18,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
                 const Padding(
-                  padding: EdgeInsets.fromLTRB(0, 100, 0, 0),
+                  padding: EdgeInsets.fromLTRB(0, 80, 0, 0),
                   child: Text(
                     "Consegna prevista entro:",
                     textAlign: TextAlign.start,
