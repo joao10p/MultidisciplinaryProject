@@ -96,7 +96,7 @@ class _WidgetCategoriesState extends State<WidgetCategories> {
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [_saporiList()],
+                              children: [_saporiList(context)],
                             ),
                           ),
                         );
@@ -194,11 +194,12 @@ class _WidgetCategoriesState extends State<WidgetCategories> {
                                       padding:
                                           EdgeInsets.only(top: 20, left: 20),
                                       child: Text(
-                                        "Scegli in quale zona vuoi cercare",
+                                        "Scegli in quale zona vuoi cercare: ",
                                         textAlign: TextAlign.center,
                                         style: TextStyle(
                                             fontSize: 20,
-                                            fontWeight: FontWeight.bold),
+                                            fontWeight: FontWeight.bold,
+                                            fontStyle: FontStyle.italic ),
                                       ),
                                     ),
                                   ),
@@ -251,7 +252,7 @@ class _WidgetCategoriesState extends State<WidgetCategories> {
                                                                 .size
                                                                 .height *
                                                             0.8,
-                                                    child: _categoriesList("49") ,//50 is the id 
+                                                    child: _categoriesList("49","Nord Italia", context) ,//50 is the id 
                                                   ),
                                                 );
                                               });
@@ -312,7 +313,7 @@ class _WidgetCategoriesState extends State<WidgetCategories> {
                                                                 .size
                                                                 .height *
                                                             0.8,
-                                                    child: _categoriesList("50") //50 is the id 
+                                                    child: _categoriesList("50", "Centro Italia", context) //50 is the id 
                                                   ),
                                                 );
                                               },
@@ -375,9 +376,9 @@ class _WidgetCategoriesState extends State<WidgetCategories> {
                                                                 .size
                                                                 .height *
                                                             0.8,
-                                                    child: _categoriesList("51") //50 is the id 
+                                                    child: _categoriesList("51","Sud Italia", context) //50 is the id 
                                                   ),
-                                                );
+                                                ); 
                                             },
                                           );
                                             }
@@ -442,14 +443,14 @@ class _WidgetCategoriesState extends State<WidgetCategories> {
         );
   }
 
-  Widget _categoriesList(String parent) {
+  Widget _categoriesList(String parent, String name,BuildContext MainContext) {
     return FutureBuilder<List<Category>>(
       future: apiSerivce
           .getCategories(parent), //getData(), // if you mean this method well return image url
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           categorieSalvate = snapshot.data;
-          return _buildCategoryList(snapshot.data);
+          return _buildCategoryList(snapshot.data, name, MainContext);
         } else {
           return Center(child: CircularProgressIndicator());
         }
@@ -459,14 +460,14 @@ class _WidgetCategoriesState extends State<WidgetCategories> {
 
 
 
-  Widget _saporiList() {
+  Widget _saporiList(BuildContext context) {
     return FutureBuilder<List<Category>>(
       future: apiSerivce
           .getSapori(), //getData(), // if you mean this method well return image url
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           categorieSalvate = snapshot.data;
-          return _buildCategoryList(snapshot.data);
+          return _buildCategoryList(snapshot.data,null,context);
         } else {
           return Center(child: CircularProgressIndicator());
         }
@@ -474,7 +475,7 @@ class _WidgetCategoriesState extends State<WidgetCategories> {
     );
   }
 
-  Widget _buildCategoryList(List<Category> categories) {
+  Widget _buildCategoryList(List<Category> categories, String name, BuildContext mainContext) {
     return Container(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height * 0.75,
@@ -491,24 +492,30 @@ class _WidgetCategoriesState extends State<WidgetCategories> {
           children: [
             Row(
               children: [
-                Padding(
+                Expanded(child:Padding(
                   padding: EdgeInsets.fromLTRB(5, 10, 10, 10),
-                  child: Text(
-                    "Scegli la caratteristica desiderata",
+                  child: 
+                  Text(
+                    name==null
+                    ?"Scegli la caratteristica desiderata"
+                    : name,
                     softWrap: true,
-                    textAlign: TextAlign.start,
+                    textAlign: TextAlign.center,
                     overflow: TextOverflow.clip,
                     style: TextStyle(
                       fontFamily: "SFPro",
                       fontWeight: FontWeight.w900,
-                      fontStyle: FontStyle.normal,
-                      fontSize: 16,
+                      fontStyle: FontStyle.italic,
+                      fontSize: 20,
                       color: Color(0xff000000),
                     ),
                   ),
-                ),
+                ),),
+              
                 IconButton(
+
                   onPressed: () {
+                    Navigator.pop(mainContext);
                     //chiudi il popup
                   },
                   iconSize: 40,
