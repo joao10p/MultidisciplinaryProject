@@ -1,7 +1,7 @@
 import 'package:carousel_pro/carousel_pro.dart';
 import 'package:flutter/material.dart';
 import 'package:olio_evo/config.dart';
-import 'package:olio_evo/widgets/widget_home_categories.dart';
+import 'package:olio_evo/widgets/widget_home_sapori_regioni.dart';
 import 'package:olio_evo/widgets/widget_home_products.dart';
 
 class DashboardPage extends StatefulWidget {
