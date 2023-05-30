@@ -7,6 +7,7 @@ import 'package:olio_evo/provider/cart_provider.dart';
 import 'package:olio_evo/utils/utils.dart';
 import 'package:provider/provider.dart';
 
+import '../pages/home_page.dart';
 import '../provider/loader_provider.dart';
 import '../utils/custom_stepper.dart';
 
@@ -52,8 +53,8 @@ class CartProduct extends StatelessWidget {
                   Utils.showMessage(
                       context,
                       "OlivEvo",
-                      "Do you want to delete this item?",
-                      "Yes",
+                      "Vuoi eliminare questo prodotto?",
+                      "Si",
                       () {
                         Provider.of<LoaderProvider>(context, listen: false)
                             .setLoadingStatus(true);
@@ -63,7 +64,6 @@ class CartProduct extends StatelessWidget {
 
                         Provider.of<LoaderProvider>(context, listen: false)
                             .setLoadingStatus(false);
-
                         Navigator.of(context).pop();
                       },
                       buttonText2: "No",
@@ -81,7 +81,7 @@ class CartProduct extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: const [
                       Icon(Icons.delete, color: Colors.white, size: 20),
-                      Text("Remove", style: TextStyle(color: Colors.white))
+                      Text("Rimuovi", style: TextStyle(color: Colors.white))
                     ]),
               ),
             ],
@@ -98,6 +98,25 @@ class CartProduct extends StatelessWidget {
               onChanged: (value) {
                 Provider.of<CartProvider>(context, listen: false)
                     .updateQty(data.productId, value);
+
+                Provider.of<LoaderProvider>(context, listen: false)
+                    .setLoadingStatus(true);
+                var cartProvider =
+                    Provider.of<CartProvider>(context, listen: false);
+
+                cartProvider.updateCart((val) {
+                  Provider.of<LoaderProvider>(context, listen: false)
+                      .setLoadingStatus(false);
+                });
+
+                if (value == 0 && cartProvider.cartItems.length == 1) {
+                  Provider.of<LoaderProvider>(context, listen: false)
+                      .setLoadingStatus(false);
+                  Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(builder: (context) => HomePage()),
+                      ModalRoute.withName("/Home"));
+                }
               },
             )),
       );
