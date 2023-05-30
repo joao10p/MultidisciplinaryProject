@@ -23,16 +23,14 @@ class ProductCard extends StatelessWidget {
         );
       },
       child: Container(
-        padding: EdgeInsets.all(2),
+        alignment: Alignment.center,
+        margin: EdgeInsets.all(10),
+        padding: EdgeInsets.all(0),
         //width: MediaQuery.of(context).size.width / 2.2,
         //height: MediaQuery.of(context).size.height / 0.5,
         decoration: BoxDecoration(
           color: Color(0xffffffff),
           shape: BoxShape.rectangle,
-          border: Border.all(
-            color: Color.fromARGB(255, 10, 10, 10), // Colore del bordo
-            width: 1,
-          ), // Larghezza del bordo
           borderRadius: BorderRadius.circular(10.0),
           boxShadow: [
             BoxShadow(
@@ -43,40 +41,56 @@ class ProductCard extends StatelessWidget {
           ],
         ),
         child: Column(
-          //   mainAxisAlignment: MainAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisSize: MainAxisSize.max,
           children: <Widget>[
-           /**  Visibility(
-                  visible: data.calculateDiscount() > 0,
-                  child: Align(
-                    alignment: Alignment.topLeft,
-                    child: Container(
-                      padding: EdgeInsets.all(5),
-                      decoration: BoxDecoration(
-                        color: Colors.green,
-                        borderRadius: BorderRadius.circular(50),
-                      ),
-                      child: Text(
-                        '${data.calculateDiscount()}% SCONTO',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w700,
-                          fontSize: 14,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                */
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.max,
-              children: <Widget>[
-                
+              children: [
                 Padding(
-                  padding: EdgeInsets.fromLTRB(5, 10, 3, 0),
+                  padding: EdgeInsets.fromLTRB(55, 20, 0, 0),
+                  child: Image.network(
+                    data.images[0].src,
+                    height: 100,
+                    width: 75,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.fromLTRB(10, 5, 0, 5),
+                  child: IconButton(
+                    icon: Icon(Icons.add_shopping_cart_outlined),
+                    onPressed: () {},
+                    color: Color(0xff212435),
+                    iconSize: 35,
+                  ),
+                ),
+              ],
+            ),
+            Container(
+              margin:
+                  EdgeInsets.fromLTRB(0, 20, 0, 0), //qui il nome del prodotto
+              width: MediaQuery.of(context).size.width * 0.4,
+              alignment: Alignment.center,
+              child: Text(data.name,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontFamily: 'SFPro',
+                    fontWeight: FontWeight.w500,
+                    fontSize: 15,
+                    color: Colors.black,
+                  )),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                Padding(
+                  padding: EdgeInsets.fromLTRB(20, 20, 3, 0),
                   child: Text(
                     data.rating.toString() == '0'
                         ? '3.0'
@@ -87,13 +101,13 @@ class ProductCard extends StatelessWidget {
                       fontFamily: 'SFPro',
                       fontWeight: FontWeight.w400,
                       //fontStyle: FontStyle.italic,
-                      fontSize: 20,
+                      fontSize: 18,
                       color: Color.fromARGB(255, 94, 94, 94),
                     ),
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.fromLTRB(2, 12, 3, 0),
+                  padding: EdgeInsets.fromLTRB(0, 20, 10, 0),
                   child: RatingBar.builder(
                     initialRating: data.rating.toDouble() == 0
                         ? 3
@@ -101,7 +115,7 @@ class ProductCard extends StatelessWidget {
                     unratedColor: Color(0xff9e9e9e),
                     itemBuilder: (context, index) =>
                         Icon(Icons.star, color: Color(0xffffc107)),
-                    itemCount: 5, //numero stelline
+                    itemCount: 1, //numero stelline
                     itemSize: 20, //dimensione stelline
                     direction: Axis.horizontal,
                     allowHalfRating: true,
@@ -109,60 +123,75 @@ class ProductCard extends StatelessWidget {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.fromLTRB(5, 0, 0, 0),
-                  child: IconButton(
-                    icon: Icon(Icons.add_shopping_cart_outlined),
-                    onPressed: () {},
-                    color: Color(0xff212435),
-                    iconSize: 30,
+                  padding: EdgeInsets.fromLTRB(0, 15, 0, 0),
+                  child: Container(
+                    // qui il prezzo
+                    padding: EdgeInsets.all(0),
+                    //bordi rotondi
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    width: MediaQuery.of(context).size.width * 0.25,
+                    alignment: Alignment.center,
+                    child: data.salePrice != null && data.salePrice.isNotEmpty
+                        ? Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                '€ ${data.regularPrice}',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  decoration: TextDecoration.lineThrough,
+                                  fontFamily: 'SFPro',
+                                  fontSize: 24,
+                                  color: Color.fromARGB(255, 150, 149, 149),
+                                  fontWeight: data.salePrice != null &&
+                                          data.salePrice.isNotEmpty
+                                      ? FontWeight.w800
+                                      : FontWeight.w800,
+                                ),
+                              ),
+                              SizedBox(
+                                width: MediaQuery.of(context).size.width * 0.02,
+                              ),
+                              Text(
+                                '€ ${data.salePrice}',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  fontFamily: 'SFPro',
+                                  fontSize: 24,
+                                  color: data.salePrice != null &&
+                                          data.salePrice.isNotEmpty
+                                      ? Colors.red
+                                      : Colors.black,
+                                  fontWeight: data.salePrice != null &&
+                                          data.salePrice.isNotEmpty
+                                      ? FontWeight.w800
+                                      : FontWeight.w800,
+                                ),
+                              )
+                            ],
+                          )
+                        : Text(
+                            '€ ${data.regularPrice}',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontFamily: 'SFPro',
+                              fontSize: 24,
+                              color: data.salePrice != null &&
+                                      data.salePrice.isNotEmpty
+                                  ? Colors.red
+                                  : Colors.black,
+                              fontWeight: data.salePrice != null &&
+                                      data.salePrice.isNotEmpty
+                                  ? FontWeight.w800
+                                  : FontWeight.w800,
+                            ),
+                          ),
                   ),
-                ),
-              ],
-            ),
-            Image.network(
-              data.images.length > 0
-                  ? data.images[0].src
-                  : "https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg?20200913095930",
-              height: MediaQuery.of(context).size.height*0.15,
-            ),
-            Container(
-              margin:
-                  EdgeInsets.only(top: 15, left: 4), //qui il nome del prodotto
-              width: MediaQuery.of(context).size.width / 1,
-              alignment: Alignment.center,
-              child: Text(data.name,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontFamily: 'SFPro',
-                    fontWeight: FontWeight.w600,
-                    fontSize: 16,
-                    color: Colors.black,
-                  )),
-            ),
-            Container(
-              // qui il prezzo
-              margin: EdgeInsets.only(top: 8, left: 4),
-              width: MediaQuery.of(context).size.width / 5,
-              alignment: Alignment.center,
-              child: Text(
-                data.salePrice != null && data.salePrice.isNotEmpty
-                    ? 'In offerta: € ${data.salePrice}'
-                    : '€ ${data.regularPrice}',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontFamily: 'SFPro',
-                  fontSize: 18,
-                  color: data.salePrice != null && data.salePrice.isNotEmpty
-                      ? Colors.red
-                      : Colors.black,
-                  fontWeight:
-                      data.salePrice != null && data.salePrice.isNotEmpty
-                          ? FontWeight.w800
-                          : FontWeight.w800,
-                ),
-              ),
-            ),
-            /* riga con icone sapori
+                )
+
+                /* riga con icone sapori
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -180,6 +209,8 @@ class ProductCard extends StatelessWidget {
                   ],
                 ),
                 */
+              ],
+            ),
           ],
         ),
       ),
