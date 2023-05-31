@@ -100,10 +100,10 @@ class _BarcodePageState extends State<BarcodePage> {
               ),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  primary: Color(0x1f000000),
+                  primary: Color.fromARGB(123, 42, 200, 3),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12.0),
-                    side: BorderSide(color: Color(0x4d9e9e9e), width: 1),
+                    side: BorderSide(color: Color.fromARGB(77, 100, 255, 33), width: 1),
                   ),
                 ),
                 onPressed: () {
@@ -159,7 +159,7 @@ class _BarcodePageState extends State<BarcodePage> {
                       ),
                     ),
                     Image(
-                      image: AssetImage("assets/images/camera_green.jpg"),
+                      image: AssetImage("assets/images/fotocamera_verde.webp"),
                       height: MediaQuery.of(context).size.height * 0.45,
                       width: MediaQuery.of(context).size.width * 0.9,
                       fit: BoxFit.cover,
