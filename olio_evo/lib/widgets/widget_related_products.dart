@@ -86,13 +86,13 @@ class WidgetRelatedProductsState extends State<WidgetRelatedProducts>{
      
         Container(
            decoration: BoxDecoration(border: Border.all(
-      color: Color.fromARGB(255, 27, 157, 23),
-      width: 2.0,
+      color: Colors.grey,
+      width: 3.0,
     ),
         borderRadius: BorderRadius.circular(20.0),
 
         ),
-      height: MediaQuery.of(context).size.height * 0.5,
+      height: MediaQuery.of(context).size.height * 0.35,
       alignment: Alignment.centerLeft,
       child: ListView.builder(
         shrinkWrap: true,
@@ -116,8 +116,8 @@ class WidgetRelatedProductsState extends State<WidgetRelatedProducts>{
               },
               child: Container(
               decoration: BoxDecoration(border: Border.all(
-      color: Color.fromARGB(255, 42, 128, 6),
-      width: 1.0,
+      color: Colors.lightGreen,
+      width: 1.5,
     ),
         borderRadius: BorderRadius.circular(10),
 
@@ -137,15 +137,8 @@ class WidgetRelatedProductsState extends State<WidgetRelatedProducts>{
                   ),
                   decoration: BoxDecoration(
                     shape: BoxShape.rectangle,
-                    borderRadius: BorderRadius.circular(30),
+                    borderRadius: BorderRadius.circular(3),
                     color: Colors.white,
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black12,
-                        offset: Offset(0, 5),
-                        blurRadius: 15,
-                      )
-                    ],
                   )),
               Container(
                 width: MediaQuery.of(context).size.width*0.25,

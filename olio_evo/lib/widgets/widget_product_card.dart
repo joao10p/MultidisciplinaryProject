@@ -4,6 +4,11 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import '../models/product.dart';
 import '../pages/product_details.dart';
 
+import '../models/cart_request_model.dart';
+import '../provider/cart_provider.dart';
+import '../provider/loader_provider.dart';
+import 'package:provider/provider.dart';
+
 class ProductCard extends StatelessWidget {
   ProductCard({Key key, this.data}) : super(key: key);
 
@@ -63,7 +68,21 @@ class ProductCard extends StatelessWidget {
                   padding: EdgeInsets.fromLTRB(10, 5, 0, 5),
                   child: IconButton(
                     icon: Icon(Icons.add_shopping_cart_outlined),
-                    onPressed: () {},
+                    onPressed: () {
+                      Provider.of<LoaderProvider>(context, listen: false)
+                          .setLoadingStatus(true);
+                      var cartProvider =
+                          Provider.of<CartProvider>(context, listen: false);
+                      CartProducts cartProducts = new CartProducts();
+
+                      cartProducts.productId = data.id;
+                      cartProducts.quantity = 1;
+                      cartProvider.addToCart(cartProducts, (val) {
+                        Provider.of<LoaderProvider>(context, listen: false)
+                            .setLoadingStatus(false);
+                        print(val);
+                      });
+                    },
                     color: Color(0xff212435),
                     iconSize: 35,
                   ),
