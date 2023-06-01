@@ -45,7 +45,6 @@ class _WidgetCategoriesState extends State<WidgetCategories> {
             color: Color.fromARGB(255, 249, 249, 249),
             shape: BoxShape.rectangle,
             borderRadius: BorderRadius.zero,
-            border: Border.all(color: Colors.white, width: 0),
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -60,6 +59,10 @@ class _WidgetCategoriesState extends State<WidgetCategories> {
                   color: Color(0xffffffff),
                   shape: BoxShape.rectangle,
                   borderRadius: BorderRadius.circular(6.0),
+                  border: Border.all(
+                      color: Colors.green, 
+                      width: 2.0,
+                  ),
                   boxShadow: [
                     BoxShadow(
                       color: Colors.black,
@@ -112,12 +115,12 @@ class _WidgetCategoriesState extends State<WidgetCategories> {
                     mainAxisSize: MainAxisSize.max,
                     children: [
                       Padding(
-                        padding: EdgeInsets.all(5),
+                        padding: EdgeInsets.all(8),
                         child: Image(
                           image: AssetImage("assets/images/sapori_image.png"),
                           height: MediaQuery.of(context).size.height * 0.15,
                           width: MediaQuery.of(context).size.width * 0.15,
-                          fit: BoxFit.fitHeight,
+                          fit: BoxFit.contain,
                         ),
                       ),
                       Text(
@@ -145,6 +148,10 @@ class _WidgetCategoriesState extends State<WidgetCategories> {
                   color: Color(0xffffffff),
                   shape: BoxShape.rectangle,
                   borderRadius: BorderRadius.circular(6.0),
+                  border: Border.all(
+                      color: Colors.green, 
+                      width: 2.0,
+                  ),
                   boxShadow: [
                     BoxShadow(
                       color: Colors.black12,

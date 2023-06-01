@@ -185,7 +185,7 @@ class _WidgetHomeProductState extends State<WidgetHomeProducts> {
                     Container(
                       margin: EdgeInsets.fromLTRB(
                           0, 20, 0, 0), //qui il nome del prodotto
-                      width: MediaQuery.of(context).size.width * 0.4,
+                      width: MediaQuery.of(context).size.width * 0.6,
                       alignment: Alignment.center,
                       child: Text(data.name,
                           textAlign: TextAlign.center,

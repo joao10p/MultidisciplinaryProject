@@ -4,10 +4,9 @@ import 'package:olio_evo/api_service.dart';
 import '../models/product.dart';
 import '../pages/product_details.dart';
 
-class WidgetRelatedProducts extends StatefulWidget{
+class WidgetRelatedProducts extends StatefulWidget {
+  bool hasFired = false;
 
-  bool hasFired=false;
-  
   WidgetRelatedProducts({
     this.labelName,
     this.products,
@@ -18,23 +17,19 @@ class WidgetRelatedProducts extends StatefulWidget{
 
   @override
   State<StatefulWidget> createState() => WidgetRelatedProductsState();
-
 }
 
-class WidgetRelatedProductsState extends State<WidgetRelatedProducts>{
-
+class WidgetRelatedProductsState extends State<WidgetRelatedProducts> {
   API apiService;
 
   @override
-  void initState(){
+  void initState() {
     apiService = new API();
-
   }
 
   @override
   Widget build(BuildContext context) {
     return Container(
-       
       child: Column(children: <Widget>[
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -67,158 +62,165 @@ class WidgetRelatedProductsState extends State<WidgetRelatedProducts>{
   }
 
   Widget _productsList() {
-    if(!this.widget.hasFired){
-    return new FutureBuilder(
-        future: apiService.getProducts(productsIDs: this.widget.products),
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            return _buildList(snapshot.data);
-          } else {
-            return Center(child: CircularProgressIndicator());
-          }
-        });
+    if (!this.widget.hasFired) {
+      return new FutureBuilder(
+          future: apiService.getProducts(productsIDs: this.widget.products),
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              return _buildList(snapshot.data);
+            } else {
+              return Center(child: CircularProgressIndicator());
+            }
+          });
     }
   }
 
   Widget _buildList(List<Product> items) {
-    this.widget.hasFired=true;
+    this.widget.hasFired = true;
     return Column(children: [
-     
-        Container(
-           decoration: BoxDecoration(border: Border.all(
-      color: Colors.grey,
-      width: 3.0,
-    ),
-        borderRadius: BorderRadius.circular(20.0),
-
+      Container(
+        decoration: BoxDecoration(
+          border: Border.all(
+            color: Colors.grey,
+            width: 3.0,
+          ),
+          borderRadius: BorderRadius.circular(20.0),
         ),
-      height: MediaQuery.of(context).size.height * 0.35,
-      alignment: Alignment.centerLeft,
-      child: ListView.builder(
-        shrinkWrap: true,
-        physics: ClampingScrollPhysics(),
-        scrollDirection: Axis.horizontal,
-        itemCount: items.length,
-        itemBuilder: (context, index) {
-          var data = items[index];
-          return Padding(
-            padding: EdgeInsets.all(8),
-              child:GestureDetector(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => ProductDetails(
-                      product: data,
-                    ),
-                  ),
-                );
-              },
-              child: Container(
-              decoration: BoxDecoration(border: Border.all(
-      color: Colors.lightGreen,
-      width: 1.5,
-    ),
-        borderRadius: BorderRadius.circular(10),
-
-        ),
-              child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              Container(
-                  margin: EdgeInsets.all(10),
-                  width: MediaQuery.of(context).size.width * 0.2,
-                  height: MediaQuery.of(context).size.height * 0.2,
-                  alignment: Alignment.center,
-                  child: Image.network(
-                    data.images[0].src,
-                   
-                  ),
-                  decoration: BoxDecoration(
-                    shape: BoxShape.rectangle,
-                    borderRadius: BorderRadius.circular(3),
-                    color: Colors.white,
-                  )),
-              Container(
-                width: MediaQuery.of(context).size.width*0.25,
-                alignment: Alignment.centerLeft,
-                child: Text(data.name,
-                textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 14,
-                      color: Colors.black,
-                      fontWeight: FontWeight.w500
-                    )),
-              ),
-              Container(
-                margin: EdgeInsets.only(top: 4, left: 4),
-                width:  MediaQuery.of(context).size.width*0.25,
-                alignment: Alignment.centerLeft,
-                child:data.salePrice != null &&
-                                    data.salePrice.isNotEmpty
-                                ? Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                        '€ ${data.regularPrice}',
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                          decoration:
-                                              TextDecoration.lineThrough,
-                                          fontFamily: 'SFPro',
-                                          fontSize: 18,
-                                          color: Color.fromARGB(
-                                              255, 150, 149, 149),
-                                          fontWeight: data.salePrice != null &&
-                                                  data.salePrice.isNotEmpty
-                                              ? FontWeight.w800
-                                              : FontWeight.w800,
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        width:
-                                            MediaQuery.of(context).size.width *
-                                                0.02,
-                                      ),
-                                      Text(
-                                        '€ ${data.salePrice}',
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                          fontFamily: 'SFPro',
-                                          fontSize: 18,
-                                          color: data.salePrice != null &&
-                                                  data.salePrice.isNotEmpty
-                                              ? Colors.red
-                                              : Colors.black,
-                                          fontWeight: data.salePrice != null &&
-                                                  data.salePrice.isNotEmpty
-                                              ? FontWeight.w800
-                                              : FontWeight.w800,
-                                        ),
-                                      )
-                                    ],
-                                  )
-                                : Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                    '€ ${data.regularPrice}',
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      fontFamily: 'SFPro',
-                                      fontSize: 18,
+        height: MediaQuery.of(context).size.height * 0.35,
+        alignment: Alignment.centerLeft,
+        child: ListView.builder(
+          shrinkWrap: true,
+          physics: ClampingScrollPhysics(),
+          scrollDirection: Axis.horizontal,
+          itemCount: items.length,
+          itemBuilder: (context, index) {
+            var data = items[index];
+            return Padding(
+                padding: EdgeInsets.all(8),
+                child: GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ProductDetails(
+                            product: data,
+                          ),
+                        ),
+                      );
+                    },
+                    child: Container(
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            color: Colors.lightGreen,
+                            width: 1.5,
+                          ),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          mainAxisSize: MainAxisSize.min,
+                          children: <Widget>[
+                            Container(
+                                margin: EdgeInsets.all(10),
+                                width: MediaQuery.of(context).size.width * 0.2,
+                                height:
+                                    MediaQuery.of(context).size.height * 0.2,
+                                alignment: Alignment.center,
+                                child: Image.network(
+                                  data.images[0].src,
+                                ),
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.rectangle,
+                                  borderRadius: BorderRadius.circular(3),
+                                  color: Colors.white,
+                                )),
+                            Container(
+                              width: MediaQuery.of(context).size.width * 0.25,
+                              alignment: Alignment.centerLeft,
+                              child: Text(data.name,
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                      fontSize: 14,
                                       color: Colors.black,
-                                      fontWeight:  FontWeight.w800,
+                                      fontWeight: FontWeight.w500)),
+                            ),
+                            Container(
+                              margin: EdgeInsets.only(top: 4, left: 4),
+                              width: MediaQuery.of(context).size.width * 0.25,
+                              alignment: Alignment.centerLeft,
+                              child: data.salePrice != null &&
+                                      data.salePrice.isNotEmpty
+                                  ? Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          '€ ${data.regularPrice}',
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                            decoration:
+                                                TextDecoration.lineThrough,
+                                            fontFamily: 'SFPro',
+                                            fontSize: 18,
+                                            color: Color.fromARGB(
+                                                255, 150, 149, 149),
+                                            fontWeight: data.salePrice !=
+                                                        null &&
+                                                    data.salePrice.isNotEmpty
+                                                ? FontWeight.w800
+                                                : FontWeight.w800,
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              0.02,
+                                        ),
+                                        Text(
+                                          '€ ${data.salePrice}',
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                            fontFamily: 'SFPro',
+                                            fontSize: 18,
+                                            color: data.salePrice != null &&
+                                                    data.salePrice.isNotEmpty
+                                                ? Colors.red
+                                                : Colors.black,
+                                            fontWeight: data.salePrice !=
+                                                        null &&
+                                                    data.salePrice.isNotEmpty
+                                                ? FontWeight.w800
+                                                : FontWeight.w800,
+                                          ),
+                                        )
+                                      ],
+                                    )
+                                  : Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          '€ ${data.regularPrice}',
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                            fontFamily: 'SFPro',
+                                            fontSize: 18,
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.w800,
+                                          ),
+                                        ),
+                                      ],
                                     ),
-                                  ),
-                                    ],),
-              )
-            ],
-          ))));
-        },
+                            )
+                          ],
+                        ))));
+          },
+        ),
       ),
-    ),
-      SizedBox(height: MediaQuery.of(context).size.height * 0.05, ),]);
+      SizedBox(
+        height: MediaQuery.of(context).size.height * 0.05,
+      ),
+    ]);
   }
 }
