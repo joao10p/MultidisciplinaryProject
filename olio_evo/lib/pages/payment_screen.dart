@@ -278,8 +278,8 @@ class _PaymentScreenState extends CheckoutBasePageState<PaymentScreen> {
                         Padding(
                           padding: EdgeInsets.fromLTRB(0, 0, 10, 0),
                           child: Image(
-                            image: AssetImage("assets/images/paypal.png"), 
-                            width: 30),
+                              image: AssetImage("assets/images/paypal.png"),
+                              width: 30),
                         ),
                         Text(
                           "Paga con PayPal",
@@ -370,7 +370,7 @@ class _PaymentScreenState extends CheckoutBasePageState<PaymentScreen> {
                   ),
                 ),
                 const Padding(
-                  padding: EdgeInsets.fromLTRB(0, 80, 0, 0),
+                  padding: EdgeInsets.fromLTRB(0, 50, 0, 0),
                   child: Text(
                     "Consegna prevista entro:",
                     textAlign: TextAlign.start,
@@ -386,7 +386,7 @@ class _PaymentScreenState extends CheckoutBasePageState<PaymentScreen> {
                 const Padding(
                   padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
                   child: Text(
-                    "25 maggio", //data consegna
+                    "25 Giugno", //data consegna
                     textAlign: TextAlign.start,
                     overflow: TextOverflow.clip,
                     style: TextStyle(

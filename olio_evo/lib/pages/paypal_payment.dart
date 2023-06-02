@@ -1,14 +1,16 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
+import 'package:olio_evo/pages/checkout_base.dart';
 import 'package:olio_evo/utils/paypal_service.dart';
 
-class PaypalPaymentScreen extends StatefulWidget {
+class PaypalPaymentScreen extends CheckoutBasePage {
   @override
-  State<StatefulWidget> createState() => PaypalPaymentScreenState();
+  _PaypalPaymentScreenState createState() => _PaypalPaymentScreenState();
 }
 
-class PaypalPaymentScreenState extends State<PaypalPaymentScreen> {
+class _PaypalPaymentScreenState
+    extends CheckoutBasePageState<PaypalPaymentScreen> {
   InAppWebViewController webView;
   String url = "";
   double progress = 0;
@@ -23,9 +25,9 @@ class PaypalPaymentScreenState extends State<PaypalPaymentScreen> {
   @override
   void initState() {
     super.initState();
-    paypalServices= new PaypalServices();
-    this.scaffoldKey = new GlobalKey<ScaffoldState>();
-  
+    currentPage = 1;
+    paypalServices = PaypalServices();
+    this.scaffoldKey = GlobalKey<ScaffoldState>();
 
     Future.delayed(Duration.zero, () async {
       try {
@@ -48,26 +50,26 @@ class PaypalPaymentScreenState extends State<PaypalPaymentScreen> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    if (checkoutURL != null)
+  Widget pageUI() {
+    if (checkoutURL != null) {
       return Scaffold(
         key: scaffoldKey,
-        appBar: AppBar(
+        /* appBar: AppBar(
           backgroundColor: Colors.transparent,
           elevation: 0,
-          centerTitle: true,
-          title: Text(
+          centerTitle: true, */
+        /* title: Text(
             "Paypal Payment",
-            style: Theme.of(context).textTheme.headline6.merge(TextStyle(
+            style: Theme.of(context).textTheme.headline6.merge(const TextStyle(
                   letterSpacing: 1.3,
                 )),
-          ),
-        ),
+          ), 
+        ), */
         body: Stack(
           children: [
             InAppWebView(
               initialUrl: checkoutURL,
-              initialOptions: new InAppWebViewGroupOptions(
+              initialOptions: InAppWebViewGroupOptions(
                   android: AndroidInAppWebViewOptions(textZoom: 120)),
               onWebViewCreated: (InAppWebViewController controller) {
                 webView = controller;
@@ -81,15 +83,13 @@ class PaypalPaymentScreenState extends State<PaypalPaymentScreen> {
                     await paypalServices
                         .executePayment(executeURL, payerId, accessToken)
                         .then((id) {
-                          print(id);
-                          Navigator.of(context).pop();
-                        }
-                        );
-                  }
-                  else{
-                     Navigator.of(context).pop();
-                  }
+                      print(id);
+                      Navigator.of(context).pop();
+                    });
+                  } else {
                     Navigator.of(context).pop();
+                  }
+                  Navigator.of(context).pop();
                 }
               },
               onProgressChanged:
@@ -104,15 +104,17 @@ class PaypalPaymentScreenState extends State<PaypalPaymentScreen> {
                     height: 3,
                     child: LinearProgressIndicator(
                       value: progress,
-                      backgroundColor:
-                          Theme.of(context).accentColor.withOpacity(0.2),
+                      backgroundColor: Theme.of(context)
+                          .colorScheme
+                          .secondary
+                          .withOpacity(0.2),
                     ),
                   )
-                : SizedBox()
+                : const SizedBox()
           ],
         ),
       );
-    else {
+    } else {
       return Scaffold(
           key: scaffoldKey,
           appBar: AppBar(
@@ -121,13 +123,14 @@ class PaypalPaymentScreenState extends State<PaypalPaymentScreen> {
             centerTitle: true,
             title: Text(
               "Paypal Payment",
-              style: Theme.of(context).textTheme.headline6.merge(TextStyle(
-                    letterSpacing: 1.3,
-                  )),
+              style:
+                  Theme.of(context).textTheme.headline6.merge(const TextStyle(
+                        letterSpacing: 1.3,
+                      )),
             ),
           ),
-          body: Center(
-            child: Container(child: CircularProgressIndicator()),
+          body: const Center(
+            child: CircularProgressIndicator(),
           ));
     }
   }
