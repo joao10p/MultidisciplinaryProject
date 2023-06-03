@@ -57,7 +57,9 @@ class PaypalServices {
       items.add({
         "name": item.productName,
         "quantity": item.qty,
-        "price": item.productSalePrice!="" ? item.productSalePrice : item.productRegularPrice,
+        "price": item.productSalePrice != ""
+            ? item.productSalePrice
+            : item.productRegularPrice,
         "currency": defaultCurrency["currency"]
       });
     });

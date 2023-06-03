@@ -1,8 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
+import 'package:olio_evo/models/order.dart';
 import 'package:olio_evo/pages/checkout_base.dart';
+import 'package:olio_evo/provider/cart_provider.dart';
 import 'package:olio_evo/utils/paypal_service.dart';
+import 'package:olio_evo/widgets/widget_order_success.dart';
+import 'package:provider/provider.dart';
 
 class PaypalPaymentScreen extends CheckoutBasePage {
   @override
@@ -83,16 +87,26 @@ class _PaypalPaymentScreenState
                     await paypalServices
                         .executePayment(executeURL, payerId, accessToken)
                         .then((id) {
-                          print(id);
-                          ///////////////////////////////////////////////
-                          Navigator.of(context).pop();
-                        }
-                        );
-                  }
-                  else{
+                      print(id);
+                      var orderProvider =
+                          Provider.of<CartProvider>(context, listen: false);
+                      OrderModel orderModel = OrderModel();
+                      orderModel.paymentMethod = "paypal";
+                      orderModel.paymentMethodTitle = "PayPal";
+                      orderModel.setPaid = true;
+                      orderModel.transactionId = id.toString();
 
+                      orderProvider.processOrder(orderModel);
 
-                     Navigator.of(context).pop();
+                      Navigator.pushAndRemoveUntil(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => OrderSuccessWidget()),
+                          ModalRoute.withName("/OrderSuccess"));
+                      //Navigator.of(context).pop();
+                    });
+                  } else {
+                    Navigator.of(context).pop();
                   }
                   Navigator.of(context).pop();
                 }
