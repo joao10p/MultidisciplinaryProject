@@ -38,7 +38,7 @@ class CheckoutBasePageState<T extends CheckoutBasePage> extends State<T> {
                   checkPoints: const [
                     "Spedizione",
                     "Pagamento",
-                    "Ordina",
+                    "Ordine",
                   ],
                   checkPointFilledColor: Colors.green,
                 ),
