@@ -82,11 +82,14 @@ class PaypalPaymentScreenState extends State<PaypalPaymentScreen> {
                         .executePayment(executeURL, payerId, accessToken)
                         .then((id) {
                           print(id);
+                          ///////////////////////////////////////////////
                           Navigator.of(context).pop();
                         }
                         );
                   }
                   else{
+
+
                      Navigator.of(context).pop();
                   }
                     Navigator.of(context).pop();

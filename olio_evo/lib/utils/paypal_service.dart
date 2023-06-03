@@ -156,7 +156,7 @@ class PaypalServices {
         ),
       );
       final body = response.data;
-      if (response.statusCode == 201) {
+      if (response.statusCode == 200) {
         if (body["links"] != null && body["links"].length > 0) {
           List links = body["links"];
           String executeUrl = "";
