@@ -4,6 +4,7 @@ import 'package:olio_evo/pages/barcode_page.dart';
 import 'package:olio_evo/pages/order_detail.dart';
 import 'package:olio_evo/pages/orders_page.dart';
 import 'package:olio_evo/pages/payment_screen.dart';
+import 'package:olio_evo/pages/product_page.dart';
 import 'package:provider/provider.dart';
 
 import '../provider/cart_provider.dart';
@@ -21,8 +22,8 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final List<Widget> _widgetList = [
     DashboardPage(),
-    const CartPage(),
-     BarcodePage(),
+    ProductPage(),
+    const  BarcodePage(),
     const ChatbotPage(),
     const AccountPage(),
   ];
