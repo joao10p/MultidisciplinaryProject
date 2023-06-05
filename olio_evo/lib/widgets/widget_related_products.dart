@@ -80,10 +80,6 @@ class WidgetRelatedProductsState extends State<WidgetRelatedProducts> {
     return Column(children: [
       Container(
         decoration: BoxDecoration(
-          border: Border.all(
-            color: Colors.grey,
-            width: 3.0,
-          ),
           borderRadius: BorderRadius.circular(20.0),
         ),
         height: MediaQuery.of(context).size.height * 0.35,
@@ -112,7 +108,7 @@ class WidgetRelatedProductsState extends State<WidgetRelatedProducts> {
                         decoration: BoxDecoration(
                           border: Border.all(
                             color: Colors.lightGreen,
-                            width: 1.5,
+                            width: 2,
                           ),
                           borderRadius: BorderRadius.circular(10),
                         ),
@@ -139,6 +135,7 @@ class WidgetRelatedProductsState extends State<WidgetRelatedProducts> {
                               alignment: Alignment.centerLeft,
                               child: Text(data.name,
                                   textAlign: TextAlign.center,
+                                  maxLines: 4,
                                   style: TextStyle(
                                       fontSize: 14,
                                       color: Colors.black,

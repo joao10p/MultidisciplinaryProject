@@ -127,6 +127,10 @@ class _WidgetHomeProductState extends State<WidgetHomeProducts> {
                   color: Color(0xffffffff),
                   shape: BoxShape.rectangle,
                   borderRadius: BorderRadius.circular(10.0),
+                  border: Border.all(
+                    color: Colors.green,
+                    width: 1.7,
+                  ),
                   boxShadow: [
                     BoxShadow(
                       color: Colors.black12,

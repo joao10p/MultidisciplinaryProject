@@ -93,7 +93,7 @@ class _WidgetCategoriesState extends State<WidgetCategories> {
                             width: MediaQuery.of(context).size.width *
                                 0.9, // Larghezza desiderata del popup
                             height: MediaQuery.of(context).size.height *
-                                0.8, // Altezza desiderata del popup
+                                0.6, // Altezza desiderata del popup
                             padding: EdgeInsets.all(
                                 5), // Imposta il padding del popup
                             child: Column(
@@ -108,7 +108,6 @@ class _WidgetCategoriesState extends State<WidgetCategories> {
                   },
 
                   // Logica da eseguire quando il primo bottone viene premuto
-
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -181,14 +180,14 @@ class _WidgetCategoriesState extends State<WidgetCategories> {
                             child: Container(
                               width: MediaQuery.of(context).size.width *
                                   0.9, // Larghezza desiderata del popup
-                              height: MediaQuery.of(context).size.height * 0.8,
+                              height: MediaQuery.of(context).size.height * 0.60,
                               child: Stack(
                                 children: [
-                                  Center(
+                                  Positioned(
                                     child: Image(
                                       image: AssetImage(
                                           "assets/images/mappa_italia.jpg"),
-                                      fit: BoxFit.cover,
+                                      fit: BoxFit.contain,
                                       width: MediaQuery.of(context).size.width *
                                           0.9,
                                       height:
@@ -196,30 +195,48 @@ class _WidgetCategoriesState extends State<WidgetCategories> {
                                               0.6,
                                     ),
                                   ),
-                                  Positioned(
-                                    child: Padding(
-                                      padding:
-                                          EdgeInsets.only(top: 20, left: 20),
-                                      child: Text(
-                                        "Scegli in quale zona cercare: ",
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                            fontFamily: "SFPro",
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.bold,
-                                            fontStyle: FontStyle.italic),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    crossAxisAlignment: CrossAxisAlignment
+                                        .start, //spazio tra i due bottoni
+                                    children: [
+                                      Padding(
+                                        padding:
+                                            EdgeInsets.fromLTRB(10, 30, 0, 20),
+                                        child: Text(
+                                          "Scegli in quale zona cercare ",
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                              fontFamily: "SFPro",
+                                              fontSize: 20,
+                                              fontWeight: FontWeight.bold,
+                                              fontStyle: FontStyle.italic),
+                                        ),
                                       ),
-                                    ),
+                                      Padding(
+                                          padding:
+                                              EdgeInsets.fromLTRB(0, 13, 0, 0),
+                                          child: IconButton(
+                                            onPressed: () {
+                                              Navigator.pop(context);
+                                              //chiudi il popup
+                                            },
+                                            iconSize: 45,
+                                            icon: Icon(Icons.close_rounded),
+                                            color: Colors.black,
+                                          ))
+                                    ],
                                   ),
                                   Positioned(
                                     top: MediaQuery.of(context).size.height *
-                                        0.1,
-                                    left: 0,
-                                    right: 0,
+                                        0.09,
+                                    left: 5,
+                                    right: 5,
                                     child: Container(
                                       height:
                                           MediaQuery.of(context).size.height *
-                                              0.6 /
+                                              0.4 /
                                               3,
                                       width: MediaQuery.of(context).size.width,
                                       child: ElevatedButton(
@@ -274,16 +291,13 @@ class _WidgetCategoriesState extends State<WidgetCategories> {
                                   ),
                                   Positioned(
                                     top: MediaQuery.of(context).size.height *
-                                            0.1 +
-                                        MediaQuery.of(context).size.height *
-                                            0.6 /
-                                            3,
-                                    left: 0,
-                                    right: 0,
+                                        0.225,
+                                    left: 5,
+                                    right: 5,
                                     child: Container(
                                       height:
                                           MediaQuery.of(context).size.height *
-                                              0.6 /
+                                              0.3 /
                                               3,
                                       child: ElevatedButton(
                                           style: ButtonStyle(
@@ -337,17 +351,13 @@ class _WidgetCategoriesState extends State<WidgetCategories> {
                                   ),
                                   Positioned(
                                     top: MediaQuery.of(context).size.height *
-                                            0.1 +
-                                        (MediaQuery.of(context).size.height *
-                                                0.6 /
-                                                3) *
-                                            2,
-                                    left: 0,
-                                    right: 0,
+                                        0.327,
+                                    left: 5,
+                                    right: 5,
                                     child: Container(
                                       height:
                                           MediaQuery.of(context).size.height *
-                                              0.6 /
+                                              0.55 /
                                               3,
                                       child: ElevatedButton(
                                           style: ButtonStyle(
@@ -491,7 +501,7 @@ class _WidgetCategoriesState extends State<WidgetCategories> {
       List<Category> categories, String name, BuildContext mainContext) {
     return Container(
         width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height * 0.75,
+        height: MediaQuery.of(context).size.height * 0.5,
         decoration: BoxDecoration(
           color: Colors.white,
           shape: BoxShape.rectangle,
