@@ -11,7 +11,7 @@ import '../models/product.dart';
 import '../provider/filters_provider.dart';
 import '../provider/products_provider.dart';
 
-class ProductPage extends BasePage {
+class ProductPage extends StatefulWidget {
   List<Category> categories;
   Category category;
 
@@ -20,7 +20,7 @@ class ProductPage extends BasePage {
   State<StatefulWidget> createState() => _ProductPageState();
 }
 
-class _ProductPageState extends BasePageState<ProductPage> {
+class _ProductPageState extends State<ProductPage> {
   API apiSerivce = new API();
   //servono per tenere l'ordinamento dei bottoni per la selezione dei filtri
   List<String> sortIndex = ["Ordina", "Categorie", "Regioni", "Consigliati"];
@@ -32,7 +32,7 @@ class _ProductPageState extends BasePageState<ProductPage> {
   ScrollController _scrollController = new ScrollController();
   final _searchQuery = new TextEditingController();
   Timer _debounce;
-  Future<List<Category>> categorieSaved;
+  List<Category> categorieSaved;
   List<String> sortFilterStrings = [
     "Popolarità",
     "Novità",
@@ -64,7 +64,6 @@ class _ProductPageState extends BasePageState<ProductPage> {
     _productList.fetchProducts(
       pageNumber,
     );
-
     _scrollController.addListener(() {
       if (_scrollController.position.pixels ==
           _scrollController.position.maxScrollExtent) {
@@ -93,7 +92,7 @@ class _ProductPageState extends BasePageState<ProductPage> {
   }
 
   @override
-  Widget pageUI() {
+  Widget build(BuildContext context) {
     return _productsList();
   }
 
@@ -191,72 +190,74 @@ class _ProductPageState extends BasePageState<ProductPage> {
         ),
       ),
       Padding(
-        padding: EdgeInsets.fromLTRB(8, 2, 6, 0),
-        child:Row(
-        children: [
-          Expanded(
-            flex: 0,
-            child: Container(
-              //height: MediaQuery.of(context).size.height * 0.06,
-              decoration: BoxDecoration(
-                color: Color.fromARGB(255, 249, 249, 249),
+          padding: EdgeInsets.fromLTRB(8, 2, 6, 0),
+          child: Row(
+            children: [
+              Expanded(
+                flex: 0,
+                child: Container(
+                  //height: MediaQuery.of(context).size.height * 0.06,
+                  decoration: BoxDecoration(
+                    color: Color.fromARGB(255, 249, 249, 249),
+                  ),
+                  child: Center(
+                    child: Text("Filtri applicati: ",
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        )),
+                  ),
+                ),
               ),
-              child: Center(
-                child: Text("Filtri applicati: ",
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                    )),
-              ),
-            ),
-          ),
-          Expanded(
-            flex: 3,
-            child: Container(
-              height: MediaQuery.of(context).size.height * 0.06,
-              decoration: BoxDecoration(
-                color: Color.fromARGB(255, 249, 249, 249),
-              ),
-              child: !isFilter
-                  ? Text("Nessun filtro applicato")
-                  : ListView.builder(
-                      shrinkWrap: true,
-                      physics: ClampingScrollPhysics(),
-                      scrollDirection: Axis.horizontal,
-                      itemCount: myFilters.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        var data = myFilters[index];
-                        return data == ""
-                            ? SizedBox.shrink()
-                            : Padding(
-                                padding: EdgeInsets.all(5.0),
-                                child: Container(
-                                  height:
-                                      MediaQuery.of(context).size.height * 0.05,
-                                  decoration: BoxDecoration(
-                                    color: Color.fromARGB(255, 249, 249, 249),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  padding: EdgeInsets.only(top: 3),
-                                  // il resto del contenuto del container
-                                  child: Center(
-                                    child: Text(
-                                      data,
-                                      style: TextStyle(
-                                        color: Colors.grey[700],
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.bold,
+              Expanded(
+                flex: 3,
+                child: Container(
+                  height: MediaQuery.of(context).size.height * 0.06,
+                  decoration: BoxDecoration(
+                    color: Color.fromARGB(255, 249, 249, 249),
+                  ),
+                  child: !isFilter
+                      ? Text("Nessun filtro applicato")
+                      : ListView.builder(
+                          shrinkWrap: true,
+                          physics: ClampingScrollPhysics(),
+                          scrollDirection: Axis.horizontal,
+                          itemCount: myFilters.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            var data = myFilters[index];
+                            return data == ""
+                                ? SizedBox.shrink()
+                                : Padding(
+                                    padding: EdgeInsets.all(5.0),
+                                    child: Container(
+                                      height:
+                                          MediaQuery.of(context).size.height *
+                                              0.05,
+                                      decoration: BoxDecoration(
+                                        color:
+                                            Color.fromARGB(255, 249, 249, 249),
+                                        borderRadius: BorderRadius.circular(8),
                                       ),
-                                      textAlign: TextAlign.center,
+                                      padding: EdgeInsets.only(top: 3),
+                                      // il resto del contenuto del container
+                                      child: Center(
+                                        child: Text(
+                                          data,
+                                          style: TextStyle(
+                                            color: Colors.grey[700],
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ),
                                     ),
-                                  ),
-                                ),
-                              );
-                      }),
-            ),
-          ),
-        ],
-      )),
+                                  );
+                          }),
+                ),
+              ),
+            ],
+          )),
       Flexible(
         child: Padding(
           padding: EdgeInsets.only(top: 0),
@@ -333,140 +334,163 @@ class _ProductPageState extends BasePageState<ProductPage> {
     );
   }
 
+  Widget _saporiList() {
+    return FutureBuilder<List<Category>>(
+      future: apiSerivce
+          .getSapori(), //getData(), // if you mean this method well return image url
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          categorieSaved = snapshot.data;
+          return _buildCategoryList(snapshot.data,true,null);
+        } else {
+          return Center(child: CircularProgressIndicator());
+        }
+      },
+    );
+  }
   //getData(), // if you mean this method well return image url
 
-  Widget _buildCategoryList(List<Category> categories) {
+  Widget _buildCategoryList(List<Category> categories, isSapori, name) {
     return Consumer<SelectionState>(builder: (context, selectionState, _) {
-      return Column(
-        children: [
-          Padding(
-            padding: EdgeInsets.fromLTRB(15, 10, 0, 10),
-            child: Text("Seleziona la categoria che preferisci:",
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 24,
-                  color: Colors.green,
-                  fontWeight: FontWeight.bold,
-                )),
-          ),
-          Container(
-            height: 110,
-            decoration: BoxDecoration(
-              color: Color.fromARGB(255, 255, 255, 255),
-              shape: BoxShape.rectangle,
-              borderRadius: BorderRadius.circular(6.0),
-              border:
-                  Border.all(color: Color.fromARGB(77, 23, 11, 11), width: 1),
+      return Container(
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height * 0.75,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          shape: BoxShape.rectangle,
+          borderRadius: BorderRadius.circular(6.0),
+          border:
+              Border.all(color: Color.fromARGB(77, 255, 255, 255), width: 1),
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                Expanded(
+                  child: Padding(
+                    padding: EdgeInsets.fromLTRB(5, 20, 10, 30),
+                    child: Text(
+                      name==null
+                      ?"Scegli la caratteristica desiderata"
+                      : name,
+                      softWrap: true,
+                      textAlign: TextAlign.center,
+                      overflow: TextOverflow.clip,
+                      style: TextStyle(
+                        fontFamily: "SFPro",
+                        fontWeight: FontWeight.w900,
+                        fontStyle: FontStyle.italic,
+                        fontSize: 20,
+                        color: Color(0xff000000),
+                      ),
+                    ),
+                  ),
+                ),
+                Padding(
+                    padding: EdgeInsets.fromLTRB(0, 0, 10, 10),
+                    child: IconButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                        //chiudi il popup
+                      },
+                      iconSize: 45,
+                      icon: Icon(Icons.close_rounded),
+                      color: Colors.black,
+                    ))
+              ],
             ),
-            child: ListView.builder(
-              shrinkWrap: true,
-              physics: ClampingScrollPhysics(),
-              scrollDirection: Axis.horizontal,
-              itemCount: categories.length,
-              itemBuilder: (context, index) {
-                var data = categories[index];
-                return Padding(
-                    padding: EdgeInsets.only(left: 5),
-                    child: GestureDetector(
-                        onTap: () {
-                          categoryId = data.categoryId;
-                          selectionState.updateIndexCategories(index);
-                        },
-                        child: Container(
-                            margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
-                            padding: EdgeInsets.symmetric(
-                                vertical: 2, horizontal: 0),
-                            width: 90,
-                            height: 110,
-                            decoration: BoxDecoration(
-                              color: categoryId == data.categoryId
-                                  ? Color.fromARGB(255, 15, 115, 6)
-                                  : Color.fromARGB(
-                                      255, 135, 209, 128), //inside color
-                              shape: BoxShape.rectangle,
-                              borderRadius: BorderRadius.circular(6.0),
-                              border: Border.all(
-                                  color: Color.fromARGB(77, 16, 16, 16),
-                                  width: 1), // border color
-                            ),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisSize: MainAxisSize.max,
-                              children: [
-                                Padding(
-                                  padding: EdgeInsets.fromLTRB(0, 5, 0, 0),
-                                  child: Container(
-                                    width: 60,
-                                    height: 60,
-                                    decoration: BoxDecoration(
-                                      shape: BoxShape.rectangle,
-                                      color: Colors.white,
-                                      boxShadow: [
-                                        BoxShadow(
-                                            color: Colors.black,
-                                            offset: Offset(0, 5),
-                                            blurRadius: 15),
-                                      ],
-                                    ),
-                                    child: Image.network(
-                                      data.image.url,
+            Expanded(
+              child: GridView.builder(
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 3,
+                  childAspectRatio: 1,
+                ),
+                itemCount: categories.length,
+                itemBuilder: (context, index) {
+                  var data = categories[index];
+                  return Padding(
+                      padding: EdgeInsets.all(5),
+                      child: GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              isFilter = true;
+                              isSapori
+                              ? myFilters[1] = "" + data.categoryName.toString()
+                              : myFilters[2] = "" + data.categoryName.toString();
+                              var productsList = Provider.of<ProductProvider>(
+                                  context,
+                                  listen: false);
+                              productsList.resetStreams();
+                              productsList.setLoadingState(
+                                  LoadMoreStatus.INITIAL, true);
+                              productsList.fetchProducts(pageNumber,
+                                  categoryId: data.categoryId.toString());
+                              categories = setFirstSelected(categories);
+                              Navigator.pop(context);
+                            });
+                          },
+                          child: Container(
+                              margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                              padding: EdgeInsets.all(0),
+                              width: MediaQuery.of(context).size.width * 0.3,
+                              height: MediaQuery.of(context).size.height * 0.30,
+                              decoration: BoxDecoration(
+                                color: Colors.lightGreen[200], //inside color
+                                shape: BoxShape.rectangle,
+                                borderRadius: BorderRadius.circular(6.0),
+                                border: Border.all(
+                                    color: Colors.black,
+                                    width: 2), // border color
+                              ),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisSize: MainAxisSize.max,
+                                children: [
+                                  Padding(
+                                    padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
+                                    child: Container(
                                       width: MediaQuery.of(context).size.width *
-                                          0.01,
-                                      fit: BoxFit.cover,
-                                    ),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.only(top: 5),
-                                  child: Container(
-                                    alignment: Alignment.center,
-                                    child: Text(
-                                      data.categoryName.toString(),
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.w700,
-                                        fontStyle: FontStyle.italic,
-                                        fontSize: 14,
-                                        color: Color(0xff000000),
+                                          0.14,
+                                      height:
+                                          MediaQuery.of(context).size.width *
+                                              0.12,
+                                      decoration: BoxDecoration(
+                                        shape: BoxShape.rectangle,
+                                        color: Colors.white,
+                                      ),
+                                      child: Image.network(
+                                        data.image.url,
+                                        fit: BoxFit.cover,
                                       ),
                                     ),
                                   ),
-                                )
-                              ],
-                            ))));
-              },
+                                  Padding(
+                                    padding: EdgeInsets.only(top: 5),
+                                    child: Container(
+                                      alignment: Alignment.center,
+                                      child: Text(
+                                        data.categoryName.toString(),
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                          fontFamily: 'SFPro',
+                                          fontWeight: FontWeight.w800,
+                                          fontStyle: FontStyle.normal,
+                                          fontSize: 14,
+                                          color: Color(0xff000000),
+                                        ),
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              ))));
+                },
+              ),
             ),
-          ),
-          Padding(
-              padding: EdgeInsets.only(top: 10),
-              child: ElevatedButton(
-                  child: Text('Applica'),
-                  style: ElevatedButton.styleFrom(
-                    primary: Color.fromARGB(255, 17, 162, 46),
-                    side: BorderSide(
-                        color: Color.fromARGB(255, 33, 32, 32), width: 1),
-                    textStyle: TextStyle(
-                        color: Color.fromARGB(255, 236, 239, 236),
-                        fontSize: 20,
-                        fontStyle: FontStyle.italic),
-                  ),
-                  onPressed: () {
-                    isFilter = true;
-                    myFilters[1] = "" +
-                        categories[selectionState.getIndexCategories()]
-                            .categoryName
-                            .toString();
-                    var productsList =
-                        Provider.of<ProductProvider>(context, listen: false);
-                    productsList.resetStreams();
-                    productsList.setLoadingState(LoadMoreStatus.INITIAL, true);
-                    productsList.fetchProducts(pageNumber,
-                        categoryId: categoryId.toString());
-                    categories = setFirstSelected(categories);
-                    Navigator.pop(context);
-                  }))
-        ],
+          ],
+        ),
       );
     });
   }
@@ -485,9 +509,241 @@ class _ProductPageState extends BasePageState<ProductPage> {
     return categories;
   }
 
+  Widget _categoriesList(String parent, String name, BuildContext MainContext) {
+    return FutureBuilder<List<Category>>(
+      future: apiSerivce.getCategories(
+          parent), //getData(), // if you mean this method well return image url
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          categorieSaved = snapshot.data;
+          return _buildCategoryList(snapshot.data,false,name);
+        } else {
+          return Center(child: CircularProgressIndicator());
+        }
+      },
+    );
+  }
+
+  Widget _saporiListBuilder() {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return Dialog(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(6.0),
+            ),
+            child: Container(
+              width: MediaQuery.of(context).size.width *
+                  0.9, // Larghezza desiderata del popup
+              height: MediaQuery.of(context).size.height *
+                  0.8, // Altezza desiderata del popup
+              padding: EdgeInsets.all(5), // Imposta il padding del popup
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [_saporiList()],
+              ),
+            ),
+          );
+        });
+  }
+
+
+  Widget _regioniList() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return Dialog(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(6.0),
+            ),
+            child: Container(
+              width: MediaQuery.of(context).size.width *
+                  0.9, // Larghezza desiderata del popup
+              height: MediaQuery.of(context).size.height * 0.60,
+              child: Stack(
+                children: [
+                  Positioned(
+                    child: Image(
+                      image: AssetImage("assets/images/mappa_italia.jpg"),
+                      fit: BoxFit.contain,
+                      width: MediaQuery.of(context).size.width * 0.9,
+                      height: MediaQuery.of(context).size.height * 0.6,
+                    ),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment:
+                        CrossAxisAlignment.start, //spazio tra i due bottoni
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.fromLTRB(10, 30, 0, 20),
+                        child: Text(
+                          "Scegli in quale zona cercare ",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              fontFamily: "SFPro",
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                              fontStyle: FontStyle.italic),
+                        ),
+                      ),
+                      Padding(
+                          padding: EdgeInsets.fromLTRB(0, 13, 0, 0),
+                          child: IconButton(
+                            onPressed: () {
+                              Navigator.pop(context);
+                              //chiudi il popup
+                            },
+                            iconSize: 45,
+                            icon: Icon(Icons.close_rounded),
+                            color: Colors.black,
+                          ))
+                    ],
+                  ),
+                  Positioned(
+                    top: MediaQuery.of(context).size.height * 0.09,
+                    left: 5,
+                    right: 5,
+                    child: Container(
+                      height: MediaQuery.of(context).size.height * 0.4 / 3,
+                      width: MediaQuery.of(context).size.width,
+                      child: ElevatedButton(
+                        style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all<Color>(
+                              Colors.transparent // Opacità personalizzabile
+
+                              ),
+                          shape:
+                              MaterialStateProperty.all<RoundedRectangleBorder>(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(6.0),
+                            ),
+                          ),
+                        ),
+                        onPressed: () {
+                          Navigator.pop(context);
+                          showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return Dialog(
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(6.0),
+                                  ),
+                                  child: Container(
+                                    width: MediaQuery.of(context).size.width *
+                                        0.9, // Larghezza desiderata del popup
+                                    height: MediaQuery.of(context).size.height *
+                                        0.8,
+                                    child: _categoriesList("49", "Nord Italia",
+                                        context), //50 is the id
+                                  ),
+                                );
+                              });
+                          // Logica da eseguire quando viene premuto il secondo bottone
+                        },
+                      ),
+                    ),
+                  ),
+                  Positioned(
+                    top: MediaQuery.of(context).size.height * 0.225,
+                    left: 5,
+                    right: 5,
+                    child: Container(
+                      height: MediaQuery.of(context).size.height * 0.3 / 3,
+                      child: ElevatedButton(
+                          style: ButtonStyle(
+                            backgroundColor: MaterialStateProperty.all<Color>(
+                                Colors.transparent // Opacità personalizzabile
+
+                                ),
+                            shape: MaterialStateProperty.all<
+                                RoundedRectangleBorder>(
+                              RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(6.0),
+                              ),
+                            ),
+                          ),
+                          onPressed: () {
+                            Navigator.pop(context);
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return Dialog(
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(6.0),
+                                  ),
+                                  child: Container(
+                                      width: MediaQuery.of(context).size.width *
+                                          0.9, // Larghezza desiderata del popup
+                                      height:
+                                          MediaQuery.of(context).size.height *
+                                              0.8,
+                                      child: _categoriesList(
+                                          "50",
+                                          "Centro Italia",
+                                          context) //50 is the id
+                                      ),
+                                );
+                              },
+                            );
+                          }),
+                    ),
+                  ),
+                  Positioned(
+                    top: MediaQuery.of(context).size.height * 0.327,
+                    left: 5,
+                    right: 5,
+                    child: Container(
+                      height: MediaQuery.of(context).size.height * 0.55 / 3,
+                      child: ElevatedButton(
+                          style: ButtonStyle(
+                            backgroundColor: MaterialStateProperty.all<Color>(
+                                Colors.transparent // Opacità personalizzabile
+
+                                ),
+                            shape: MaterialStateProperty.all<
+                                RoundedRectangleBorder>(
+                              RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(6.0),
+                              ),
+                            ),
+                          ),
+                          onPressed: () {
+                            Navigator.pop(context);
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return Dialog(
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(6.0),
+                                  ),
+                                  child: Container(
+                                      width: MediaQuery.of(context).size.width *
+                                          0.9, // Larghezza desiderata del popup
+                                      height:
+                                          MediaQuery.of(context).size.height *
+                                              0.8,
+                                      child: _categoriesList("51", "Sud Italia",
+                                          context) //50 is the id
+                                      ),
+                                );
+                              },
+                            );
+                          }),
+                    ),
+                  ),
+                ],
+              ),
+            ));
+      },
+    );
+  }
+
   Widget _buildFilterList() {
     return Consumer<SelectionState>(builder: (context, selectionState, _) {
-      return Container(
+      
+       return Container(
         height: MediaQuery.of(context).size.height * 0.32,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -617,25 +873,37 @@ class _ProductPageState extends BasePageState<ProductPage> {
             ])
           ],
         ),
-      );
+      );  
     });
   }
 
   Widget filterMenu(int type) {
-    showModalBottomSheet(
-        backgroundColor: Color.fromARGB(255, 250, 250, 250),
-        shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(20), topRight: Radius.circular(20))),
-        elevation: 100,
+    switch (type) {
+      case 1:
+        _saporiListBuilder();
+        break;
+      case 0:
+        
+         showDialog(
         context: context,
-        isScrollControlled: true, // abilita lo scrolling
-        builder: (context) {
-          return Container(
-              height: MediaQuery.of(context).size.height * 0.40,
-              child: type == 1
-                  ? _buildCategoryList(this.widget.categories)
-                  : _buildFilterList());
-        });
+        builder: (BuildContext context) {
+          return Dialog(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(6.0),
+            ),
+            child: Container(
+              width: MediaQuery.of(context).size.width *
+                  0.8, // Larghezza desiderata del popup
+              height: MediaQuery.of(context).size.height *
+                  0.6, // Altezza desiderata del popup
+              padding: EdgeInsets.all(5), // Imposta il padding del popup
+              child: _buildFilterList())
+          );
+        },);
+        break;
+      case 2:
+        _regioniList();
+        break;
+    }
   }
 }
