@@ -8,6 +8,7 @@ class Config {
   static String productURL = "products";
   static String topSellingTagId = "31";
   static String offerteDiOggiTagId = "30";
+  static String iPiuAmatiTagId = "109";
 
   static String addToCartURL = "/wp-json/wc/v3/addtocart";
   static String cartURL = "/wp-json/wc/v3/cart";

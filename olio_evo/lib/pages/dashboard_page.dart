@@ -20,7 +20,8 @@ class _DashboardPageState extends State<DashboardPage> {
        // imageCarousel(context),
         WidgetCategories(),
         WidgetHomeProducts(labelName: "Offerte di oggi", tagId:Config.offerteDiOggiTagId),
-        WidgetHomeProducts(labelName: "TopSeller", tagId:Config.topSellingTagId)
+        WidgetHomeProducts(labelName: "I più Venduti", tagId:Config.topSellingTagId),
+        WidgetHomeProducts(labelName: "I più Amati ", tagId:Config.iPiuAmatiTagId),
 
       ]),
     ));
