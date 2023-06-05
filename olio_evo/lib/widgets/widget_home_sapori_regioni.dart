@@ -60,8 +60,8 @@ class _WidgetCategoriesState extends State<WidgetCategories> {
                   shape: BoxShape.rectangle,
                   borderRadius: BorderRadius.circular(6.0),
                   border: Border.all(
-                      color: Colors.green, 
-                      width: 2.0,
+                    color: Colors.green,
+                    width: 2.0,
                   ),
                   boxShadow: [
                     BoxShadow(
@@ -149,8 +149,8 @@ class _WidgetCategoriesState extends State<WidgetCategories> {
                   shape: BoxShape.rectangle,
                   borderRadius: BorderRadius.circular(6.0),
                   border: Border.all(
-                      color: Colors.green, 
-                      width: 2.0,
+                    color: Colors.green,
+                    width: 2.0,
                   ),
                   boxShadow: [
                     BoxShadow(
@@ -190,7 +190,7 @@ class _WidgetCategoriesState extends State<WidgetCategories> {
                                           "assets/images/mappa_italia.jpg"),
                                       fit: BoxFit.cover,
                                       width: MediaQuery.of(context).size.width *
-                                          0.8,
+                                          0.9,
                                       height:
                                           MediaQuery.of(context).size.height *
                                               0.6,
@@ -201,12 +201,13 @@ class _WidgetCategoriesState extends State<WidgetCategories> {
                                       padding:
                                           EdgeInsets.only(top: 20, left: 20),
                                       child: Text(
-                                        "Scegli in quale zona vuoi cercare: ",
+                                        "Scegli in quale zona cercare: ",
                                         textAlign: TextAlign.center,
                                         style: TextStyle(
+                                            fontFamily: "SFPro",
                                             fontSize: 20,
                                             fontWeight: FontWeight.bold,
-                                            fontStyle: FontStyle.italic ),
+                                            fontStyle: FontStyle.italic),
                                       ),
                                     ),
                                   ),
@@ -238,8 +239,8 @@ class _WidgetCategoriesState extends State<WidgetCategories> {
                                           ),
                                         ),
                                         onPressed: () {
-                                        Navigator.pop(context);
-                                            showDialog(
+                                          Navigator.pop(context);
+                                          showDialog(
                                               context: context,
                                               builder: (BuildContext context) {
                                                 return Dialog(
@@ -259,7 +260,10 @@ class _WidgetCategoriesState extends State<WidgetCategories> {
                                                                 .size
                                                                 .height *
                                                             0.8,
-                                                    child: _categoriesList("49","Nord Italia", context) ,//50 is the id 
+                                                    child: _categoriesList(
+                                                        "49",
+                                                        "Nord Italia",
+                                                        context), //50 is the id
                                                   ),
                                                 );
                                               });
@@ -310,18 +314,21 @@ class _WidgetCategoriesState extends State<WidgetCategories> {
                                                             6.0),
                                                   ),
                                                   child: Container(
-                                                    width: MediaQuery.of(
-                                                                context)
-                                                            .size
-                                                            .width *
-                                                        0.9, // Larghezza desiderata del popup
-                                                    height:
-                                                        MediaQuery.of(context)
-                                                                .size
-                                                                .height *
-                                                            0.8,
-                                                    child: _categoriesList("50", "Centro Italia", context) //50 is the id 
-                                                  ),
+                                                      width: MediaQuery.of(
+                                                                  context)
+                                                              .size
+                                                              .width *
+                                                          0.9, // Larghezza desiderata del popup
+                                                      height:
+                                                          MediaQuery.of(context)
+                                                                  .size
+                                                                  .height *
+                                                              0.8,
+                                                      child: _categoriesList(
+                                                          "50",
+                                                          "Centro Italia",
+                                                          context) //50 is the id
+                                                      ),
                                                 );
                                               },
                                             );
@@ -329,40 +336,38 @@ class _WidgetCategoriesState extends State<WidgetCategories> {
                                     ),
                                   ),
                                   Positioned(
-                                      top: MediaQuery.of(context).size.height *
-                                              0.1 +
-                                          (MediaQuery.of(context).size.height *
-                                                  0.6 /
-                                                  3) *
-                                              2,
-                                      left: 0,
-                                      right: 0,
-                                      child: Container(
-                                          height: MediaQuery.of(context)
-                                                  .size
-                                                  .height *
+                                    top: MediaQuery.of(context).size.height *
+                                            0.1 +
+                                        (MediaQuery.of(context).size.height *
+                                                0.6 /
+                                                3) *
+                                            2,
+                                    left: 0,
+                                    right: 0,
+                                    child: Container(
+                                      height:
+                                          MediaQuery.of(context).size.height *
                                               0.6 /
                                               3,
-                                          child: ElevatedButton(
-                                            style: ButtonStyle(
-                                              backgroundColor:
-                                                  MaterialStateProperty.all<
-                                                          Color>(
-                                                      Colors
-                                                          .transparent // Opacità personalizzabile
+                                      child: ElevatedButton(
+                                          style: ButtonStyle(
+                                            backgroundColor:
+                                                MaterialStateProperty.all<
+                                                        Color>(
+                                                    Colors
+                                                        .transparent // Opacità personalizzabile
 
-                                                      ),
-                                              shape: MaterialStateProperty.all<
-                                                  RoundedRectangleBorder>(
-                                                RoundedRectangleBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          6.0),
-                                                ),
+                                                    ),
+                                            shape: MaterialStateProperty.all<
+                                                RoundedRectangleBorder>(
+                                              RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(6.0),
                                               ),
                                             ),
-                                            onPressed: () {
-                                              Navigator.pop(context);
+                                          ),
+                                          onPressed: () {
+                                            Navigator.pop(context);
                                             showDialog(
                                               context: context,
                                               builder: (BuildContext context) {
@@ -373,24 +378,26 @@ class _WidgetCategoriesState extends State<WidgetCategories> {
                                                             6.0),
                                                   ),
                                                   child: Container(
-                                                    width: MediaQuery.of(
-                                                                context)
-                                                            .size
-                                                            .width *
-                                                        0.9, // Larghezza desiderata del popup
-                                                    height:
-                                                        MediaQuery.of(context)
-                                                                .size
-                                                                .height *
-                                                            0.8,
-                                                    child: _categoriesList("51","Sud Italia", context) //50 is the id 
-                                                  ),
-                                                ); 
-                                            },
-                                          );
-                                            }
-                                          ),
-                                      ),
+                                                      width: MediaQuery.of(
+                                                                  context)
+                                                              .size
+                                                              .width *
+                                                          0.9, // Larghezza desiderata del popup
+                                                      height:
+                                                          MediaQuery.of(context)
+                                                                  .size
+                                                                  .height *
+                                                              0.8,
+                                                      child: _categoriesList(
+                                                          "51",
+                                                          "Sud Italia",
+                                                          context) //50 is the id
+                                                      ),
+                                                );
+                                              },
+                                            );
+                                          }),
+                                    ),
                                   ),
                                 ],
                               ),
@@ -450,10 +457,10 @@ class _WidgetCategoriesState extends State<WidgetCategories> {
         );
   }
 
-  Widget _categoriesList(String parent, String name,BuildContext MainContext) {
+  Widget _categoriesList(String parent, String name, BuildContext MainContext) {
     return FutureBuilder<List<Category>>(
-      future: apiSerivce
-          .getCategories(parent), //getData(), // if you mean this method well return image url
+      future: apiSerivce.getCategories(
+          parent), //getData(), // if you mean this method well return image url
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           categorieSalvate = snapshot.data;
@@ -465,8 +472,6 @@ class _WidgetCategoriesState extends State<WidgetCategories> {
     );
   }
 
-
-
   Widget _saporiList(BuildContext context) {
     return FutureBuilder<List<Category>>(
       future: apiSerivce
@@ -474,7 +479,7 @@ class _WidgetCategoriesState extends State<WidgetCategories> {
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           categorieSalvate = snapshot.data;
-          return _buildCategoryList(snapshot.data,null,context);
+          return _buildCategoryList(snapshot.data, null, context);
         } else {
           return Center(child: CircularProgressIndicator());
         }
@@ -482,12 +487,13 @@ class _WidgetCategoriesState extends State<WidgetCategories> {
     );
   }
 
-  Widget _buildCategoryList(List<Category> categories, String name, BuildContext mainContext) {
+  Widget _buildCategoryList(
+      List<Category> categories, String name, BuildContext mainContext) {
     return Container(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height * 0.75,
         decoration: BoxDecoration(
-          color: Color.fromARGB(255, 255, 255, 255),
+          color: Colors.white,
           shape: BoxShape.rectangle,
           borderRadius: BorderRadius.circular(6.0),
           border:
@@ -499,36 +505,37 @@ class _WidgetCategoriesState extends State<WidgetCategories> {
           children: [
             Row(
               children: [
-                Expanded(child:Padding(
-                  padding: EdgeInsets.fromLTRB(5, 10, 10, 10),
-                  child: 
-                  Text(
-                    name==null
-                    ?"Scegli la caratteristica desiderata"
-                    : name,
-                    softWrap: true,
-                    textAlign: TextAlign.center,
-                    overflow: TextOverflow.clip,
-                    style: TextStyle(
-                      fontFamily: "SFPro",
-                      fontWeight: FontWeight.w900,
-                      fontStyle: FontStyle.italic,
-                      fontSize: 20,
-                      color: Color(0xff000000),
+                Expanded(
+                  child: Padding(
+                    padding: EdgeInsets.fromLTRB(5, 20, 10, 30),
+                    child: Text(
+                      name == null
+                          ? "Scegli la caratteristica desiderata"
+                          : name,
+                      softWrap: true,
+                      textAlign: TextAlign.center,
+                      overflow: TextOverflow.clip,
+                      style: TextStyle(
+                        fontFamily: "SFPro",
+                        fontWeight: FontWeight.w900,
+                        fontStyle: FontStyle.italic,
+                        fontSize: 20,
+                        color: Color(0xff000000),
+                      ),
                     ),
                   ),
-                ),),
-              
-                IconButton(
-
-                  onPressed: () {
-                    Navigator.pop(mainContext);
-                    //chiudi il popup
-                  },
-                  iconSize: 40,
-                  icon: Icon(Icons.close_rounded),
-                  color: Colors.black,
-                )
+                ),
+                Padding(
+                    padding: EdgeInsets.fromLTRB(0, 0, 10, 10),
+                    child: IconButton(
+                      onPressed: () {
+                        Navigator.pop(mainContext);
+                        //chiudi il popup
+                      },
+                      iconSize: 45,
+                      icon: Icon(Icons.close_rounded),
+                      color: Colors.black,
+                    ))
               ],
             ),
             Expanded(
@@ -557,13 +564,12 @@ class _WidgetCategoriesState extends State<WidgetCategories> {
                               width: MediaQuery.of(context).size.width * 0.3,
                               height: MediaQuery.of(context).size.height * 0.30,
                               decoration: BoxDecoration(
-                                color: Color.fromARGB(
-                                    255, 135, 209, 128), //inside color
+                                color: Colors.lightGreen[200], //inside color
                                 shape: BoxShape.rectangle,
                                 borderRadius: BorderRadius.circular(6.0),
                                 border: Border.all(
-                                    color: Color.fromARGB(77, 16, 16, 16),
-                                    width: 1), // border color
+                                    color: Colors.black,
+                                    width: 2), // border color
                               ),
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.start,
@@ -581,23 +587,15 @@ class _WidgetCategoriesState extends State<WidgetCategories> {
                                       decoration: BoxDecoration(
                                         shape: BoxShape.rectangle,
                                         color: Colors.white,
-                                        boxShadow: [
-                                          BoxShadow(
-                                              color: Colors.black,
-                                              offset: Offset(1, 1),
-                                              blurRadius: 1,
-                                              spreadRadius: 0.1),
-                                        ],
                                       ),
                                       child: Image.network(
                                         data.image.url,
-                                        //width: MediaQuery.of(context).size.width * 0.01,
                                         fit: BoxFit.cover,
                                       ),
                                     ),
                                   ),
                                   Padding(
-                                    padding: EdgeInsets.only(top: 10),
+                                    padding: EdgeInsets.only(top: 5),
                                     child: Container(
                                       alignment: Alignment.center,
                                       child: Text(
@@ -607,7 +605,7 @@ class _WidgetCategoriesState extends State<WidgetCategories> {
                                           fontFamily: 'SFPro',
                                           fontWeight: FontWeight.w800,
                                           fontStyle: FontStyle.normal,
-                                          fontSize: 12,
+                                          fontSize: 14,
                                           color: Color(0xff000000),
                                         ),
                                       ),
