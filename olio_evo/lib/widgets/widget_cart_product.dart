@@ -12,8 +12,10 @@ import '../provider/loader_provider.dart';
 import '../utils/custom_stepper.dart';
 
 class CartProduct extends StatelessWidget {
-  CartProduct({this.data});
-  CartItem data;
+  const CartProduct({Key key, this.data, this.onStepperValueChanged})
+      : super(key: key);
+  final CartItem data;
+  final VoidCallback onStepperValueChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +50,7 @@ class CartProduct extends StatelessWidget {
                 "€${data.productSalePrice.toString()}",
                 style: const TextStyle(color: Colors.black),
               ),
-              TextButton(
+              /* TextButton(
                 onPressed: () {
                   Utils.showMessage(
                       context,
@@ -83,7 +85,7 @@ class CartProduct extends StatelessWidget {
                       Icon(Icons.delete, color: Colors.white, size: 20),
                       Text("Rimuovi", style: TextStyle(color: Colors.white))
                     ]),
-              ),
+              ), */
             ],
           ),
         ),
@@ -108,15 +110,6 @@ class CartProduct extends StatelessWidget {
                   Provider.of<LoaderProvider>(context, listen: false)
                       .setLoadingStatus(false);
                 });
-
-                if (value == 0 && cartProvider.cartItems.length == 1) {
-                  Provider.of<LoaderProvider>(context, listen: false)
-                      .setLoadingStatus(false);
-                  Navigator.pushAndRemoveUntil(
-                      context,
-                      MaterialPageRoute(builder: (context) => HomePage()),
-                      ModalRoute.withName("/Home"));
-                }
               },
             )),
       );

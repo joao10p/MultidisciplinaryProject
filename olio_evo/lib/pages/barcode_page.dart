@@ -58,33 +58,33 @@ class _BarcodePageState extends State<BarcodePage> {
             mainAxisSize: MainAxisSize.max,
             children: [
               Padding(
-                padding: EdgeInsets.fromLTRB(0, 0, 10, 10),
+                padding: EdgeInsets.fromLTRB(0, 10, 10, 30),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisSize: MainAxisSize.max,
                   children: [
                     Padding(
-                      padding: EdgeInsets.fromLTRB(0, 0, 5, 0),
+                      padding: EdgeInsets.fromLTRB(0, 0, 15, 0),
                       child: Container(
                         decoration: BoxDecoration(
                           border: Border.all(
-                            color: Color.fromRGBO(47, 165, 51, 1),
+                            color: Colors.green,
                             width: 2,
                           ),
                         ),
                         child: IconButton(
-                          icon: Icon(Icons.qr_code),
+                          icon: Icon(Icons.qr_code_scanner),
                           onPressed: () {},
                           color: Color(0xff212435),
-                          iconSize: 24,
+                          iconSize: 30,
                         ),
                       ),
                     ),
                     Container(
                       decoration: BoxDecoration(
                         border: Border.all(
-                          color: Color.fromRGBO(47, 165, 51, 1),
+                          color: Colors.green,
                           width: 2,
                         ),
                       ),
@@ -92,7 +92,7 @@ class _BarcodePageState extends State<BarcodePage> {
                         icon: Icon(Icons.photo_camera),
                         onPressed: () {},
                         color: Color(0xff212435),
-                        iconSize: 24,
+                        iconSize: 28,
                       ),
                     ),
                   ],
@@ -100,10 +100,10 @@ class _BarcodePageState extends State<BarcodePage> {
               ),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  primary: Color.fromARGB(123, 42, 200, 3),
+                  primary: Colors.white,
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12.0),
-                    side: BorderSide(color: Color.fromARGB(77, 100, 255, 33), width: 1),
+                    borderRadius: BorderRadius.circular(8.0),
+                    side: BorderSide(color: Colors.green, width: 4),
                   ),
                 ),
                 onPressed: () {
@@ -141,28 +141,32 @@ class _BarcodePageState extends State<BarcodePage> {
                       });
                   // Inserire qui le azioni da eseguire quando il bottone viene cliccato
                 },
-                child: Column(
+                child: Padding(
+                  padding: EdgeInsets.all(10),
+                  child:Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.max,
                   children: [
                     Positioned(
-                      top: MediaQuery.of(context).size.height * 0.1,
+                      top: MediaQuery.of(context).size.height * 0.2,
                       left: 0,
                       right: 0,
                       child: Text(
-                        "Clicca qua",
+                        "Tocca lo schermo",
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontSize: 30,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
+                          fontWeight: FontWeight.w400,
+                          color: Colors.grey[700],
                         ),
                       ),
                     ),
                     Image(
-                      image: AssetImage("assets/images/fotocamera_verde.webp"),
+                      image: AssetImage("assets/images/barcode_scan.png"),
                       height: MediaQuery.of(context).size.height * 0.45,
                       width: MediaQuery.of(context).size.width * 0.9,
-                      fit: BoxFit.cover,
+                      fit: BoxFit.contain,
                     ),
                     Positioned(
                       bottom: MediaQuery.of(context).size.height * 0.3,
@@ -173,13 +177,14 @@ class _BarcodePageState extends State<BarcodePage> {
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontSize: 30,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
+                          fontWeight: FontWeight.w400,
+                          color: Colors.grey[700],
                           fontFamily: "Roboto",
                         ),
                       ),
                     ),
                   ],
+                ),
                 ),
               ),
               Visibility(

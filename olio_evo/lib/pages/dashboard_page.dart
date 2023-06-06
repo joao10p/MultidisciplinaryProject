@@ -15,13 +15,14 @@ class _DashboardPageState extends State<DashboardPage> {
     return Scaffold(
         body: Container(
       color: Colors.white,
-      child: ListView(
-        children: [   
+      child: ListView(children: [
         imageCarousel(context),
-        WidgetHomeProducts(labelName: "Offerte di oggi", tagId:Config.offerteDiOggiTagId),
-        WidgetHomeProducts(labelName: "I più Venduti", tagId:Config.topSellingTagId),
-        WidgetHomeProducts(labelName: "I più Amati ", tagId:Config.iPiuAmatiTagId),
-
+        WidgetHomeProducts(
+            labelName: "Offerte di oggi", tagId: Config.offerteDiOggiTagId),
+        WidgetHomeProducts(
+            labelName: "I più Venduti", tagId: Config.topSellingTagId),
+        WidgetHomeProducts(
+            labelName: "I più Amati ", tagId: Config.iPiuAmatiTagId),
       ]),
     ));
   }
@@ -33,26 +34,23 @@ class _DashboardPageState extends State<DashboardPage> {
       child: Carousel(
         //overlayShadow: false,
         borderRadius: true,
-       // boxFit: BoxFit.fill,
+        boxFit: BoxFit.contain,
         autoplay: true,
-        dotSize: 2.0,
+        autoplayDuration: Duration(seconds: 7),
+        dotSize: 3.0,
         images: [
           FittedBox(
             fit: BoxFit.fill,
-            child: Image.asset(
-                "assets/images/pubblicita_olio_1.jpg"),
+            child: Image.asset("assets/images/pubblicita_olio_1.jpg"),
           ),
           FittedBox(
             fit: BoxFit.fill,
-            child: Image.asset(
-                "assets/images/pubblicita_olio_2.jpg"),
+            child: Image.asset("assets/images/pubblicita_olio_2.jpg"),
           ),
           FittedBox(
             fit: BoxFit.fill,
-            child: Image.asset(
-                "assets/images/pubblicita_olio_3.jpg"),
+            child: Image.asset("assets/images/pubblicita_olio_3.jpg"),
           ),
-         
         ],
       ),
     );

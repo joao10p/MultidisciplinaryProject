@@ -8,8 +8,6 @@ import 'package:olio_evo/widgets/unauth_cart_widget.dart';
 import 'package:olio_evo/widgets/widget_cart_product.dart';
 import 'package:provider/provider.dart';
 
-import '../shared_service.dart';
-
 class CartPage extends StatefulWidget {
   const CartPage({Key key}) : super(key: key);
 
@@ -80,7 +78,9 @@ class _CartPageState extends State<CartPage> {
                       scrollDirection: Axis.vertical,
                       itemCount: cartModel.cartItems.length,
                       itemBuilder: (context, index) {
-                        return CartProduct(data: cartModel.cartItems[index]);
+                        return CartProduct(
+                          data: cartModel.cartItems[index],
+                        );
                       },
                     ),
                   ],
@@ -187,9 +187,7 @@ class _CartPageState extends State<CartPage> {
               ],
             ),
           );
-        } else if (cartModel.cartItems.isEmpty &&
-            Provider.of<LoaderProvider>(context, listen: false)
-                .isApiCallProcess) {
+        } else if (cartModel.cartItems.isEmpty) {
           return Column(children: [
             Padding(
               padding: const EdgeInsets.fromLTRB(0, 70, 0, 30),
@@ -200,7 +198,6 @@ class _CartPageState extends State<CartPage> {
                 fit: BoxFit.fitWidth,
               ),
             ),
-            //bottone di testo verde
             Padding(
               padding: const EdgeInsets.all(10),
               child: TextButton(
@@ -246,12 +243,12 @@ class _CartPageState extends State<CartPage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: const [
                         Text(
-                          "Total",
+                          "Totale",
                           style: TextStyle(
                               fontSize: 15, fontWeight: FontWeight.w400),
                         ),
                         Text(
-                          "€ 0.0",
+                          "€ 0.00",
                           style: TextStyle(
                             fontSize: 25,
                             fontWeight: FontWeight.bold,
@@ -280,7 +277,10 @@ class _CartPageState extends State<CartPage> {
                         children: const [
                           Text(
                             "Checkout",
-                            style: TextStyle(color: Colors.white),
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 16,
+                            ),
                           )
                         ],
                       ),
@@ -291,7 +291,9 @@ class _CartPageState extends State<CartPage> {
             )
           ]);
         } else {
-          return const Center(child: CircularProgressIndicator());
+          return const Center(
+            child: Text('Error occurred'),
+          );
         }
       },
     );
