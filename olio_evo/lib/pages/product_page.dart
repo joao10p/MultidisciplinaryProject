@@ -234,8 +234,7 @@ class _ProductPageState extends State<ProductPage> {
                                           MediaQuery.of(context).size.height *
                                               0.05,
                                       decoration: BoxDecoration(
-                                        color:
-                                            Color.fromARGB(255, 249, 249, 249),
+                                        color: Colors.white,
                                         borderRadius: BorderRadius.circular(8),
                                       ),
                                       padding: EdgeInsets.only(top: 3),
@@ -341,7 +340,7 @@ class _ProductPageState extends State<ProductPage> {
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           categorieSaved = snapshot.data;
-          return _buildCategoryList(snapshot.data,  true,  null);
+          return _buildCategoryList(snapshot.data, true, null);
         } else {
           return Center(child: CircularProgressIndicator());
         }
@@ -354,7 +353,7 @@ class _ProductPageState extends State<ProductPage> {
     return Consumer<SelectionState>(builder: (context, selectionState, _) {
       return Container(
         width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height * 0.75,
+        height: MediaQuery.of(context).size.height * 0.5,
         decoration: BoxDecoration(
           color: Colors.white,
           shape: BoxShape.rectangle,
@@ -485,7 +484,7 @@ class _ProductPageState extends State<ProductPage> {
                               width: MediaQuery.of(context).size.width * 0.3,
                               height: MediaQuery.of(context).size.height * 0.30,
                               decoration: BoxDecoration(
-                                color: Colors.lightGreen[200], //inside color
+                                color: Colors.black12, //inside color
                                 shape: BoxShape.rectangle,
                                 borderRadius: BorderRadius.circular(6.0),
                                 border: Border.all(
@@ -526,7 +525,7 @@ class _ProductPageState extends State<ProductPage> {
                                           fontFamily: 'SFPro',
                                           fontWeight: FontWeight.w800,
                                           fontStyle: FontStyle.normal,
-                                          fontSize: 14,
+                                          fontSize: 13,
                                           color: Color(0xff000000),
                                         ),
                                       ),
@@ -584,7 +583,7 @@ class _ProductPageState extends State<ProductPage> {
               width: MediaQuery.of(context).size.width *
                   0.9, // Larghezza desiderata del popup
               height: MediaQuery.of(context).size.height *
-                  0.8, // Altezza desiderata del popup
+                  0.6, // Altezza desiderata del popup
               padding: EdgeInsets.all(5), // Imposta il padding del popup
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -681,7 +680,7 @@ class _ProductPageState extends State<ProductPage> {
                                     width: MediaQuery.of(context).size.width *
                                         0.9, // Larghezza desiderata del popup
                                     height: MediaQuery.of(context).size.height *
-                                        0.8,
+                                        0.6,
                                     child: _categoriesList("49", "Nord Italia",
                                         context), //50 is the id
                                   ),
@@ -725,7 +724,7 @@ class _ProductPageState extends State<ProductPage> {
                                           0.9, // Larghezza desiderata del popup
                                       height:
                                           MediaQuery.of(context).size.height *
-                                              0.8,
+                                              0.6,
                                       child: _categoriesList(
                                           "50",
                                           "Centro Italia",
@@ -770,7 +769,7 @@ class _ProductPageState extends State<ProductPage> {
                                           0.9, // Larghezza desiderata del popup
                                       height:
                                           MediaQuery.of(context).size.height *
-                                              0.8,
+                                              0.6,
                                       child: _categoriesList("51", "Sud Italia",
                                           context) //50 is the id
                                       ),
@@ -789,34 +788,50 @@ class _ProductPageState extends State<ProductPage> {
 
   Widget _buildFilterList() {
     return Consumer<SelectionState>(builder: (context, selectionState, _) {
-      
-       return Container(
+      return Container(
         height: MediaQuery.of(context).size.height * 0.32,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Padding(
-              padding: EdgeInsets.fromLTRB(15, 10, 0, 10),
-              child: Text(
-                "Seleziona l'ordine che preferisci:",
-                style: TextStyle(
-                  fontSize: 24,
-                  color: Colors.green,
-                  fontWeight: FontWeight.bold,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment:
+                  CrossAxisAlignment.start, //spazio tra i due bottoni
+              children: [
+                Padding(
+                  padding: EdgeInsets.fromLTRB(5, 30, 0, 20),
+                  child: Text(
+                    "Scegli in quale ordine cercare ",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                        fontFamily: "SFPro",
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        fontStyle: FontStyle.italic),
+                  ),
                 ),
-              ),
+                Padding(
+                    padding: EdgeInsets.fromLTRB(0, 15, 0, 0),
+                    child: IconButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                        //chiudi il popup
+                      },
+                      iconSize: 35,
+                      icon: Icon(Icons.close_rounded),
+                      color: Colors.black,
+                    ))
+              ],
             ),
             Padding(
-              padding: EdgeInsets.fromLTRB(15, 0, 15, 0),
+              padding: EdgeInsets.fromLTRB(15, 20, 15, 0),
               child: Container(
                 height: MediaQuery.of(context).size.height * 0.30,
                 width: MediaQuery.of(context).size.width,
                 decoration: BoxDecoration(
-                  color: Color.fromARGB(255, 255, 255, 255),
+                  color: Colors.white,
                   shape: BoxShape.rectangle,
                   borderRadius: BorderRadius.circular(6.0),
-                  border: Border.all(
-                      color: Color.fromRGBO(92, 197, 17, 0.961), width: 1),
                 ),
                 child: GridView.count(
                   childAspectRatio: 5,
@@ -832,27 +847,25 @@ class _ProductPageState extends State<ProductPage> {
                           selectionState.updateSelection(index);
                         },
                         child: Padding(
-                          padding: EdgeInsets.only(top: 10, bottom:10, left: 10, right: 10),
+                          padding: EdgeInsets.all(2.5),
                           child: Container(
                               decoration: BoxDecoration(
-                                 borderRadius: BorderRadius.circular(10),
-                                color: Color.fromARGB(255, 242, 243, 242),
-                                boxShadow: <BoxShadow>[
-                                  BoxShadow(
-                                    color: Color.fromARGB(255, 19, 168, 27),
-                                    blurRadius: 1,
-                                    spreadRadius: 1,
-                                  ),
-                                ],
-                                
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(6.0),
+                                border: Border.all(
+                                  color: selectionState.isSelected[index] == 0
+                                      ? Colors.black
+                                      : Colors.green,
+                                  width: 2,
+                                ),
                               ),
                               child: Center(
                                 child: Text(
                                   data,
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
-                                    fontSize: 24,
-                                    fontStyle: FontStyle.italic,
+                                    fontSize: 20,
+                                    fontStyle: FontStyle.normal,
                                     color: selectionState.isSelected[index] == 0
                                         ? Colors.black
                                         : Colors.green,
@@ -868,91 +881,52 @@ class _ProductPageState extends State<ProductPage> {
               ),
             ),
             Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-              Padding(
-                  padding: EdgeInsets.only(top: 10),
-                  child: ElevatedButton(
-                      child: Text('Applica'),
-                      style: ElevatedButton.styleFrom(
-                        primary: Color.fromARGB(255, 17, 162, 46),
-                        side: BorderSide(
-                          color: Color.fromARGB(255, 33, 32, 32),
-                          width: 1,
-                        ),
-                        textStyle: TextStyle(
-                            color: Color.fromARGB(255, 236, 239, 236),
-                            fontSize: 20,
-                            fontStyle: FontStyle.italic),
-                      ),
-                      onPressed: () {
-                        setState(() {
-                          isFilter = true;
-                          myFilters[0] = "" +
-                              sortFilterStrings[selectionState.getIndex()]
-                                  .toString();
-                          var _productsList = Provider.of<ProductProvider>(
-                              context,
-                              listen: false);
-                          _productsList.resetStreams();
-                          _productsList.setLoadingState(
-                              LoadMoreStatus.INITIAL, true);
-                          if (selectionState.getIndex() != -1 &&
-                                  categoryId != null &&
-                                  saporiId == null) {
-                                _productsList.fetchProducts(
-                                  pageNumber,
-                                  sortOrder:
-                                      _sortByOptions[selectionState.getIndex()]
-                                          .sortOrder,
-                                  sortBy:
-                                      _sortByOptions[selectionState.getIndex()]
-                                          .value,
-                                  categoryId: categoryId,
-                                );
-                              } else if (selectionState.getIndex() != -1 &&
-                                  categoryId != null &&
-                                  saporiId != null) {
-                                _productsList.fetchProducts(
-                                  pageNumber,
-                                  sortOrder:
-                                      _sortByOptions[selectionState.getIndex()]
-                                          .sortOrder,
-                                  sortBy:
-                                      _sortByOptions[selectionState.getIndex()]
-                                          .value,
-                                  categoryId: categoryId + "," + saporiId,
-                                );
-                                  }
-                                else if (selectionState.getIndex() != -1 &&
-                                  categoryId == null &&
-                                  saporiId == null) {
-                                _productsList.fetchProducts(
-                                  pageNumber,
-                                  sortOrder:
-                                      _sortByOptions[selectionState.getIndex()]
-                                          .sortOrder,
-                                  sortBy:
-                                      _sortByOptions[selectionState.getIndex()]
-                                          .value,
-            
-                                );} else if (selectionState.getIndex() != -1 &&
-                                  categoryId == null &&
-                                  saporiId != null) {
-                                _productsList.fetchProducts(
-                                  pageNumber,
-                                  sortOrder:
-                                      _sortByOptions[selectionState.getIndex()]
-                                          .sortOrder,
-                                  sortBy:
-                                      _sortByOptions[selectionState.getIndex()]
-                                          .value,
-                                          categoryId: saporiId,
-            
-                                );}
-                              
-                              
-                          Navigator.pop(context);
-                        });
-                      }))
+              MaterialButton(
+                  color: Colors.green,
+                  minWidth: 120,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(6.0),
+                  ),
+                  padding: EdgeInsets.all(16),
+                  child: Text(
+                    "Applica",
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w700,
+                      fontStyle: FontStyle.normal,
+                    ),
+                  ),
+                  textColor: Color(0xffffffff),
+                  onPressed: () {
+                    setState(() {
+                      isFilter = true;
+                      myFilters[0] = "" +
+                          sortFilterStrings[selectionState.getIndex()]
+                              .toString();
+                      var _productsList =
+                          Provider.of<ProductProvider>(context, listen: false);
+                      _productsList.resetStreams();
+                      _productsList.setLoadingState(
+                          LoadMoreStatus.INITIAL, true);
+                      if (categoryId != null) {
+                        _productsList.fetchProducts(pageNumber,
+                            sortOrder: _sortByOptions[selectionState.getIndex()]
+                                .sortOrder,
+                            sortBy:
+                                _sortByOptions[selectionState.getIndex()].value,
+                            categoryId: categoryId.toString());
+                      } else {
+                        _productsList.fetchProducts(
+                          pageNumber,
+                          sortOrder: _sortByOptions[selectionState.getIndex()]
+                              .sortOrder,
+                          sortBy:
+                              _sortByOptions[selectionState.getIndex()].value,
+                        );
+                      }
+                      Navigator.pop(context);
+                    });
+                  }),
             ])
           ],
         ),
@@ -966,23 +940,22 @@ class _ProductPageState extends State<ProductPage> {
         _saporiListBuilder();
         break;
       case 0:
-        
-         showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return Dialog(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(6.0),
-            ),
-            child: Container(
-              width: MediaQuery.of(context).size.width *
-                  0.8, // Larghezza desiderata del popup
-              height: MediaQuery.of(context).size.height *
-                  0.6, // Altezza desiderata del popup
-              padding: EdgeInsets.all(5), // Imposta il padding del popup
-              child: _buildFilterList())
-          );
-        },);
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return Dialog(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(6.0),
+                ),
+                child: Container(
+                    width: MediaQuery.of(context).size.width *
+                        0.8, // Larghezza desiderata del popup
+                    height: MediaQuery.of(context).size.height *
+                        0.6, // Altezza desiderata del popup
+                    padding: EdgeInsets.all(5), // Imposta il padding del popup
+                    child: _buildFilterList()));
+          },
+        );
         break;
       case 2:
         _regioniList();

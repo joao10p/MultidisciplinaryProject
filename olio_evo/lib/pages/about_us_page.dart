@@ -13,9 +13,8 @@ class AboutPage extends StatelessWidget {
           children: [
             Padding(
                 padding: EdgeInsets.fromLTRB(5, 60, 5, 10),
-                child: Image(
-                  image: AssetImage(
-                      "assets/images/8ha771cl2p_66olz7ebcx_file.jpeg"),
+                child: Image.asset(
+                  "assets/images/olivevo_logo.jpg",
                   height: 200,
                   width: MediaQuery.of(context).size.width * 0.9,
                   fit: BoxFit.cover,

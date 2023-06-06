@@ -264,7 +264,7 @@ class _PaymentScreenState extends CheckoutBasePageState<PaymentScreen> {
                     },
                     style: TextButton.styleFrom(
                       padding: const EdgeInsets.all(16),
-                      backgroundColor: Colors.blue,
+                      backgroundColor: Colors.lightBlue,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(6.0),
                         side: const BorderSide(
@@ -299,7 +299,7 @@ class _PaymentScreenState extends CheckoutBasePageState<PaymentScreen> {
                     onPressed: () {},
                     style: TextButton.styleFrom(
                       padding: const EdgeInsets.all(16),
-                      backgroundColor: Colors.orange,
+                      backgroundColor: Colors.green,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(6.0),
                         side: const BorderSide(
@@ -330,47 +330,8 @@ class _PaymentScreenState extends CheckoutBasePageState<PaymentScreen> {
                     ),
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(0, 20, 0, 0),
-                  child: TextButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    style: TextButton.styleFrom(
-                      padding: const EdgeInsets.all(16),
-                      backgroundColor: Colors.green,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(6.0),
-                        side: const BorderSide(
-                            color: Color(0xff808080), width: 1),
-                      ),
-                    ),
-                    child: Wrap(
-                      alignment: WrapAlignment.center,
-                      crossAxisAlignment: WrapCrossAlignment.center,
-                      children: const [
-                        Padding(
-                          padding: EdgeInsets.fromLTRB(0, 0, 10, 0),
-                          child: Icon(
-                            Icons.monetization_on_rounded,
-                            color: Colors.white,
-                            size: 30,
-                          ),
-                        ),
-                        Text(
-                          "Paga alla consegna",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.w600,
-                            fontSize: 18,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
                 const Padding(
-                  padding: EdgeInsets.fromLTRB(0, 50, 0, 0),
+                  padding: EdgeInsets.fromLTRB(0, 75, 0, 0),
                   child: Text(
                     "Consegna prevista entro:",
                     textAlign: TextAlign.start,

@@ -63,12 +63,12 @@ class OffersPage extends StatelessWidget {
                   ),
                   decoration: InputDecoration(
                     disabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(30.0),
+                      borderRadius: BorderRadius.circular(10.0),
                       borderSide:
                           BorderSide(color: Color(0xff696767), width: 1.5),
                     ),
                     focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(30.0),
+                      borderRadius: BorderRadius.circular(10.0),
                       borderSide:
                           BorderSide(color: Color(0xff696767), width: 1.5),
                     ),
@@ -77,7 +77,7 @@ class OffersPage extends StatelessWidget {
                       borderSide:
                           BorderSide(color: Color(0xff696767), width: 1.5),
                     ),
-                    hintText: "InviteYourFriendsCode01",
+                    hintText: "CodiceAmico01",
                     hintStyle: TextStyle(
                       fontWeight: FontWeight.w300,
                       fontStyle: FontStyle.normal,
@@ -94,23 +94,71 @@ class OffersPage extends StatelessWidget {
               ),
               MaterialButton(
                 onPressed: () {},
-                color: Color(0xff3a57e8),
+                color: Colors.green,
                 elevation: 0,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10.0),
                 ),
                 padding: EdgeInsets.all(16),
                 child: Text(
-                  "Condividi",
+                  "Applica",
                   style: TextStyle(
-                    fontSize: 20,
+                    fontSize: 16,
                     fontWeight: FontWeight.w700,
                     fontStyle: FontStyle.normal,
                   ),
                 ),
                 textColor: Color(0xffffffff),
-                height: 60,
-                minWidth: 190,
+              ),
+              //text con un codice casuale e sotto un bottone con scritto condividi
+              Padding(
+                padding: EdgeInsets.fromLTRB(0, 50, 0, 0),
+                child: Text(
+                  "Codice personale (condiviso 0/5 volte)",
+                  textAlign: TextAlign.center,
+                  overflow: TextOverflow.clip,
+                  style: TextStyle(
+                    fontWeight: FontWeight.w400,
+                    fontStyle: FontStyle.normal,
+                    fontSize: 18,
+                    color: Color.fromARGB(255, 0, 0, 0),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
+                child: Text(
+                  "ASD67BXX32",
+                  textAlign: TextAlign.center,
+                  overflow: TextOverflow.clip,
+                  style: TextStyle(
+                    fontWeight: FontWeight.w700,
+                    fontStyle: FontStyle.normal,
+                    fontSize: 20,
+                    color: Color.fromARGB(255, 0, 0, 0),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
+                child: MaterialButton(
+                  onPressed: () {},
+                  color: Colors.black,
+                  elevation: 0,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                  padding: EdgeInsets.all(16),
+                  child: Text(
+                    "Condividi",
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w700,
+                      fontStyle: FontStyle.normal,
+                    ),
+                  ),
+                  textColor: Color(0xffffffff),
+                ),
               ),
             ],
           ),

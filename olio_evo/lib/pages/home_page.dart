@@ -57,13 +57,13 @@ class _HomePageState extends State<HomePage> {
                     Icons.storefront_outlined,
                     //color: Colors.green,
                   ),
-                  label: 'Store'),
+                  label: 'Negozio'),
               BottomNavigationBarItem(
                   icon: Icon(
                     Icons.search,
                     //color: Colors.green,
                   ),
-                  label: 'Search'),
+                  label: 'Cerca'),
               BottomNavigationBarItem(
                   icon: Icon(
                     Icons.camera_alt_outlined,
@@ -82,7 +82,7 @@ class _HomePageState extends State<HomePage> {
                   Icons.account_circle_outlined,
                   //color: Colors.green,
                 ),
-                label: 'Account',
+                label: 'Profilo',
               ),
             ],
             unselectedItemColor: Colors.black,
@@ -151,7 +151,7 @@ class _HomePageState extends State<HomePage> {
                     Icon(
                       Icons.brightness_1,
                       size: 20.0,
-                      color: Colors.green,
+                      color: Colors.redAccent,
                     ),
                     Positioned(
                       top: 4.0,
@@ -164,7 +164,7 @@ class _HomePageState extends State<HomePage> {
                               .toString(),
                           style: const TextStyle(
                             color: Colors.white,
-                            fontSize: 12.0,
+                            fontSize: 13.0,
                             fontWeight: FontWeight.w500,
                           ),
                         ),

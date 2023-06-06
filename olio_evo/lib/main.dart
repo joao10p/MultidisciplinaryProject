@@ -8,7 +8,7 @@ import 'package:olio_evo/pages/orders_page.dart';
 import 'package:olio_evo/pages/paypal_payment.dart';
 import 'package:olio_evo/pages/product_details.dart';
 import 'package:olio_evo/pages/product_page.dart';
-import 'package:olio_evo/pages/sign_up_new.dart';
+import 'package:olio_evo/pages/sign_up_page.dart';
 import 'package:olio_evo/provider/cart_provider.dart';
 import 'package:olio_evo/provider/filters_provider.dart';
 import 'package:olio_evo/provider/loader_provider.dart';
