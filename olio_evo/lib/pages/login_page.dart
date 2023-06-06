@@ -216,7 +216,7 @@ class _LoginPageState extends State<LoginPage> {
                                                                       MaterialPageRoute(
                                                                           builder: (context) => HomePage(
                                                                               selectedPage:
-                                                                                  3)),
+                                                                                  0)),
                                                                       ModalRoute
                                                                           .withName(
                                                                               "/Home"));
@@ -334,7 +334,8 @@ class _LoginPageState extends State<LoginPage> {
                                             mainAxisSize: MainAxisSize.max,
                                             children: [
                                               IconButton(
-                                                icon: const Icon(Icons.facebook),
+                                                icon:
+                                                    const Icon(Icons.facebook),
                                                 onPressed: () {},
                                                 color: const Color(0xff212435),
                                                 iconSize: 30,
@@ -376,7 +377,8 @@ class _LoginPageState extends State<LoginPage> {
                                                     fontWeight: FontWeight.w400,
                                                     fontStyle: FontStyle.normal,
                                                     fontSize: 10,
-                                                    color: Color.fromARGB(255, 1, 113, 224),
+                                                    color: Color.fromARGB(
+                                                        255, 1, 113, 224),
                                                   ),
                                                 ),
                                               ),

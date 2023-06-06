@@ -8,8 +8,6 @@ import 'package:olio_evo/widgets/unauth_cart_widget.dart';
 import 'package:olio_evo/widgets/widget_cart_product.dart';
 import 'package:provider/provider.dart';
 
-import '../shared_service.dart';
-
 class CartPage extends StatefulWidget {
   const CartPage({Key key}) : super(key: key);
 
