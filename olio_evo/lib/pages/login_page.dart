@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:olio_evo/pages/sign_up_new.dart';
-import 'package:olio_evo/pages/signup_page.dart';
+import 'package:olio_evo/pages/sign_up_page.dart';
 import 'package:olio_evo/shared_service.dart';
 
 import '../api_service.dart';
@@ -381,7 +380,7 @@ class _LoginPageState extends State<LoginPage> {
                                                     Navigator.push(
                                                       context,
                                                       MaterialPageRoute(
-                                                          builder: (context) => SignUpPage()),
+                                                          builder: (context) => SignUpPage(logInContext: context,)),
                                                     );
                                                   },
                                                   color: Colors.black,
