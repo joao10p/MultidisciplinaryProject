@@ -311,7 +311,7 @@ class _ProductPageState extends State<ProductPage> {
           focusedBorder: OutlineInputBorder(
             borderSide: BorderSide(
               color: Colors.green,
-              width: 1.5,
+              width: 2,
             ),
             borderRadius: BorderRadius.circular(6.0),
           ),
@@ -341,7 +341,7 @@ class _ProductPageState extends State<ProductPage> {
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           categorieSaved = snapshot.data;
-          return _buildCategoryList(snapshot.data,true,null);
+          return _buildCategoryList(snapshot.data, true, null);
         } else {
           return Center(child: CircularProgressIndicator());
         }
@@ -359,8 +359,6 @@ class _ProductPageState extends State<ProductPage> {
           color: Colors.white,
           shape: BoxShape.rectangle,
           borderRadius: BorderRadius.circular(6.0),
-          border:
-              Border.all(color: Color.fromARGB(77, 255, 255, 255), width: 1),
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -372,9 +370,9 @@ class _ProductPageState extends State<ProductPage> {
                   child: Padding(
                     padding: EdgeInsets.fromLTRB(5, 20, 10, 30),
                     child: Text(
-                      name==null
-                      ?"Scegli la caratteristica desiderata"
-                      : name,
+                      name == null
+                          ? "Scegli la caratteristica desiderata"
+                          : name,
                       softWrap: true,
                       textAlign: TextAlign.center,
                       overflow: TextOverflow.clip,
@@ -417,8 +415,10 @@ class _ProductPageState extends State<ProductPage> {
                             setState(() {
                               isFilter = true;
                               isSapori
-                              ? myFilters[1] = "" + data.categoryName.toString()
-                              : myFilters[2] = "" + data.categoryName.toString();
+                                  ? myFilters[1] =
+                                      "" + data.categoryName.toString()
+                                  : myFilters[2] =
+                                      "" + data.categoryName.toString();
                               var productsList = Provider.of<ProductProvider>(
                                   context,
                                   listen: false);
@@ -516,7 +516,7 @@ class _ProductPageState extends State<ProductPage> {
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           categorieSaved = snapshot.data;
-          return _buildCategoryList(snapshot.data,false,name);
+          return _buildCategoryList(snapshot.data, false, name);
         } else {
           return Center(child: CircularProgressIndicator());
         }
@@ -547,7 +547,6 @@ class _ProductPageState extends State<ProductPage> {
           );
         });
   }
-
 
   Widget _regioniList() {
     showDialog(
@@ -742,8 +741,7 @@ class _ProductPageState extends State<ProductPage> {
 
   Widget _buildFilterList() {
     return Consumer<SelectionState>(builder: (context, selectionState, _) {
-      
-       return Container(
+      return Container(
         height: MediaQuery.of(context).size.height * 0.32,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -807,8 +805,8 @@ class _ProductPageState extends State<ProductPage> {
                                     fontSize: 24,
                                     fontStyle: FontStyle.italic,
                                     color: selectionState.isSelected[index] == 0
-                                        ? Color.fromARGB(255, 10, 10, 10)
-                                        : Color.fromARGB(255, 48, 148, 41),
+                                        ? Colors.black
+                                        : Colors.green,
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
@@ -873,7 +871,7 @@ class _ProductPageState extends State<ProductPage> {
             ])
           ],
         ),
-      );  
+      );
     });
   }
 
@@ -883,23 +881,22 @@ class _ProductPageState extends State<ProductPage> {
         _saporiListBuilder();
         break;
       case 0:
-        
-         showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return Dialog(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(6.0),
-            ),
-            child: Container(
-              width: MediaQuery.of(context).size.width *
-                  0.8, // Larghezza desiderata del popup
-              height: MediaQuery.of(context).size.height *
-                  0.6, // Altezza desiderata del popup
-              padding: EdgeInsets.all(5), // Imposta il padding del popup
-              child: _buildFilterList())
-          );
-        },);
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return Dialog(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(6.0),
+                ),
+                child: Container(
+                    width: MediaQuery.of(context).size.width *
+                        0.8, // Larghezza desiderata del popup
+                    height: MediaQuery.of(context).size.height *
+                        0.6, // Altezza desiderata del popup
+                    padding: EdgeInsets.all(5), // Imposta il padding del popup
+                    child: _buildFilterList()));
+          },
+        );
         break;
       case 2:
         _regioniList();

@@ -112,13 +112,17 @@ class _HomePageState extends State<HomePage> {
       automaticallyImplyLeading: true,
       title: const Text(
         "OlivEvo",
-        style: TextStyle(color: Colors.white),
+        style: TextStyle(color: Colors.white,
+            fontSize: 24,
+            fontWeight: FontWeight.bold,
+            ),
       ),
       actions: [
         IconButton(
           icon: const Icon(
             Icons.notifications_none,
             color: Colors.white,
+            size: 24,
           ),
           onPressed: () {},
         ),
@@ -135,6 +139,7 @@ class _HomePageState extends State<HomePage> {
           icon: const Icon(
             Icons.shopping_cart_rounded,
             color: Colors.white,
+            size: 24,
           ),
         ),
         Provider.of<CartProvider>(context, listen: false).cartItems.isEmpty
@@ -145,7 +150,7 @@ class _HomePageState extends State<HomePage> {
                     Icon(
                       Icons.brightness_1,
                       size: 20.0,
-                      color: Colors.green[900],
+                      color: Colors.green,
                     ),
                     Positioned(
                       top: 4.0,

@@ -44,6 +44,10 @@ class ProductCard extends StatelessWidget {
               blurRadius: 3,
             )
           ],
+          border: Border.all(
+            color: Colors.green,
+            width: 1.7,
+          ),
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -96,6 +100,7 @@ class ProductCard extends StatelessWidget {
               alignment: Alignment.center,
               child: Text(data.name,
                   textAlign: TextAlign.center,
+                  maxLines: 3,
                   style: TextStyle(
                     fontFamily: 'SFPro',
                     fontWeight: FontWeight.w500,
@@ -113,7 +118,7 @@ class ProductCard extends StatelessWidget {
                   child: Text(
                     data.rating.toString() == '0'
                         ? '3.0'
-                        : 'data.rating.toString()',
+                        : data.rating.toString(),
                     textAlign: TextAlign.left,
                     overflow: TextOverflow.clip,
                     style: TextStyle(

@@ -33,7 +33,7 @@ class _WidgetHomeProductState extends State<WidgetHomeProducts> {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: Color.fromARGB(255, 249, 249, 249),
+        color: Colors.white,
       ),
       child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -44,17 +44,17 @@ class _WidgetHomeProductState extends State<WidgetHomeProducts> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Padding(
-                  padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                  padding: EdgeInsets.fromLTRB(10, 5, 10, 0),
                   child: Text(
                     this.widget.labelName,
                     style: TextStyle(
                         fontSize: 24,
                         fontWeight: FontWeight.bold,
-                        color: Color.fromARGB(255, 5, 116, 30)),
+                        color: Colors.black),
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                  padding: EdgeInsets.fromLTRB(10, 5, 10, 0),
                   child: TextButton(
                     onPressed: () {
                       Navigator.push(
@@ -67,7 +67,7 @@ class _WidgetHomeProductState extends State<WidgetHomeProducts> {
                     child: Text(
                       'Vedi tutti',
                       style: TextStyle(
-                        color: Color.fromARGB(255, 5, 116, 30),
+                        color: Colors.black,
                         decoration: TextDecoration.underline,
                         fontSize: 15,
                       ),
@@ -95,7 +95,7 @@ class _WidgetHomeProductState extends State<WidgetHomeProducts> {
 
   Widget _buildList(List<Product> items) {
     return Container(
-      height: MediaQuery.of(context).size.height / 1.7, //altezza box
+      height: MediaQuery.of(context).size.height / 1.75, //altezza box
       alignment: Alignment.center,
       child: GridView.builder(
         physics: NeverScrollableScrollPhysics(),
@@ -210,7 +210,7 @@ class _WidgetHomeProductState extends State<WidgetHomeProducts> {
                           child: Text(
                             data.rating.toString() == '0'
                                 ? '3.0'
-                                : 'data.rating.toString()',
+                                : data.rating.toString(),
                             textAlign: TextAlign.left,
                             overflow: TextOverflow.clip,
                             style: TextStyle(
@@ -239,7 +239,7 @@ class _WidgetHomeProductState extends State<WidgetHomeProducts> {
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsets.fromLTRB(0, 15, 0, 0),
+                          padding: EdgeInsets.fromLTRB(0, 15, 0, 5),
                           child: Container(
                             // qui il prezzo
                             padding: EdgeInsets.all(0),
