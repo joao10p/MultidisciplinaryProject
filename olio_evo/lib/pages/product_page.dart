@@ -23,10 +23,13 @@ class ProductPage extends StatefulWidget {
 class _ProductPageState extends State<ProductPage> {
   API apiSerivce = new API();
   //servono per tenere l'ordinamento dei bottoni per la selezione dei filtri
-  List<String> sortIndex = ["Ordina", "Categorie", "Regioni", "Consigliati"];
+  List<String> sortIndex = ["Ordina", "Sapori", "Regioni", "Consigliati"];
   List<String> myStrings = ['Elemento 1', 'Elemento 123242', 'Elemento 3'];
   int pageNumber = 1;
-  int categoryId;
+  //Tiene traccia dell'id dell sapori
+  String saporiId;
+  //Tiene traccia dell'id della regione
+  String categoryId;
   //Tiene ttraccia se è stato selezionato un filtro o meno
   bool isFilter;
   ScrollController _scrollController = new ScrollController();
@@ -51,13 +54,8 @@ class _ProductPageState extends State<ProductPage> {
 
   @override
   void initState() {
-    if (this.widget.category != null) {
-      categoryId = this.widget.category.categoryId;
-      myFilters[1] = "" + this.widget.category.categoryName;
-      isFilter = true;
-    } else {
-      isFilter = false;
-    }
+    isFilter = false;
+
     var _productList = Provider.of<ProductProvider>(context, listen: false);
     _productList.resetStreams();
     _productList.setLoadingState(LoadMoreStatus.INITIAL, false);
@@ -341,7 +339,7 @@ class _ProductPageState extends State<ProductPage> {
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           categorieSaved = snapshot.data;
-          return _buildCategoryList(snapshot.data,true,null);
+          return _buildCategoryList(snapshot.data, true, null);
         } else {
           return Center(child: CircularProgressIndicator());
         }
@@ -372,9 +370,9 @@ class _ProductPageState extends State<ProductPage> {
                   child: Padding(
                     padding: EdgeInsets.fromLTRB(5, 20, 10, 30),
                     child: Text(
-                      name==null
-                      ?"Scegli la caratteristica desiderata"
-                      : name,
+                      name == null
+                          ? "Scegli la caratteristica desiderata"
+                          : name,
                       softWrap: true,
                       textAlign: TextAlign.center,
                       overflow: TextOverflow.clip,
@@ -416,18 +414,69 @@ class _ProductPageState extends State<ProductPage> {
                           onTap: () {
                             setState(() {
                               isFilter = true;
-                              isSapori
-                              ? myFilters[1] = "" + data.categoryName.toString()
-                              : myFilters[2] = "" + data.categoryName.toString();
-                              var productsList = Provider.of<ProductProvider>(
+                              if (isSapori) {
+                                myFilters[1] =
+                                    "" + data.categoryName.toString();
+                                saporiId = data.categoryId.toString();
+                              } else {
+                                myFilters[2] =
+                                    "" + data.categoryName.toString();
+                                categoryId = data.categoryId.toString();
+                              }
+                              var _productsList = Provider.of<ProductProvider>(
                                   context,
                                   listen: false);
-                              productsList.resetStreams();
-                              productsList.setLoadingState(
+                              _productsList.resetStreams();
+                              _productsList.setLoadingState(
                                   LoadMoreStatus.INITIAL, true);
-                              productsList.fetchProducts(pageNumber,
-                                  categoryId: data.categoryId.toString());
-                              categories = setFirstSelected(categories);
+                              if (selectionState.getIndex() != -1 &&
+                                  categoryId != null &&
+                                  saporiId == null) {
+                                _productsList.fetchProducts(
+                                  pageNumber,
+                                  sortOrder:
+                                      _sortByOptions[selectionState.getIndex()]
+                                          .sortOrder,
+                                  sortBy:
+                                      _sortByOptions[selectionState.getIndex()]
+                                          .value,
+                                  categoryId: categoryId,
+                                );
+                              } else if (selectionState.getIndex() == -1 &&
+                                  categoryId != null &&
+                                  saporiId == null) {
+                                _productsList.fetchProducts(
+                                  pageNumber,
+                                  categoryId: categoryId,
+                                );
+                              } else if (selectionState.getIndex() != -1 &&
+                                  categoryId != null &&
+                                  saporiId != null) {
+                                _productsList.fetchProducts(
+                                  pageNumber,
+                                  sortOrder:
+                                      _sortByOptions[selectionState.getIndex()]
+                                          .sortOrder,
+                                  sortBy:
+                                      _sortByOptions[selectionState.getIndex()]
+                                          .value,
+                                  categoryId: categoryId + "," + saporiId,
+                                );
+                              } else if (selectionState.getIndex() == -1 &&
+                                  categoryId == null &&
+                                  saporiId != null) {
+                                _productsList.fetchProducts(
+                                  pageNumber,
+                                  categoryId: saporiId,
+                                );
+                              } else if (selectionState.getIndex() == -1 &&
+                                  categoryId != null &&
+                                  saporiId != null) {
+                                _productsList.fetchProducts(
+                                  pageNumber,
+                                  categoryId: categoryId + "," + saporiId,
+                                );
+                              }
                               Navigator.pop(context);
                             });
                           },
@@ -516,7 +565,7 @@ class _ProductPageState extends State<ProductPage> {
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           categorieSaved = snapshot.data;
-          return _buildCategoryList(snapshot.data,false,name);
+          return _buildCategoryList(snapshot.data, false, name);
         } else {
           return Center(child: CircularProgressIndicator());
         }
@@ -547,7 +596,6 @@ class _ProductPageState extends State<ProductPage> {
           );
         });
   }
-
 
   Widget _regioniList() {
     showDialog(
@@ -742,9 +790,7 @@ class _ProductPageState extends State<ProductPage> {
 
   Widget _buildFilterList() {
     return Consumer<SelectionState>(builder: (context, selectionState, _) {
-      
-       return Container(
-        height: MediaQuery.of(context).size.height * 0.32,
+      return Container(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -762,7 +808,7 @@ class _ProductPageState extends State<ProductPage> {
             Padding(
               padding: EdgeInsets.fromLTRB(15, 0, 15, 0),
               child: Container(
-                height: MediaQuery.of(context).size.height * 0.20,
+                height: MediaQuery.of(context).size.height * 0.30,
                 width: MediaQuery.of(context).size.width,
                 decoration: BoxDecoration(
                   color: Color.fromARGB(255, 255, 255, 255),
@@ -772,8 +818,7 @@ class _ProductPageState extends State<ProductPage> {
                       color: Color.fromARGB(77, 23, 11, 11), width: 1),
                 ),
                 child: GridView.count(
-                  childAspectRatio: 10,
-                  crossAxisSpacing: MediaQuery.of(context).size.width * 0.013,
+                  childAspectRatio: 5,
                   crossAxisCount: 1,
                   physics: ClampingScrollPhysics(),
                   scrollDirection: Axis.vertical,
@@ -792,13 +837,12 @@ class _ProductPageState extends State<ProductPage> {
                                 color: Color.fromARGB(255, 242, 243, 242),
                                 boxShadow: <BoxShadow>[
                                   BoxShadow(
-                                    color: Color.fromARGB(255, 16, 17, 17),
-                                    blurRadius: 5,
-                                    spreadRadius: 2,
+                                    color: Color.fromARGB(255, 19, 168, 27),
+                                    blurRadius: 3,
+                                    spreadRadius: 1,
                                   ),
                                 ],
                               ),
-                              height: 40,
                               child: Center(
                                 child: Text(
                                   data,
@@ -873,7 +917,7 @@ class _ProductPageState extends State<ProductPage> {
             ])
           ],
         ),
-      );  
+      );
     });
   }
 
@@ -883,23 +927,22 @@ class _ProductPageState extends State<ProductPage> {
         _saporiListBuilder();
         break;
       case 0:
-        
-         showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return Dialog(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(6.0),
-            ),
-            child: Container(
-              width: MediaQuery.of(context).size.width *
-                  0.8, // Larghezza desiderata del popup
-              height: MediaQuery.of(context).size.height *
-                  0.6, // Altezza desiderata del popup
-              padding: EdgeInsets.all(5), // Imposta il padding del popup
-              child: _buildFilterList())
-          );
-        },);
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return Dialog(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(6.0),
+                ),
+                child: Container(
+                    width: MediaQuery.of(context).size.width *
+                        0.8, // Larghezza desiderata del popup
+                    height: MediaQuery.of(context).size.height *
+                        0.5, // Altezza desiderata del popup
+                    padding: EdgeInsets.all(5), // Imposta il padding del popup
+                    child: _buildFilterList()));
+          },
+        );
         break;
       case 2:
         _regioniList();

@@ -28,14 +28,14 @@ class _DashboardPageState extends State<DashboardPage> {
 
   Widget imageCarousel(BuildContext context) {
     return Container(
-      width: MediaQuery.of(context).size.width,
-      height: 200,
+      width: MediaQuery.of(context).size.width*0.95,
+      height: 220,
       child: Carousel(
-        overlayShadow: false,
+        //overlayShadow: false,
         borderRadius: true,
-        boxFit: BoxFit.none,
+       // boxFit: BoxFit.fill,
         autoplay: true,
-        dotSize: 4.0,
+        dotSize: 2.0,
         images: [
           FittedBox(
             fit: BoxFit.fill,
