@@ -10,6 +10,8 @@ import '../utils/ProgressHUD.dart';
 import '../utils/former_helper.dart';
 
 class SignUpPage extends StatefulWidget {
+  BuildContext logInContext;
+  SignUpPage({this.logInContext});
   @override
   _SignUpPageState createState() => _SignUpPageState();
 }
@@ -199,7 +201,8 @@ class _SignUpPageState extends State<SignUpPage> {
                                   "Registrazione avvenuta con successo",
                                   "Ok",
                                   () {
-                                    Navigator.of(context).pop();
+                                    Navigator.of(context, rootNavigator: true).pop();
+                   Navigator.of(this.widget.logInContext).pop();
                                   },
                                 );
                               } else {
