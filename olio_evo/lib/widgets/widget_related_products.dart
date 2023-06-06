@@ -49,8 +49,10 @@ class WidgetRelatedProductsState extends State<WidgetRelatedProducts> {
               child: TextButton(
                 onPressed: () {},
                 child: Text(
-                  'View All',
-                  style: TextStyle(color: Color.fromARGB(255, 54, 196, 19)),
+                  'Vedi tutti',
+                  style: TextStyle(color: Colors.black,
+                  fontSize: 15,
+                  decoration: TextDecoration.underline,),
                 ),
               ),
             )
@@ -107,7 +109,7 @@ class WidgetRelatedProductsState extends State<WidgetRelatedProducts> {
                     child: Container(
                         decoration: BoxDecoration(
                           border: Border.all(
-                            color: Colors.lightGreen,
+                            color: Colors.green,
                             width: 2,
                           ),
                           borderRadius: BorderRadius.circular(10),

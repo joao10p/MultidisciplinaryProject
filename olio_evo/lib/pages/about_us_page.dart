@@ -16,7 +16,7 @@ class AboutPage extends StatelessWidget {
                 child: Image(
                   image: AssetImage(
                       "assets/images/8ha771cl2p_66olz7ebcx_file.jpeg"),
-                  height: 220,
+                  height: 200,
                   width: MediaQuery.of(context).size.width * 0.9,
                   fit: BoxFit.cover,
                 ),
