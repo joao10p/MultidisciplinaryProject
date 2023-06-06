@@ -70,21 +70,18 @@ class _LoginPageState extends State<LoginPage> {
                               children: [
                                 const Padding(
                                   padding: EdgeInsets.symmetric(
-                                      vertical: 25, horizontal: 0),
-                                  child:
-
-                                      ///***If you have exported images you must have to copy those images in assets/images directory.
-                                      Image(
+                                      vertical: 0, horizontal: 0),
+                                  child: Image(
                                     image: AssetImage(
                                         "assets/images/olivevo_logo.jpg"),
-                                    height: 200,
-                                    width: 200,
+                                    height: 300,
+                                    width: 300,
                                     fit: BoxFit.cover,
                                   ),
                                 ),
                                 Padding(
                                   padding:
-                                      const EdgeInsets.fromLTRB(0, 0, 0, 15),
+                                      const EdgeInsets.fromLTRB(0, 0, 0, 0),
                                   child: Form(
                                     key: globalKey,
                                     child: Column(
@@ -100,25 +97,21 @@ class _LoginPageState extends State<LoginPage> {
                                                     .contains('@')
                                                 ? "Inserisci una mail valida"
                                                 : null,
-                                            decoration: const InputDecoration(
+                                            decoration: InputDecoration(
                                                 hintText: "Indirizzo email",
                                                 enabledBorder:
                                                     UnderlineInputBorder(
                                                         borderSide: BorderSide(
-                                                  color: Color.fromARGB(
-                                                      255,
-                                                      239,
-                                                      239,
-                                                      239), //Theme.of(context).accentColor.withOpacity(0.2)
-                                                )),
+                                                            color: Colors
+                                                                .grey[300])),
                                                 focusedBorder:
                                                     UnderlineInputBorder(
                                                         borderSide: BorderSide(
-                                                            color: Colors
-                                                                .greenAccent)),
+                                                            color:
+                                                                Colors.grey)),
                                                 prefixIcon: Icon(
                                                   Icons.email,
-                                                  color: Colors.greenAccent,
+                                                  color: Colors.black,
                                                 ))),
                                         const SizedBox(height: 20),
                                         TextFormField(
@@ -135,14 +128,14 @@ class _LoginPageState extends State<LoginPage> {
                                             hintText: "Password",
                                             enabledBorder: UnderlineInputBorder(
                                                 borderSide: BorderSide(
-                                                    color: Colors.greenAccent)),
+                                                    color: Colors.grey[300])),
                                             focusedBorder: UnderlineInputBorder(
                                                 borderSide: BorderSide(
                                                     color: Color.fromARGB(
                                                         255, 69, 203, 132))),
                                             prefixIcon: Icon(
                                               Icons.lock,
-                                              color: Colors.greenAccent,
+                                              color: Colors.black,
                                             ),
                                             suffixIcon: IconButton(
                                               onPressed: () {
@@ -150,7 +143,7 @@ class _LoginPageState extends State<LoginPage> {
                                                   hidePassword = !hidePassword;
                                                 });
                                               },
-                                              color: Colors.greenAccent,
+                                              color: Colors.black,
                                               icon: Icon(hidePassword
                                                   ? Icons.visibility_off
                                                   : Icons.visibility),
@@ -168,11 +161,12 @@ class _LoginPageState extends State<LoginPage> {
                                               textAlign: TextAlign.center,
                                               overflow: TextOverflow.clip,
                                               style: TextStyle(
-                                                fontWeight: FontWeight.w100,
+                                                fontWeight: FontWeight.w300,
                                                 fontStyle: FontStyle.normal,
-                                                fontSize: 15,
-                                                color: Color.fromARGB(
-                                                    255, 12, 111, 42),
+                                                decoration:
+                                                    TextDecoration.underline,
+                                                fontSize: 14,
+                                                color: Colors.blue,
                                               ),
                                             ),
                                           ),
@@ -257,27 +251,22 @@ class _LoginPageState extends State<LoginPage> {
                                                 });
                                               }
                                             },
-                                            color: const Color(0xffffffff),
+                                            color: Colors.green,
                                             elevation: 0,
                                             shape: RoundedRectangleBorder(
                                               borderRadius:
                                                   BorderRadius.circular(8.0),
-                                              side: BorderSide(
-                                                  color: Color.fromARGB(
-                                                      255, 5, 79, 22),
-                                                  width: 1),
                                             ),
                                             padding: const EdgeInsets.all(16),
                                             child: const Text(
                                               "Login",
                                               style: TextStyle(
-                                                fontSize: 14,
-                                                fontWeight: FontWeight.w700,
+                                                fontSize: 18,
+                                                fontWeight: FontWeight.bold,
                                                 fontStyle: FontStyle.normal,
                                               ),
                                             ),
-                                            textColor: Color.fromARGB(
-                                                255, 36, 160, 65),
+                                            textColor: Colors.white,
                                             height: 50,
                                             minWidth: 200,
                                           ),
@@ -307,7 +296,7 @@ class _LoginPageState extends State<LoginPage> {
                                               style: TextStyle(
                                                 fontWeight: FontWeight.w100,
                                                 fontStyle: FontStyle.normal,
-                                                fontSize: 10,
+                                                fontSize: 14,
                                                 color: Color(0xff000000),
                                               ),
                                             ),
@@ -338,19 +327,19 @@ class _LoginPageState extends State<LoginPage> {
                                                     const Icon(Icons.facebook),
                                                 onPressed: () {},
                                                 color: const Color(0xff212435),
-                                                iconSize: 30,
+                                                iconSize: 40,
                                               ),
                                               IconButton(
                                                 icon: const Icon(Icons.apple),
                                                 onPressed: () {},
                                                 color: const Color(0xff212435),
-                                                iconSize: 30,
+                                                iconSize: 40,
                                               ),
                                               IconButton(
-                                                icon: const Icon(Icons.add),
+                                                icon: const Icon(Icons.tiktok),
                                                 onPressed: () {},
                                                 color: const Color(0xff212435),
-                                                iconSize: 30,
+                                                iconSize: 40,
                                               ),
                                             ],
                                           ),
@@ -358,7 +347,7 @@ class _LoginPageState extends State<LoginPage> {
                                         const SizedBox(height: 20),
                                         Padding(
                                           padding: const EdgeInsets.fromLTRB(
-                                              5, 10, 5, 0),
+                                              20, 20, 20, 0),
                                           child: Row(
                                             mainAxisAlignment:
                                                 MainAxisAlignment.start,
@@ -368,7 +357,7 @@ class _LoginPageState extends State<LoginPage> {
                                             children: [
                                               const Padding(
                                                 padding: EdgeInsets.fromLTRB(
-                                                    0, 0, 5, 0),
+                                                    24, 0, 0, 0),
                                                 child: Text(
                                                   "Non hai ancora un account?",
                                                   textAlign: TextAlign.start,
@@ -376,44 +365,36 @@ class _LoginPageState extends State<LoginPage> {
                                                   style: TextStyle(
                                                     fontWeight: FontWeight.w400,
                                                     fontStyle: FontStyle.normal,
-                                                    fontSize: 10,
-                                                    color: Color.fromARGB(
-                                                        255, 1, 113, 224),
+                                                    fontSize: 14,
+                                                    color: Colors.black,
                                                   ),
                                                 ),
                                               ),
                                               Padding(
                                                 padding:
                                                     const EdgeInsets.fromLTRB(
-                                                        5, 0, 0, 0),
+                                                        25, 0, 0, 0),
                                                 child: MaterialButton(
                                                   onPressed: () {},
-                                                  color:
-                                                      const Color(0xffffffff),
+                                                  color: Colors.black,
                                                   elevation: 0,
                                                   shape: RoundedRectangleBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            8.0),
-                                                    side: const BorderSide(
-                                                        color:
-                                                            Color(0xff808080),
-                                                        width: 1),
-                                                  ),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              8.0)),
                                                   padding:
                                                       const EdgeInsets.all(16),
-                                                  child: const Text(
+                                                  child: Text(
                                                     "Registrati",
                                                     style: TextStyle(
                                                       fontSize: 14,
                                                       fontWeight:
-                                                          FontWeight.w700,
+                                                          FontWeight.bold,
                                                       fontStyle:
                                                           FontStyle.normal,
                                                     ),
                                                   ),
-                                                  textColor:
-                                                      const Color(0xff000000),
+                                                  textColor: Colors.white,
                                                   height: 35,
                                                   minWidth: 100,
                                                 ),

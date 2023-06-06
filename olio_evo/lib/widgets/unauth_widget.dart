@@ -11,7 +11,7 @@ class UnAuthWidget extends StatelessWidget {
     return Consumer<CartProvider>(builder: (context, loginModel, child) {
       return Center(
         child: Container(
-          margin: const EdgeInsets.only(top: 100),
+          margin: const EdgeInsets.only(top: 0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -28,8 +28,8 @@ class UnAuthWidget extends StatelessWidget {
                         begin: Alignment.bottomLeft,
                         end: Alignment.topRight,
                         colors: [
-                          Colors.green.withOpacity(1),
-                          Colors.green.withOpacity(0.2),
+                          Colors.black.withOpacity(1),
+                          Colors.black.withOpacity(0.2),
                         ],
                       ),
                     ),
@@ -45,13 +45,15 @@ class UnAuthWidget extends StatelessWidget {
               //const Opacity(
               //opacity: 0.6,
               /*child:*/ const Text(
-                "You must be logged in to access this page",
+                "Devi accedere con le tue credenziali per poter proseguire con questa pagina",
                 textAlign: TextAlign.center,
-                style: TextStyle(color: Colors.red),
+                style: TextStyle(
+                  color: Colors.red,
+                  fontSize: 16,),
               ),
               //),
               const SizedBox(
-                height: 20,
+                height: 30,
               ),
               TextButton(
                 onPressed: () {
@@ -59,11 +61,17 @@ class UnAuthWidget extends StatelessWidget {
                       MaterialPageRoute(builder: (context) => LoginPage()));
                 },
                 style: TextButton.styleFrom(
-                    padding: const EdgeInsets.all(15),
-                    backgroundColor: Colors.green),
+                    padding: const EdgeInsets.all(16),
+                    backgroundColor: Colors.green,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(6))),
                 child: const Text(
                   'Login',
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20,
+                  ),
                 ),
               )
             ],

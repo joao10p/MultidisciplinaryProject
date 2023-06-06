@@ -29,5 +29,6 @@ class SharedService {
 
   static Future<void> logout() async {
     await setLoginDetails(null);
+
   }
 }
