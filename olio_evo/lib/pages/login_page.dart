@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:olio_evo/pages/sign_up_new.dart';
+import 'package:olio_evo/pages/signup_page.dart';
 import 'package:olio_evo/shared_service.dart';
 
 import '../api_service.dart';
@@ -375,7 +377,13 @@ class _LoginPageState extends State<LoginPage> {
                                                     const EdgeInsets.fromLTRB(
                                                         25, 0, 0, 0),
                                                 child: MaterialButton(
-                                                  onPressed: () {},
+                                                  onPressed: () {
+                                                    Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                          builder: (context) => SignUpPage()),
+                                                    );
+                                                  },
                                                   color: Colors.black,
                                                   elevation: 0,
                                                   shape: RoundedRectangleBorder(
