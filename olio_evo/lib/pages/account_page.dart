@@ -112,6 +112,9 @@ class _AccountPageState extends State<AccountPage> {
                           clipBehavior: Clip.antiAlias,
                           decoration: const BoxDecoration(
                             shape: BoxShape.circle,
+                            border: Border(
+                              
+                            )
                           ),
                           child: Image.asset("assets/images/olivevo_logo.jpg",
                               fit: BoxFit.cover),
@@ -138,7 +141,7 @@ class _AccountPageState extends State<AccountPage> {
                         physics: const NeverScrollableScrollPhysics(),
                         children: [
                           Padding(
-                            padding: const EdgeInsets.fromLTRB(5, 20, 5, 5),
+                            padding: const EdgeInsets.fromLTRB(5, 30, 5, 5),
                               child: Container(
                                 height:MediaQuery.of(context).size.height * 0.06,
                                 child: ListTile(
@@ -160,8 +163,8 @@ class _AccountPageState extends State<AccountPage> {
                                   selectedTileColor: const Color(0x42000000),
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(6.0),
-                                    side: const BorderSide(
-                                        color: Color(0x4d9e9e9e), width: 1),
+                                    side: BorderSide(
+                                        color: Colors.grey[700], width: 1),
                                   ),
                                   leading: const Icon(Icons.work_outline,
                                       color: Color(0xff212435), size: 24),
@@ -200,8 +203,8 @@ class _AccountPageState extends State<AccountPage> {
                                 selectedTileColor: const Color(0x42000000),
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(6.0),
-                                  side: const BorderSide(
-                                      color: Color(0x4d9e9e9e), width: 1),
+                                  side: BorderSide(
+                                        color: Colors.grey[700], width: 1),
                                 ),
                                 leading: const Icon(Icons.settings,
                                     color: Color(0xff212435), size: 24),
@@ -233,8 +236,8 @@ class _AccountPageState extends State<AccountPage> {
                                 selectedTileColor: const Color(0x42000000),
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(6.0),
-                                  side: const BorderSide(
-                                      color: Color(0x4d9e9e9e), width: 1),
+                                  side: BorderSide(
+                                        color: Colors.grey[700], width: 1),
                                 ),
                                 leading: const Icon(Icons.credit_card,
                                     color: Color(0xff212435), size: 24),
@@ -266,8 +269,8 @@ class _AccountPageState extends State<AccountPage> {
                                 selectedTileColor: const Color(0x42000000),
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(6.0),
-                                  side: const BorderSide(
-                                      color: Color(0x4d9e9e9e), width: 1),
+                                  side: BorderSide(
+                                        color: Colors.grey[700], width: 1),
                                 ),
                                 leading: const Icon(Icons.location_on,
                                     color: Color(0xff212435), size: 24),
@@ -299,8 +302,8 @@ class _AccountPageState extends State<AccountPage> {
                                 selectedTileColor: const Color(0x42000000),
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(6.0),
-                                  side: const BorderSide(
-                                      color: Color(0x4d9e9e9e), width: 1),
+                                  side: BorderSide(
+                                        color: Colors.grey[700], width: 1),
                                 ),
                                 leading: const Icon(Icons.favorite_border,
                                     color: Color(0xff000000), size: 24),
@@ -338,8 +341,8 @@ class _AccountPageState extends State<AccountPage> {
                                 selectedTileColor: const Color(0x42000000),
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(6.0),
-                                  side: const BorderSide(
-                                      color: Color(0x4d9e9e9e), width: 1),
+                                  side: BorderSide(
+                                        color: Colors.grey[700], width: 1),
                                 ),
                                 leading: const Icon(Icons.help_outline,
                                     color: Color(0xff212435), size: 24),
@@ -377,8 +380,8 @@ class _AccountPageState extends State<AccountPage> {
                                 selectedTileColor: const Color(0x42000000),
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(6.0),
-                                  side: const BorderSide(
-                                      color: Color(0x4d9e9e9e), width: 1),
+                                  side: BorderSide(
+                                        color: Colors.grey[700], width: 1),
                                 ),
                                 leading: const Icon(Icons.info_outline,
                                     color: Color(0xff212435), size: 24),
@@ -396,7 +399,7 @@ class _AccountPageState extends State<AccountPage> {
                         ],
                       ),
                       Padding(
-                        padding: const EdgeInsets.fromLTRB(0, 15, 0, 5),
+                        padding: const EdgeInsets.fromLTRB(0, 10, 0, 5),
                         child: MaterialButton(
                           onPressed: () {
                             SharedService.logout()
