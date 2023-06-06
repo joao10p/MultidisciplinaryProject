@@ -55,7 +55,7 @@ class MyApp extends StatelessWidget {
           home: HomePage(),
           initialRoute: "/",
           routes: <String, WidgetBuilder>{
-            "/PayPal": (context) => new PaypalPaymentScreen()
+            "/PayPal": (context) => new PaypalPaymentScreen(context)
           },
         ));
   }

@@ -529,7 +529,7 @@ class API {
   }
 
   Future<bool> createOrder(OrderModel model) async {
-    model.customerId = Config.userID as int;
+    model.customerId = 23;
 
     bool isOrderCreated = false;
     var authToken = base64.encode(
