@@ -9,6 +9,8 @@ import 'package:olio_evo/widgets/widget_order_success.dart';
 import 'package:provider/provider.dart';
 
 class PaypalPaymentScreen extends CheckoutBasePage {
+  BuildContext paypalScreenContext;
+  PaypalPaymentScreen(this.paypalScreenContext);
   @override
   _PaypalPaymentScreenState createState() => _PaypalPaymentScreenState();
 }
@@ -87,6 +89,7 @@ class _PaypalPaymentScreenState
                     await paypalServices
                         .executePayment(executeURL, payerId, accessToken)
                         .then((id) {
+                          Navigator.of(this.widget.paypalScreenContext).pop();
                       print(id);
                       var orderProvider =
                           Provider.of<CartProvider>(context, listen: false);
@@ -95,20 +98,17 @@ class _PaypalPaymentScreenState
                       orderModel.paymentMethodTitle = "PayPal";
                       orderModel.setPaid = true;
                       orderModel.transactionId = id.toString();
-
                       orderProvider.processOrder(orderModel);
-
-                      Navigator.pushAndRemoveUntil(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => OrderSuccessWidget()),
-                          ModalRoute.withName("/OrderSuccess"));
-                      //Navigator.of(context).pop();
+                      
+                      Navigator.of(this.widget.paypalScreenContext).push(
+                        MaterialPageRoute(
+                            builder: (context) => OrderSuccessWidget()),
+                      );
                     });
                   } else {
                     Navigator.of(context).pop();
                   }
-                  Navigator.of(context).pop();
+                  //  Navigator.of(context).pop();
                 }
               },
               onProgressChanged:

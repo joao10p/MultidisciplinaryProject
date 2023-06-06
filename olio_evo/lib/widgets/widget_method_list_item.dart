@@ -18,7 +18,7 @@ class PaymentMethodListItem extends StatelessWidget {
         if (this.paymentMethod.isRouteRedirect) {
          Navigator.push(context, new MaterialPageRoute(
   builder: (context) =>
-     new PaypalPaymentScreen())
+     new PaypalPaymentScreen(context))
   );
         } else {
           this.paymentMethod.onTap();

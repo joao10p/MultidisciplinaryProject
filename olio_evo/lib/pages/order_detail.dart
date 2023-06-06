@@ -62,13 +62,11 @@ class _OrderDetailsPageState extends BasePageState<OrderDetailsPage> {
               style: Theme.of(context).textTheme.labelHeading,
             ),
             Text(
-              model.shipping.address1,
+              
+              "Piazza Duomo 13",
               style: Theme.of(context).textTheme.labelText,
             ),
-            Text(model.shipping.address2,
-                style: Theme.of(context).textTheme.labelText),
-            Text("${model.shipping.city}, ${model.shipping.state}",
-                style: Theme.of(context).textTheme.labelText),
+         
             const SizedBox(
               height: 20,
             ),
@@ -85,7 +83,7 @@ class _OrderDetailsPageState extends BasePageState<OrderDetailsPage> {
             CheckPoints(
               checkedTill: 0,
               checkPoints: ["Elaborazione", "Spedito", "Consegnato"],
-              checkPointFilledColor: Colors.redAccent,
+              checkPointFilledColor: Color.fromARGB(255, 41, 160, 55),
             ),
             const Divider(
               color: Colors.grey,
@@ -150,7 +148,7 @@ class _OrderDetailsPageState extends BasePageState<OrderDetailsPage> {
 extension CustomStyles on TextTheme {
   TextStyle get labelHeading {
     return const TextStyle(
-        fontSize: 16, color: Colors.redAccent, fontWeight: FontWeight.bold);
+        fontSize: 16, color: Color.fromARGB(255, 43, 177, 63), fontWeight: FontWeight.bold);
   }
 
   TextStyle get labelText {

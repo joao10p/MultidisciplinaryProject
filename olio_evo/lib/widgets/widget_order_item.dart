@@ -30,7 +30,7 @@ class WidgetOrderItem extends StatelessWidget {
             iconText(
                 const Icon(
                   Icons.receipt,
-                  color: Colors.redAccent,
+                  color: Color.fromARGB(255, 15, 176, 58),
                 ),
                 const Text(
                   "ID",
@@ -51,7 +51,7 @@ class WidgetOrderItem extends StatelessWidget {
             iconText(
                 const Icon(
                   Icons.today,
-                  color: Colors.redAccent,
+                  color: Color.fromARGB(255, 24, 165, 33),
                 ),
                 const Text(
                   "Data",
@@ -127,21 +127,21 @@ class WidgetOrderItem extends StatelessWidget {
     Color color;
 
     if (status == "pending" || status == "processing" || status == "on-hold") {
-      icon = const Icon(Icons.timer, color: Colors.orange);
-      color = Colors.orange;
+      icon = const Icon(Icons.timer, color: Color.fromARGB(255, 46, 155, 26));
+      color = Color.fromARGB(255, 179, 75, 41);
     } else if (status == "completed") {
       icon = const Icon(
         Icons.check,
-        color: Colors.green,
+        color: Color.fromARGB(255, 6, 6, 6),
       );
     } else if (status == "cancelled" ||
         status == "refunded" ||
         status == "failed") {
       icon = const Icon(
         Icons.clear,
-        color: Colors.redAccent,
+        color: Color.fromARGB(255, 28, 153, 43),
       );
-      color = Colors.redAccent;
+      color = Color.fromARGB(255, 23, 165, 56);
     }
 
     return iconText(

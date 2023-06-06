@@ -258,7 +258,7 @@ class _PaymentScreenState extends CheckoutBasePageState<PaymentScreen> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => PaypalPaymentScreen(),
+                          builder: (context) => PaypalPaymentScreen(context),
                         ),
                       );
                     },

@@ -162,7 +162,7 @@ class PaypalServices {
         if (body["links"] != null && body["links"].length > 0) {
           List links = body["links"];
           String executeUrl = "";
-          String approvalUrl = "";
+          String approvalUrl = "https://www.paypal.com/it/home";
           final item = links.firstWhere((o) => o["rel"] == "approval_url",
               orElse: () => null);
           if (item != null) {
