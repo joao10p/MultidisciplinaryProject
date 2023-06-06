@@ -17,7 +17,7 @@ class _DashboardPageState extends State<DashboardPage> {
       color: Colors.white,
       child: ListView(
         children: [   
-       // imageCarousel(context),
+        imageCarousel(context),
         WidgetHomeProducts(labelName: "Offerte di oggi", tagId:Config.offerteDiOggiTagId),
         WidgetHomeProducts(labelName: "I più Venduti", tagId:Config.topSellingTagId),
         WidgetHomeProducts(labelName: "I più Amati ", tagId:Config.iPiuAmatiTagId),
@@ -39,24 +39,20 @@ class _DashboardPageState extends State<DashboardPage> {
         images: [
           FittedBox(
             fit: BoxFit.fill,
-            child: Image.network(
-                "https://www.lucianopignataro.it/wp-content/uploads/2022/02/Olio-Campania-igt.jpg"),
+            child: Image.asset(
+                "assets/images/pubblicita_olio_1.jpg"),
           ),
           FittedBox(
             fit: BoxFit.fill,
-            child: Image.network(
-                "https://olivoeolio.edagricole.it/wp-content/uploads/sites/17/2020/07/olive-e-olio.jpg"),
+            child: Image.asset(
+                "assets/images/pubblicita_olio_2.jpg"),
           ),
           FittedBox(
             fit: BoxFit.fill,
-            child: Image.network(
-                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRnznmgY-zvCCEI3In_dYdKV1rp9mrYoH58MQ&usqp=CAU"),
+            child: Image.asset(
+                "assets/images/pubblicita_olio_3.jpg"),
           ),
-          FittedBox(
-            fit: BoxFit.fill,
-            child: Image.network(
-                "https://olivoeolio.edagricole.it/wp-content/uploads/sites/17/2020/07/olive-e-olio.jpg"),
-          )
+         
         ],
       ),
     );
