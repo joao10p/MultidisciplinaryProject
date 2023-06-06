@@ -203,13 +203,13 @@ class _WidgetCategoriesState extends State<WidgetCategories> {
                                     children: [
                                       Padding(
                                         padding:
-                                            EdgeInsets.fromLTRB(10, 30, 0, 20),
+                                            EdgeInsets.fromLTRB(5, 30, 0, 20),
                                         child: Text(
                                           "Scegli in quale zona cercare ",
                                           textAlign: TextAlign.center,
                                           style: TextStyle(
                                               fontFamily: "SFPro",
-                                              fontSize: 20,
+                                              fontSize: 18,
                                               fontWeight: FontWeight.bold,
                                               fontStyle: FontStyle.italic),
                                         ),
@@ -222,7 +222,7 @@ class _WidgetCategoriesState extends State<WidgetCategories> {
                                               Navigator.pop(context);
                                               //chiudi il popup
                                             },
-                                            iconSize: 45,
+                                            iconSize: 40,
                                             icon: Icon(Icons.close_rounded),
                                             color: Colors.black,
                                           ))

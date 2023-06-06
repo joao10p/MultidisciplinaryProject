@@ -196,7 +196,7 @@ class _ProductPageState extends State<ProductPage> {
                 child: Container(
                   //height: MediaQuery.of(context).size.height * 0.06,
                   decoration: BoxDecoration(
-                    color: Color.fromARGB(255, 249, 249, 249),
+                    color: Colors.white,
                   ),
                   child: Center(
                     child: Text("Filtri applicati: ",
@@ -212,10 +212,12 @@ class _ProductPageState extends State<ProductPage> {
                 child: Container(
                   height: MediaQuery.of(context).size.height * 0.06,
                   decoration: BoxDecoration(
-                    color: Color.fromARGB(255, 249, 249, 249),
+                    color: Colors.white,
                   ),
                   child: !isFilter
-                      ? Text("Nessun filtro applicato")
+                      ? Padding(
+                          padding: EdgeInsets.only(left: 8, top: 20),
+                          child: Text("Nessun filtro applicato"))
                       : ListView.builder(
                           shrinkWrap: true,
                           physics: ClampingScrollPhysics(),
@@ -622,7 +624,7 @@ class _ProductPageState extends State<ProductPage> {
                         CrossAxisAlignment.start, //spazio tra i due bottoni
                     children: [
                       Padding(
-                        padding: EdgeInsets.fromLTRB(10, 30, 0, 20),
+                        padding: EdgeInsets.fromLTRB(5, 30, 0, 20),
                         child: Text(
                           "Scegli in quale zona cercare ",
                           textAlign: TextAlign.center,
@@ -640,7 +642,7 @@ class _ProductPageState extends State<ProductPage> {
                               Navigator.pop(context);
                               //chiudi il popup
                             },
-                            iconSize: 45,
+                            iconSize: 40,
                             icon: Icon(Icons.close_rounded),
                             color: Colors.black,
                           ))

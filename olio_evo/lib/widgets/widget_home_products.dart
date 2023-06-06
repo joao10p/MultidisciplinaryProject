@@ -150,7 +150,7 @@ class _WidgetHomeProductState extends State<WidgetHomeProducts> {
                       mainAxisSize: MainAxisSize.max,
                       children: [
                         Padding(
-                          padding: EdgeInsets.fromLTRB(55, 20, 0, 0),
+                          padding: EdgeInsets.fromLTRB(50, 20, 0, 0),
                           child: Image.network(
                             data.images[0].src,
                             height: 100,
@@ -181,7 +181,7 @@ class _WidgetHomeProductState extends State<WidgetHomeProducts> {
                               });
                             },
                             color: Color(0xff212435),
-                            iconSize: 35,
+                            iconSize: 30,
                           ),
                         ),
                       ],

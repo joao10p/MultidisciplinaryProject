@@ -49,46 +49,47 @@ class _HomePageState extends State<HomePage> {
         bottomNavigationBar: SizedBox(
           height: MediaQuery.of(context).size.height * 0.107,
           child: BottomNavigationBar(
-            selectedLabelStyle: TextStyle(fontSize: 16),
+            selectedLabelStyle: TextStyle(fontSize: 15),
             unselectedLabelStyle: TextStyle(fontSize: 15),
             items: const [
               BottomNavigationBarItem(
                   icon: Icon(
                     Icons.storefront_outlined,
-                    color: Colors.green,
+                    //color: Colors.green,
                   ),
                   label: 'Store'),
               BottomNavigationBarItem(
                   icon: Icon(
                     Icons.search,
-                    color: Colors.green,
+                    //color: Colors.green,
                   ),
                   label: 'Search'),
               BottomNavigationBarItem(
                   icon: Icon(
                     Icons.camera_alt_outlined,
-                    color: Colors.green,
+                    //color: Colors.green,
                   ),
                   label: 'Scan'),
               BottomNavigationBarItem(
                   icon: Icon(
                     Icons.chat_outlined,
-                    color: Colors.green,
+                    //color: Colors.green,
+                        
                   ),
                   label: 'Chatbot'),
               BottomNavigationBarItem(
                 icon: Icon(
                   Icons.account_circle_outlined,
-                  color: Colors.green,
+                  //color: Colors.green,
                 ),
                 label: 'Account',
               ),
             ],
-            selectedItemColor: Color.fromARGB(255, 17, 17, 17),
+            unselectedItemColor: Colors.black,
             backgroundColor: Colors.white,
-            unselectedItemColor: const Color.fromRGBO(97, 113, 53, 1),
+            selectedItemColor: Colors.green,
             type: BottomNavigationBarType.fixed,
-            iconSize: 30,
+            iconSize: 28,
 
             currentIndex: _index,
             onTap: (index) {

@@ -66,7 +66,9 @@ class ProductDetailsWidget extends StatelessWidget {
                       : "",
                 ),
                 Text(
-                  '€ ${data.salePrice}',
+                  data.salePrice != null && data.salePrice.isNotEmpty
+                      ? '€ ${data.salePrice}'
+                      : '€ ${data.regularPrice}',
                   style: const TextStyle(
                       fontSize: 25,
                       color: Colors.black,

@@ -139,11 +139,8 @@ class _AccountPageState extends State<AccountPage> {
                         children: [
                           Padding(
                             padding: const EdgeInsets.fromLTRB(5, 20, 5, 5),
-                            child: Container(
-                              height: MediaQuery.of(context).size.height * 0.06,
                               child: Container(
-                                height:
-                                    MediaQuery.of(context).size.height * 0.06,
+                                height:MediaQuery.of(context).size.height * 0.06,
                                 child: ListTile(
                                   tileColor: const Color(0xffffffff),
                                   title: const Text(
@@ -180,11 +177,10 @@ class _AccountPageState extends State<AccountPage> {
                                 ),
                               ),
                             ),
-                          ),
                           Padding(
                             padding: const EdgeInsets.fromLTRB(5, 0, 5, 5),
                             child: Container(
-                              //height:  MediaQuery.of(context).size.height*0.06,
+                              height:  MediaQuery.of(context).size.height*0.06,
                               child: ListTile(
                                 tileColor: const Color(0x00000000),
                                 title: const Text(
@@ -217,7 +213,7 @@ class _AccountPageState extends State<AccountPage> {
                           Padding(
                             padding: const EdgeInsets.fromLTRB(5, 0, 5, 5),
                             child: Container(
-                              //height:  MediaQuery.of(context).size.height*0.06,
+                              height:  MediaQuery.of(context).size.height*0.06,
                               child: ListTile(
                                 tileColor: const Color(0x00000000),
                                 title: const Text(
@@ -250,7 +246,7 @@ class _AccountPageState extends State<AccountPage> {
                           Padding(
                             padding: const EdgeInsets.fromLTRB(5, 0, 5, 5),
                             child: Container(
-                              //height:  MediaQuery.of(context).size.height*0.06,
+                              height:  MediaQuery.of(context).size.height*0.06,
                               child: ListTile(
                                 tileColor: const Color(0x00000000),
                                 title: const Text(
@@ -283,7 +279,7 @@ class _AccountPageState extends State<AccountPage> {
                           Padding(
                             padding: const EdgeInsets.fromLTRB(5, 0, 5, 5),
                             child: Container(
-                              //height:  MediaQuery.of(context).size.height*0.06,
+                              height:  MediaQuery.of(context).size.height*0.06,
                               child: ListTile(
                                 tileColor: const Color(0x00000000),
                                 title: const Text(
@@ -322,7 +318,7 @@ class _AccountPageState extends State<AccountPage> {
                           Padding(
                             padding: const EdgeInsets.fromLTRB(5, 0, 5, 5),
                             child: Container(
-                              //height:  MediaQuery.of(context).size.height*0.05,
+                              height:  MediaQuery.of(context).size.height*0.06,
                               child: ListTile(
                                 tileColor: const Color(0x00000000),
                                 title: const Text(
@@ -359,9 +355,9 @@ class _AccountPageState extends State<AccountPage> {
                             ),
                           ),
                           Padding(
-                            padding: const EdgeInsets.fromLTRB(5, 0, 5, 5),
+                            padding: const EdgeInsets.fromLTRB(5, 0, 5, 15),
                             child: Container(
-                              //height:  MediaQuery.of(context).size.height*0.05,
+                              height:  MediaQuery.of(context).size.height*0.06,
                               child: ListTile(
                                 tileColor: const Color(0x00000000),
                                 title: const Text(

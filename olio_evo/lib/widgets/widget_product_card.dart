@@ -60,7 +60,7 @@ class ProductCard extends StatelessWidget {
               mainAxisSize: MainAxisSize.max,
               children: [
                 Padding(
-                  padding: EdgeInsets.fromLTRB(55, 20, 0, 0),
+                  padding: EdgeInsets.fromLTRB(50, 20, 0, 0),
                   child: Image.network(
                     data.images[0].src,
                     height: 100,
@@ -88,7 +88,7 @@ class ProductCard extends StatelessWidget {
                       });
                     },
                     color: Color(0xff212435),
-                    iconSize: 35,
+                    iconSize: 30,
                   ),
                 ),
               ],
@@ -100,7 +100,7 @@ class ProductCard extends StatelessWidget {
               alignment: Alignment.center,
               child: Text(data.name,
                   textAlign: TextAlign.center,
-                  maxLines: 3,
+                  maxLines: 2,
                   style: TextStyle(
                     fontFamily: 'SFPro',
                     fontWeight: FontWeight.w500,
