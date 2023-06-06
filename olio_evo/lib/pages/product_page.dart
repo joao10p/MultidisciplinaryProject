@@ -412,9 +412,14 @@ class _ProductPageState extends State<ProductPage> {
                           onTap: () {
                             setState(() {
                               isFilter = true;
-                              isSapori
-                              ? myFilters[1] = "" + data.categoryName.toString()
-                              : myFilters[2] = "" + data.categoryName.toString();
+                              if(isSapori){
+                                saporiId = data.categoryId.toString();
+                                myFilters[1] = "" + data.categoryName.toString();
+                              }
+                              else{
+                                categoryId = data.categoryId.toString();
+                                myFilters[2] = "" + data.categoryName.toString();
+                              }
                               var productsList = Provider.of<ProductProvider>(
                                   context,
                                   listen: false);
@@ -809,7 +814,7 @@ class _ProductPageState extends State<ProductPage> {
                   shape: BoxShape.rectangle,
                   borderRadius: BorderRadius.circular(6.0),
                   border: Border.all(
-                      color: Color.fromARGB(77, 23, 11, 11), width: 1),
+                      color: Color.fromRGBO(92, 197, 17, 0.961), width: 1),
                 ),
                 child: GridView.count(
                   childAspectRatio: 5,
@@ -825,17 +830,19 @@ class _ProductPageState extends State<ProductPage> {
                           selectionState.updateSelection(index);
                         },
                         child: Padding(
-                          padding: EdgeInsets.all(1),
+                          padding: EdgeInsets.only(top: 10, bottom:10, left: 10, right: 10),
                           child: Container(
                               decoration: BoxDecoration(
+                                 borderRadius: BorderRadius.circular(10),
                                 color: Color.fromARGB(255, 242, 243, 242),
                                 boxShadow: <BoxShadow>[
                                   BoxShadow(
                                     color: Color.fromARGB(255, 19, 168, 27),
-                                    blurRadius: 3,
+                                    blurRadius: 1,
                                     spreadRadius: 1,
                                   ),
                                 ],
+                                
                               ),
                               child: Center(
                                 child: Text(
@@ -886,25 +893,61 @@ class _ProductPageState extends State<ProductPage> {
                           _productsList.resetStreams();
                           _productsList.setLoadingState(
                               LoadMoreStatus.INITIAL, true);
-                          if (categoryId != null) {
-                            _productsList.fetchProducts(pageNumber,
-                                sortOrder:
-                                    _sortByOptions[selectionState.getIndex()]
-                                        .sortOrder,
-                                sortBy:
-                                    _sortByOptions[selectionState.getIndex()]
-                                        .value,
-                                categoryId: categoryId.toString());
-                          } else {
-                            _productsList.fetchProducts(
-                              pageNumber,
-                              sortOrder:
-                                  _sortByOptions[selectionState.getIndex()]
-                                      .sortOrder,
-                              sortBy: _sortByOptions[selectionState.getIndex()]
-                                  .value,
-                            );
-                          }
+                          if (selectionState.getIndex() != -1 &&
+                                  categoryId != null &&
+                                  saporiId == null) {
+                                _productsList.fetchProducts(
+                                  pageNumber,
+                                  sortOrder:
+                                      _sortByOptions[selectionState.getIndex()]
+                                          .sortOrder,
+                                  sortBy:
+                                      _sortByOptions[selectionState.getIndex()]
+                                          .value,
+                                  categoryId: categoryId,
+                                );
+                              } else if (selectionState.getIndex() != -1 &&
+                                  categoryId != null &&
+                                  saporiId != null) {
+                                _productsList.fetchProducts(
+                                  pageNumber,
+                                  sortOrder:
+                                      _sortByOptions[selectionState.getIndex()]
+                                          .sortOrder,
+                                  sortBy:
+                                      _sortByOptions[selectionState.getIndex()]
+                                          .value,
+                                  categoryId: categoryId + "," + saporiId,
+                                );
+                                  }
+                                else if (selectionState.getIndex() != -1 &&
+                                  categoryId == null &&
+                                  saporiId == null) {
+                                _productsList.fetchProducts(
+                                  pageNumber,
+                                  sortOrder:
+                                      _sortByOptions[selectionState.getIndex()]
+                                          .sortOrder,
+                                  sortBy:
+                                      _sortByOptions[selectionState.getIndex()]
+                                          .value,
+            
+                                );} else if (selectionState.getIndex() != -1 &&
+                                  categoryId == null &&
+                                  saporiId != null) {
+                                _productsList.fetchProducts(
+                                  pageNumber,
+                                  sortOrder:
+                                      _sortByOptions[selectionState.getIndex()]
+                                          .sortOrder,
+                                  sortBy:
+                                      _sortByOptions[selectionState.getIndex()]
+                                          .value,
+                                          categoryId: saporiId,
+            
+                                );}
+                              
+                              
                           Navigator.pop(context);
                         });
                       }))
